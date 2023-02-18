@@ -16,6 +16,7 @@ export default defineConfig({
       ],
       dts: 'src/types/auto-imports.d.ts',
       dirs: [],
+      vueTemplate: true,
     }),
     VueComponents({
       dts: 'src/types/vue-components.d.ts',
