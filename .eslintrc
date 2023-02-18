@@ -2,6 +2,7 @@
   "extends": "@antfu",
   "rules": {
     "arrow-parens": ["error", "as-needed"],
+    "brace-style": ["error", "1tbs"],
     "no-console": ["warn"],
     "curly": ["error", "all"]
   }
