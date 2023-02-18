@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preinstall": "node ./scripts/preinstall.js",
+    "postinstall": "simple-git-hooks",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -30,10 +31,21 @@
     "esbuild": "^0.17.4",
     "eslint": "^8.34.0",
     "execa": "^4.0.2",
+    "lint-staged": "^13.1.2",
     "magic-string": "^0.27.0",
     "minimist": "^1.2.0",
     "rollup": "~3.10.0",
     "rollup-plugin-esbuild": "^5.0.0",
-    "rollup-plugin-polyfill-node": "^0.11.0"
+    "rollup-plugin-polyfill-node": "^0.11.0",
+    "simple-git-hooks": "^2.8.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "node scripts/verifyCommit.js"
+  },
+  "lint-staged": {
+    "*.{js,ts,json}": [
+      "eslint"
+    ]
   }
 }
