@@ -1,3 +1,3 @@
 <template>
-  <div>pages/index</div>
+  <BaseSideRoutes />
 </template>
