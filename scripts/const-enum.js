@@ -46,8 +46,17 @@ export function scanEnums() {
   }
 
   // 1. grep for files with exported const enum
-  const { stdout } = execa.sync('git', ['grep', 'export const enum'])
-  const files = [...new Set(stdout.split('\n').map(line => line.split(':')[0]))]
+  let stdout = ''
+  try {
+    stdout = execa.sync('git', ['grep', 'export const enum']).stdout
+  } catch (e) {
+    if (e.exitCode !== 1) {
+      throw e
+    }
+  }
+  const files = stdout !== ''
+    ? [...new Set(stdout.split('\n').map(line => line.split(':')[0]))]
+    : []
 
   // 2. parse matched files to collect enum info
   for (const relativeFile of files) {
