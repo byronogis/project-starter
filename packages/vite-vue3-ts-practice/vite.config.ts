@@ -8,6 +8,8 @@ import {
   AntDesignVueResolver,
   ElementPlusResolver,
 } from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -35,9 +37,11 @@ export default defineConfig({
       resolvers: [
         AntDesignVueResolver({ resolveIcons: true }),
         ElementPlusResolver(),
+        IconsResolver({ prefix: 'i', enabledCollections: ['ep'] }),
       ],
       dts: 'src/types/vue-components.d.ts',
       dirs: ['src/components'],
     }),
+    Icons(),
   ],
 })
