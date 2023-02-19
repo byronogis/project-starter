@@ -5,6 +5,8 @@
 export {}
 declare global {
   const AMessage: typeof import('../composables/antd-vue/AMessage')['AMessage']
+  const AModal: typeof import('../composables/antd-vue/AModal')['AModal']
+  const ANotification: typeof import('../composables/antd-vue/ANotification')['ANotification']
   const EffectScope: typeof import('vue')['EffectScope']
   const ElMessage: typeof import('element-plus/es')['ElMessage']
   const computed: typeof import('vue')['computed']
@@ -73,6 +75,8 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface ComponentCustomProperties {
     readonly AMessage: UnwrapRef<typeof import('../composables/antd-vue/AMessage')['AMessage']>
+    readonly AModal: UnwrapRef<typeof import('../composables/antd-vue/AModal')['AModal']>
+    readonly ANotification: UnwrapRef<typeof import('../composables/antd-vue/ANotification')['ANotification']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
