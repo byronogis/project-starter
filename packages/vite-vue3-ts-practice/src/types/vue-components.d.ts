@@ -9,6 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AButton: typeof import('ant-design-vue/es')['Button']
+    ASpace: typeof import('ant-design-vue/es')['Space']
     BaseSideRoutes: typeof import('./../components/BaseSideRoutes.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
@@ -17,7 +19,12 @@ declare module '@vue/runtime-core' {
     ElPageHeader: typeof import('element-plus/es')['ElPageHeader']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    HomeOutlined: typeof import('@ant-design/icons-vue')['HomeOutlined']
+    LoadingOutlined: typeof import('@ant-design/icons-vue')['LoadingOutlined']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SettingFilled: typeof import('@ant-design/icons-vue')['SettingFilled']
+    SmileOutlined: typeof import('@ant-design/icons-vue')['SmileOutlined']
+    SyncOutlined: typeof import('@ant-design/icons-vue')['SyncOutlined']
   }
 }
