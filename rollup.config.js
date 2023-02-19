@@ -190,8 +190,7 @@ function createConfig(format, output, plugins = []) {
     if (Object.keys(replacements).length) {
       // @ts-expect-error ts-expect-error
       return [replace({ values: replacements, preventAssignment: true })]
-    }
-    else {
+    } else {
       return []
     }
   }
@@ -205,8 +204,7 @@ function createConfig(format, output, plugins = []) {
         // they are only listed here to suppress warnings.
         return treeShakenDeps
       }
-    }
-    else {
+    } else {
       // Node / esm-bundler builds.
       // externalize all direct deps unless it's the compat build.
       return [
@@ -339,8 +337,7 @@ function cjsReExportsPatchPlugin() {
         return code.replace(matcher, (_, r1, r2, r3) => {
           return `Object.keys(${r1}).forEach(function(k) {${r2}${r3}});`
         })
-      }
-      else if (options.file.endsWith('packages/vue/dist/vue.cjs.js')) {
+      } else if (options.file.endsWith('packages/vue/dist/vue.cjs.js')) {
         // make sure we don't accidentally miss the rewrite in case Rollup
         // changes the output again.
         throw new Error('cjs build re-exports rewrite failed.')
