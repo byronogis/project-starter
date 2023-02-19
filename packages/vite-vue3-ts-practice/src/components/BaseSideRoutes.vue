@@ -7,8 +7,15 @@
         :index="route.path"
         :route="route"
       >
-        <span class="text">{{ route.path }}</span>
+        <span class="singal-row-ellipsis">{{ route.path }}</span>
       </el-menu-item>
     </el-menu>
   </div>
 </template>
+
+<style scoped>
+.components_base-side-routes {
+  height: 100%;
+  overflow: auto;
+}
+</style>
