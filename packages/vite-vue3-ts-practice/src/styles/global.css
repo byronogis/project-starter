@@ -3,3 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* 单行过长文字省略号 */
+.singal-row-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
