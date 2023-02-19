@@ -1,13 +1,17 @@
 <script setup lang="ts">
+const halfyear = ref('')
 const month = ref('')
 </script>
 
 <template>
-  <div class="pages_ep_date-picker">
-    <el-date-picker
-      v-model="month"
-      type="month"
-      placeholder="Pick a month"
-    />
-  </div>
+  <DatePickerEnhanced
+    v-model="halfyear"
+    type="halfyear"
+  />
+  <hr>
+
+  <DatePickerEnhanced
+    v-model="month"
+    type="month"
+  />
 </template>
