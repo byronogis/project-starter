@@ -44,7 +44,7 @@
     "commit-msg": "node scripts/verifyCommit.js"
   },
   "lint-staged": {
-    "*.{js,ts,json}": [
+    "*.{js,ts,json,vue}": [
       "eslint"
     ]
   }
