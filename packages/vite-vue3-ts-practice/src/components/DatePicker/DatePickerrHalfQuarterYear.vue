@@ -15,9 +15,9 @@ interface ViewItem {
 }
 
 const props = withDefaults(defineProps<{
-  type?: 1 | 2 | 3 // 1季度选择 2半年度选择 3年度选择
+  type?: 'quarteryear' | 'halfyear'
 }>(), {
-  type: 2,
+  type: 'halfyear',
 })
 const attrs = useAttrs()
 
@@ -41,7 +41,6 @@ const input = reactive({
   readonly: false,
   editable: true,
   disabled: false,
-  prefixIcon: Calendar,
 })
 
 const setInputModelValue = (val: any) => {
@@ -52,7 +51,7 @@ const datepicker = reactive({
   data: [0, 0], /// 年度, 季度/半年度
   valueFormat: 'yyyy-qq',
 
-  viewPanel: 3, // 1季度选择 2半年度选择 3年度选择
+  viewPanel: 'year', // 'quarteryear' | 'halfyear' | 'year'
   viewYear: new Date().getFullYear(),
   viewItems: [] as ViewItem[],
 })
@@ -62,13 +61,13 @@ const datepicker_viewLines = computed(() => Math.ceil(datepicker.viewItems.lengt
 const datepicker_viewTitle = computed(() => {
   let res
   switch (datepicker.viewPanel) {
-    case 1:
+    case 'quarteryear':
       res = `${datepicker.viewYear} 年`
       break
-    case 2:
+    case 'halfyear':
       res = `${datepicker.viewYear} 年`
       break
-    case 3:
+    case 'year':
       res = `${datepicker_startYear.value} 年 - ${datepicker_startYear.value + 9} 年`
       break
     default:
@@ -79,41 +78,41 @@ const datepicker_viewTitle = computed(() => {
 })
 
 const datepicker_clickPrev = () => {
-  if ([1, 2].includes(datepicker.viewPanel)) {
+  if (['quarteryear', 'halfyear'].includes(datepicker.viewPanel)) {
     datepicker.viewYear--
     initView()
-  } else if ([3].includes(datepicker.viewPanel)) {
+  } else if (['year'].includes(datepicker.viewPanel)) {
     datepicker.viewYear -= 10
     initView()
   }
 }
 const datepicker_clickNext = () => {
-  if ([1, 2].includes(datepicker.viewPanel)) {
+  if (['quarteryear', 'halfyear'].includes(datepicker.viewPanel)) {
     datepicker.viewYear++
     initView()
-  } else if ([3].includes(datepicker.viewPanel)) {
+  } else if (['year'].includes(datepicker.viewPanel)) {
     datepicker.viewYear += 10
     initView()
   }
 }
 const datepicker_clickViewTitle = () => {
-  if (datepicker.viewPanel !== 3) {
-    datepicker.viewPanel = 3
+  if (datepicker.viewPanel !== 'year') {
+    datepicker.viewPanel = 'year'
   }
 }
 const datepicker_clickViewItem = ({ year, half, quarter }: ViewItem) => {
   console.log(year, half, quarter)
-  if ([1, 2].includes(datepicker.viewPanel)) {
-    if (datepicker.viewPanel === 1) {
+  if (['quarteryear', 'halfyear'].includes(datepicker.viewPanel)) {
+    if (datepicker.viewPanel === 'quarteryear') {
       datepicker.data = [year, quarter as number]
-    } else { // 2
+    } else { // 'halfyear'
       datepicker.data = [year, half as number]
     }
     popover.modelVisible = false
     input.modelValue = datepicker.data.join('-')
-  } else { // 3
-    datepicker.viewPanel = props.type
+  } else { // 'year'
     datepicker.viewYear = year
+    datepicker.viewPanel = props.type
   }
 }
 
@@ -127,7 +126,7 @@ function initView() {
   const curQuarter = Math.ceil(curMonth / 3)
   const curHalf = Math.ceil(curMonth / 6)
 
-  if (datepicker.viewPanel === 1) { // 季度
+  if (datepicker.viewPanel === 'quarteryear') { // 季度
     list = quarteryearEnum.reduce((acc, cur, idx) => {
       const year = datepicker.viewYear
 
@@ -141,7 +140,7 @@ function initView() {
 
       return acc
     }, [] as ViewItem[])
-  } else if (datepicker.viewPanel === 2) { // 半年度
+  } else if (datepicker.viewPanel === 'halfyear') { // 半年度
     list = halfyearEnum.reduce((acc, cur, idx) => {
       const year = datepicker.viewYear
 
@@ -155,7 +154,7 @@ function initView() {
 
       return acc
     }, [] as ViewItem[])
-  } else if (datepicker.viewPanel === 3) { // 年度
+  } else if (datepicker.viewPanel === 'year') { // 年度
     datepicker.viewYear = datepicker_startYear.value
 
     list = Array(10).fill(1).reduce((acc, _cur, idx) => {
@@ -201,6 +200,7 @@ initView()
       <el-input
         class="el-date-editor el-date-editor--month"
         v-bind="input"
+        :prefix-icon="Calendar"
         @update:modelValue="setInputModelValue"
       />
     </template>

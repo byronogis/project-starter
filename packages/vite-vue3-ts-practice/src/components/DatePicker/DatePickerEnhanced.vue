@@ -36,7 +36,7 @@ const originType
   <template v-else-if="props.type === 'halfyear'">
     <DatePickerrHalfQuarterYear
       v-bind="$attrs"
-      :type="2"
+      type="halfyear"
     />
   </template>
 
@@ -44,7 +44,7 @@ const originType
   <template v-else-if="props.type === 'quarteryear'">
     <DatePickerrHalfQuarterYear
       v-bind="$attrs"
-      :type="1"
+      type="quarteryear"
     />
   </template>
 </template>
