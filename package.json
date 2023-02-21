@@ -8,6 +8,7 @@
     "node": ">=16.11.0"
   },
   "scripts": {
+    "dev": "pnpm --filter vite-vue3-ts-practice dev",
     "build": "node scripts/build.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
