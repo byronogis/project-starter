@@ -41,7 +41,7 @@
     "simple-git-hooks": "^2.8.1"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged",
+    "pre-commit": "npx lint-staged",
     "commit-msg": "node scripts/verifyCommit.js"
   },
   "lint-staged": {
