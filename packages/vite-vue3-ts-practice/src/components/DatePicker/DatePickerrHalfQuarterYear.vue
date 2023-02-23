@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // 基于 See https://blog.csdn.net/qq1370151551/article/details/118811216
 import { Calendar, DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
-import 'element-plus/es/components/calendar/style/css'
 import 'element-plus/es/components/popover/style/css'
+import 'element-plus/es/components/input/style/css'
 import 'element-plus/es/components/date-picker/style/css'
+import 'element-plus/es/components/calendar/style/css'
 
 interface ViewItem {
   label: string
@@ -12,6 +13,7 @@ interface ViewItem {
   half?: number
   current: boolean
   active: boolean
+  disabled?: boolean
 }
 
 const props = defineProps<{
@@ -33,7 +35,7 @@ const popover = reactive({
 
 const input = reactive({
   modelValue: '',
-  placeholder: '',
+  placeholder: '选择月份',
   clearable: true,
   size: 'default',
   readonly: false,
@@ -98,8 +100,13 @@ const datepicker_clickViewTitle = () => {
     datepicker.viewPanel = 'year'
   }
 }
-const datepicker_clickViewItem = ({ year, half, quarter }: ViewItem) => {
+const datepicker_clickViewItem = ({ year, half, quarter, disabled }: ViewItem) => {
   console.log(year, half, quarter)
+
+  if (disabled) {
+    return
+  }
+
   if (['quarteryear', 'halfyear'].includes(datepicker.viewPanel)) {
     if (datepicker.viewPanel === 'quarteryear') {
       datepicker.data = [year, quarter as number]
@@ -191,7 +198,7 @@ initView()
     :placement="popover.placement"
     :hide-after="popover.hideAfter"
     :transition="popover.transition"
-    :popper-class="popover.popperClass"
+    :popper-class="[popover.popperClass, 'el-picker__popper']"
     width="auto"
   >
     <template #reference>
@@ -204,11 +211,11 @@ initView()
     </template>
 
     <template #default>
-      <div class="el-date-picker">
+      <div class="el-picker-panel el-date-picker">
         <div class="el-picker-panel__body-wrapper">
           <div class="el-picker-panel__body">
             <!-- header -->
-            <div class="el-date-picker__header el-date-picker__header--bordered" style="margin:0px; line-height:30px">
+            <div class="el-date-picker__header el-date-picker__header--bordered">
               <span class="el-date-picker__prev-btn">
                 <button
                   type="button"
@@ -228,13 +235,30 @@ initView()
               </span>
             </div>
             <!-- content -->
-            <div class="el-picker-panel__content" style="margin:0px; width:100%">
+            <div class="el-picker-panel__content">
               <table class="el-month-table" style="">
                 <tbody>
                   <tr v-for="line in datepicker_viewLines" :key="line">
-                    <td v-for="index in (line * 4 <= datepicker.viewItems.length ? 4 : datepicker.viewItems.length - (line - 1) * 4)" :key="index" :class="{ today: datepicker.viewItems[(line - 1) * 4 + index - 1]?.current, current: datepicker.viewItems[(line - 1) * 4 + index - 1]?.active }">
-                      <div><a class="cell" @click="datepicker_clickViewItem(datepicker.viewItems[(line - 1) * 4 + index - 1])">{{ datepicker.viewItems[(line - 1) * 4 + index - 1]?.label }}</a></div>
-                    </td>
+                    <template
+                      v-for="item in datepicker.viewItems.slice((line - 1) * 4, (line - 1) * 4 + 4)"
+                      :key="item.label"
+                    >
+                      <td
+                        v-if="item"
+                        :class="{
+                          today: item.current,
+                          current: item.active,
+                          disabled: item.disabled,
+                        }"
+                      >
+                        <div>
+                          <span
+                            class="cell"
+                            @click="datepicker_clickViewItem(item)"
+                          >{{ item.label }}</span>
+                        </div>
+                      </td>
+                    </template>
                   </tr>
                 </tbody>
               </table>
