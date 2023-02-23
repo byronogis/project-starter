@@ -14,11 +14,9 @@ interface ViewItem {
   active: boolean
 }
 
-const props = withDefaults(defineProps<{
-  type?: 'quarteryear' | 'halfyear'
-}>(), {
-  type: 'halfyear',
-})
+const props = defineProps<{
+  type: 'quarteryear' | 'halfyear'
+}>()
 const attrs = useAttrs()
 
 const quarteryearEnum = ['一', '二', '三', '四']
