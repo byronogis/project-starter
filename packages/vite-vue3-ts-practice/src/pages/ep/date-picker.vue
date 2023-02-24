@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const halfyear = ref('')
+const quarteryear = ref('')
 const month = ref('')
+const monthrange = ref('')
 </script>
 
 <template>
@@ -13,7 +15,25 @@ const month = ref('')
 
   <div>季度选择器:</div>
   <DatePickerEnhanced
-    v-model="month"
+    v-model="quarteryear"
     type="quarteryear"
+  />
+
+  <div>月度选择器:</div>
+  <DatePickerEnhanced
+    v-model="month"
+    type="month"
+  />
+
+  <div>DatePickerHalfQuarterYearRange</div>
+  <DatePickerHalfQuarterYearRange />
+
+  <div>月度范围选择</div>
+  <el-date-picker
+    v-model="monthrange"
+    type="monthrange"
+    range-separator="To"
+    start-placeholder="Start month"
+    end-placeholder="End month"
   />
 </template>
