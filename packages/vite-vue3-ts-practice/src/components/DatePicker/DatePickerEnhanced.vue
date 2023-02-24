@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DatePickerrHalfQuarterYear from './DatePickerrHalfQuarterYear.vue'
+import DatePickerrHalfQuarterYear from './DatePickerHalfQuarterYear.vue'
 
 type DateType =
   | 'year'
