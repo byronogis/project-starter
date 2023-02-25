@@ -40,8 +40,8 @@ watchEffect(() => {
       name=""
       class="el-range-input"
       v-bind="inputStart"
-      @focusin="() => inputStarFocus = true"
-      @focusout="() => inputStarFocus = false"
+      @click="() => inputStarFocus = true"
+      @blur="() => inputStarFocus = false"
     >
     <span class="el-range-separator">{{ separator }}</span>
 
@@ -50,8 +50,8 @@ watchEffect(() => {
       name=""
       class="el-range-input"
       v-bind="inputEnd"
-      @focusin="() => inputEndFocus = true"
-      @focusout="() => inputEndFocus = false"
+      @click="() => inputEndFocus = true"
+      @blur="() => inputEndFocus = false"
     >
 
     <i class="el-icon el-input__icon el-range__close-icon el-range__close-icon--hidden">
