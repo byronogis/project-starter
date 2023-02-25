@@ -1,20 +1,13 @@
 <script setup lang="ts">
 // 基于 See https://blog.csdn.net/qq1370151551/article/details/118811216
+// eslint-disable-next-line unused-imports/no-unused-imports
 import { Calendar, DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
+import DatePickerHalfQuarterYearPanel from './DatePickerHalfQuarterYearPanel.vue'
 import 'element-plus/es/components/popover/style/css'
 import 'element-plus/es/components/input/style/css'
 import 'element-plus/es/components/date-picker/style/css'
 import 'element-plus/es/components/calendar/style/css'
-
-interface ViewItem {
-  label: string
-  year: number
-  quarteryear?: number
-  halfyear?: number
-  current: boolean
-  active: boolean
-  disabled?: boolean
-}
+import type { ViewItem } from './types'
 
 const props = defineProps<{
   type: 'quarteryear' | 'halfyear'
@@ -204,61 +197,15 @@ initView()
     </template>
 
     <template #default>
-      <div class="el-picker-panel el-date-picker">
-        <div class="el-picker-panel__body-wrapper">
-          <div class="el-picker-panel__body">
-            <!-- header -->
-            <div class="el-date-picker__header el-date-picker__header--bordered">
-              <span class="el-date-picker__prev-btn">
-                <button
-                  type="button"
-                  aria-label="上一年"
-                  class="el-picker-panel__icon-btn el-icon-d-arrow-left"
-                  @click="datepicker_clickPrev"
-                ><el-icon><DArrowLeft /></el-icon></button>
-              </span>
-              <span role="button" class="el-date-picker__header-label" @click="datepicker_clickViewTitle">{{ datepicker_viewTitle }}</span>
-              <span class="el-date-picker__next-btn">
-                <button
-                  type="button"
-                  aria-label="下一年"
-                  class="el-picker-panel__icon-btn el-icon-d-arrow-right"
-                  @click="datepicker_clickNext"
-                ><el-icon><DArrowRight /></el-icon></button>
-              </span>
-            </div>
-            <!-- content -->
-            <div class="el-picker-panel__content">
-              <table class="el-month-table" style="">
-                <tbody>
-                  <tr v-for="line in datepicker_viewLines" :key="line">
-                    <template
-                      v-for="item in datepicker.viewItems.slice((line - 1) * 4, (line - 1) * 4 + 4)"
-                      :key="item.label"
-                    >
-                      <td
-                        v-if="item"
-                        :class="{
-                          today: item.current,
-                          current: item.active,
-                          disabled: item.disabled,
-                        }"
-                      >
-                        <div>
-                          <span
-                            class="cell"
-                            @click="datepicker_clickViewItem(item)"
-                          >{{ item.label }}</span>
-                        </div>
-                      </td>
-                    </template>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DatePickerHalfQuarterYearPanel
+        :datepicker_view-title="datepicker_viewTitle"
+        :datepicker_view-lines="datepicker_viewLines"
+        :datepicker_view-items="datepicker.viewItems"
+        @datepicker_click-prev="datepicker_clickPrev"
+        @datepicker_click-next="datepicker_clickNext"
+        @datepicker_click-view-title="datepicker_clickViewTitle"
+        @datepicker_click-view-item="datepicker_clickViewItem"
+      />
     </template>
   </el-popover>
 </template>
