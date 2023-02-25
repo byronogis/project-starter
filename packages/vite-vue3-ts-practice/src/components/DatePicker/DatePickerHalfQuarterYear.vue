@@ -52,7 +52,7 @@ export default {
       /> -->
       <DatePickerInput
         v-bind="input.property"
-        @update:modelValue="$attrs['onUpdate:modelValue']"
+        @update:modelValue="emits('update:modelValue', $event)"
         @update:popoverVisible="(status: boolean) => popover.property.visible = status"
       />
     </template>
