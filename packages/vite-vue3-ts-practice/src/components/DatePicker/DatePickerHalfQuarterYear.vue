@@ -180,25 +180,28 @@ initView()
 
 <template>
   <el-popover
-    v-model:visible="popover.visible"
-    :trigger="popover.trigger"
-    :placement="popover.placement"
-    :hide-after="popover.hideAfter"
-    :transition="popover.transition"
-    :popper-class="popover.popperClass"
+    v-bind="popover"
     width="auto"
   >
     <template #reference>
+      <!-- 使用 click 而不是 focus
+        防止选择完成后 datepicker_clickViewItem 把 visible 设为 false
+        但因为焦点回到输入框后导致的 visible 自动设为 true 而致使弹出层视觉上的不会自动消失
+      -->
       <el-input
         class="el-date-editor el-date-editor--month"
         v-bind="input"
         :prefix-icon="Calendar"
         @update:modelValue="setInputModelValue"
+        @click="() => popover.visible = true"
+        @blur="() => popover.visible = false"
       />
     </template>
 
     <template #default>
-      <DatePickerHalfQuarterYearPanelWrapper>
+      <DatePickerHalfQuarterYearPanelWrapper
+        @update:popover-visible="(status: boolean) => popover.visible = status"
+      >
         <template #default>
           <DatePickerHalfQuarterYearPanel
             :datepicker_view-title="datepicker_viewTitle"
