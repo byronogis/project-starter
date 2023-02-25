@@ -1,7 +1,8 @@
+<!-- eslint-disable unused-imports/no-unused-imports -->
 <script setup lang="ts">
 // 基于 See https://blog.csdn.net/qq1370151551/article/details/118811216
-// eslint-disable-next-line unused-imports/no-unused-imports
 import { Calendar, DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
+import DatePickerHalfQuarterYearPanelWrapper from './DatePickerHalfQuarterYearPanelWrapper.vue'
 import DatePickerHalfQuarterYearPanel from './DatePickerHalfQuarterYearPanel.vue'
 import 'element-plus/es/components/popover/style/css'
 import 'element-plus/es/components/input/style/css'
@@ -24,7 +25,7 @@ const popover = reactive({
   hideAfter: 0,
   transition: 'el-zoom-in-top',
   modelVisible: false,
-  popperClass: [attrs['popper-class']],
+  popperClass: [attrs['popper-class'], 'el-picker__popper'],
 })
 
 // v-bind=
@@ -184,7 +185,7 @@ initView()
     :placement="popover.placement"
     :hide-after="popover.hideAfter"
     :transition="popover.transition"
-    :popper-class="[popover.popperClass, 'el-picker__popper']"
+    :popper-class="popover.popperClass"
     width="auto"
   >
     <template #reference>
@@ -197,15 +198,19 @@ initView()
     </template>
 
     <template #default>
-      <DatePickerHalfQuarterYearPanel
-        :datepicker_view-title="datepicker_viewTitle"
-        :datepicker_view-lines="datepicker_viewLines"
-        :datepicker_view-items="datepicker.viewItems"
-        @datepicker_click-prev="datepicker_clickPrev"
-        @datepicker_click-next="datepicker_clickNext"
-        @datepicker_click-view-title="datepicker_clickViewTitle"
-        @datepicker_click-view-item="datepicker_clickViewItem"
-      />
+      <DatePickerHalfQuarterYearPanelWrapper>
+        <template #default>
+          <DatePickerHalfQuarterYearPanel
+            :datepicker_view-title="datepicker_viewTitle"
+            :datepicker_view-lines="datepicker_viewLines"
+            :datepicker_view-items="datepicker.viewItems"
+            @datepicker_click-prev="datepicker_clickPrev"
+            @datepicker_click-next="datepicker_clickNext"
+            @datepicker_click-view-title="datepicker_clickViewTitle"
+            @datepicker_click-view-item="datepicker_clickViewItem"
+          />
+        </template>
+      </DatePickerHalfQuarterYearPanelWrapper>
     </template>
   </el-popover>
 </template>
