@@ -1,13 +1,10 @@
-import type { SetupContext } from 'vue'
-import type { DatePickertType, ViewItem } from './types'
+import type { toRefs } from 'vue'
+import type { Attrs, InputAttrs, Props, ViewItem } from './types'
 
-interface Props {
-  type: DatePickertType
-}
 const quarteryearEnum = ['一', '二', '三', '四']
 const halfyearEnum = ['上', '下']
 
-export function usePopover(attrs: SetupContext['attrs']) {
+export function usePopover(attrs: toRefs<Attrs>) {
   const popover = reactive({
     trigger: 'click',
     placement: 'bottom',
@@ -19,22 +16,18 @@ export function usePopover(attrs: SetupContext['attrs']) {
   return popover
 }
 
-export default function useDatePicker(props: Props, attrs: SetupContext['attrs'], existPopover: any = null) {
+export default function useDatePicker(props: Props, attrs: toRefs<Attrs>, existPopover: any = null) {
   const popover = existPopover || usePopover(attrs)
 
-  const input = reactive({
-    modelValue: '',
-    placeholder: '选择月份',
-    clearable: true,
-    size: 'default',
-    readonly: false,
-    editable: true,
-    disabled: false,
+  const input = reactive<InputAttrs>({
+    modelValue: attrs.modelValue,
+    placeholder: attrs.placeholder,
+    // clearable: true,
+    // size: 'default',
+    // readonly: false,
+    // editable: true,
+    // disabled: false,
   })
-
-  const setInputModelValue = (val: any) => {
-    input.modelValue = val
-  }
 
   const datepicker = reactive({
     data: [0, 0], /// 年度, 季度/半年度
@@ -63,7 +56,6 @@ export default function useDatePicker(props: Props, attrs: SetupContext['attrs']
   })
 
   const datepicker_clickPrev = () => {
-    console.log(111111111)
     datepicker_isYearViewPanel.value
       ? datepicker.viewYear -= 10
       : datepicker.viewYear--
@@ -163,7 +155,8 @@ export default function useDatePicker(props: Props, attrs: SetupContext['attrs']
   // 日期改变设置输入框值
   watch(() => datepicker.data, (newV, oldV) => {
     console.log('改变了日期 new old: ', newV, oldV)
-    input.modelValue = datepicker.data.join('-')
+    // input.modelValue = datepicker.data.join('-')
+    attrs?.['onUpdate:modelValue']?.value?.(datepicker.data.join('-'))
 
     // 重新生成面板项目,主要为了刷新状态
     initView()
@@ -187,7 +180,7 @@ export default function useDatePicker(props: Props, attrs: SetupContext['attrs']
       viewTitle: datepicker_viewTitle,
     },
     event: {
-      input_setValue: setInputModelValue,
+      // input_setValue: attrs['onUpdate:modelValue'],
       datepicker_clickPrev,
       datepicker_clickNext,
       datepicker_clickViewTitle,

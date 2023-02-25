@@ -25,6 +25,12 @@ const scopedId = getCurrentInstance()?.type?.__hmrId
 provide('scopedId', scopedId)
 </script>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
+
 <template>
   <div class="component-datepicker-enhanced">
     <!-- 原始支持 -->
