@@ -189,7 +189,9 @@ initView()
     </template>
     <!--  -->
     <template #default>
-      <DatePickerHalfQuarterYearPanelWrapper>
+      <DatePickerHalfQuarterYearPanelWrapper
+        @update:popover-visible="(status: boolean) => popover.visible = status"
+      >
         <template #default>
           <!-- left -->
           <DatePickerHalfQuarterYearPanel
