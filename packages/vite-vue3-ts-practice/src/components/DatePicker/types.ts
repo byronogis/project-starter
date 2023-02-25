@@ -1,5 +1,18 @@
 import type { ComputedRef } from 'vue'
 
+export type OriginDateType =
+  | 'year'
+  | 'month'
+  | 'date'
+  | 'dates'
+  | 'week'
+  | 'datetime'
+  | 'datetimerange'
+  | 'daterange'
+  | 'monthrange'
+
+export type DateType = 'halfyear' | 'quarteryear' | 'halfyearrange' | 'quarteryearrange' | Partial<OriginDateType>
+
 export interface ViewItem {
   label: string
   year: number
