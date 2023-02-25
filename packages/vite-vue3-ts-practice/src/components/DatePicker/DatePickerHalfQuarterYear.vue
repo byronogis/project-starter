@@ -24,7 +24,7 @@ const popover = reactive({
   placement: 'bottom',
   hideAfter: 0,
   transition: 'el-zoom-in-top',
-  modelVisible: false,
+  visible: false,
   popperClass: [attrs['popper-class'], 'el-picker__popper'],
 })
 
@@ -102,7 +102,7 @@ const datepicker_clickViewItem = (viewItem: ViewItem) => {
     datepicker.viewPanel = props.type
   } else {
     datepicker.data = [viewItem.year, viewItem[props.type] as number]
-    popover.modelVisible = false
+    popover.visible = false
   }
 }
 
@@ -180,7 +180,7 @@ initView()
 
 <template>
   <el-popover
-    v-model:visible="popover.modelVisible"
+    v-model:visible="popover.visible"
     :trigger="popover.trigger"
     :placement="popover.placement"
     :hide-after="popover.hideAfter"
