@@ -48,7 +48,7 @@ watchEffect(() => {
         <template #range-left>
           <!-- left -->
           <DatePickerHalfQuarterYearPanel
-            class="el-date-range-picker__content is-left"
+            class="el-date-range-picker__content is-left p-0"
             :datepicker_view-title="leftPanel.datepicker.viewTitle.value"
             :datepicker_view-lines="leftPanel.datepicker.viewLines.value"
             :datepicker_view-items="leftPanel.datepicker.property.viewItems"
@@ -62,7 +62,7 @@ watchEffect(() => {
         <template #range-right>
           <!-- right -->
           <DatePickerHalfQuarterYearPanel
-            class="el-date-range-picker__content is-right"
+            class="el-date-range-picker__content is-right p-0"
             :datepicker_view-title="rightPanel.datepicker.viewTitle.value"
             :datepicker_view-lines="rightPanel.datepicker.viewLines.value"
             :datepicker_view-items="rightPanel.datepicker.property.viewItems"
