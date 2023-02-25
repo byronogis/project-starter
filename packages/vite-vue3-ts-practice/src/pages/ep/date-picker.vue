@@ -26,7 +26,7 @@ const monthrange = ref('')
   />
 
   <div>DatePickerHalfQuarterYearRange</div>
-  <DatePickerHalfQuarterYearRange />
+  <DatePickerHalfQuarterYearRange type="quarteryearrange" />
 
   <div>月度范围选择</div>
   <el-date-picker

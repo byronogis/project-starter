@@ -1,31 +1,49 @@
 <script setup lang="ts">
-const inputStart = reactive({
-  placeholder: '开始',
-})
-
-const inputEnd = reactive({
-  placeholder: '结束',
-})
-
-// is-active
+const emits = defineEmits(['update:popoverVisible'])
 
 const separator = ref('To')
 
-const datepickerRangeInput = ref<HTMLDivElement | null>(null)
+const inputStart = reactive({
+  placeholder: '开始',
+})
+const inputEnd = reactive({
+  placeholder: '结束',
+})
+const inputStartRef = ref<HTMLInputElement | null>(null)
+const inputEndRef = ref<HTMLInputElement | null>(null)
 
-watch(() => datepickerRangeInput, () => {
-  datepickerRangeInput.value?.addEventListener?.('focus', ({ currentTarget }) => {
-    //
-    console.dir(currentTarget)
-  }, { capture: true })
-}, {
-  immediate: true,
+const inputStarFocus = ref(false)
+const inputEndFocus = ref(false)
+
+watchEffect(() => {
+  if (inputStarFocus.value || inputEndFocus.value) {
+    emits('update:popoverVisible', true)
+  } else {
+    emits('update:popoverVisible', false)
+  }
+})
+
+onMounted(() => {
+  //
+  inputStartRef.value?.addEventListener?.('focusin', e => {
+    inputStarFocus.value = true
+  })
+  inputStartRef.value?.addEventListener?.('focusout', e => {
+    inputStarFocus.value = false
+  })
+
+  //
+  inputEndRef.value?.addEventListener?.('focusin', e => {
+    inputEndFocus.value = true
+  })
+  inputEndRef.value?.addEventListener?.('focusout', e => {
+    inputEndFocus.value = false
+  })
 })
 </script>
 
 <template>
   <div
-    ref="datepickerRangeInput"
     class="el-date-editor el-date-editor--monthrange el-input__wrapper el-range-editor el-tooltip__trigger el-tooltip__trigger"
   >
     <i class="el-icon el-input__icon el-range__icon">
@@ -38,6 +56,7 @@ watch(() => datepickerRangeInput, () => {
     </i>
 
     <input
+      ref="inputStartRef"
       autocomplete="off"
       name=""
       class="el-range-input"
@@ -46,6 +65,7 @@ watch(() => datepickerRangeInput, () => {
     <span class="el-range-separator">{{ separator }}</span>
 
     <input
+      ref="inputEndRef"
       autocomplete="off"
       name=""
       class="el-range-input"
