@@ -27,21 +27,19 @@ const emits = defineEmits([
     <!-- header -->
     <div class="el-date-picker__header el-date-picker__header--bordered">
       <span class="el-date-picker__prev-btn">
-        <button
-          type="button"
+        <span
           aria-label="上一年"
           class="el-picker-panel__icon-btn el-icon-d-arrow-left"
           @click="emits('datepicker_clickPrev')"
-        ><el-icon><DArrowLeft /></el-icon></button>
+        ><el-icon><DArrowLeft /></el-icon></span>
       </span>
       <span role="button" class="el-date-picker__header-label" @click="emits('datepicker_clickViewTitle')">{{ props.datepicker_viewTitle }}</span>
       <span class="el-date-picker__next-btn">
-        <button
-          type="button"
+        <span
           aria-label="下一年"
           class="el-picker-panel__icon-btn el-icon-d-arrow-right"
           @click="emits('datepicker_clickNext')"
-        ><el-icon><DArrowRight /></el-icon></button>
+        ><el-icon><DArrowRight /></el-icon></span>
       </span>
     </div>
     <!-- table -->
