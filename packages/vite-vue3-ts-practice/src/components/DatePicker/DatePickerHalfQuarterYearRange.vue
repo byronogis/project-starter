@@ -190,11 +190,13 @@ initView()
     <!--  -->
     <template #default>
       <DatePickerHalfQuarterYearPanelWrapper
+        is-range
         @update:popover-visible="(status: boolean) => popover.visible = status"
       >
-        <template #default>
+        <template #range-left>
           <!-- left -->
           <DatePickerHalfQuarterYearPanel
+            class="el-date-range-picker__content is-left"
             :datepicker_view-title="datepicker_viewTitle"
             :datepicker_view-lines="datepicker_viewLines"
             :datepicker_view-items="datepicker.viewItems"
@@ -203,9 +205,12 @@ initView()
             @datepicker_click-view-title="datepicker_clickViewTitle"
             @datepicker_click-view-item="datepicker_clickViewItem"
           />
+        </template>
 
+        <template #range-right>
           <!-- right -->
           <DatePickerHalfQuarterYearPanel
+            class="el-date-range-picker__content is-right"
             :datepicker_view-title="datepicker_viewTitle"
             :datepicker_view-lines="datepicker_viewLines"
             :datepicker_view-items="datepicker.viewItems"
