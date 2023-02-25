@@ -22,10 +22,18 @@ const {
   datepicker,
   event,
 } = useDatePickerHalfQuarterYear(props, attrs)
+
+const scopedId = inject<string>('scopedId')
+const datepickerHalfQuarterYearRef = ref<any>(null)
+watchEffect(() => {
+  const popper = datepickerHalfQuarterYearRef.value?.popperRef?.contentRef as HTMLDivElement
+  popper?.setAttribute(`data-v-${scopedId}`, '')
+})
 </script>
 
 <template>
   <el-popover
+    ref="datepickerHalfQuarterYearRef"
     v-bind="popover.property"
     width="auto"
   >

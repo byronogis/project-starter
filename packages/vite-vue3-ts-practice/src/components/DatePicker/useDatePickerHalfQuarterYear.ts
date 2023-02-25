@@ -14,7 +14,7 @@ export function usePopover(attrs: SetupContext['attrs']) {
     hideAfter: 0,
     transition: 'el-zoom-in-top',
     visible: false,
-    popperClass: [attrs['popper-class'], 'el-picker__popper'],
+    popperClass: [attrs['popper-class'], 'el-picker__popper', 'p-0'],
   })
   return popover
 }

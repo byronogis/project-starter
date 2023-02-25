@@ -18,10 +18,18 @@ const attrs = useAttrs()
 
 const leftPanel = useDatePickerHalfQuarterYear(props, attrs)
 const rightPanel = useDatePickerHalfQuarterYear(props, attrs, leftPanel.popover.property)
+
+const scopedId = inject<string>('scopedId')
+const datepickerHalfQuarterYearRangeRef = ref<any>(null)
+watchEffect(() => {
+  const popper = datepickerHalfQuarterYearRangeRef.value?.popperRef?.contentRef as HTMLDivElement
+  popper?.setAttribute(`data-v-${scopedId}`, '')
+})
 </script>
 
 <template>
   <el-popover
+    ref="datepickerHalfQuarterYearRangeRef"
     v-bind="leftPanel.popover.property"
     width="auto"
   >
