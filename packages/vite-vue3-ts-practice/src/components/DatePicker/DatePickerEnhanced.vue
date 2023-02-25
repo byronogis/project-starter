@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DatePickerrHalfQuarterYear from './DatePickerHalfQuarterYear.vue'
+import DatePickerHalfQuarterYearRange from './DatePickerHalfQuarterYearRange.vue'
 
 type DateType =
   | 'year'
@@ -13,7 +14,7 @@ type DateType =
   | 'monthrange'
 
 const props = defineProps<{
-  type: 'halfyear' | 'quarteryear' | Partial<DateType>
+  type: 'halfyear' | 'quarteryear' | 'halfyearrange' | 'quarteryearrange' | Partial<DateType>
 }>()
 
 const originType
@@ -52,11 +53,31 @@ provide('scopedId', scopedId)
         type="quarteryear"
       />
     </template>
+
+    <!-- 半年度范围 -->
+    <template v-else-if="props.type === 'halfyearrange'">
+      <DatePickerHalfQuarterYearRange
+        v-bind="$attrs"
+        type="halfyearrange"
+      />
+    </template>
+
+    <!-- 季度范围 -->
+    <template v-else-if="props.type === 'quarteryearrange'">
+      <DatePickerHalfQuarterYearRange
+        v-bind="$attrs"
+        type="quarteryearrange"
+      />
+    </template>
   </div>
 </template>
 
 <style scoped>
-.p-0 :deep() {
+.p-0 {
+    padding: 0;
+}
+
+:deep() .p-0  {
   padding: 0px;
 }
 </style>
