@@ -10,4 +10,18 @@ export interface ViewItem {
   disabled?: boolean
 }
 
+export interface InputAttrs {
+  modelValue: string | number
+  'onUpdate:modelValue'?: (value: string | number) => void
+  placeholder: string | number
+}
+
+export interface Attrs extends InputAttrs {
+  //
+}
+
 export type DatePickertType = 'quarteryear' | 'halfyear' | 'quarteryearrange' | 'halfyearrange'
+
+export interface Props {
+  type: DatePickertType
+}
