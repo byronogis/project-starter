@@ -9,3 +9,5 @@ export interface ViewItem {
   active: boolean
   disabled?: boolean
 }
+
+export type DatePickertType = 'quarteryear' | 'halfyear' | 'quarteryearrange' | 'halfyearrange'
