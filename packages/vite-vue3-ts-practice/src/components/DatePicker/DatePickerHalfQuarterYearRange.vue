@@ -45,7 +45,7 @@ const datepicker = reactive({
   data: [0, 0], /// 年度, 季度/半年度
   // valueFormat: 'yyyy-qq',
 
-  viewPanel: 'year', // 'quarteryear' | 'halfyear' | 'year'
+  viewPanel: 'year', // 'quarteryearrange' | 'halfyearrange' | 'year'
   viewYear: new Date().getFullYear(),
   viewItems: [] as ViewItem[],
 })
@@ -114,7 +114,7 @@ function initView() {
   const curQuarterYear = Math.ceil(curMonth / 3)
   const curHalfYear = Math.ceil(curMonth / 6)
 
-  if (datepicker.viewPanel === 'quarteryear') { // 季度
+  if (datepicker.viewPanel === 'quarteryearrange') { // 季度
     list = quarteryearEnum.map((cur, idx): ViewItem => {
       const year = datepicker.viewYear
       const quarteryear = idx + 1
@@ -127,7 +127,7 @@ function initView() {
         active: (year === datepicker.data[0]) && (quarteryear === datepicker.data[1]),
       }
     })
-  } else if (datepicker.viewPanel === 'halfyear') { // 半年度
+  } else if (datepicker.viewPanel === 'halfyearrange') { // 半年度
     list = halfyearEnum.map((cur, idx): ViewItem => {
       const year = datepicker.viewYear
       const halfyear = idx + 1
