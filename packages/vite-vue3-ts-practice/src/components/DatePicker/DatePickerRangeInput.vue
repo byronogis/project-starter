@@ -11,7 +11,7 @@ const inputEnd = reactive({
 
 const separator = ref('To')
 
-const datepickerRangeInput = ref<HTMLDivElement>(null)
+const datepickerRangeInput = ref<HTMLDivElement | null>(null)
 
 watch(() => datepickerRangeInput, () => {
   datepickerRangeInput.value?.addEventListener?.('focus', ({ currentTarget }) => {
