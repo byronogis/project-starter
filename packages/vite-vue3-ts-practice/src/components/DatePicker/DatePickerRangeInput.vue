@@ -9,8 +9,6 @@ const inputStart = reactive({
 const inputEnd = reactive({
   placeholder: '结束',
 })
-const inputStartRef = ref<HTMLInputElement | null>(null)
-const inputEndRef = ref<HTMLInputElement | null>(null)
 
 const inputStarFocus = ref(false)
 const inputEndFocus = ref(false)
@@ -21,24 +19,6 @@ watchEffect(() => {
   } else {
     emits('update:popoverVisible', false)
   }
-})
-
-onMounted(() => {
-  //
-  inputStartRef.value?.addEventListener?.('focusin', e => {
-    inputStarFocus.value = true
-  })
-  inputStartRef.value?.addEventListener?.('focusout', e => {
-    inputStarFocus.value = false
-  })
-
-  //
-  inputEndRef.value?.addEventListener?.('focusin', e => {
-    inputEndFocus.value = true
-  })
-  inputEndRef.value?.addEventListener?.('focusout', e => {
-    inputEndFocus.value = false
-  })
 })
 </script>
 
@@ -56,20 +36,22 @@ onMounted(() => {
     </i>
 
     <input
-      ref="inputStartRef"
       autocomplete="off"
       name=""
       class="el-range-input"
       v-bind="inputStart"
+      @focusin="() => inputStarFocus = true"
+      @focusout="() => inputStarFocus = false"
     >
     <span class="el-range-separator">{{ separator }}</span>
 
     <input
-      ref="inputEndRef"
       autocomplete="off"
       name=""
       class="el-range-input"
       v-bind="inputEnd"
+      @focusin="() => inputEndFocus = true"
+      @focusout="() => inputEndFocus = false"
     >
 
     <i class="el-icon el-input__icon el-range__close-icon el-range__close-icon--hidden">
