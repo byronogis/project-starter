@@ -1,3 +1,5 @@
+import type { ComputedRef } from 'vue'
+
 export interface ViewItem {
   label: string
   year: number
@@ -11,9 +13,16 @@ export interface ViewItem {
 }
 
 export interface InputAttrs {
-  modelValue: string | number
+  modelValue: ComputedRef<string>
   'onUpdate:modelValue'?: (value: string | number) => void
-  placeholder: string | number
+  placeholder: string
+
+  // range extra
+  modelValueStart?: ComputedRef<string[]>
+  placeholderStart?: string
+  modelValueEnd?: ComputedRef<string[]>
+  placeholderEnd?: string
+  separator?: string
 }
 
 export interface Attrs extends InputAttrs {

@@ -13,7 +13,7 @@ import useDatePickerHalfQuarterYear from './useDatePickerHalfQuarterYear'
 const props = defineProps<{
   type: 'quarteryear' | 'halfyear'
 }>()
-
+const emits = defineEmits(['update:modelValue'])
 const attrs = useAttrs() as unknown
 
 const {
@@ -21,7 +21,7 @@ const {
   input,
   datepicker,
   event,
-} = useDatePickerHalfQuarterYear(props, toRefs(attrs as Attrs))
+} = useDatePickerHalfQuarterYear(props, emits, toRefs(attrs as Attrs))
 
 const scopedId = inject<string>('scopedId')
 const datepickerHalfQuarterYearRef = ref<any>(null)

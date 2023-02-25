@@ -14,10 +14,11 @@ import useDatePickerHalfQuarterYear from './useDatePickerHalfQuarterYear'
 const props = defineProps<{
   type: 'quarteryearrange' | 'halfyearrange'
 }>()
+const emits = defineEmits(['update:modelValue'])
 const attrs = useAttrs()
 
-const leftPanel = useDatePickerHalfQuarterYear(props, attrs)
-const rightPanel = useDatePickerHalfQuarterYear(props, attrs, leftPanel.popover.property)
+const leftPanel = useDatePickerHalfQuarterYear(props, emits, toRefs(attrs))
+const rightPanel = useDatePickerHalfQuarterYear(props, emits, toRefs(attrs), leftPanel.popover.property)
 
 const scopedId = inject<string>('scopedId')
 const datepickerHalfQuarterYearRangeRef = ref<any>(null)
@@ -25,6 +26,26 @@ watchEffect(() => {
   const popper = datepickerHalfQuarterYearRangeRef.value?.popperRef?.contentRef as HTMLDivElement
   popper?.setAttribute(`data-v-${scopedId}`, '')
 })
+
+const updateModelValueFn = (val: string, idx: number) => {
+  switch (idx) {
+    case 0:
+      emits('update:modelValue', [val, attrs.modelValue?.[1]])
+      break
+    case 1:
+      emits('update:modelValue', [attrs.modelValue?.[0], val])
+      break
+
+    default:
+      break
+  }
+}
+</script>
+
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
 </script>
 
 <template>
@@ -36,6 +57,8 @@ watchEffect(() => {
     <!--  -->
     <template #reference>
       <DatePickerRangeInput
+        v-bind="{ left: leftPanel.input.property, right: rightPanel.input.property }"
+        @update:modelValue="updateModelValueFn"
         @update:popover-visible="(status: boolean) => leftPanel.popover.property.visible = status"
       />
     </template>

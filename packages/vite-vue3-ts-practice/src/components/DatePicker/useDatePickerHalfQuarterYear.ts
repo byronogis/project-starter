@@ -1,5 +1,5 @@
 import type { toRefs } from 'vue'
-import type { Attrs, InputAttrs, Props, ViewItem } from './types'
+import type { Attrs, DatePickertType, InputAttrs, Props, ViewItem } from './types'
 
 const quarteryearEnum = ['一', '二', '三', '四']
 const halfyearEnum = ['上', '下']
@@ -11,17 +11,27 @@ export function usePopover(attrs: toRefs<Attrs>) {
     hideAfter: 0,
     transition: 'el-zoom-in-top',
     visible: false,
-    popperClass: [attrs['popper-class'], 'el-picker__popper', 'p-0'],
+    popperClass: [attrs['popper-class']?.value, 'el-picker__popper', 'p-0'],
   })
   return popover
 }
 
-export default function useDatePicker(props: Props, attrs: toRefs<Attrs>, existPopover: any = null) {
+export default function useDatePicker(props: Props, emits: any, attrs: toRefs<Attrs>, existPopover: any = null) {
   const popover = existPopover || usePopover(attrs)
 
+  const isRange = Array.isArray(attrs.modelValue?.value)
+  const isLeft = !existPopover
+
   const input = reactive<InputAttrs>({
-    modelValue: attrs.modelValue,
-    placeholder: attrs.placeholder,
+    modelValue: computed(() => attrs.modelValue?.value),
+    placeholder: attrs.placeholder || '选择日期',
+
+    // range extra attrs属性名一致,使用的时候再判别
+    modelValueStart: computed(() => isRange && attrs.modelValue?.value?.[0]),
+    placeholderStart: isRange && (attrs['placeholder-start']?.value || '开始日期'),
+    modelValueEnd: computed(() => isRange && attrs.modelValue?.value?.[1]),
+    placeholderEnd: isRange && (attrs['placeholder-end'] || '结束日期'),
+    separator: isRange && (attrs.separator?.value || 'To'),
     // clearable: true,
     // size: 'default',
     // readonly: false,
@@ -87,7 +97,8 @@ export default function useDatePicker(props: Props, attrs: toRefs<Attrs>, existP
       datepicker.viewYear = viewItem.year
       datepicker.viewPanel = props.type
     } else {
-      datepicker.data = [viewItem.year, viewItem[props.type] as number]
+      const type = props.type?.replace('range', '') as DatePickertType
+      datepicker.data = [viewItem.year, viewItem[type] as number]
       popover && (popover.visible = false)
     }
   }
@@ -156,7 +167,11 @@ export default function useDatePicker(props: Props, attrs: toRefs<Attrs>, existP
   watch(() => datepicker.data, (newV, oldV) => {
     console.log('改变了日期 new old: ', newV, oldV)
     // input.modelValue = datepicker.data.join('-')
-    attrs?.['onUpdate:modelValue']?.value?.(datepicker.data.join('-'))
+    !isRange
+      ? emits('update:modelValue', datepicker.data.join('-'))
+      : isLeft
+        ? emits('update:modelValue', [datepicker.data.join('-'), attrs?.modelValue?.value?.[1]])
+        : emits('update:modelValue', [attrs?.modelValue?.value?.[0], datepicker.data.join('-')])
 
     // 重新生成面板项目,主要为了刷新状态
     initView()

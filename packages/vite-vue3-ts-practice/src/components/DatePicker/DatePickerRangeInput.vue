@@ -1,14 +1,5 @@
 <script setup lang="ts">
-const emits = defineEmits(['update:popoverVisible'])
-
-const separator = ref('To')
-
-const inputStart = reactive({
-  placeholder: '开始',
-})
-const inputEnd = reactive({
-  placeholder: '结束',
-})
+const emits = defineEmits(['update:popoverVisible', 'update:modelValue'])
 
 const inputStarFocus = ref(false)
 const inputEndFocus = ref(false)
@@ -39,17 +30,21 @@ watchEffect(() => {
       autocomplete="off"
       name=""
       class="el-range-input"
-      v-bind="inputStart"
+      :value="$attrs?.left?.modelValueStart"
+      :placeholder="$attrs?.left?.placeholderStart as string"
+      @change="(e: any) => emits('update:modelValue', e.target?.value, 0)"
       @click="() => inputStarFocus = true"
       @blur="() => inputStarFocus = false"
     >
-    <span class="el-range-separator">{{ separator }}</span>
+    <span class="el-range-separator">{{ $attrs?.left?.separator }}</span>
 
     <input
       autocomplete="off"
       name=""
       class="el-range-input"
-      v-bind="inputEnd"
+      :value="$attrs?.right?.modelValueEnd"
+      :placeholder="$attrs?.right?.placeholderEnd as string"
+      @change="(e: any) => emits('update:modelValue', e.target?.value, 1)"
       @click="() => inputEndFocus = true"
       @blur="() => inputEndFocus = false"
     >
