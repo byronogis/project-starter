@@ -1,20 +1,10 @@
 <script setup lang="ts">
 import DatePickerrHalfQuarterYear from './DatePickerHalfQuarterYear.vue'
 import DatePickerHalfQuarterYearRange from './DatePickerHalfQuarterYearRange.vue'
-
-type DateType =
-  | 'year'
-  | 'month'
-  | 'date'
-  | 'dates'
-  | 'week'
-  | 'datetime'
-  | 'datetimerange'
-  | 'daterange'
-  | 'monthrange'
+import type { DateType } from './types'
 
 const props = defineProps<{
-  type: 'halfyear' | 'quarteryear' | 'halfyearrange' | 'quarteryearrange' | Partial<DateType>
+  type: DateType
 }>()
 
 const originType
