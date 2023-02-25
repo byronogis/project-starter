@@ -1,27 +1,21 @@
-<!-- eslint-disable unused-imports/no-unused-imports -->
 <script setup lang="ts">
 // 基于 See https://blog.csdn.net/qq1370151551/article/details/118811216
 import DatePickerHalfQuarterYearPanelWrapper from './DatePickerHalfQuarterYearPanelWrapper.vue'
 import DatePickerHalfQuarterYearPanel from './DatePickerHalfQuarterYearPanel.vue'
-import 'element-plus/es/components/popover/style/css'
-import 'element-plus/es/components/input/style/css'
-import 'element-plus/es/components/date-picker/style/css'
-import 'element-plus/es/components/calendar/style/css'
-import type { Attrs } from './types'
 import useDatePickerHalfQuarterYear from './useDatePickerHalfQuarterYear'
 
 const props = defineProps<{
   type: 'quarteryear' | 'halfyear'
 }>()
 const emits = defineEmits(['update:modelValue'])
-const attrs = useAttrs() as unknown
+const attrs = useAttrs()
 
 const {
   popover,
   input,
   datepicker,
   event,
-} = useDatePickerHalfQuarterYear(props, emits, toRefs(attrs as Attrs))
+} = useDatePickerHalfQuarterYear(props, emits, toRefs(attrs))
 
 const scopedId = inject<string>('scopedId')
 const datepickerHalfQuarterYearRef = ref<any>(null)

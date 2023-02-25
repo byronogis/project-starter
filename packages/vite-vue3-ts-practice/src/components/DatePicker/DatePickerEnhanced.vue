@@ -3,6 +3,11 @@ import DatePickerrHalfQuarterYear from './DatePickerHalfQuarterYear.vue'
 import DatePickerHalfQuarterYearRange from './DatePickerHalfQuarterYearRange.vue'
 import type { DateType } from './types'
 
+import 'element-plus/es/components/popover/style/css'
+import 'element-plus/es/components/input/style/css'
+import 'element-plus/es/components/date-picker/style/css'
+import 'element-plus/es/components/calendar/style/css'
+
 const props = defineProps<{
   type: DateType
 }>()

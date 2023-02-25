@@ -1,14 +1,6 @@
-<!-- eslint-disable unused-imports/no-unused-imports -->
 <script setup lang="ts">
-// import DatePickerHalfQuarterYear from './DatePickerHalfQuarterYear.vue'
-import { Calendar, DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
 import DatePickerHalfQuarterYearPanelWrapper from './DatePickerHalfQuarterYearPanelWrapper.vue'
 import DatePickerHalfQuarterYearPanel from './DatePickerHalfQuarterYearPanel.vue'
-import 'element-plus/es/components/popover/style/css'
-import 'element-plus/es/components/input/style/css'
-import 'element-plus/es/components/date-picker/style/css'
-import 'element-plus/es/components/calendar/style/css'
-import type { ViewItem } from './types'
 import useDatePickerHalfQuarterYear from './useDatePickerHalfQuarterYear'
 
 const props = defineProps<{
