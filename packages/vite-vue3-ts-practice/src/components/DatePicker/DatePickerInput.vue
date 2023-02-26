@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emits = defineEmits(['update:popoverVisible', 'update:modelValue'])
+const emits = defineEmits(['update:popoverVisible', 'update:modelValue', 'update:datepickerData'])
 
 const inputFocus = ref(false)
 
@@ -48,7 +48,7 @@ export default {
         type="text"
         :value="$attrs.modelValue"
         :placeholder="$attrs.placeholder as string"
-        @change="(e: any) => emits('update:modelValue', e.target?.value)"
+        @change="(e: any) => emits('update:datepickerData', e.target?.value)"
         @click="() => emits('update:popoverVisible', true)"
         @blur="() => emits('update:popoverVisible', false)"
       >

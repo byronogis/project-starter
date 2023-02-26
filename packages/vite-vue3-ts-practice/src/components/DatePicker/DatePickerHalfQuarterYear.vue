@@ -23,6 +23,35 @@ watchEffect(() => {
   const popper = datepickerHalfQuarterYearRef.value?.popperRef?.contentRef as HTMLDivElement
   popper?.setAttribute(`data-v-${scopedId}`, '')
 })
+
+function updateDatePickerDataFn(arg: string) {
+  //
+  console.log(arg)
+  const argArr = String(arg).split('-')
+
+  if (argArr.length !== 2) {
+    return
+  }
+
+  // ! 从1000年到2999年
+  if (!/^[12][0-9]{3}$/.test(argArr[0])) {
+    return
+  }
+
+  const halfQuarterYear = argArr[1].match(/\d{1}/)?.[0]
+  if (!halfQuarterYear) {
+    return
+  }
+
+  const halfQuarterYearValidate = props.type === 'halfyear' ? [1, 2].includes(Number(halfQuarterYear)) : [1, 2, 3, 4].includes(Number(halfQuarterYear))
+  if (!halfQuarterYearValidate) {
+    return
+  }
+
+  console.log(datepicker.property.data)
+  datepicker.property.data = [Number(argArr[0]), Number(halfQuarterYear)]
+  console.log(datepicker.property.data)
+}
 </script>
 
 <script lang="ts">
@@ -52,6 +81,8 @@ export default {
       /> -->
       <DatePickerInput
         v-bind="input.property"
+        :datepicker-data="datepicker.property.data"
+        @update:datepickerData="updateDatePickerDataFn"
         @update:modelValue="emits('update:modelValue', $event)"
         @update:popoverVisible="(status: boolean) => popover.property.visible = status"
       />
