@@ -21,7 +21,7 @@ const scopedId = inject<string>('scopedId')
 const datepickerHalfQuarterYearRef = ref<any>(null)
 watchEffect(() => {
   const popper = datepickerHalfQuarterYearRef.value?.popperRef?.contentRef as HTMLDivElement
-  popper?.setAttribute(`data-v-${scopedId}`, '')
+  popper?.setAttribute?.(`data-v-${scopedId}`, '')
 })
 
 function updateDatePickerDataFn(arg: string) {
