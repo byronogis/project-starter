@@ -6,6 +6,7 @@ import DatePickerPanelWrapper from './DatePickerPanelWrapper.vue'
 import DatePickerPanel from './DatePickerPanel.vue'
 import DatePickerInputRange from './DatePickerInputRange.vue'
 import useDatePickerEnhancedRange from './useDatePickerEnhancedRange'
+import type { DatePickerPanelItem } from './types'
 
 interface Props {
   modelValue: [DateModelType, DateModelType]
@@ -50,6 +51,23 @@ const {
   panelItemClick: panelItemClickSecond,
   panelTitleClick: panelTitleClickSecond,
 } = useDatePickerEnhancedRange(props, emits, 1, popover)
+
+const type = props.type.replace('range', '')
+const clickedStatus = ref([false, false])
+const clickItem = (item: DatePickerPanelItem, whichPanel: 1 | 2) => {
+  type in item && (clickedStatus.value[whichPanel - 1] = true)
+  whichPanel === 1 ? panelItemClick(item) : panelItemClickSecond(item)
+}
+
+watchEffect(() => {
+  console.log(clickedStatus.value)
+  clickedStatus.value.every(Boolean) // 两块面板均点击过
+    && (popover.visible = false) // 关闭面板
+})
+
+watch(() => popover.visible, (newVal, _oldVal) => {
+  !newVal && (clickedStatus.value = [false, false]) // 面板关闭时重置面板点击状态
+})
 
 const scopedId: any = inject('scopedId')
 const datepickerHalfQuarterYearRangeRef = ref<any>(null)
@@ -113,7 +131,7 @@ export default {
             :items="panelItems"
             @clickPrev="panelPrevClick"
             @clickNext="panelNextClick"
-            @clickItem="panelItemClick"
+            @clickItem="clickItem($event, 1)"
             @clickTitle="panelTitleClick"
           />
         </template>
@@ -126,7 +144,7 @@ export default {
             :items="panelItemsSecond"
             @clickPrev="panelPrevClickSecond"
             @clickNext="panelNextClickSecond"
-            @clickItem="panelItemClickSecond"
+            @clickItem="clickItem($event, 2)"
             @clickTitle="panelTitleClickSecond"
           />
         </template>
