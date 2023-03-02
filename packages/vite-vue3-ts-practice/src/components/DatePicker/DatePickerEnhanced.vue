@@ -157,6 +157,14 @@ export default {
 
 <style scoped>
 .p-0 {
-    padding: 0;
+    padding: 0 !important;
+}
+
+:deep() .cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+:deep() .pointer-events-none {
+  pointer-events: none;
 }
 </style>
