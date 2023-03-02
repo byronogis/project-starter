@@ -1,15 +1,30 @@
 <script setup lang="ts">
-const emits = defineEmits(['update:popoverVisible', 'update:modelValue'])
+const props = defineProps<{
+  value: string | string[]
 
-const inputStarFocus = ref(false)
-const inputEndFocus = ref(false)
+  startValue?: string
+  startPlaceholder?: string
 
-watchEffect(() => {
-  if (inputStarFocus.value || inputEndFocus.value) {
-    emits('update:popoverVisible', true)
-  } else {
-    emits('update:popoverVisible', false)
-  }
+  endValue?: string
+  endPlaceholder?: string
+
+  rangeSeparator?: string
+}>()
+const emits = defineEmits([
+  // 'update:value',
+  'update:startValue',
+  'update:endValue',
+])
+
+const startInputFocus = ref(false)
+const endInputFocus = ref(false)
+
+const startInputFocusUpdate = (status: boolean) => startInputFocus.value = status
+const endInputFocusUpdate = (status: boolean) => endInputFocus.value = status
+
+defineExpose({
+  startFocus: startInputFocus,
+  endFocus: endInputFocus,
 })
 </script>
 
@@ -30,23 +45,23 @@ watchEffect(() => {
       autocomplete="off"
       name=""
       class="el-range-input"
-      :value="$attrs?.left?.modelValueStart"
-      :placeholder="$attrs?.left?.placeholderStart as string"
-      @change="(e: any) => emits('update:modelValue', e.target?.value, 0)"
-      @click="() => inputStarFocus = true"
-      @blur="() => inputStarFocus = false"
+      :value="props.startValue"
+      :placeholder="props.startPlaceholder"
+      @change="(e: any) => emits('update:startValue', e.target?.value ?? '')"
+      @click="startInputFocusUpdate(true)"
+      @blur="startInputFocusUpdate(false)"
     >
-    <span class="el-range-separator">{{ $attrs?.left?.separator }}</span>
+    <span class="el-range-separator">{{ props.rangeSeparator }}</span>
 
     <input
       autocomplete="off"
       name=""
       class="el-range-input"
-      :value="$attrs?.right?.modelValueEnd"
-      :placeholder="$attrs?.right?.placeholderEnd as string"
-      @change="(e: any) => emits('update:modelValue', e.target?.value, 1)"
-      @click="() => inputEndFocus = true"
-      @blur="() => inputEndFocus = false"
+      :value="props.endValue"
+      :placeholder="props.endPlaceholder"
+      @change="(e: any) => emits('update:endValue', e.target?.value ?? '')"
+      @click="endInputFocusUpdate(true)"
+      @blur="endInputFocusUpdate(false)"
     >
 
     <i class="el-icon el-input__icon el-range__close-icon el-range__close-icon--hidden">

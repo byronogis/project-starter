@@ -1,14 +1,24 @@
 <script setup lang="ts">
-const emits = defineEmits(['update:popoverVisible', 'update:modelValue', 'update:datepickerData'])
+const props = defineProps<{
+  value: string
+  placeholder: string
+
+  // range extra
+  // startValue?: string[]
+  // startPlaceholder?: string
+  // endValue?: string[]
+  // endPlaceholder?: string
+  // separator?: string
+}>()
+
+const emits = defineEmits(['update:value'])
 
 const inputFocus = ref(false)
 
-watchEffect(() => {
-  if (inputFocus.value) {
-    emits('update:popoverVisible', true)
-  } else {
-    emits('update:popoverVisible', false)
-  }
+const inputFocusUpdate = (status: boolean) => inputFocus.value = status
+
+defineExpose({
+  focus: inputFocus,
 })
 </script>
 
@@ -40,17 +50,21 @@ export default {
           </i>
         </span>
       </span>
+      <!-- 使用 click 而不是 focus
+        防止选择完成后 datepicker_clickViewItem 把弹出层 visible 设为 false
+        但因为焦点回到输入框后导致的 visible 重新设为 true 而致使弹出层不消失
+      -->
       <input
         autocomplete="off"
         name=""
         tabindex="0"
         class="el-input__inner"
         type="text"
-        :value="$attrs.modelValue"
-        :placeholder="$attrs.placeholder as string"
-        @change="(e: any) => emits('update:datepickerData', e.target?.value)"
-        @click="() => emits('update:popoverVisible', true)"
-        @blur="() => emits('update:popoverVisible', false)"
+        :value="props.value"
+        :placeholder="props.placeholder"
+        @change="(e: any) => emits('update:value', e.target?.value ?? '')"
+        @click="inputFocusUpdate(true)"
+        @blur="inputFocusUpdate(false)"
       >
       <span
         class="el-input__suffix"
