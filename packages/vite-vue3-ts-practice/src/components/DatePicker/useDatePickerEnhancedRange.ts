@@ -166,7 +166,7 @@ export default function useDatePickerEnhanced(
       panelType.value,
       panelYear.value,
       panelStartYear.value,
-      panelValue.value,
+      localModelValue.value[range],
     )
   }
 
