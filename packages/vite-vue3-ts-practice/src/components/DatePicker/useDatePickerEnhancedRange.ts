@@ -192,6 +192,7 @@ export default function useDatePickerEnhanced(
     panelNextClick,
     panelItemClick,
     panelTitleClick,
+    panelType,
   }
 }
 

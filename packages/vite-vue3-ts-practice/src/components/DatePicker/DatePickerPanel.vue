@@ -5,6 +5,8 @@ import type { DatePickerPanelItem } from './types'
 const props = defineProps<{
   title: string
   items: DatePickerPanelItem[]
+  leftPanelArrowDisabled?: boolean
+  rightPanelArrowDisabled?: boolean
 
 }>()
 
@@ -28,20 +30,28 @@ const numberOfRows = computed(() => Math.ceil(props.items.length / 4))
   <div class="el-picker-panel__content">
     <!-- header -->
     <div class="el-date-picker__header el-date-picker__header--bordered">
-      <span class="el-date-picker__prev-btn">
+      <span
+        class="el-date-picker__prev-btn"
+        :class="[props.leftPanelArrowDisabled && ('is-disabled cursor-not-allowed')]"
+      >
         <span
           aria-label="上一年"
           class="el-picker-panel__icon-btn el-icon-d-arrow-left"
+          :class="[props.leftPanelArrowDisabled && ('is-disabled pointer-events-none')]"
           @click="emits('clickPrev')"
-        ><el-icon><DArrowLeft /></el-icon></span>
+        ><el-icon :class="[props.leftPanelArrowDisabled && ('is-disabled cursor-not-allowed')]"><DArrowLeft /></el-icon></span>
       </span>
       <span role="button" class="el-date-picker__header-label" @click="emits('clickTitle')">{{ props.title }}</span>
-      <span class="el-date-picker__next-btn">
+      <span
+        class="el-date-picker__next-btn"
+        :class="[props.rightPanelArrowDisabled && ('is-disabled cursor-not-allowed')]"
+      >
         <span
           aria-label="下一年"
           class="el-picker-panel__icon-btn el-icon-d-arrow-right"
+          :class="[props.rightPanelArrowDisabled && ('is-disabled pointer-events-none')]"
           @click="emits('clickNext')"
-        ><el-icon><DArrowRight /></el-icon></span>
+        ><el-icon :class="[props.rightPanelArrowDisabled && ('is-disabled cursor-not-allowed')]"><DArrowRight /></el-icon></span>
       </span>
     </div>
     <!-- table -->

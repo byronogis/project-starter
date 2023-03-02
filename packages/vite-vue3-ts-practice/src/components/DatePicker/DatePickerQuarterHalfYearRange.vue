@@ -37,6 +37,7 @@ const {
   panelNextClick,
   panelItemClick,
   panelTitleClick,
+  panelType,
 } = useDatePickerEnhancedRange(props, emits, 0)
 
 const {
@@ -50,6 +51,7 @@ const {
   panelNextClick: panelNextClickSecond,
   panelItemClick: panelItemClickSecond,
   panelTitleClick: panelTitleClickSecond,
+  panelType: panelTypeSecond,
 } = useDatePickerEnhancedRange(props, emits, 1, popover)
 
 const type = props.type.replace('range', '')
@@ -82,6 +84,22 @@ watchEffect(() => {
   const startFocus = !!InputRef.value?.startFocus
   const endFocus = !!InputRef.value?.endFocus
   popover.visible = startFocus || endFocus
+})
+
+const isArrowDisabled = computed(() => {
+  const leftYearMax = panelTitle.value.slice(-4)
+  const rightYearMin = panelTitleSecond.value.slice(0, 4)
+  console.log('computed')
+
+  if (panelType.value === 'year' && panelTypeSecond.value === 'year') {
+    return leftYearMax >= rightYearMin
+  } else if (panelType.value === 'year' && panelTypeSecond.value !== 'year') {
+    return leftYearMax >= rightYearMin
+  } else if (panelType.value !== 'year' && panelTypeSecond.value === 'year') {
+    return leftYearMax >= rightYearMin
+  }
+
+  return false
 })
 </script>
 
@@ -129,6 +147,7 @@ export default {
             class="el-date-range-picker__content is-left p-0"
             :title="panelTitle"
             :items="panelItems"
+            :right-panel-arrow-disabled="isArrowDisabled"
             @clickPrev="panelPrevClick"
             @clickNext="panelNextClick"
             @clickItem="clickItem($event, 1)"
@@ -142,6 +161,7 @@ export default {
             class="el-date-range-picker__content is-right p-0"
             :title="panelTitleSecond"
             :items="panelItemsSecond"
+            :left-panel-arrow-disabled="isArrowDisabled"
             @clickPrev="panelPrevClickSecond"
             @clickNext="panelNextClickSecond"
             @clickItem="clickItem($event, 2)"
