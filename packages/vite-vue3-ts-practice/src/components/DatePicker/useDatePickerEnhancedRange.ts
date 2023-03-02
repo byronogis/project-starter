@@ -154,7 +154,7 @@ export default function useDatePickerEnhanced(
     newModelValue[range] = dateParsed
 
     emits('update:modelValue', newModelValue)
-    popover.visible = false
+    // popover.visible = false
 
     generateItems()
   })
