@@ -1,20 +1,26 @@
-<!-- eslint-disable unused-imports/no-unused-imports -->
 <script setup lang="ts">
 import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
-import type { ViewItem } from './types'
+import type { DatePickerPanelItem } from './types'
 
 const props = defineProps<{
-  datepicker_viewTitle: string
-  datepicker_viewLines: number
-  datepicker_viewItems: ViewItem[]
+  title: string
+  items: DatePickerPanelItem[]
+
 }>()
 
 const emits = defineEmits([
-  'datepicker_clickPrev',
-  'datepicker_clickNext',
-  'datepicker_clickViewTitle',
-  'datepicker_clickViewItem',
+  'clickPrev',
+  'clickNext',
+  'clickTitle',
+  'clickItem',
 ])
+
+const numberOfRows = computed(() => Math.ceil(props.items.length / 4))
+
+// const log = () => {
+//   console.log(111)
+//   emits('clickPrev')
+// }
 </script>
 
 <template>
@@ -26,38 +32,38 @@ const emits = defineEmits([
         <span
           aria-label="上一年"
           class="el-picker-panel__icon-btn el-icon-d-arrow-left"
-          @click="emits('datepicker_clickPrev')"
+          @click="emits('clickPrev')"
         ><el-icon><DArrowLeft /></el-icon></span>
       </span>
-      <span role="button" class="el-date-picker__header-label" @click="emits('datepicker_clickViewTitle')">{{ props.datepicker_viewTitle }}</span>
+      <span role="button" class="el-date-picker__header-label" @click="emits('clickTitle')">{{ props.title }}</span>
       <span class="el-date-picker__next-btn">
         <span
           aria-label="下一年"
           class="el-picker-panel__icon-btn el-icon-d-arrow-right"
-          @click="emits('datepicker_clickNext')"
+          @click="emits('clickNext')"
         ><el-icon><DArrowRight /></el-icon></span>
       </span>
     </div>
     <!-- table -->
     <table class="el-month-table" style="">
       <tbody>
-        <tr v-for="line in datepicker_viewLines" :key="line">
+        <tr v-for="row in numberOfRows" :key="row">
           <template
-            v-for="item in props.datepicker_viewItems.slice((line - 1) * 4, (line - 1) * 4 + 4)"
+            v-for="item in props.items.slice((row - 1) * 4, (row - 1) * 4 + 4)"
             :key="item.label"
           >
             <td
               v-if="item"
               :class="{
-                today: item.current,
-                current: item.active,
-                disabled: item.disabled,
+                today: item.isToday,
+                current: item.isCurrent,
+                disabled: item.isDisabled,
               }"
             >
               <div>
                 <span
                   class="cell"
-                  @click="emits('datepicker_clickViewItem', item)"
+                  @click="emits('clickItem', item)"
                 >{{ item.label }}</span>
               </div>
             </td>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const halfyear = ref('')
-const quarteryear = ref('')
+const halfyear = ref('2021-05-01')
+const quarteryear = ref('2023-10-01')
 
-const halfyearrange = ref(['', ''])
-const quarteryearrange = ref(['3', '4'])
+const halfyearrange = ref<[string, string]>(['2021-05-01', '2023-10-01'])
+const quarteryearrange = ref<[string, string]>(['2021-05-01', '2023-10-01'])
 
-const month = ref('')
-const monthrange = ref('')
+const month = ref('2021-06-01')
+const monthrange = ref(['2021-07-01', '2021-09-01'])
 </script>
 
 <template>
@@ -16,7 +16,6 @@ const monthrange = ref('')
     type="halfyear"
     placeholder="选择半年度"
   />
-  <hr>
 
   <div>季度选择器:</div>
   <DatePickerEnhanced
@@ -29,21 +28,21 @@ const monthrange = ref('')
   <DatePickerEnhanced
     v-model="halfyearrange"
     type="halfyearrange"
-    placeholder-start="半年度开始"
-    placeholder-end="半年度结束"
+    start-placeholder="半年度开始"
+    end-placeholder="半年度结束"
   />
 
   <div>季度范围</div>
   <DatePickerEnhanced
     v-model="quarteryearrange"
     type="quarteryearrange"
-    placeholder-start="季度开始"
-    placeholder-end="季度结束"
-    separator="至"
+    start-placeholder="季度开始"
+    end-placeholder="季度结束"
+    range-separator="To"
   />
 
   <div>月度选择器:</div>
-  <DatePickerEnhanced
+  <el-date-picker
     v-model="month"
     type="month"
   />

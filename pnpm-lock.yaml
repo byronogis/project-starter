@@ -60,6 +60,7 @@ importers:
       '@iconify-json/ep': ^1.1.9
       '@vitejs/plugin-vue': ^4.0.0
       ant-design-vue: ^3.2.15
+      dayjs: ^1.11.7
       element-plus: ^2.2.31
       typescript: ^4.9.3
       unplugin-auto-import: ^0.14.3
@@ -75,6 +76,7 @@ importers:
       '@ant-design/icons-vue': 6.1.0_vue@3.2.47
       '@element-plus/icons-vue': 2.0.10_vue@3.2.47
       ant-design-vue: 3.2.15_vue@3.2.47
+      dayjs: 1.11.7
       element-plus: 2.2.31_vue@3.2.47
       vue: 3.2.47
       vue-router: 4.1.6_vue@3.2.47
