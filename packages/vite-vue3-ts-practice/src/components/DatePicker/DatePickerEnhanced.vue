@@ -50,8 +50,19 @@ const enhancedPopperClass = computed(() => {
   return `${props.popperClass} el-picker__popper p-0`
 })
 
-// @ts-expect-error 无法提示实际存在的 scopeId/__hmrId test in vue v3.2.45
-const scopedId = getCurrentInstance()?.type?.__hmrId
+const datePickerEnhancedRef = ref<HTMLDivElement | null>(null)
+const scopedId = computed(() => {
+  const attrs = datePickerEnhancedRef.value?.attributes
+
+  if (!attrs) {
+    return
+  }
+
+  return Object.values(attrs).find(attr => {
+    const reg = /^data-v-[a-zA-Z0-9]{8}$/
+    return reg.test(String(attr?.name))
+  })?.name
+})
 provide('scopedId', scopedId)
 </script>
 
@@ -62,7 +73,7 @@ export default {
 </script>
 
 <template>
-  <div class="component-datepicker-enhanced">
+  <div ref="datePickerEnhancedRef" class="component-datepicker-enhanced">
     <!-- 原始支持 -->
     <template v-if="originType.includes(props.type as OriginDateType)">
       <ElDatePicker
