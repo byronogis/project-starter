@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     DatePickerQuarterHalfYear: typeof import('./../components/DatePicker/DatePickerQuarterHalfYear.vue')['default']
     DatePickerQuarterHalfYearRange: typeof import('./../components/DatePicker/DatePickerQuarterHalfYearRange.vue')['default']
     DatePickerRangeInput: typeof import('./../components/DatePicker/DatePickerRangeInput.vue')['default']
+    DatePickerYearRange: typeof import('./../components/DatePicker/DatePickerYearRange.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElIcon: typeof import('element-plus/es')['ElIcon']

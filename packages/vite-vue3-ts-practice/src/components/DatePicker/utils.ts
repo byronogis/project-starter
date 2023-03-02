@@ -29,7 +29,7 @@ function generateDateStr(date: DateModelType, type: DatePickerPanelType) {
   if (type === 'halfyear' || type === 'quarteryear') {
     const abbr = (dateAbbr.find(i => i[0] === type) as string[])[1]
     dateStr = `${year}-${abbr}${dict[type]}`
-  } else {
+  } else { // year
     dateStr = `${year}`
   }
 
@@ -62,7 +62,7 @@ export function dateUnifiedParse(dateUnified: string | string[], type: DatePicke
     } else if (type === 'quarteryear') {
       const prepareToFormat = [year, (Number(arr[1][1]) - 1) * 3 + 1].join('-')
       return dayjs(prepareToFormat).format(dateFormat)
-    } else {
+    } else { // 'year'
       return dayjs(year).format(dateFormat)
     }
   }

@@ -16,6 +16,7 @@ interface Props {
   type:
   | 'quarteryearrange'
   | 'halfyearrange'
+  | 'yearrange'
 }
 
 const props = defineProps<Props>()

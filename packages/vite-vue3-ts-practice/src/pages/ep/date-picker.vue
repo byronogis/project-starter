@@ -2,8 +2,9 @@
 const halfyear = ref('2021-05-01')
 const quarteryear = ref('2023-10-01')
 
-const halfyearrange = ref<[string, string]>(['2021-05-01', '2023-10-01'])
-const quarteryearrange = ref<[string, string]>(['2021-05-01', '2023-10-01'])
+const halfyearrange = ref<[string, string]>(['2016-05-01', '2018-10-01'])
+const quarteryearrange = ref<[string, string]>(['2018-05-01', '2020-10-01'])
+const yearrange = ref<[string, string]>(['2022-05-01', '2024-10-01'])
 
 const month = ref('2021-06-01')
 const monthrange = ref(['2021-07-01', '2021-09-01'])
@@ -38,6 +39,15 @@ const monthrange = ref(['2021-07-01', '2021-09-01'])
     type="quarteryearrange"
     start-placeholder="季度开始"
     end-placeholder="季度结束"
+    range-separator="To"
+  />
+
+  <div>年度范围</div>
+  <DatePickerEnhanced
+    v-model="yearrange"
+    type="yearrange"
+    start-placeholder="年度开始"
+    end-placeholder="年度结束"
     range-separator="To"
   />
 
