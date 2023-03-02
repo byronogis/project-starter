@@ -1,3 +1,4 @@
+/* eslint-disable prefer-regex-literals */
 /* eslint-disable import/order */
 import { computed } from 'vue'
 import { dateUnifiedParse, dateUnify } from './utils'
@@ -44,7 +45,9 @@ export default function useDatePickerEnhanced(
   const localModelValue = computed(() => {
     return props.modelValue.map(date => {
       const { test, exec } = valiDate(type, dateUnify(date, type) as string)
-      return (test && exec && exec.slice(1, 3).map(Number)) || [new Date().getFullYear(), 1]
+      const sliceEndIdx = type !== 'year' ? 3 : 2
+      return (test && exec && exec.slice(1, sliceEndIdx).map(Number))
+        || [new Date().getFullYear(), 1]
     })
   })
   //
@@ -119,7 +122,11 @@ export default function useDatePickerEnhanced(
       panelValue.value[0] = item.year
       panelType.value = type
     } else {
-      const value = [item.year, item[type]] as number[]
+      const value: number[] = []
+
+      value[0] = item.year
+      type !== 'year' && (value[1] = item[type] as number)
+
       const dateStr = generateDateStr(type, value)
       valiDate(type, dateStr).test && (panelValue.value = value)
     }
@@ -156,7 +163,7 @@ export default function useDatePickerEnhanced(
   watch(() => localModelValue.value, () => {
     // 单独改变元素而非直接改变数组,阻止循环侦听
     panelValue.value[0] = localModelValue.value[range][0]
-    panelValue.value[1] = localModelValue.value[range][1]
+    type !== 'year' && (panelValue.value[1] = localModelValue.value[range][1])
     generateItems()
   })
 
@@ -189,12 +196,19 @@ export default function useDatePickerEnhanced(
 }
 
 function generateDateStr(type: DatePickerPanelType, value: number[]) {
+  if (type === 'year') {
+    return `${value[0]}`
+  }
+
   return `${value[0]}-${dateSymbol[type]}${value[1]}`
 }
 
 // 验证日期格式是否符合预期
 function valiDate(dateType: DatePickerPanelType, dateStr: string) {
-  const dateReg = new RegExp(`^(\\d{4})-${dateSymbol[dateType]}(\\d)$`)
+  const dateReg = dateType !== 'year'
+    ? new RegExp(`^(\\d{4})-${dateSymbol[dateType]}(\\d)$`)
+    : new RegExp('^(\\d{4})$')
+
   let test = dateReg.test(dateStr)
   const exec = dateReg.exec(dateStr)
 

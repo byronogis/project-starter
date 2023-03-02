@@ -139,6 +139,19 @@ export default {
         @update:modelValue="emits('update:modelValue', $event)"
       />
     </template>
+
+    <!-- 年度范围 -->
+    <template v-else-if="props.type === 'yearrange'">
+      <DatePickerQuarterHalfYearRange
+        type="yearrange"
+        :model-value="Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue, props.modelValue]"
+        :popper-class="enhancedPopperClass"
+        :start-placeholder="props.startPlaceholder"
+        :end-placeholder="props.endPlaceholder"
+        :range-separator="props.rangeSeparator"
+        @update:modelValue="emits('update:modelValue', $event)"
+      />
+    </template>
   </div>
 </template>
 

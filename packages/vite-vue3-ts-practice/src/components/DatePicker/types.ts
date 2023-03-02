@@ -32,6 +32,7 @@ export type ExtraDateType =
   | 'halfyear'
   | 'quarteryearrange'
   | 'halfyearrange'
+  | 'yearrange'
 
 export type DateType = OriginDateType | ExtraDateType
 
