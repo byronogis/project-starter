@@ -53,7 +53,6 @@ const enhancedPopperClass = computed(() => {
 // @ts-expect-error 无法提示实际存在的 scopeId/__hmrId test in vue v3.2.45
 const scopedId = getCurrentInstance()?.type?.__hmrId
 provide('scopedId', scopedId)
-console.log(scopedId)
 </script>
 
 <script lang="ts">
