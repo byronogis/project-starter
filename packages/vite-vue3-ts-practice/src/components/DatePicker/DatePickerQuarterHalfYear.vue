@@ -33,11 +33,11 @@ const {
   panelTitleClick,
 } = useDatePickerEnhanced(props, emits)
 
-const scopedId = inject<string>('scopedId')
+const scopedId: any = inject('scopedId')
 const datepickerHalfQuarterYearRef = ref<any>(null)
 watchEffect(() => {
   const popper = datepickerHalfQuarterYearRef.value?.popperRef?.contentRef as HTMLDivElement
-  popper?.setAttribute?.(`data-v-${scopedId}`, '')
+  popper?.setAttribute?.(`${String(scopedId.value)}`, '')
 })
 
 const InputRef = ref<InstanceType<typeof DatePickerInput> | null>(null)

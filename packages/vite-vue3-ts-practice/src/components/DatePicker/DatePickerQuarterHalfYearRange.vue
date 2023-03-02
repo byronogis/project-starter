@@ -50,11 +50,11 @@ const {
   panelTitleClick: panelTitleClickSecond,
 } = useDatePickerEnhancedRange(props, emits, 1, popover)
 
-const scopedId = inject<string>('scopedId')
+const scopedId: any = inject('scopedId')
 const datepickerHalfQuarterYearRangeRef = ref<any>(null)
 watchEffect(() => {
   const popper = datepickerHalfQuarterYearRangeRef.value?.popperRef?.contentRef as HTMLDivElement
-  popper?.setAttribute(`data-v-${scopedId}`, '')
+  popper?.setAttribute?.(`${String(scopedId.value)}`, '')
 })
 
 const InputRef = ref<InstanceType<typeof DatePickerInputRange> | null>(null)
