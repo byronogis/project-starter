@@ -61,15 +61,11 @@ const clickItem = (item: DatePickerPanelItem, whichPanel: 1 | 2) => {
   whichPanel === 1 ? panelItemClick(item) : panelItemClickSecond(item)
 }
 
-watchEffect(() => {
-  console.log(clickedStatus.value)
+watch(clickedStatus, () => {
   clickedStatus.value.every(Boolean) // 两块面板均点击过
     && (popover.visible = false) // 关闭面板
-})
-
-watch(() => popover.visible, (newVal, _oldVal) => {
-  !newVal && (clickedStatus.value = [false, false]) // 面板关闭时重置面板点击状态
-})
+    && (clickedStatus.value = [false, false]) // 重置面板点击状态
+}, { deep: true })
 
 const scopedId: any = inject('scopedId')
 const datepickerHalfQuarterYearRangeRef = ref<any>(null)
@@ -79,11 +75,21 @@ watchEffect(() => {
 })
 
 const InputRef = ref<InstanceType<typeof DatePickerInputRange> | null>(null)
+const panelWrapperRef = ref<InstanceType<typeof DatePickerPanelWrapper> | null>(null)
+let wantClose = false
 
 watchEffect(() => {
   const startFocus = !!InputRef.value?.startFocus
   const endFocus = !!InputRef.value?.endFocus
-  popover.visible = startFocus || endFocus
+  if (startFocus || endFocus || panelWrapperRef.value?.focus) {
+    wantClose = false
+    popover.visible = true
+  } else {
+    wantClose = true
+    setTimeout(() => {
+      wantClose && (popover.visible = false) && ((wantClose = false))
+    }, 100)
+  }
 })
 
 const isArrowDisabled = computed(() => {
@@ -138,8 +144,8 @@ export default {
     <!--  -->
     <template #default>
       <DatePickerPanelWrapper
+        ref="panelWrapperRef"
         is-range
-        @update:modelVisible="(status: boolean) => popover.visible = status"
       >
         <template #range-left>
           <!-- left -->
