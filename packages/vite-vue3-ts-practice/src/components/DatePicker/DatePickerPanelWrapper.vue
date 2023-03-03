@@ -3,9 +3,15 @@ const props = defineProps<{
   isRange?: boolean
 }>()
 
-const emits = defineEmits(['update:modelVisible'])
-
 const isRange = toRef(props, 'isRange')
+
+const panelFocus = ref(false)
+
+const panelFocusUpdate = (status: boolean) => panelFocus.value = status
+
+defineExpose({
+  focus: panelFocus,
+})
 </script>
 
 <template>
@@ -13,8 +19,8 @@ const isRange = toRef(props, 'isRange')
     tabindex="0"
     class="el-picker-panel"
     :class="!isRange ? 'el-date-picker' : 'el-date-range-picker'"
-    @focus="emits('update:modelVisible', true)"
-    @blur="emits('update:modelVisible', false)"
+    @focus="panelFocusUpdate(true)"
+    @blur="panelFocusUpdate(false)"
   >
     <div class="el-picker-panel__body-wrapper">
       <div class="el-picker-panel__body">

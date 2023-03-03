@@ -41,9 +41,19 @@ watchEffect(() => {
 })
 
 const InputRef = ref<InstanceType<typeof DatePickerInput> | null>(null)
+const panelWrapperRef = ref<InstanceType<typeof DatePickerPanelWrapper> | null>(null)
+let wantClose = false
 
 watchEffect(() => {
-  popover.visible = !!InputRef.value?.focus
+  if (InputRef.value?.focus || panelWrapperRef.value?.focus) {
+    wantClose = false
+    popover.visible = true
+  } else {
+    wantClose = true
+    setTimeout(() => {
+      wantClose && (popover.visible = false) && (wantClose = false)
+    }, 100)
+  }
 })
 </script>
 
@@ -75,7 +85,7 @@ export default {
 
     <template #default>
       <DatePickerPanelWrapper
-        @update:modelVisible="(status: boolean) => (popover.visible = status)"
+        ref="panelWrapperRef"
       >
         <template #default>
           <DatePickerPanel
