@@ -5,6 +5,7 @@ import {
   defineConfig,
   presetIcons,
   presetUno,
+  // presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
@@ -28,6 +29,13 @@ export default defineConfig({
         'vertical-align': 'middle',
       },
     }),
+    // presetWebFonts({
+    //   // https://fonts.bunny.net/
+    //   provider: 'bunny',
+    //   fonts: {
+    //     // sans: 'Noto Sans SC',
+    //   },
+    // }),
 
   ],
   transformers: [

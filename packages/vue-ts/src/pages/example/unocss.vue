@@ -8,6 +8,9 @@
     <div class="bg-red:700 p-4 text-white">
       bg-red-500 p-4 text-white
     </div>
+    <p class="font-sans">
+      简体中文 font-sans 😀
+    </p>
 
     <div class="bg-gray:400">
       <i class="i-mdi:ab-testing" />
