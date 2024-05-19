@@ -1,1 +1,4 @@
-export const isArray = Array.isArray
+export function isShared(flag: boolean) {
+  console.log(flag)
+  return flag
+}

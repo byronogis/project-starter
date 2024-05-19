@@ -3,46 +3,42 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@7.26.0",
+  "packageManager": "pnpm@9.1.1",
   "engines": {
-    "node": ">=16.11.0"
+    "node": ">=20.9.0"
   },
   "scripts": {
-    "dev": "pnpm --filter vite-vue3-ts-practice dev",
-    "build": "node scripts/build.js",
+    "dev": "echo dev",
+    "build": "echo build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "preinstall": "node ./scripts/preinstall.js",
-    "prepare": "husky install",
+    "prepare": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.2",
-    "@babel/parser": "^7.20.15",
-    "@babel/types": "^7.20.7",
-    "@rollup/plugin-alias": "^4.0.3",
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-replace": "^5.0.2",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@types/node": "^16.4.7",
-    "brotli": "^1.3.2",
-    "chalk": "^4.1.0",
-    "esbuild": "^0.17.4",
-    "eslint": "^8.34.0",
-    "execa": "^4.0.2",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.1.2",
-    "magic-string": "^0.27.0",
-    "minimist": "^1.2.0",
-    "rollup": "~3.10.0",
-    "rollup-plugin-esbuild": "^5.0.0",
-    "rollup-plugin-polyfill-node": "^0.11.0"
+    "@antfu/eslint-config": "^2.18.1",
+    "@project-starter/shared": "workspace:*",
+    "@types/node": "^20.12.12",
+    "@unocss/reset": "^0.60.2",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vueuse/core": "^10.9.0",
+    "eslint": "^9.3.0",
+    "eslint-plugin-format": "^0.1.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "pinia": "^2.1.7",
+    "typescript": "^5.4.5",
+    "unbuild": "^2.0.0",
+    "unocss": "^0.60.2",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.0",
+    "unplugin-vue-router": "^0.8.6",
+    "vite": "^5.2.11",
+    "vite-plugin-vue-devtools": "^7.2.0",
+    "vue": "^3.4.27",
+    "vue-router": "^4.3.2"
   },
   "lint-staged": {
-    "*.{js,ts,json,vue}": [
-      "eslint"
-    ]
+    "*": "eslint --fix"
   }
 }

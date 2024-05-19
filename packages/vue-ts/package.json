@@ -1,5 +1,5 @@
 {
-  "name": "@project-starter/shared",
+  "name": "@project-starter/vue-ts",
   "type": "module",
   "version": "0.0.0",
   "exports": {
@@ -14,6 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }
