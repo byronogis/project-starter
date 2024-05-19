@@ -1,3 +1,13 @@
 # Project Starter
 
-> 使用 [pnpm workspace](https://pnpm.io/workspaces) 管理多个项目起手模板的 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
+> This is a monorepo for managing multiple project starter templates using [pnpm workspace](https://pnpm.io/workspaces).
+>
+> Not for libraries, but for independent projects.
+
+## Current Templates
+
+> Unless otherwise stated, the templates are built with vite (latest version).
+
+### vue-ts
+
+- Vue 3 + TypeScript
