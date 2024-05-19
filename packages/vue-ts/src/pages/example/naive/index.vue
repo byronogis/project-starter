@@ -24,7 +24,13 @@ const message = useMessage()
   <n-card>
     avatar:
     <n-space vertical>
-      <n-avatar bordered class="bg-red vertical-middle color-yellow">
+      <n-avatar
+        bordered
+        :style="{
+          color: 'yellow',
+          backgroundColor: 'red',
+        }"
+      >
         M
       </n-avatar>
 
