@@ -8,6 +8,7 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 // https://github.com/unplugin/unplugin-vue-components?tab=readme-ov-file#configuration
 import Components from 'unplugin-vue-components/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 // https://uvr.esm.is/guide/configuration.html
 import VueRouter from 'unplugin-vue-router/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
@@ -64,11 +65,22 @@ export default defineConfig({
         '@vueuse/core',
 
         VueRouterAutoImports,
+        {
+          'naive-ui': [
+            'useDialog',
+            'useMessage',
+            'useNotification',
+            'useLoadingBar',
+          ],
+        },
       ],
       vueTemplate: true,
     }),
     Components({
       dts: './src/types/components.d.ts',
+      resolvers: [
+        NaiveUiResolver(),
+      ],
     }),
     VueDevTools(),
   ],
