@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.18.1",
+    "@iconify/utils": "^2.1.23",
     "@project-starter/shared": "workspace:*",
     "@types/node": "^20.12.12",
     "@unocss/reset": "^0.60.2",
