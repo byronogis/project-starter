@@ -22,8 +22,12 @@ declare module 'vue-router/auto-routes' {
     '/example': RouteRecordInfo<'/example', '/example', Record<never, never>, Record<never, never>>,
     '/example/alias': RouteRecordInfo<'/example/alias', '/example/alias', Record<never, never>, Record<never, never>>,
     '/example/console': RouteRecordInfo<'/example/console', '/example/console', Record<never, never>, Record<never, never>>,
+    '/example/naive': RouteRecordInfo<'/example/naive', '/example/naive', Record<never, never>, Record<never, never>>,
+    '/example/naive/': RouteRecordInfo<'/example/naive/', '/example/naive', Record<never, never>, Record<never, never>>,
+    '/example/request': RouteRecordInfo<'/example/request', '/example/request', Record<never, never>, Record<never, never>>,
     '/example/shared': RouteRecordInfo<'/example/shared', '/example/shared', Record<never, never>, Record<never, never>>,
     '/example/store': RouteRecordInfo<'/example/store', '/example/store', Record<never, never>, Record<never, never>>,
+    '/example/unocss': RouteRecordInfo<'/example/unocss', '/example/unocss', Record<never, never>, Record<never, never>>,
     '/example/vueuse': RouteRecordInfo<'/example/vueuse', '/example/vueuse', Record<never, never>, Record<never, never>>,
   }
 }
