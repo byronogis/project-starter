@@ -31,6 +31,8 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
+        // TODO 修改为对应服务端地址及端口
+        target: 'http://192.168.192.129:5000',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },

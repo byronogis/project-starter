@@ -1,0 +1,13 @@
+{
+  "name": "@project-starter/server",
+  "private": true,
+  "scripts": {
+    "dev": "nitro dev",
+    "build": "nitro build",
+    "prepare": "nitro prepare",
+    "preview": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "nitropack": "latest"
+  }
+}
