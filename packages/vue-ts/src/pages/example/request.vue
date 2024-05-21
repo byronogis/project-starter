@@ -1,17 +1,42 @@
 <script setup lang="ts">
-import axios from 'axios'
-
-const url = ref('')
+const url = ref('/api/hello?foo=bar')
+const method = ref('get')
 const data = ref()
 
-function send() {
-  axios.get(url.value).then(res => data.value = res.data)
+async function send() {
+  console.log(request)
+  try {
+    debugger
+    await request.request({
+      url: toValue(url),
+      // method: toValue(method),
+      params: {
+        name: 'from params',
+      },
+      data: {
+        name: 'from data',
+      },
+    })
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 </script>
 
 <template>
   <div class="page-example-request">
-    <textarea id="" v-model="url" type="text" name="" @keyup.enter="send" />
+    <textarea id="" v-model="url" type="text" name="" />
+    <br>
+    <select id="" v-model="method" name="">
+      <option v-for="i in ['get', 'post']" :key="i" :value="i">
+        {{ i }}
+      </option>
+    </select>
+    <br>
+    <button @click="send">
+      Send
+    </button>
     <br>
 
     <pre>

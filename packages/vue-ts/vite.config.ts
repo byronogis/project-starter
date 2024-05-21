@@ -32,7 +32,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         // TODO 修改为对应服务端地址及端口
-        target: 'http://192.168.192.129:5000',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },
@@ -56,6 +56,7 @@ export default defineConfig({
       dirs: [
         'src/composables',
         'src/stores',
+        'src/utils',
       ],
       imports: [
         /**
