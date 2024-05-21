@@ -25,7 +25,7 @@ export class Request {
 
     const requestInterceptors = [
       this.#preventDuplication,
-      this.#setAbortController,
+      this.#addAbortController,
     ].reverse() // NOTE: 由于请求拦截器是按添加顺序的倒序执行, 所以这里反转以使执行顺序和上面数组的定义顺序一致
     requestInterceptors.forEach((interceptor) => {
       this.instance.interceptors.request.use(interceptor.bind(this))
@@ -67,7 +67,7 @@ export class Request {
     this.abortControllerMap.clear()
   }
 
-  #setAbortController(requestConfig: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
+  #addAbortController(requestConfig: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
     const controller = new AbortController()
     requestConfig.signal = controller.signal
 
@@ -109,6 +109,11 @@ interface RequestConfig extends AxiosRequestConfig {
   // TODO
   // _key?: string
 }
+
+// interface InternalRequestConfig extends InternalAxiosRequestConfig {
+//   // _key?: string
+
+// }
 
 // type Promisable<T> = T | Promise<T>
 
