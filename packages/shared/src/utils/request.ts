@@ -9,25 +9,62 @@ import type {
 
 export class Request {
   instance: AxiosInstance
-  abortControllerMap: Map<any, AbortController> = new Map()
+  abortControllerMap: Map<string, AbortController> = new Map()
 
   constructor(config: CreateRequestConfig = {}) {
     this.instance = axios.create(config)
 
     // this.instance.interceptors.request.use((requestConfig) => {
     //   console.log('requestConfig', requestConfig)
+    //   return requestConfig
     // })
-    const interceptors = [
+    // this.instance.interceptors.response.use((response) => {
+    //   console.log('response', response)
+    //   return response
+    // })
+
+    const requestInterceptors = [
       this.#preventDuplication,
       this.#setAbortController,
-    ]
-    interceptors.forEach((interceptor) => {
+    ].reverse() // NOTE: 由于请求拦截器是按添加顺序的倒序执行, 所以这里反转以使执行顺序和上面数组的定义顺序一致
+    requestInterceptors.forEach((interceptor) => {
       this.instance.interceptors.request.use(interceptor.bind(this))
+    })
+
+    const responseInterceptors = [
+      this.#removeAbortController,
+    ]
+    responseInterceptors.forEach((interceptor) => {
+      this.instance.interceptors.response.use(interceptor.bind(this))
     })
   }
 
+  /**
+   * 发送请求
+   */
   request(config: RequestConfig) {
     return this.instance.request(config)
+  }
+
+  /**
+   * 取消请求
+   */
+  cancel(key: string) {
+    const controller = this.abortControllerMap.get(key)
+    if (controller) {
+      controller.abort()
+      this.abortControllerMap.delete(key)
+    }
+  }
+
+  /**
+   * 取消所有请求
+   */
+  cancelAll() {
+    this.abortControllerMap.forEach((controller) => {
+      controller.abort()
+    })
+    this.abortControllerMap.clear()
   }
 
   #setAbortController(requestConfig: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
@@ -38,6 +75,12 @@ export class Request {
     this.abortControllerMap.set(key, controller)
 
     return Promise.resolve(requestConfig)
+  }
+
+  #removeAbortController(response: AxiosResponse): Promise<AxiosResponse> {
+    const key = this.#generateKey(response.config)
+    this.abortControllerMap.delete(key)
+    return Promise.resolve(response)
   }
 
   #preventDuplication(requestConfig: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
@@ -55,9 +98,6 @@ export class Request {
   }
 }
 
-// const request = new Request()
-// // request.req
-
 interface CreateRequestConfig extends CreateAxiosDefaults {
   // TODO
   // interceptors?: AxiosInstance['interceptors']
@@ -66,6 +106,8 @@ interface CreateRequestConfig extends CreateAxiosDefaults {
 interface RequestConfig extends AxiosRequestConfig {
   // TODO
   // interceptors?: AxiosInstance['interceptors']
+  // TODO
+  // _key?: string
 }
 
 // type Promisable<T> = T | Promise<T>
