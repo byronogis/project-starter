@@ -4,10 +4,10 @@ const method = ref('get')
 const data = ref()
 
 async function send() {
-  console.log(request)
+  console.log(http)
   try {
-    debugger
-    await request.request({
+    // debugger
+    await http.request({
       url: toValue(url),
       // method: toValue(method),
       params: {

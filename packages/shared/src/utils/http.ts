@@ -7,11 +7,11 @@ import type {
   InternalAxiosRequestConfig,
 } from 'axios'
 
-export class Request {
+export class HTTP {
   instance: AxiosInstance
   abortControllerMap: Map<string, AbortController> = new Map()
 
-  constructor(config: CreateRequestConfig = {}) {
+  constructor(config: CreateHTTPConfig = {}) {
     this.instance = axios.create(config)
 
     // this.instance.interceptors.request.use((requestConfig) => {
@@ -23,16 +23,21 @@ export class Request {
     //   return response
     // })
 
+    // 请求拦截器
     const requestInterceptors = [
+      // ...config.interceptors?.request ?? [],
       this.#preventDuplication,
       this.#addAbortController,
+
     ].reverse() // NOTE: 由于请求拦截器是按添加顺序的倒序执行, 所以这里反转以使执行顺序和上面数组的定义顺序一致
     requestInterceptors.forEach((interceptor) => {
       this.instance.interceptors.request.use(interceptor.bind(this))
     })
 
+    // 响应拦截器
     const responseInterceptors = [
       this.#removeAbortController,
+      // ...config.interceptors?.response ?? [],
     ]
     responseInterceptors.forEach((interceptor) => {
       this.instance.interceptors.response.use(interceptor.bind(this))
@@ -67,7 +72,7 @@ export class Request {
     this.abortControllerMap.clear()
   }
 
-  #addAbortController(requestConfig: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
+  #addAbortController(requestConfig: InternalRequestConfig): Promise<InternalRequestConfig> {
     const controller = new AbortController()
     requestConfig.signal = controller.signal
 
@@ -77,13 +82,13 @@ export class Request {
     return Promise.resolve(requestConfig)
   }
 
-  #removeAbortController(response: AxiosResponse): Promise<AxiosResponse> {
+  #removeAbortController(response: Response): Promise<Response> {
     const key = this.#generateKey(response.config)
     this.abortControllerMap.delete(key)
     return Promise.resolve(response)
   }
 
-  #preventDuplication(requestConfig: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> {
+  #preventDuplication(requestConfig: InternalRequestConfig): Promise<InternalRequestConfig> {
     const key = this.#generateKey(requestConfig)
     if (this.abortControllerMap.has(key)) {
       return Promise.reject(new Error('Duplicate request'))
@@ -91,33 +96,47 @@ export class Request {
     return Promise.resolve(requestConfig)
   }
 
-  #generateKey(requestConfig: InternalAxiosRequestConfig) {
+  #generateKey(requestConfig: InternalRequestConfig) {
+    if (requestConfig._key) {
+      return requestConfig._key
+    }
+
     const method = (requestConfig.method ?? 'get').toUpperCase()
     const url = requestConfig.url ?? ''
     return `${method}:${url}`
   }
+
+  // #addRequestInterceptors(interceptors: HTTPInterceptors['request']) {
+  //   interceptors.forEach((i) => {
+  //     this.instance.interceptors.request.use(...i)
+  //   })
+  // }
+
+  // #addResponseInterceptors(interceptors: HTTPInterceptors['response']) {
+  //   interceptors.forEach((i) => {
+  //     this.instance.interceptors.response.use(...i)
+  //   })
+  // }
 }
 
-interface CreateRequestConfig extends CreateAxiosDefaults {
-  // TODO
-  // interceptors?: AxiosInstance['interceptors']
+interface CreateHTTPConfig extends CreateAxiosDefaults {
+  // interceptors?: HTTPInterceptors
 }
 
-interface RequestConfig extends AxiosRequestConfig {
-  // TODO
-  // interceptors?: AxiosInstance['interceptors']
-  // TODO
-  // _key?: string
+type RequestConfig = AxiosRequestConfig & ExtraRequestConfig
+
+type InternalRequestConfig = InternalAxiosRequestConfig & ExtraRequestConfig
+
+type Response = AxiosResponse & { config: InternalRequestConfig }
+
+interface ExtraRequestConfig {
+  _key?: string
 }
 
-// interface InternalRequestConfig extends InternalAxiosRequestConfig {
-//   // _key?: string
-
+// interface HTTPInterceptors {
+//   request: RequestInterceptor[]
+//   response: ResponseInterceptor[]
 // }
 
-// type Promisable<T> = T | Promise<T>
-
-// interface RequestInterceptors {
-//   request?: (config: InternalAxiosRequestConfig) => RequestConfig | Promise<InternalAxiosRequestConfig>
-//   response?: (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
-// }
+// type RequestInterceptor = Parameters<AxiosInstance['interceptors']['request']['use']>
+// type ResponseInterceptor = Parameters<AxiosInstance['interceptors']['response']['use']>

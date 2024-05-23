@@ -1,4 +1,4 @@
-export * from './utils/request'
+export * from './utils/http'
 
 export function isShared(flag: boolean) {
   console.log(flag)
