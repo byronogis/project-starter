@@ -1,43 +1,104 @@
 <script setup lang="ts">
-const url = ref('/api/hello?foo=bar')
-const method = ref('get')
+const requestsInfo = ref([
+  {
+    path: '/api/hello',
+    method: 'get',
+    payload: {
+      params: {
+        name: 'from query',
+      },
+    },
+  },
+  {
+    path: '/api/hello',
+    method: 'post',
+    payload: {
+      data: {
+        name: 'from body',
+      },
+    },
+  },
+  {
+    path: '/api/hello/[name]',
+    method: 'get',
+  },
+])
+
 const data = ref()
 
-async function send() {
-  console.log(http)
+interface Data {
+  name: string
+}
+
+interface Result {
+  code: number
+  msg: string
+  data: string
+}
+
+async function send(index: number) {
+  const {
+    path,
+    method,
+    payload,
+  } = requestsInfo.value[index]
+
   try {
-    // debugger
-    await http.request({
-      url: toValue(url),
-      // method: toValue(method),
-      params: {
-        name: 'from params',
-      },
-      data: {
-        name: 'from data',
-      },
+    const res = await http.request<Data, Result>({
+      url: path,
+      method,
+      ...payload,
     })
+
+    console.log(res)
+    console.log('----------------------------')
   }
   catch (error) {
     console.error(error)
   }
 }
+
+function updatePayload(e: Event, index: number) {
+  //
+  const value = JSON.parse((e.target as HTMLElement).textContent ?? '{}')
+
+  requestsInfo.value[index].payload = value
+}
 </script>
 
 <template>
   <div class="page-example-request">
-    <textarea id="" v-model="url" type="text" name="" />
-    <br>
-    <select id="" v-model="method" name="">
-      <option v-for="i in ['get', 'post']" :key="i" :value="i">
-        {{ i }}
-      </option>
-    </select>
-    <br>
-    <button @click="send">
-      Send
-    </button>
-    <br>
+    <div
+      v-for="(r, index) in requestsInfo" :key="index"
+      :style="{
+        position: 'relative',
+        margin: '1em',
+        padding: '1em',
+        border: '1px solid gray',
+      }"
+    >
+      <input v-model="r.path" type="text">
+
+      <select v-model="r.method">
+        <option v-for="m in ['get', 'post']" :key="m" :value="m">
+          {{ m }}
+        </option>
+      </select>
+
+      <button @click="send(index)">
+        Send
+      </button>
+
+      <pre
+        :style="{
+          margin: '1em',
+          padding: '1em',
+          border: '1px solid gray',
+        }" contenteditable @input="updatePayload($event, index)"
+      >{{ r.payload }}</pre>
+    </div>
+
+    <hr>
 
     <pre>
       {{ data }}

@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
-  // 请求体校验
-  const bodySchema = z.object({
+  // 查询参数校验
+  const paramsSchema = z.object({
     name: z.string(),
   })
 
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     data,
     error,
     success,
-  } = await readValidatedBody(event, bodySchema.safeParse)
+  } = await getValidatedRouterParams(event, paramsSchema.safeParse)
 
   // 成功响应
   if (success) {
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     return {
       code: 200,
       msg: 'ok',
-      data: `Hello, ${name}! (post)`,
+      data: `Hello, ${name}!`,
     }
   }
   // 失败响应

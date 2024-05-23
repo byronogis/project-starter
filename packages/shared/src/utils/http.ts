@@ -47,7 +47,7 @@ export class HTTP {
   /**
    * 发送请求
    */
-  request(config: RequestConfig) {
+  request<T = any, R = any>(config: RequestConfig<T>): Promise<Response<R, T>> {
     return this.instance.request(config)
   }
 
@@ -123,13 +123,13 @@ interface CreateHTTPConfig extends CreateAxiosDefaults {
   // interceptors?: HTTPInterceptors
 }
 
-type RequestConfig = AxiosRequestConfig & ExtraRequestConfig
+type RequestConfig<T = any> = AxiosRequestConfig<T> & ExtraRequestConfig
 
-type InternalRequestConfig = InternalAxiosRequestConfig & ExtraRequestConfig
+type InternalRequestConfig<T = any> = InternalAxiosRequestConfig<T> & ExtraRequestConfig
 
-type Response = AxiosResponse & { config: InternalRequestConfig }
+type Response<R = any, T = any> = AxiosResponse<R, T> & { config: InternalRequestConfig<T> }
 
-interface ExtraRequestConfig {
+export interface ExtraRequestConfig {
   _key?: string
 }
 
