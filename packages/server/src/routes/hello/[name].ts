@@ -23,6 +23,6 @@ export default defineEventHandler(async (event) => {
   }
   // 失败响应
   else {
-    throw new Error(`Invalid request: ${error}`)
+    throw new Error(JSON.stringify(error))
   }
 })

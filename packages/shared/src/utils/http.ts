@@ -17,12 +17,13 @@ export class HTTP {
     const {
       _isAborted = true,
       _isDeDuplicate = true,
+      _isStorePending = true,
     } = config
 
     // 请求拦截器
     const requestInterceptors = [
       _isDeDuplicate && this.#deDuplication,
-      this.#addPendingRequest,
+      _isStorePending && this.#addPendingRequest,
       _isAborted && this.#addAbortController,
     ].reverse() // NOTE: 由于请求拦截器是按添加顺序的倒序执行, 所以这里反转以使执行顺序和上面数组的定义顺序一致
     requestInterceptors.forEach((interceptor) => {
@@ -34,7 +35,7 @@ export class HTTP {
 
     // 响应拦截器
     const responseInterceptors = [
-      this.#removePendingRequest,
+      _isStorePending && this.#removePendingRequest,
     ]
     responseInterceptors.forEach((interceptor) => {
       if (!interceptor) {
@@ -76,6 +77,19 @@ export class HTTP {
     })
 
     requestConfig._key = key
+    /**
+     * NOTE: 防止因失败返回而无法清理 pendingMap 中存储的数据
+     */
+    requestConfig.validateStatus = (status) => {
+      const isSuccess = status >= 200 && status < 300 // axios validateStatus default
+
+      if (!isSuccess) {
+        this.#removePendingRequest({ config: requestConfig } as Response)
+      }
+
+      return isSuccess
+    }
+
     return Promise.resolve(requestConfig)
   }
 
@@ -119,6 +133,11 @@ export class HTTP {
 
 interface CreateHTTPConfig extends CreateAxiosDefaults {
   // ...
+  /**
+   * 是否存储请求
+   * @default true
+   */
+  _isStorePending?: boolean
   /**
    * 是否启用取消请求
    * @default true

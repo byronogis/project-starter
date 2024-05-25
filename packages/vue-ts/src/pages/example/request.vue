@@ -1,54 +1,41 @@
 <script setup lang="ts">
+import {
+  bodyHelloAPI,
+  pathHelloAPI,
+  queryHelloAPI,
+} from '~/api/example'
+
 const requestsInfo = ref([
   {
-    path: '/api/hello',
-    method: 'get',
+    api: queryHelloAPI,
     payload: {
-      params: {
-        name: 'from query',
-      },
+      name: 'from query',
     },
   },
   {
-    path: '/api/hello',
-    method: 'post',
+    api: bodyHelloAPI,
     payload: {
-      data: {
-        name: 'from body',
-      },
+      name: 'from body',
     },
   },
   {
-    path: '/api/hello/[name]',
-    method: 'get',
+    api: pathHelloAPI,
+    payload: {
+      name: 'from path',
+    },
   },
 ])
 
 const data = ref()
 
-interface Data {
-  name: string
-}
-
-interface Result {
-  code: number
-  msg: string
-  data: string
-}
-
 async function send(index: number) {
   const {
-    path,
-    method,
+    api,
     payload,
   } = requestsInfo.value[index]
 
   try {
-    const res = await http.request<Data, Result>({
-      url: path,
-      method,
-      ...payload,
-    })
+    const res = await api(payload)
 
     console.log(res)
     console.log('----------------------------')
@@ -77,13 +64,7 @@ function updatePayload(e: Event, index: number) {
         border: '1px solid gray',
       }"
     >
-      <input v-model="r.path" type="text">
-
-      <select v-model="r.method">
-        <option v-for="m in ['get', 'post']" :key="m" :value="m">
-          {{ m }}
-        </option>
-      </select>
+      <span>{{ r.api.name }}: </span>
 
       <button @click="send(index)">
         Send
