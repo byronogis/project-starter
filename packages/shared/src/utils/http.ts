@@ -9,37 +9,37 @@ import type {
 
 export class HTTP {
   instance: AxiosInstance
-  abortControllerMap: Map<string, AbortController> = new Map()
+  pendingMap: Map<string, PendingRequest> = new Map()
 
   constructor(config: CreateHTTPConfig = {}) {
     this.instance = axios.create(config)
 
-    // this.instance.interceptors.request.use((requestConfig) => {
-    //   console.log('requestConfig', requestConfig)
-    //   return requestConfig
-    // })
-    // this.instance.interceptors.response.use((response) => {
-    //   console.log('response', response)
-    //   return response
-    // })
+    const {
+      _isAborted = true,
+      _isDeDuplicate = true,
+    } = config
 
     // 请求拦截器
     const requestInterceptors = [
-      // ...config.interceptors?.request ?? [],
-      this.#preventDuplication,
-      this.#addAbortController,
-
+      _isDeDuplicate && this.#deDuplication,
+      this.#addPendingRequest,
+      _isAborted && this.#addAbortController,
     ].reverse() // NOTE: 由于请求拦截器是按添加顺序的倒序执行, 所以这里反转以使执行顺序和上面数组的定义顺序一致
     requestInterceptors.forEach((interceptor) => {
+      if (!interceptor) {
+        return
+      }
       this.instance.interceptors.request.use(interceptor.bind(this))
     })
 
     // 响应拦截器
     const responseInterceptors = [
-      this.#removeAbortController,
-      // ...config.interceptors?.response ?? [],
+      this.#removePendingRequest,
     ]
     responseInterceptors.forEach((interceptor) => {
+      if (!interceptor) {
+        return
+      }
       this.instance.interceptors.response.use(interceptor.bind(this))
     })
   }
@@ -55,48 +55,58 @@ export class HTTP {
    * 取消请求
    */
   cancel(key: string) {
-    const controller = this.abortControllerMap.get(key)
-    if (controller) {
-      controller.abort()
-      this.abortControllerMap.delete(key)
-    }
+    const { cancel } = this.pendingMap.get(key) ?? {}
+    cancel?.()
   }
 
   /**
    * 取消所有请求
    */
   cancelAll() {
-    this.abortControllerMap.forEach((controller) => {
-      controller.abort()
+    this.pendingMap.forEach(({ cancel }) => {
+      cancel?.()
     })
-    this.abortControllerMap.clear()
+  }
+
+  #addPendingRequest(requestConfig: InternalRequestConfig): Promise<InternalRequestConfig> {
+    const key = this.#generateKey(requestConfig)
+    this.pendingMap.set(key, {
+      key,
+      config: requestConfig,
+    })
+
+    requestConfig._key = key
+    return Promise.resolve(requestConfig)
+  }
+
+  #removePendingRequest(response: Response): Promise<Response> {
+    const key = response.config._key!
+    this.pendingMap.delete(key)
+    return Promise.resolve(response)
   }
 
   #addAbortController(requestConfig: InternalRequestConfig): Promise<InternalRequestConfig> {
     const controller = new AbortController()
     requestConfig.signal = controller.signal
 
-    const key = this.#generateKey(requestConfig)
-    this.abortControllerMap.set(key, controller)
+    const key = requestConfig._key!
+    this.pendingMap.get(key)!.cancel = () => {
+      controller.abort()
+      this.pendingMap.delete(key)
+    }
 
     return Promise.resolve(requestConfig)
   }
 
-  #removeAbortController(response: Response): Promise<Response> {
-    const key = this.#generateKey(response.config)
-    this.abortControllerMap.delete(key)
-    return Promise.resolve(response)
-  }
-
-  #preventDuplication(requestConfig: InternalRequestConfig): Promise<InternalRequestConfig> {
+  #deDuplication(requestConfig: InternalRequestConfig): Promise<InternalRequestConfig> {
     const key = this.#generateKey(requestConfig)
-    if (this.abortControllerMap.has(key)) {
+    if (this.pendingMap.has(key)) {
       return Promise.reject(new Error('Duplicate request'))
     }
     return Promise.resolve(requestConfig)
   }
 
-  #generateKey(requestConfig: InternalRequestConfig) {
+  #generateKey(requestConfig: InternalRequestConfig): string {
     if (requestConfig._key) {
       return requestConfig._key
     }
@@ -105,22 +115,26 @@ export class HTTP {
     const url = requestConfig.url ?? ''
     return `${method}:${url}`
   }
-
-  // #addRequestInterceptors(interceptors: HTTPInterceptors['request']) {
-  //   interceptors.forEach((i) => {
-  //     this.instance.interceptors.request.use(...i)
-  //   })
-  // }
-
-  // #addResponseInterceptors(interceptors: HTTPInterceptors['response']) {
-  //   interceptors.forEach((i) => {
-  //     this.instance.interceptors.response.use(...i)
-  //   })
-  // }
 }
 
 interface CreateHTTPConfig extends CreateAxiosDefaults {
-  // interceptors?: HTTPInterceptors
+  // ...
+  /**
+   * 是否启用取消请求
+   * @default true
+   */
+  _isAborted?: boolean
+  /**
+   * 是否阻止重复请求
+   * @default true
+   */
+  _isDeDuplicate?: boolean
+}
+
+interface PendingRequest {
+  key: string
+  config: InternalRequestConfig
+  cancel?: () => void
 }
 
 type RequestConfig<T = any> = AxiosRequestConfig<T> & ExtraRequestConfig
@@ -132,11 +146,3 @@ type Response<R = any, T = any> = AxiosResponse<R, T> & { config: InternalReques
 export interface ExtraRequestConfig {
   _key?: string
 }
-
-// interface HTTPInterceptors {
-//   request: RequestInterceptor[]
-//   response: ResponseInterceptor[]
-// }
-
-// type RequestInterceptor = Parameters<AxiosInstance['interceptors']['request']['use']>
-// type ResponseInterceptor = Parameters<AxiosInstance['interceptors']['response']['use']>
