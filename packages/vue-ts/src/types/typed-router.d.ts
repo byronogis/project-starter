@@ -24,6 +24,7 @@ declare module 'vue-router/auto-routes' {
     '/example/console': RouteRecordInfo<'/example/console', '/example/console', Record<never, never>, Record<never, never>>,
     '/example/naive': RouteRecordInfo<'/example/naive', '/example/naive', Record<never, never>, Record<never, never>>,
     '/example/naive/': RouteRecordInfo<'/example/naive/', '/example/naive', Record<never, never>, Record<never, never>>,
+    '/example/query': RouteRecordInfo<'/example/query', '/example/query', Record<never, never>, Record<never, never>>,
     '/example/request': RouteRecordInfo<'/example/request', '/example/request', Record<never, never>, Record<never, never>>,
     '/example/shared': RouteRecordInfo<'/example/shared', '/example/shared', Record<never, never>, Record<never, never>>,
     '/example/store': RouteRecordInfo<'/example/store', '/example/store', Record<never, never>, Record<never, never>>,

@@ -19,6 +19,8 @@
     "@antfu/eslint-config": "^2.18.1",
     "@iconify/utils": "^2.1.23",
     "@project-starter/shared": "workspace:*",
+    "@tanstack/vue-query": "^5.37.1",
+    "@tanstack/vue-query-devtools": "^5.37.1",
     "@types/node": "^20.12.12",
     "@unocss/reset": "^0.60.2",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -40,7 +42,8 @@
     "vite": "^5.2.11",
     "vite-plugin-vue-devtools": "^7.2.0",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "zod": "^3.23.8"
   },
   "lint-staged": {
     "*": "eslint --fix"
