@@ -1,0 +1,10 @@
+{
+  "name": "@project-starter/json-server",
+  "private": true,
+  "scripts": {
+    "dev": "npx json-server -p 3300 db.json"
+  },
+  "devDependencies": {
+    "json-server": "1.0.0-beta.0"
+  }
+}
