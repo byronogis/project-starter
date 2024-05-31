@@ -1,8 +1,9 @@
-export function queryHelloAPI(data: ExampleData) {
+export function queryHelloAPI(data: ExampleData, extraConfig: any = {}) {
   return http.request<ExampleData, ExampleResult>({
     url: '/api/hello',
     method: 'GET',
     params: data,
+    ...extraConfig,
   })
 }
 
