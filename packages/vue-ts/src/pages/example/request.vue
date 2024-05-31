@@ -37,8 +37,7 @@ async function send(index: number) {
   try {
     const res = await api(payload)
 
-    console.log(res)
-    console.log('----------------------------')
+    data.value = res.data
   }
   catch (error) {
     console.error(error)
@@ -81,9 +80,7 @@ function updatePayload(e: Event, index: number) {
 
     <hr>
 
-    <pre>
-      {{ data }}
-    </pre>
+    <pre>{{ data }}</pre>
   </div>
 </template>
 
