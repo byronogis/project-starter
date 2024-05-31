@@ -1,5 +1,5 @@
 {
-  "name": "@project-starter/server",
+  "name": "@project-starter/nirto-server",
   "private": true,
   "scripts": {
     "dev": "nitro dev",

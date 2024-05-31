@@ -22,6 +22,6 @@
     "packages/**/src"
   ],
   "exclude": [
-    "packages/server"
+    "packages/nitro-server"
   ]
 }
