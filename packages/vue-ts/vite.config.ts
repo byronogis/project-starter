@@ -32,13 +32,13 @@ export default defineConfig({
     proxy: {
       '/api': {
         // TODO 修改为对应服务端地址及端口
-        target: 'http://localhost:3000',
+        target: 'http://localhost:5000',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },
       '/jsapi': {
         // NOTE packages/json-server
-        target: 'http://localhost:3300',
+        target: 'http://localhost:5100',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/jsapi/, ''),
       },
