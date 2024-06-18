@@ -2,10 +2,7 @@
   "name": "@project-starter/nirto-server",
   "private": true,
   "scripts": {
-    "dev": "PORT=5000 nitro dev",
-    "build": "nitro build",
-    "prepare": "nitro prepare",
-    "preview": "node .output/server/index.mjs"
+    "dev": "PORT=5000 nitro dev"
   },
   "devDependencies": {
     "nitropack": "latest"
