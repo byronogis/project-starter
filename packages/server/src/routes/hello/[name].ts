@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
-  // 查询参数校验
+  // 路径参数校验
   const paramsSchema = z.object({
     name: z.string(),
   })
