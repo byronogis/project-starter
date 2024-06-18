@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     return {
       code: 200,
       msg: 'ok',
-      data: `Hello, ${name}!`,
+      data: `Hello, ${name}! (get params)`,
     }
   }
   // 失败响应
