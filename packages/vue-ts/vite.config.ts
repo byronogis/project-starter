@@ -30,17 +30,17 @@ export default defineConfig({
   server: {
     host: true,
     proxy: {
-      '/api': {
-        // TODO 修改为对应服务端地址及端口
+      '/server-nitro': {
+        // NOTE packages/server-nitro
         target: 'http://localhost:5000',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ''),
+        rewrite: path => path.replace(/^\/server-nitro/, ''),
       },
-      '/jsapi': {
-        // NOTE packages/json-server
+      '/server-json': {
+        // NOTE packages/server-json
         target: 'http://localhost:5100',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/jsapi/, ''),
+        rewrite: path => path.replace(/^\/server-json/, ''),
       },
     },
   },

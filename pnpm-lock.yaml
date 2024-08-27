@@ -93,7 +93,7 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
 
-  packages/json-server:
+  packages/server-json:
     devDependencies:
       json-server:
         specifier: 1.0.0-beta.0

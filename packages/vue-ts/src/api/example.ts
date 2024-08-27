@@ -1,6 +1,6 @@
 export function queryHelloAPI(data: ExampleData, extraConfig: any = {}) {
   return http.request<ExampleData, ExampleResult>({
-    url: '/api/hello',
+    url: '/server-nitro/hello',
     method: 'GET',
     params: data,
     ...extraConfig,
@@ -9,7 +9,7 @@ export function queryHelloAPI(data: ExampleData, extraConfig: any = {}) {
 
 export function bodyHelloAPI(data: ExampleData) {
   return http.request<ExampleData, ExampleResult>({
-    url: '/api/hello',
+    url: '/server-nitro/hello',
     method: 'POST',
     data,
   })
@@ -17,7 +17,7 @@ export function bodyHelloAPI(data: ExampleData) {
 
 export function pathHelloAPI(data: ExampleData) {
   return http.request<ExampleData, ExampleResult>({
-    url: `/api/hello/${data.name}`,
+    url: `/server-nitro/hello/${data.name}`,
     method: 'GET',
   })
 }
