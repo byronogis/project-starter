@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "preview": {
+      "dependsOn": ["^preview"]
+    },
+    "check-types": {
+      "dependsOn": ["^transit"]
+    },
+    "//#root:lint": { },
+    "//#root:lint:fix": { }
+
+  }
+}

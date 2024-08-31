@@ -1,0 +1,44 @@
+{
+  "name": "@project-starter/eslint-config",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./base": {
+      "types": "./dist/config/base.d.ts",
+      "import": "./dist/config/base.mjs",
+      "require": "./dist/config/base.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "unbuild --watch",
+    "build": "unbuild",
+    "check-types": "tsc --noEmit",
+    "postinstall": "pnpm build"
+  },
+  "peerDependencies": {
+    "eslint": "^9.9.1"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^2.27.3",
+    "@unocss/eslint-plugin": "^0.62.3",
+    "eslint": "^9.9.1",
+    "eslint-flat-config-utils": "^0.3.1",
+    "eslint-plugin-format": "^0.1.2"
+  },
+  "devDependencies": {
+    "@project-starter/typescript-config": "workspace:*",
+    "typescript": "^5.5.4",
+    "unbuild": "3.0.0-rc.7"
+  }
+}

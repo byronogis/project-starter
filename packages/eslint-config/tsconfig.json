@@ -1,0 +1,11 @@
+{
+  "extends": "@project-starter/typescript-config/tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ]
+}
