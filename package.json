@@ -10,18 +10,24 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "generate": "turbo run generate",
     "preview": "turbo run preview",
+    "preview:build": "turbo run preview:build",
+    "preview:generate": "turbo run preview:generate",
     "check-types": "turbo run check-types",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
-    "prepare": "husky || true",
+    "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@project-starter/eslint-config": "workspace:*",
+    "@project-starter/unocss-config": "workspace:*",
+    "defu": "^6.1.4",
     "eslint": "^9.9.1",
     "husky": "^9.1.5",
-    "lint-staged": "^15.2.9",
+    "jiti": "^1.21.6",
+    "lint-staged": "^15.2.10",
     "turbo": "latest"
   },
   "lint-staged": {

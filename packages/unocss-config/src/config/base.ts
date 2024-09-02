@@ -15,8 +15,7 @@ import type {
 
 export default function base(options?: Options): Parameters<typeof defineConfig>[0] {
   const {
-    customIcons = true,
-    customIconsDir = 'src/assets/icons/custom',
+    customIcons = false,
   } = options ?? {}
 
   return {
@@ -26,9 +25,9 @@ export default function base(options?: Options): Parameters<typeof defineConfig>
         scale: 1.2,
         autoInstall: true,
         collections: {
-          custom: customIcons
+          custom: typeof customIcons === 'string'
             ? FileSystemIconLoader(
-              `${resolve(cwd(), customIconsDir)}`,
+              `${resolve(cwd(), customIcons)}`,
               (svg) => {
               // return svg.replace(/#fff/, 'currentColor')
                 return svg
@@ -69,13 +68,8 @@ export default function base(options?: Options): Parameters<typeof defineConfig>
 interface Options {
   /**
    * Enable custom icons
-   * @default true
+   * @example 'app/assets/icons/custom'
+   * @default false
    */
-  customIcons?: boolean
-  /**
-   * Custom icons directory
-   * @default
-   * 'app/assets/icons/custom'
-   */
-  customIconsDir?: string
+  customIcons?: false | string
 }

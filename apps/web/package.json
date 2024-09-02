@@ -1,0 +1,35 @@
+{
+  "name": "@project-starter/web",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "preview:build": "pnpm build && pnpm preview",
+    "preview:generate": "pnpm generate && pnpm preview",
+    "check-types": "nuxi typecheck",
+    "postinstall": "nuxi prepare"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^0.5.5",
+    "@nuxtjs/color-mode": "^3.4.4",
+    "@pinia/nuxt": "^0.5.4",
+    "@project-starter/eslint-config": "workspace:*",
+    "@project-starter/shared": "workspace:*",
+    "@project-starter/unocss-config": "workspace:*",
+    "@unocss/nuxt": "^0.62.3",
+    "@unocss/reset": "^0.62.3",
+    "@vite-pwa/nuxt": "^0.10.1",
+    "@vueuse/core": "^11.0.3",
+    "@vueuse/nuxt": "^11.0.3",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.2.2",
+    "postcss-nesting": "^13.0.0",
+    "typescript": "^5.5.4",
+    "unocss": "^0.62.3",
+    "vue-tsc": "^2.1.4"
+  }
+}

@@ -1,0 +1,26 @@
+html,
+body,
+#__nuxt {
+  height: 100vh;
+  font-size: 16px;
+}
+
+html.dark {
+  background: #222;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.scroll-bar-hidden {
+  /* 隐藏水平和垂直滚动条 */
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+  overflow: -moz-scrollbars-none; /* 老版本 Firefox */
+}
+
+.scroll-bar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, 新版本 Opera */
+}

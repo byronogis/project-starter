@@ -1,0 +1,5 @@
+@layer reset, base, transition;
+
+@import '@unocss/reset/tailwind.css' layer(reset);
+@import './base.css' layer(base);
+@import './transition.css' layer(transition);

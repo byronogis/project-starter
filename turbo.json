@@ -9,10 +9,25 @@
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "check-types"]
+    },
+    "generate": {
+      "dependsOn": ["^generate", "check-types"]
     },
     "preview": {
-      "dependsOn": ["^preview"]
+      "dependsOn": ["^transit"],
+      "cache": false,
+      "persistent": true
+    },
+    "preview:build": {
+      "dependsOn": ["^transit"],
+      "cache": false,
+      "persistent": true
+    },
+    "preview:generate": {
+      "dependsOn": ["^transit"],
+      "cache": false,
+      "persistent": true
     },
     "check-types": {
       "dependsOn": ["^transit"]
