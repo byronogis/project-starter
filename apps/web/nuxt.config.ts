@@ -31,10 +31,6 @@ export default defineNuxtConfig({
     foo: 'bar',
   },
 
-  colorMode: {
-    classSuffix: '',
-  },
-
   compatibilityDate: '2024-08-14',
 
   css: [
@@ -54,12 +50,6 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
-  eslint: {
-    config: {
-      standalone: false,
-    },
-  },
-
   experimental: {
     viewTransition: true,
     /**
@@ -76,17 +66,28 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@unocss/nuxt',
-    '@nuxtjs/color-mode',
-    '@pinia/nuxt',
-    '@nuxt/eslint',
-    '@vueuse/nuxt',
-    '@vite-pwa/nuxt',
-  ],
+    ['@unocss/nuxt', {
+      autoImport: false,
+    }],
 
-  pinia: {
-    storesDirs: ['./app/stores'],
-  },
+    ['@nuxtjs/color-mode', {
+      classSuffix: '',
+    }],
+
+    ['@pinia/nuxt', {
+      storesDirs: ['./app/stores'],
+    }],
+
+    ['@nuxt/eslint', {
+      config: {
+        standalone: false,
+      },
+    }],
+
+    '@vueuse/nuxt',
+
+    ['@vite-pwa/nuxt', pwa],
+  ],
 
   /**
    * By default, Nuxt comes with the following plugins already pre-configured:
@@ -102,11 +103,7 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
-
   // ssr: false,
 
   telemetry: true,
-
-  unocss: { autoImport: false },
 })
