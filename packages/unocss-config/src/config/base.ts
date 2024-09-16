@@ -10,10 +10,10 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 import type {
-  defineConfig,
+  UserConfig,
 } from 'unocss'
 
-export default function base(options?: Options): Parameters<typeof defineConfig>[0] {
+export default function base(options?: Options): UserConfig {
   const {
     customIcons = false,
   } = options ?? {}

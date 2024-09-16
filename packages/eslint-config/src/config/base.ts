@@ -26,6 +26,11 @@ export default function base(
         }],
 
         /**
+         * @see https://eslint.org/docs/latest/rules/no-unused-expressions
+         */
+        'ts/no-unused-expressions': 'warn',
+
+        /**
          * Always use curly braces for blocks and new line.
          * @see https://eslint.org/docs/latest/rules/curly#all
          * @see https://eslint.style/rules/default/max-statements-per-line#max
