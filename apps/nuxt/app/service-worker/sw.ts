@@ -1,9 +1,9 @@
 // @see https://github.com/vite-pwa/nuxt/blob/main/playground/service-worker/sw.ts
 
+import { clientsClaim } from 'workbox-core'
 /// <reference lib="WebWorker" />
 /// <reference types="vite/client" />
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
-import { clientsClaim } from 'workbox-core'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 
 declare let self: ServiceWorkerGlobalScope

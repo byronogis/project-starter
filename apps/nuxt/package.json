@@ -1,5 +1,5 @@
 {
-  "name": "@project-starter/web",
+  "name": "@project-starter/nuxt",
   "type": "module",
   "private": true,
   "scripts": {
