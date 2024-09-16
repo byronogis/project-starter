@@ -35,6 +35,9 @@
     "check-types": {
       "dependsOn": ["^transit"]
     },
+    "clear": {
+      "dependsOn": ["^transit"]
+    },
     "//#root:lint": { },
     "//#root:lint:fix": { }
 

@@ -11,6 +11,7 @@
     "preview:build": "pnpm build && pnpm preview",
     "preview:generate": "pnpm generate && pnpm preview",
     "check-types": "nuxi typecheck",
+    "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
   },
   "devDependencies": {

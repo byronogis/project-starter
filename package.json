@@ -17,6 +17,7 @@
     "check-types": "turbo run check-types",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
+    "clear": "turbo run clear && rimraf ./**/dist ./**/node_modules ./**/.turbo",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +29,7 @@
     "husky": "^9.1.6",
     "jiti": "^2.0.0-beta.3",
     "lint-staged": "^15.2.10",
+    "rimraf": "^6.0.1",
     "turbo": "latest"
   },
   "lint-staged": {
