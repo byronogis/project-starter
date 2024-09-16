@@ -1,10 +1,28 @@
 import { pwa } from './app/config/pwa'
-import { appDescription } from './app/constants/index'
+import { appCST } from './app/constants/app'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  $production: {
+    app: {
+      head: {
+        script: [
+          /**
+           * polyfill \
+           * es2023, es2022, es2021, es2020, default \
+           * @see https://cdnjs.cloudflare.com/polyfill/
+           */
+          {
+            src: 'https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=es2023%2Ces2022%2Ces2021%2Ces2020%2Cdefault',
+            defer: true,
+          },
+        ],
+      },
+    },
+  },
   app: {
     head: {
+      title: appCST.title,
       link: [
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -12,8 +30,12 @@ export default defineNuxtConfig({
       ],
       meta: [
         { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: appDescription },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover' },
+        { name: 'description', content: appCST.description },
+        { name: 'keywords', content: appCST.keywords },
+        { name: 'author', content: appCST.author },
+        { name: 'mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-title', content: appCST.name },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
         { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
         { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
@@ -63,6 +85,17 @@ export default defineNuxtConfig({
 
   future: {
     compatibilityVersion: 4,
+  },
+
+  imports: {
+    dirs: [
+      'api',
+      'constants',
+      'types',
+    ],
+    imports: [
+      { name: '*', as: 'Utils', from: '@project-starter/shared/utils' },
+    ],
   },
 
   modules: [

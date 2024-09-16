@@ -1,6 +1,6 @@
-import process from 'node:process'
 import type { ModuleOptions } from '@vite-pwa/nuxt'
-import { appDescription, appName } from '../constants/index'
+import process from 'node:process'
+import { appCST } from '../constants/app'
 
 const sw = process.env.VITE_PLUGIN_PWA === 'true'
 
@@ -16,10 +16,10 @@ export const pwa: ModuleOptions = {
   manifest: {
     id: scope,
     scope,
-    name: appName,
-    short_name: appName,
-    description: appDescription,
-    theme_color: '#ffffff',
+    name: appCST.name,
+    short_name: appCST.name,
+    description: appCST.description,
+    theme_color: appCST.themeColor,
     icons: [
       {
         src: 'pwa-192x192.png',
