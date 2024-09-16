@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.7",
+    "@nuxt/icon": "^1.5.1",
     "@nuxtjs/color-mode": "^3.5.1",
     "@pinia/nuxt": "^0.5.4",
     "@project-starter/eslint-config": "workspace:*",

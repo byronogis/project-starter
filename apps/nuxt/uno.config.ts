@@ -9,6 +9,6 @@ export default defineConfig(defu(
     //
   },
   base({
-    customIcons: 'app/assets/icons/custom',
+    // customIcons: 'app/assets/icons/custom',
   }),
 ))

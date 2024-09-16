@@ -120,6 +120,21 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
 
     ['@vite-pwa/nuxt', pwa],
+
+    ['@nuxt/icon', {
+      cssLayer: 'nuxt-icon',
+      componentName: 'NuxtIcon',
+      customCollections: [
+        {
+          prefix: 'custom',
+          dir: './app/assets/icons/custom',
+        },
+      ],
+      provider: 'server',
+      clientBundle: {
+        sizeLimitKb: 0,
+      },
+    }],
   ],
 
   /**
