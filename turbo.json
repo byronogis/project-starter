@@ -17,17 +17,20 @@
     "preview": {
       "dependsOn": ["^transit"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interactive": true
     },
     "preview:build": {
       "dependsOn": ["^transit"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interactive": true
     },
     "preview:generate": {
       "dependsOn": ["^transit"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interactive": true
     },
     "check-types": {
       "dependsOn": ["^transit"]
@@ -35,5 +38,6 @@
     "//#root:lint": { },
     "//#root:lint:fix": { }
 
-  }
+  },
+  "ui": "tui"
 }
