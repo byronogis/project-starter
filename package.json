@@ -32,6 +32,11 @@
     "rimraf": "^6.0.1",
     "turbo": "latest"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "nprogress": "patches/nprogress.patch"
+    }
+  },
   "lint-staged": {
     "*": "eslint --fix"
   }
