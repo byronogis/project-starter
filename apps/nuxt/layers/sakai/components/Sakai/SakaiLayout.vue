@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { SakaiOptions } from '../../types/sakai'
-import Toast from 'primevue/toast'
 import { SakaiStoreInjectionKey, useSakaiStore } from '../../stores/sakai'
 import SakaiFooter from './SakaiFooter.vue'
 import SakaiSidebar from './SakaiSidebar.vue'
@@ -37,7 +36,5 @@ const containerClass = computed(() => {
       <SakaiFooter />
     </div>
     <div class="layout-mask animate-fade-in animate-duration-150" />
-
-    <Toast />
   </div>
 </template>

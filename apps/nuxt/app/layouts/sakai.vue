@@ -7,6 +7,7 @@ const sidebarMenuList = ref<SakaiSidebarMenuItem[]>([
       { label: 'Mouse', icon: 'i-prime:book', to: '/mouse' },
       { label: 'Sakai', icon: 'i-prime:bell', to: '/sakai' },
       { label: 'Crud', icon: 'i-prime:bell', to: '/crud' },
+      { label: 'Login', icon: 'i-prime:bell', to: '/login' },
     ],
   },
 ])

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
+import Toast from 'primevue/toast'
 </script>
 
 <template>
@@ -8,5 +9,6 @@ import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
     <NuxtPage />
   </NuxtLayout>
 
+  <Toast />
   <VueQueryDevtools />
 </template>
