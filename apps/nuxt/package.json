@@ -15,10 +15,15 @@
     "postinstall": "nuxi prepare"
   },
   "devDependencies": {
+    "@iconify-json/prime": "^1.2.0",
     "@nuxt/eslint": "^0.5.7",
     "@nuxt/icon": "^1.5.1",
+    "@nuxt/kit": "^3.13.2",
+    "@nuxt/schema": "^3.13.2",
     "@nuxtjs/color-mode": "^3.5.1",
     "@pinia/nuxt": "^0.5.4",
+    "@primevue/nuxt-module": "^4.0.7",
+    "@primevue/themes": "^4.0.7",
     "@project-starter/eslint-config": "workspace:*",
     "@project-starter/shared": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
@@ -29,7 +34,9 @@
     "@vueuse/nuxt": "^11.1.0",
     "nuxt": "^3.13.2",
     "pinia": "^2.2.2",
+    "postcss-mixins": "^11.0.1",
     "postcss-nesting": "^13.0.0",
+    "primevue": "^4.0.7",
     "typescript": "^5.6.2",
     "unocss": "^0.62.3",
     "vue-tsc": "^2.1.6"

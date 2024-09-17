@@ -1,4 +1,4 @@
-import { pwa } from './app/config/pwa'
+import { primevue, pwa } from './app/config'
 import { appCST } from './app/constants/app'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -40,6 +40,27 @@ export default defineNuxtConfig({
         { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
         { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
       ],
+      style: [
+        {
+          /**
+           * 在此处定义 @layer, 保证顺序完全与期望一致
+           * @see ./app/assets/styles/index.css
+           */
+          textContent: ['@layer', [
+            'uno-preflights',
+            'uno-shortcuts',
+            'uno-icons',
+            'nuxt-icon',
+            'reset',
+            'primevue',
+            'uno-primevue-sakai',
+            'layout-sakai',
+            'base',
+            'transition',
+            'uno-default',
+          ].join(', '), ';'].join(' '),
+        },
+      ],
     },
     pageTransition: { name: 'fade', mode: 'out-in' },
     layoutTransition: { name: 'fade', mode: 'out-in' },
@@ -56,10 +77,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-08-14',
 
   css: [
-    'uno:preflights.css',
     'uno.css',
     '~/assets/styles/index.css',
-    'uno:default.css',
   ],
 
   debug: false,
@@ -119,7 +138,9 @@ export default defineNuxtConfig({
 
     '@vueuse/nuxt',
 
-    ['@vite-pwa/nuxt', pwa],
+    ['@unocss/nuxt', {
+      // ...
+    }],
 
     ['@nuxt/icon', {
       cssLayer: 'nuxt-icon',
@@ -135,6 +156,10 @@ export default defineNuxtConfig({
         sizeLimitKb: 0,
       },
     }],
+
+    ['@vite-pwa/nuxt', pwa],
+
+    ['@primevue/nuxt-module', primevue],
   ],
 
   /**
@@ -147,11 +172,13 @@ export default defineNuxtConfig({
    */
   postcss: {
     plugins: {
+      'postcss-mixins': {},
       'postcss-nesting': {},
     },
   },
 
   // ssr: false,
 
+  // @ts-expect-error type error
   telemetry: true,
 })

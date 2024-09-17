@@ -1,3 +1,6 @@
+import type {
+  UserConfig,
+} from 'unocss'
 import { resolve } from 'node:path'
 import { cwd } from 'node:process'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
@@ -8,9 +11,6 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss'
-import type {
-  UserConfig,
 } from 'unocss'
 
 export default function base(options?: Options): UserConfig {
