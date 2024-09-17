@@ -4,7 +4,7 @@ export interface SakaiOptions {
   /**
    * 左侧菜单列表
    */
-  sidebarMunuList?: MaybeRefOrGetter<SakaiSidebarMenuItem[]>
+  sidebarMenuList?: MaybeRefOrGetter<SakaiSidebarMenuItem[]>
   /**
    * 标题
    */
