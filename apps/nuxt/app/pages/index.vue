@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'sakai',
+})
+
 const userStore = useUserStore()
 
 const name = computed(() => userStore.name)
