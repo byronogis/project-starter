@@ -4,7 +4,7 @@ import SakaiMenuItem from './SakaiMenuItem.vue'
 
 const sakaiStore = inject(SakaiStoreInjectionKey)!
 
-const model = computed(() => sakaiStore.sidebarMunuList)
+const model = computed(() => sakaiStore.sidebarMenuList)
 </script>
 
 <template>

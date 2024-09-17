@@ -13,7 +13,7 @@ import Lara from '@primevue/themes/lara'
 
 export function useSakaiStore(options?: SakaiOptions) {
   const {
-    sidebarMunuList: _sidebarMunuList = [
+    sidebarMenuList: _sidebarMenuList = [
       {
         label: 'Home',
         items: [{ label: 'Dashboard', icon: 'i-prime:home', to: '/' }],
@@ -22,7 +22,7 @@ export function useSakaiStore(options?: SakaiOptions) {
     title = 'Sakai',
   } = options ?? {}
 
-  const sidebarMunuList = computed<SakaiSidebarMenuItem[]>(() => toValue(_sidebarMunuList))
+  const sidebarMenuList = computed<SakaiSidebarMenuItem[]>(() => toValue(_sidebarMenuList))
 
   const config = useLocalStorage<SakaiConfig>('sakai-config', {
     preset: 'Aura',
@@ -240,7 +240,7 @@ export function useSakaiStore(options?: SakaiOptions) {
   };
 
   return reactive({
-    sidebarMunuList,
+    sidebarMenuList,
     title,
     config,
     state,
