@@ -125,16 +125,16 @@ async function handleSubmit() {
           </div>
 
           <div class="mb-4 flex flex-col space-y-4">
-            <div class="flex flex-col">
+            <div class="relative flex flex-col pb-1.2em">
               <label for="email1" class="text-surface-900 dark:text-surface-0 mb-2 block text-xl font-medium">Email</label>
               <PrimeInputText id="email1" v-model="email" type="text" placeholder="Email address" class="w-full md:w-[30rem]" />
-              <small class="h-1em color-#f00">{{ errors.email }}</small>
+              <small v-if="errors.email" v-motion-fade class="absolute bottom-0 color-#f00">{{ errors.email }}</small>
             </div>
 
-            <div class="flex flex-col">
+            <div class="relative flex flex-col pb-1.2em">
               <label for="password1" class="text-surface-900 dark:text-surface-0 mb-2 block text-xl font-medium">Password</label>
               <PrimePassword v-model="password" input-id="password1" placeholder="Password" :toggle-mask="true" class="" fluid :feedback="false" />
-              <small class="h-1em color-#f00">{{ errors.password }}</small>
+              <small v-if="errors.password" v-motion-fade class="absolute bottom-0 color-#f00">{{ errors.password }}</small>
             </div>
 
             <div class="mb-8 mt-2 flex items-center justify-between gap-8">

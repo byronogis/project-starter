@@ -37,6 +37,7 @@
     "@vee-validate/zod": "^4.13.2",
     "@vite-pwa/nuxt": "^0.10.5",
     "@vueuse/core": "^11.1.0",
+    "@vueuse/motion": "^2.2.5",
     "@vueuse/nuxt": "^11.1.0",
     "filepond": "^4.31.3",
     "filepond-plugin-file-rename": "^1.1.8",

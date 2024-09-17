@@ -138,6 +138,8 @@ export default defineNuxtConfig({
 
     '@vueuse/nuxt',
 
+    '@vueuse/motion/nuxt',
+
     ['@unocss/nuxt', {
       // ...
     }],
