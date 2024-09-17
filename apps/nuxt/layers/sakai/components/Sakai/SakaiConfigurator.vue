@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import type { SakaiSidebarMenuMode } from '../../types/sakai'
+import { useAppColorMode } from '../../composables/useAppColorMode'
+import { SakaiStoreInjectionKey } from '../../stores/sakai'
+
 const { isDark } = useAppColorMode()
 
-const sakaiStore = useSakaiStore()
+const sakaiStore = inject(SakaiStoreInjectionKey)!
 
 const presetsOptions = ref(Object.keys(sakaiStore.presets))
 

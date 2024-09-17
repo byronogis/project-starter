@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import type { SakaiOptions } from '../../types/sakai'
+import Toast from 'primevue/toast'
+import { SakaiStoreInjectionKey, useSakaiStore } from '../../stores/sakai'
+import SakaiFooter from './SakaiFooter.vue'
 import SakaiSidebar from './SakaiSidebar.vue'
+import SakaiTopbar from './SakaiTopbar.vue'
 
-const sakaiStore = useSakaiStore()
+const props = defineProps<SakaiOptions>()
+
+const sakaiStore = useSakaiStore(props)
+
+provide(SakaiStoreInjectionKey, sakaiStore)
 
 const appSidebarRef = ref<InstanceType<typeof SakaiSidebar>>()
 onClickOutside(appSidebarRef, () => sakaiStore.resetMenu())
@@ -29,6 +38,6 @@ const containerClass = computed(() => {
     </div>
     <div class="layout-mask animate-fade-in animate-duration-150" />
 
-    <PrimeToast />
+    <Toast />
   </div>
 </template>

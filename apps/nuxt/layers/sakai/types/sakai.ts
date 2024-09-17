@@ -1,3 +1,16 @@
+import type { MaybeRefOrGetter } from 'vue'
+
+export interface SakaiOptions {
+  /**
+   * 左侧菜单列表
+   */
+  sidebarMunuList?: MaybeRefOrGetter<SakaiSidebarMenuItem[]>
+  /**
+   * 标题
+   */
+  title?: MaybeRefOrGetter<string>
+}
+
 export interface SakaiBaseMenuItem {
   label?: string
   icon?: string

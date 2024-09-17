@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SakaiMenu from './SakaiMenu.vue'
 </script>
 
 <template>

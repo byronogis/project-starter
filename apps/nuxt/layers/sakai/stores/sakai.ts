@@ -1,14 +1,28 @@
+import type { InjectionKey } from 'vue'
+import type {
+  SakaiConfig,
+  SakaiOptions,
+  SakaiPrimaryColorItem,
+  SakaiSidebarMenuItem,
+  SakaiState,
+  SakaiSurfaceItem,
+} from '../types/sakai'
 import { $t, updatePreset, updateSurfacePalette } from '@primevue/themes'
 import Aura from '@primevue/themes/aura'
 import Lara from '@primevue/themes/lara'
 
-export const useSakaiStore = defineStore('sakai', () => {
-  const sidebarMunuList = ref<SakaiSidebarMenuItem[]>([
-    {
-      label: 'Home',
-      items: [{ label: 'Dashboard', icon: 'i-prime:home', to: '/' }],
-    },
-  ])
+export function useSakaiStore(options?: SakaiOptions) {
+  const {
+    sidebarMunuList: _sidebarMunuList = [
+      {
+        label: 'Home',
+        items: [{ label: 'Dashboard', icon: 'i-prime:home', to: '/' }],
+      },
+    ],
+    title = 'Sakai',
+  } = options ?? {}
+
+  const sidebarMunuList = computed<SakaiSidebarMenuItem[]>(() => toValue(_sidebarMunuList))
 
   const config = useLocalStorage<SakaiConfig>('sakai-config', {
     preset: 'Aura',
@@ -225,8 +239,9 @@ export const useSakaiStore = defineStore('sakai', () => {
     state.value.menuHoverActive = false
   };
 
-  return {
+  return reactive({
     sidebarMunuList,
+    title,
     config,
     state,
     presets,
@@ -235,9 +250,9 @@ export const useSakaiStore = defineStore('sakai', () => {
     onMenuToggle,
     setActiveMenuItem,
     resetMenu,
-  }
-})
-
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useSakaiStore, import.meta.hot))
+  })
 }
+
+export const SakaiStoreInjectionKey = Symbol('SakaiStoreInjectionKey') as InjectionKey<
+  ReturnType<typeof useSakaiStore>
+>

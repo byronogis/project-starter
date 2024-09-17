@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const sakaiStore = useSakaiStore()
+import { SakaiStoreInjectionKey } from '../../stores/sakai'
+import SakaiMenuItem from './SakaiMenuItem.vue'
+
+const sakaiStore = inject(SakaiStoreInjectionKey)!
 
 const model = computed(() => sakaiStore.sidebarMunuList)
 </script>

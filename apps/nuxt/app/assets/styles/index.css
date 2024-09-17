@@ -2,6 +2,5 @@
 /* @layer nuxt-icon, reset, primevue, uno-primevue-sakai, layout-sakai, base, transition; */
 
 @import '@unocss/reset/tailwind.css' layer(reset);
-@import './sakai/layout.pcss' layer(layout-sakai);
 @import './base.css' layer(base);
 @import './transition.css' layer(transition);

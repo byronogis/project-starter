@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const sakaiStore = useSakaiStore()
+import { useAppColorMode } from '../../composables/useAppColorMode'
+import { SakaiStoreInjectionKey } from '../../stores/sakai'
+
+const sakaiStore = inject(SakaiStoreInjectionKey)!
 
 const {
   state,
@@ -45,7 +48,7 @@ const colorModeIconName = computed(() => {
           </g>
         </svg>
 
-        <span>{{ appCST.title }}</span>
+        <span>{{ sakaiStore.title }}</span>
       </router-link>
     </div>
 

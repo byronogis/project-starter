@@ -3,7 +3,7 @@ import { defu } from 'defu'
 import {
   defineConfig,
 } from 'unocss'
-import { primevueSakaiPresetOfUnocss } from './app/config/primevue'
+import { primevueSakaiPresetOfUnocss } from './layers/sakai/config/primevue'
 
 export default defineConfig(defu(
   {

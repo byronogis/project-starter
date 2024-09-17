@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { SakaiSidebarMenuItem } from '../../types/sakai'
+import { SakaiStoreInjectionKey } from '../../stores/sakai'
+
 const props = withDefaults(defineProps<{
   item?: SakaiSidebarMenuItem
   index?: number
@@ -13,7 +16,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-const sakaiStore = useSakaiStore()
+const sakaiStore = inject(SakaiStoreInjectionKey)!
 
 const isActiveMenu = ref(false)
 const itemKey = ref<string | null>(null)
@@ -64,7 +67,7 @@ function checkActiveRoute(item: SakaiSidebarMenuItem) {
 </script>
 
 <template>
-  <li :class="{ 'layout-root-menuitem': root, 'active-menuitem': isActiveMenu }">
+  <li data-allow-mismatch :class="{ 'layout-root-menuitem': root, 'active-menuitem': isActiveMenu }">
     <template v-if="!item.hidden">
       <div v-if="root" class="layout-menuitem-root-text">
         {{ item.label }}
