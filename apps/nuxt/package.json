@@ -39,6 +39,7 @@
     "@vueuse/core": "^11.1.0",
     "@vueuse/motion": "^2.2.5",
     "@vueuse/nuxt": "^11.1.0",
+    "chart.js": "^4.4.4",
     "filepond": "^4.31.3",
     "filepond-plugin-file-rename": "^1.1.8",
     "filepond-plugin-file-validate-type": "^1.2.9",
