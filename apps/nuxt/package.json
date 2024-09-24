@@ -3,13 +3,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "nuxi dev",
-    "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev",
+    "dev": "nuxi dev --host",
+    "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev --host",
     "build": "nuxi build",
     "generate": "nuxi generate",
-    "preview": "nuxi preview",
-    "preview:build": "pnpm build && pnpm preview",
-    "preview:generate": "pnpm generate && pnpm preview",
+    "preview": "nuxi preview --host",
+    "preview:build": "pnpm build && pnpm preview --host",
+    "preview:generate": "pnpm generate && pnpm preview --host",
     "check-types": "nuxi typecheck",
     "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
@@ -17,6 +17,7 @@
   "devDependencies": {
     "@hebilicious/vue-query-nuxt": "^0.3.0",
     "@iconify-json/prime": "^1.2.0",
+    "@nuxt/devtools": "^1.5.1",
     "@nuxt/eslint": "^0.5.7",
     "@nuxt/icon": "^1.5.1",
     "@nuxt/kit": "^3.13.2",

@@ -84,11 +84,7 @@ export default defineNuxtConfig({
   debug: false,
 
   devServer: {
-    host: '0.0.0.0',
-  },
-
-  devtools: {
-    enabled: true,
+    // host: '0.0.0.0',
   },
 
   experimental: {
@@ -118,6 +114,8 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxt/devtools',
+
     ['@unocss/nuxt', {
       autoImport: false,
     }],
