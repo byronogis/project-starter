@@ -77,7 +77,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-08-14',
 
   css: [
-    'uno.css',
     '~/assets/styles/index.css',
   ],
 
@@ -115,10 +114,6 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/devtools',
-
-    ['@unocss/nuxt', {
-      autoImport: false,
-    }],
 
     ['@nuxtjs/color-mode', {
       classSuffix: '',
