@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+const title = appCST.title
 </script>
 
 <template>
-  <SakaiLayoutBlank id="layout-sakai-blank">
+  <SakaiLayoutBlank id="layout-sakai-blank" :title>
     <slot />
   </SakaiLayoutBlank>
 </template>
