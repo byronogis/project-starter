@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
+    "dev": "nuxi prepare",
     "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
   },
