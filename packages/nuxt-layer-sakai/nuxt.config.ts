@@ -26,4 +26,6 @@ export default defineNuxtConfig({
       { name: '*', as: 'Utils', from: '@project-starter/shared/utils' },
     ],
   },
+
+  compatibilityDate: '2024-08-14',
 })
