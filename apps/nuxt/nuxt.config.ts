@@ -52,9 +52,12 @@ export default defineNuxtConfig({
             'uno-icons',
             'nuxt-icon',
             'reset',
-            'primevue',
-            'uno-primevue-sakai',
-            'layout-sakai',
+
+            // @project-starter/nuxt-layer-sakai
+            'nuxt-layer-sakai_primevue',
+            'uno-nuxt-layer-sakai_unocss',
+            'nuxt-layer-sakai_index',
+
             'base',
             'transition',
             'uno-default',

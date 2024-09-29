@@ -11,7 +11,7 @@ function convert(color: string) {
 export function sakaiPreset() {
   return definePreset(() => ({
     name: 'sakai',
-    layer: 'uno-sakai',
+    layer: 'nuxt-layer-sakai_unocss',
     theme: {
       /**
        * tailwindcss-primeui

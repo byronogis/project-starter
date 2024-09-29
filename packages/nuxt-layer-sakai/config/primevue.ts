@@ -12,7 +12,7 @@ export const primevue = {
       preset: CustomPreset,
       options: {
         cssLayer: {
-          name: 'primevue',
+          name: 'nuxt-layer-sakai_primevue',
         },
         darkModeSelector: 'html.dark',
       },
