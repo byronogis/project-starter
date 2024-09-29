@@ -16,7 +16,7 @@ const menuModeOptions = ref<{
 
 <template>
   <div
-    class="bg-surface-0 dark:bg-surface-900 config-panel component-sakai-configurator rounded-border border-surface absolute right-0 top-[3.25rem] hidden w-64 origin-top border p-4 shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]"
+    class="config-panel component-sakai-configurator rounded-border bg-surface-0 border-surface dark:bg-surface-900 absolute right-0 top-[3.25rem] hidden w-64 origin-top border p-4 shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]"
   >
     <div class="flex flex-col gap-4">
       <div>
@@ -28,10 +28,10 @@ const menuModeOptions = ref<{
             type="button"
             :title="primaryColor.name"
             data-allow-mismatch
-            class="h-5 w-5 cursor-pointer rounded-full border-none p-0 outline-offset-1 outline-none"
+            class="h-5 w-5 cursor-pointer rounded-full border-none p-0 outline-transparent outline-offset-1 outline-solid"
             :class="[
               {
-                'outline-primary': sakaiStore.config.primary === primaryColor.name,
+                '!outline-primary': sakaiStore.config.primary === primaryColor.name,
               },
             ]"
             :style="{ backgroundColor: `${primaryColor.name === 'noir' ? 'var(--text-color)' : primaryColor.palette['500']}` }"
@@ -48,10 +48,10 @@ const menuModeOptions = ref<{
             type="button"
             :title="surface.name"
             data-allow-mismatch
-            class="h-5 w-5 cursor-pointer rounded-full border-none p-0 outline-offset-1 outline-none"
+            class="h-5 w-5 cursor-pointer rounded-full border-none p-0 outline-transparent outline-offset-1 outline-solid"
             :class="[
               {
-                'outline-primary': sakaiStore.config.surface
+                '!outline-primary': sakaiStore.config.surface
                   ? sakaiStore.config.surface === surface.name
                   : isDark
                     ? surface.name === 'zinc'
