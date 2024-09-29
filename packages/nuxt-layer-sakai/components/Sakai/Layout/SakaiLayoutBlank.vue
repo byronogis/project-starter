@@ -19,5 +19,7 @@ provide(SakaiStoreInjectionKey, sakaiStore)
 <template>
   <div class="component-sakai-layout-blank min-h-100vh">
     <slot />
+
+    <Toast />
   </div>
 </template>

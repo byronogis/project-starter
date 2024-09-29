@@ -1,28 +1,20 @@
 <script setup lang="ts">
+const props = withDefaults(defineProps<{
+  signInFn?: () => Promise<void>
+  signUpFn?: () => Promise<void>
+}>(), {
+  //
+})
+
 const sakaiStore = useSakaiStore()
 provide(SakaiStoreInjectionKey, sakaiStore)
 
 const toast = useSakaiToast()
 const loginLogger = Utils.logger.withTag('Login')
 
-const isSubmiting = ref(false)
-
-const {
-  values,
-  errors,
-  validate,
-  defineField,
-  resetForm,
-} = useForm({
-  validationSchema: toTypedSchema(z.object({
-    email: z.string().email(),
-    password: z.string().min(6),
-  })),
-})
-const [email] = defineField('email')
-const [password] = defineField('password')
-// const checked = ref(false)
-
+/**
+ * Login
+ */
 type LoginStep = 'sign-in' | 'sign-up'
 interface LoginStepInfo {
   title: string
@@ -35,10 +27,6 @@ interface LoginStepInfo {
 }
 
 const step = ref<LoginStep>('sign-in')
-watch(step, () => {
-  resetForm()
-})
-
 const stepInfos: Record<LoginStep, LoginStepInfo> = {
   'sign-in': {
     title: 'Sign In',
@@ -68,21 +56,144 @@ const stepInfos: Record<LoginStep, LoginStepInfo> = {
   },
 }
 
+/**
+ * sing-in
+ */
+const signinForm = useForm({
+  validationSchema: toTypedSchema(z.object({
+    username: z.string().min(3),
+    password: z.string().min(6),
+  })),
+  initialValues: {
+    username: '',
+    password: '',
+  },
+})
+const [signinUsername] = signinForm.defineField('username')
+const [signinPassword] = signinForm.defineField('password')
+
+/**
+ * sing-up
+ */
+const signupForm = useForm({
+  validationSchema: toTypedSchema(z.object(
+    {
+      username: z.string().min(3),
+      password: z.string().min(6),
+      passwordConfirm: z.string(),
+      email: z.string().email(),
+    },
+  ).refine(data => data.password === data.passwordConfirm, {
+    message: 'Passwords do not match',
+    path: ['passwordConfirm'],
+  })),
+  initialValues: {
+    username: '',
+    password: '',
+    passwordConfirm: '',
+    email: '',
+  },
+})
+const [signupUsername] = signupForm.defineField('username')
+const [signupPassword] = signupForm.defineField('password')
+const [signupPasswordConfirm] = signupForm.defineField('passwordConfirm')
+const [signupEmail] = signupForm.defineField('email')
+
+const form = computed(() => step.value === 'sign-in' ? signinForm : signupForm)
+const username = computed({
+  get: () => step.value === 'sign-in' ? signinUsername.value : signupUsername.value,
+  set: (value: string) => {
+    if (step.value === 'sign-in') {
+      signinUsername.value = value
+    }
+    else {
+      signupUsername.value = value
+    }
+  },
+})
+const password = computed({
+  get: () => step.value === 'sign-in' ? signinPassword.value : signupPassword.value,
+  set: (value: string) => {
+    if (step.value === 'sign-in') {
+      signinPassword.value = value
+    }
+    else {
+      signupPassword.value = value
+    }
+  },
+})
+const passwordConfirm = computed({
+  get: () => signupPasswordConfirm.value,
+  set: (value: string) => {
+    signupPasswordConfirm.value = value
+  },
+})
+const email = computed({
+  get: () => signupEmail.value,
+  set: (value: string) => {
+    signupEmail.value = value
+  },
+})
+
+/**
+ * remember
+ */
+const rememberChecked = useLocalStorage('remember', false)
+watch(rememberChecked, (value) => {
+  if (!value) {
+    localStorage.removeItem('username')
+    localStorage.removeItem('password')
+  }
+})
+onMounted(() => {
+  if (rememberChecked.value) {
+    signinUsername.value = localStorage.getItem('username') || ''
+    signinPassword.value = localStorage.getItem('password') || ''
+  }
+})
+
+/**
+ * submit
+ */
+const isSubmiting = ref(false)
+const loggerSubmit = loginLogger.withTag('submit')
 async function handleSubmit() {
-  loginLogger.withTag(`submit`).log(step.value, values)
+  loggerSubmit.log(step.value, {
+    username: username.value,
+    password: password.value,
+    passwordConfirm: passwordConfirm.value,
+    email: email.value,
+  })
 
   try {
     isSubmiting.value = true
-    const { valid } = await validate()
+
+    // validate
+    const { valid } = await form.value.validate()
     if (!valid) {
       throw new Error('Validation Error')
     }
 
+    // run callback
+    if (step.value === 'sign-in') {
+      await props.signInFn?.()
+    }
+    else {
+      await props.signUpFn?.()
+    }
+
+    // remember
+    if (rememberChecked.value) {
+      localStorage.setItem('username', username.value!)
+      localStorage.setItem('password', password.value!)
+    }
+
     useRouter().push('/')
+    toast.toastSuccess('Login success')
   }
   catch (error: any) {
     toast.toastError(String(error.message))
-    loginLogger.withTag(`submit`).error(error)
+    loggerSubmit.error(error)
   }
   finally {
     isSubmiting.value = false
@@ -117,28 +228,48 @@ async function handleSubmit() {
                 </g>
               </svg>
               <div class="text-surface-900 dark:text-surface-0 mb-4 text-3xl font-medium">
-                Welcome to PrimeLand!
+                {{ sakaiStore.title }}
               </div>
               <span class="text-muted-color font-medium">{{ stepInfos[step].subtitle }}</span>
             </div>
 
-            <div class="mb-4 flex flex-col space-y-4">
+            <div class="mb-4 flex flex-col space-y-6">
               <div class="relative flex flex-col pb-1.2em">
-                <label for="email1" class="text-surface-900 dark:text-surface-0 mb-2 block text-xl font-medium">Email</label>
-                <InputText id="email1" v-model="email" type="text" placeholder="Email address" class="w-full md:w-[30rem]" />
-                <small v-if="errors.email" v-motion-fade class="absolute bottom-0 color-#f00">{{ errors.email }}</small>
+                <FloatLabel>
+                  <label for="username1">Username</label>
+                  <InputText id="username1" v-model="username" type="text" class="w-full md:w-[30rem]" @keypress.enter.exact="handleSubmit()" />
+                </FloatLabel>
+                <small v-if="toValue(form.errors).username" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(form.errors).username }}</small>
+              </div>
+
+              <div v-if="step === 'sign-up'" class="relative flex flex-col pb-1.2em">
+                <FloatLabel>
+                  <label for="email1">Email</label>
+                  <InputText id="email1" v-model="email" type="text" class="w-full md:w-[30rem]" @keypress.enter.exact="handleSubmit()" />
+                </FloatLabel>
+                <small v-if="toValue(signupForm.errors).email" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(signupForm.errors).email }}</small>
               </div>
 
               <div class="relative flex flex-col pb-1.2em">
-                <label for="password1" class="text-surface-900 dark:text-surface-0 mb-2 block text-xl font-medium">Password</label>
-                <Password v-model="password" input-id="password1" placeholder="Password" :toggle-mask="true" class="" fluid :feedback="false" />
-                <small v-if="errors.password" v-motion-fade class="absolute bottom-0 color-#f00">{{ errors.password }}</small>
+                <FloatLabel>
+                  <label for="password1" class="z-2">Password</label>
+                  <Password v-model="password" input-id="password1" :toggle-mask="true" class="" fluid :feedback="false" @keypress.enter.exact="handleSubmit()" />
+                </FloatLabel>
+                <small v-if="toValue(form.errors).password" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(form.errors).password }}</small>
+              </div>
+
+              <div v-if="step === 'sign-up'" class="relative flex flex-col pb-1.2em">
+                <FloatLabel>
+                  <label for="passwordConfirm1" class="z-2">Password Confirm</label>
+                  <Password v-model="passwordConfirm" input-id="passwordConfirm1" :toggle-mask="true" class="" fluid :feedback="false" @keypress.enter.exact="handleSubmit()" />
+                </FloatLabel>
+                <small v-if="toValue(signupForm.errors).passwordConfirm" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(signupForm.errors).passwordConfirm }}</small>
               </div>
 
               <div class="mb-8 mt-2 flex items-center justify-between gap-8">
                 <div class="flex items-center">
-                  <!-- <Checkbox v-model="checked" input-id="rememberme1" binary class="mr-2" /> -->
-                  <!-- <label for="rememberme1">Remember me</label> -->
+                  <Checkbox v-model="rememberChecked" input-id="rememberme1" binary class="mr-2" />
+                  <label for="rememberme1">Remember me</label>
                 </div>
                 <span
                   class="text-primary ml-2 cursor-pointer text-right font-medium no-underline"
