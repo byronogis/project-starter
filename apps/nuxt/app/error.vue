@@ -7,10 +7,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div>
-    <h1>{{ props.error.statusCode }}</h1>
-    <NuxtLink to="/">
-      Go back home
-    </NuxtLink>
-  </div>
+  <SakaiPageError
+    :title="String(props.error.statusCode)"
+    :description="props.error.statusMessage"
+  />
 </template>
