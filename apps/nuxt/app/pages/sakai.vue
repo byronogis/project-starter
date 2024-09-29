@@ -1,16 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'sakai',
+  layout: 'sakai-primary',
 })
 
-const appToast = useAppToast()
+const appToast = useSakaiToast()
 </script>
 
 <template>
   <div id="page-sakai">
     <h4>Sakai Page</h4>
-    <PrimeInputText />
-    <PrimeButton label="fine" @click="appToast.toastSuccess('fine')" />
+    <InputText />
+    <Button label="fine" @click="appToast.toastSuccess('fine')" />
   </div>
 </template>
 

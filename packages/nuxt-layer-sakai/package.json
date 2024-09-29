@@ -1,0 +1,42 @@
+{
+  "name": "@project-starter/nuxt-layer-sakai",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": "./nuxt.config.ts",
+    "./unocss": "./config/unocss.ts"
+  },
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "clear": "rm -rf .nuxt .output",
+    "postinstall": "nuxi prepare"
+  },
+  "peerDependencies": {
+    "postcss-mixins": "^11.0.1",
+    "postcss-nesting": "^13.0.0"
+  },
+  "dependencies": {
+    "@iconify-json/prime": "^1.2.0",
+    "@primevue/nuxt-module": "^4.0.7",
+    "@primevue/themes": "^4.0.7",
+    "@project-starter/nuxt-layer-shared": "workspace:*",
+    "@project-starter/shared": "workspace:*",
+    "@types/nprogress": "^0.2.3",
+    "chart.js": "^4.4.4",
+    "filepond": "^4.31.4",
+    "filepond-plugin-file-rename": "^1.1.8",
+    "filepond-plugin-file-validate-type": "^1.2.9",
+    "filepond-plugin-image-preview": "^4.6.12",
+    "json-editor-vue": "^0.16.0",
+    "lossless-json": "^4.0.2",
+    "nprogress": "^0.2.0",
+    "primevue": "^4.0.7",
+    "unocss": "^0.62.4",
+    "vanilla-jsoneditor": "^0.23.8",
+    "vue-filepond": "^7.0.4"
+  },
+  "devDependencies": {
+    "nuxt": "^3.13.2",
+    "typescript": "^5.6.2"
+  }
+}

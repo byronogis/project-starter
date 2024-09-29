@@ -1,11 +1,11 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'sakai-blank',
-})
+
 </script>
 
 <template>
-  <SakaiPageLogin id="page-login" />
+  <SakaiLayoutBlank id="layout-sakai-blank">
+    <slot />
+  </SakaiLayoutBlank>
 </template>
 
 <style scoped lang="postcss"></style>

@@ -1,30 +1,30 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'sakai',
+  layout: 'sakai-primary',
 })
 
-const name = 'user'
+const name = 'example'
 
-const userLogger = Utils.logger.withTag(name)
+const exampleLogger = Utils.logger.withTag(name)
 
 const crudRef = useTemplateRef('crudRef')
 const isUpdating = computed(() => !!crudRef.value?.isUpdating)
 
-const formFieldsInfo = ref<UserFormFieldsInfoWithCrudGroupItem[]>(userFormFieldsInfoByGroupCST)
+const formFieldsInfo = ref(exampleFormFieldsInfoCST)
 
 const {
   data,
   isLoading,
 } = useQuery<{
-  list: UserItemWithCrud[]
+  list: ExampleItemWithForm[]
 }>({
-  queryKey: ['user', 'list'],
+  queryKey: ['example', 'list'],
   queryFn: async () => {
-    const res = await getUserListAPI({})
+    const res = await getExampleListAPI({})
     return {
       list: res.data.data.map(i => ({
         _id: i.id,
-        _name: i.name,
+        _label: i.name,
         ...i,
       })),
     }
@@ -32,26 +32,26 @@ const {
   placeholderData: () => ({ list: [] }),
 })
 
-async function submitFn(item: Partial<UserItemWithCrud>) {
+async function submitFn(items: Partial<ExampleItemWithForm>[]) {
   if (isUpdating.value) {
-    userLogger.info('Updating user', item)
-    // return updateUser(item)
+    exampleLogger.info('Updating example', items)
+    // return updateExample(items)
   }
   else {
-    userLogger.info('Creating user', item)
-    // return createUser(item)
+    exampleLogger.info('Creating example', items)
+    // return createExample(items)
   }
 }
 
-async function deleteFn(items: Partial<UserItemWithCrud>[]) {
-  userLogger.warn('Deleting user', items)
-  // return deleteUser(item)
+async function deleteFn(items: Partial<ExampleItemWithForm>[]) {
+  exampleLogger.warn('Deleting example', items)
+  // return deleteExample(items)
 }
 </script>
 
 <template>
   <div id="page-crud">
-    <Crud
+    <SakaiCrud
       ref="crudRef"
       :item-alias="name"
       :items="data?.list"
@@ -59,25 +59,26 @@ async function deleteFn(items: Partial<UserItemWithCrud>[]) {
       :form-fields-info="formFieldsInfo"
       :submit-fn="submitFn"
       :delete-fn="deleteFn"
+      :disable-global-filter="false"
     >
       <template #columns>
-        <PrimeColumn field="id" header="ID" style="min-width: 10rem" />
+        <Column field="id" header="ID" style="min-width: 10rem" />
 
-        <PrimeColumn field="name" header="Name" style="min-width: 10rem" />
+        <Column field="name" header="Name" style="min-width: 10rem" />
       </template>
-    </Crud>
+    </SakaiCrud>
   </div>
 </template>
 
 <style scoped lang="postcss">
-:deep(.component-crud-form-fields-group-user-_default) {
+:deep(.shared-form-fields-group-_default) {
   display: grid;
   grid-template:
     'id  name  avatar' auto
     'id  name  avatar' auto / 1fr 1fr 1fr;
 }
 
-:deep(.component-crud-from-field-array-item-contacts) {
+:deep(.component-sakai-form-field-array-item-contacts) {
   display: grid;
   grid-template:
     'contacts_email contacts_phone contacts_website .      ' auto

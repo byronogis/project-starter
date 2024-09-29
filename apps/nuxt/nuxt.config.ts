@@ -1,4 +1,4 @@
-import { primevue, pwa } from './app/config'
+import { pwa } from './app/config'
 import { appCST } from './app/constants/app'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -97,6 +97,10 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
+  extends: [
+    '@project-starter/nuxt-layer-sakai',
+  ],
+
   future: {
     compatibilityVersion: 4,
   },
@@ -115,10 +119,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/devtools',
 
-    ['@nuxtjs/color-mode', {
-      classSuffix: '',
-    }],
-
     ['@pinia/nuxt', {
       storesDirs: ['./app/stores'],
     }],
@@ -128,10 +128,6 @@ export default defineNuxtConfig({
         standalone: false,
       },
     }],
-
-    '@vueuse/nuxt',
-
-    '@vueuse/motion/nuxt',
 
     ['@unocss/nuxt', {
       // ...
@@ -154,7 +150,11 @@ export default defineNuxtConfig({
 
     ['@vite-pwa/nuxt', pwa],
 
-    ['@primevue/nuxt-module', primevue],
+    ['@hebilicious/vue-query-nuxt', {
+      vueQueryPluginOptions: {
+        enableDevtoolsV6Plugin: true,
+      },
+    }],
   ],
 
   /**

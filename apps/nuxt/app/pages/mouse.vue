@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'sakai',
+  layout: 'sakai-primary',
 })
 
 const { x, y } = useMouse()
