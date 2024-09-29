@@ -6,8 +6,7 @@ const props = withDefaults(defineProps<{
   //
 })
 
-const sakaiStore = useSakaiStore()
-provide(SakaiStoreInjectionKey, sakaiStore)
+const sakaiStore = inject(SakaiStoreInjectionKey)!
 
 const toast = useSakaiToast()
 const loginLogger = Utils.logger.withTag('Login')

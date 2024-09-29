@@ -10,9 +10,6 @@ const props = withDefaults(defineProps<{
   btnLabel: 'Go to Home',
   btnTo: '/',
 })
-
-const sakaiStore = useSakaiStore()
-provide(SakaiStoreInjectionKey, sakaiStore)
 </script>
 
 <template>
