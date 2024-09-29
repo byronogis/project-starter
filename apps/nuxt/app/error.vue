@@ -7,8 +7,10 @@ const props = defineProps<{
 </script>
 
 <template>
-  <SakaiPageError
-    :title="String(props.error.statusCode)"
-    :description="props.error.statusMessage"
-  />
+  <SakaiLayoutBlank>
+    <SakaiPageError
+      :title="String(props.error.statusCode)"
+      :description="props.error.statusMessage"
+    />
+  </SakaiLayoutBlank>
 </template>
