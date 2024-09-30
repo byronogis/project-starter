@@ -87,6 +87,11 @@ const props = withDefaults(defineProps<{
    */
   disableMultiSelect?: boolean
   /**
+   * 是否禁用展开
+   * @default true
+   */
+  disableExpander?: boolean
+  /**
    * 是否禁用全局搜索(过滤)
    * @default true
    */
@@ -118,6 +123,7 @@ const props = withDefaults(defineProps<{
   disableAdd: false,
   disableExport: true,
   disableMultiSelect: true,
+  disableExpander: true,
   disableGlobalFilter: true,
   disableHeaderActionBar: false,
   disableTableHeader: false,
@@ -431,6 +437,13 @@ defineExpose({
           frozen
         />
 
+        <Column
+          v-if="!props.disableExpander"
+          expander
+          style="width: 5rem"
+          :exportable="false"
+        />
+
         <slot name="columns">
           <!-- Column -->
         </slot>
@@ -464,6 +477,11 @@ defineExpose({
             <slot name="action-extra" :item="(slotProps.data as T)" />
           </template>
         </Column>
+
+        <!-- TODO pref v-for $slot -->
+        <template #expansion="slotProps">
+          <slot name="expansion" v-bind="slotProps" />
+        </template>
       </DataTable>
     </div>
 
