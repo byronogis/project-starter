@@ -1,7 +1,22 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  signInFn?: () => Promise<void>
-  signUpFn?: () => Promise<void>
+  /**
+   * Sign in callback \
+   * Login callback
+   */
+  signInFn?: (i: {
+    username: string
+    password: string
+  }) => Promise<void>
+  /**
+   * Sign up callback \
+   * Register callback
+   */
+  signUpFn?: (i: {
+    username: string
+    password: string
+    email: string
+  }) => Promise<void>
 }>(), {
   //
 })
@@ -137,7 +152,9 @@ const email = computed({
 /**
  * remember
  */
-const rememberChecked = useLocalStorage('remember', false)
+const rememberChecked = useCookie('user-remember', {
+  default: () => false,
+})
 watch(rememberChecked, (value) => {
   if (!value) {
     localStorage.removeItem('username')
@@ -175,10 +192,17 @@ async function handleSubmit() {
 
     // run callback
     if (step.value === 'sign-in') {
-      await props.signInFn?.()
+      await props.signInFn?.({
+        username: username.value!,
+        password: password.value!,
+      })
     }
     else {
-      await props.signUpFn?.()
+      await props.signUpFn?.({
+        username: username.value!,
+        password: password.value!,
+        email: email.value!,
+      })
     }
 
     // remember
