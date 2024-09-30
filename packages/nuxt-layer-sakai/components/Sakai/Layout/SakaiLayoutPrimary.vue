@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DynamicDialog from 'primevue/dynamicdialog'
 import SakaiFooter from '../SakaiFooter.vue'
 import SakaiSidebar from '../SakaiSidebar.vue'
 import SakaiTopbar from '../SakaiTopbar.vue'
@@ -61,5 +62,6 @@ const containerClass = computed(() => {
     <div class="layout-mask animate-fade-in animate-duration-150" />
 
     <Toast />
+    <DynamicDialog />
   </div>
 </template>
