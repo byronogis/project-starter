@@ -31,6 +31,11 @@ export default function base(
         'ts/no-unused-expressions': 'warn',
 
         /**
+         * @see https://eslint.org/docs/latest/rules/prefer-promise-reject-errors
+         */
+        'prefer-promise-reject-errors': 'error',
+
+        /**
          * Always use curly braces for blocks and new line.
          * @see https://eslint.org/docs/latest/rules/curly#all
          * @see https://eslint.style/rules/default/max-statements-per-line#max
