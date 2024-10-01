@@ -6,7 +6,7 @@ const props = defineProps<{
   field: T
 }>()
 
-// const toast = useSakaiToast()
+// const toast = inject(SakaiToastInjectionKey, useSakaiToast())
 
 const field = computed(() => props.field)
 const gridArea = computed(() => (props.field.gridArea ?? props.field.name)

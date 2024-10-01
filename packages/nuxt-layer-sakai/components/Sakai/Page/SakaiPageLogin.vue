@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<{
 
 const sakaiStore = inject(SakaiStoreInjectionKey)!
 
-const toast = useSakaiToast()
+const toast = inject(SakaiToastInjectionKey, useSakaiToast())
 const loginLogger = Utils.logger.withTag('Login')
 
 /**

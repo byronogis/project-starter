@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     dirs: [
       join(currentDir, './types'),
       join(currentDir, './stores'),
+      join(currentDir, './constants'),
     ],
     imports: [
       { name: '*', as: 'Utils', from: '@project-starter/shared/utils' },

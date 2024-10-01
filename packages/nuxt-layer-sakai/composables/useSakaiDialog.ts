@@ -2,7 +2,7 @@ import Button from 'primevue/button'
 
 export function useSakaiDialog() {
   const dialog = useDialog()
-  const toast = useSakaiToast()
+  const toast = inject(SakaiToastInjectionKey, useSakaiToast())
 
   return {
     dialog,

@@ -135,7 +135,7 @@ const props = withDefaults(defineProps<{
  */
 const sakaiCrudLogger = Utils.logger.withTag(`SakaiCrud`).withTag(`${Utils._.upperFirst(props.itemAlias)}`)
 
-const toast = useSakaiToast()
+const toast = inject(SakaiToastInjectionKey, useSakaiToast())
 
 /**
  * 分页 \
