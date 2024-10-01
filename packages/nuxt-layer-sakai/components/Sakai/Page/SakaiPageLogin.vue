@@ -299,7 +299,13 @@ async function handleSubmit() {
                   @click="stepInfos[step].footerButtonAction()"
                 >{{ stepInfos[step].footerText }}</span>
               </div>
-              <Button :label="stepInfos[step].buttonText" class="w-full" @click="stepInfos[step].buttonAction()" />
+
+              <Button
+                :loading="isSubmiting"
+                :label="stepInfos[step].buttonText"
+                class="w-full"
+                @click="stepInfos[step].buttonAction()"
+              />
             </div>
           </div>
         </div>
