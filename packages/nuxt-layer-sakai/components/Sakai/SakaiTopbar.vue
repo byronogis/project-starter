@@ -90,35 +90,37 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: SakaiTopbarEx
         </div>
       </div>
 
-      <button
-        v-styleclass="sakaiStore.styleClass.actionBtn"
-        class="layout-topbar-action layout-topbar-menu-button"
-      >
-        <i class="i-prime:ellipsis-v" />
-      </button>
+      <template v-if="toValue(sakaiStore.topbarExtraActionList)?.length">
+        <button
+          v-styleclass="sakaiStore.styleClass.actionBtn"
+          class="layout-topbar-action layout-topbar-menu-button"
+        >
+          <i class="i-prime:ellipsis-v" />
+        </button>
 
-      <div ref="topbarElRef" class="layout-topbar-menu hidden lg:block">
-        <div class="layout-topbar-menu-content">
-          <template
-            v-for="(action, index) in toValue(sakaiStore.topbarExtraActionList)"
-            :key="index"
-          >
-            <button
-              type="button"
-              class="layout-topbar-action"
-              :style="{ order: action.order }"
-              @click="handleTopbarExtraActionClick($event, action)"
+        <div ref="topbarElRef" class="layout-topbar-menu hidden lg:block">
+          <div class="layout-topbar-menu-content">
+            <template
+              v-for="(action, index) in toValue(sakaiStore.topbarExtraActionList)"
+              :key="index"
             >
-              <component :is="action.custom" v-if="action.custom" />
+              <button
+                type="button"
+                class="layout-topbar-action"
+                :style="{ order: action.order }"
+                @click="handleTopbarExtraActionClick($event, action)"
+              >
+                <component :is="action.custom" v-if="action.custom" />
 
-              <template v-else>
-                <i :class="action.icon" />
-                <span>{{ action.label }}</span>
-              </template>
-            </button>
-          </template>
+                <template v-else>
+                  <i :class="action.icon" />
+                  <span>{{ action.label }}</span>
+                </template>
+              </button>
+            </template>
+          </div>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>

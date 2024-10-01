@@ -12,16 +12,7 @@ export function useSakaiStore(options?: SakaiOptions) {
         items: [{ label: 'Dashboard', icon: 'i-prime:home', to: '/' }],
       },
     ],
-    topbarExtraActionList = [
-      {
-        label: 'Profile',
-        icon: 'i-prime:user',
-        onClick: () => {
-          console.info('Profile')
-        },
-        closePopover: 'end',
-      },
-    ],
+    topbarExtraActionList = [],
   } = options ?? {}
 
   /**
