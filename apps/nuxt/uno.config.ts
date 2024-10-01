@@ -12,6 +12,6 @@ export default defineConfig(defu(
     ],
   },
   base({
-    // customIcons: 'app/assets/icons/custom',
+    // iconCustomCollection: 'app/assets/icons/custom',
   }),
 ))

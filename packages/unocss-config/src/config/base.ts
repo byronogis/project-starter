@@ -15,42 +15,47 @@ import {
 
 export default function base(options?: Options): UserConfig {
   const {
-    customIcons = false,
+    webFonts = true,
+    icons = true,
+    iconCustomCollection = false,
   } = options ?? {}
 
-  return {
-    presets: [
-      presetUno(),
-      presetIcons({
-        scale: 1.2,
-        autoInstall: true,
-        collections: {
-          custom: typeof customIcons === 'string'
-            ? FileSystemIconLoader(
-              `${resolve(cwd(), customIcons)}`,
-              (svg) => {
-              // return svg.replace(/#fff/, 'currentColor')
-                return svg
-              },
-            )
-            : undefined,
-        },
-        extraProperties: {
-          'display': 'inline-block',
-          'vertical-align': 'middle',
-        },
-      }),
-      presetWebFonts({
-        // https://fonts.bunny.net/
-        provider: 'bunny',
-        fonts: {
-          sans: 'DM Sans',
-          serif: 'DM Serif Display',
-          mono: 'DM Mono',
-        },
-      }),
+  const presets = [
+    presetUno(),
+  ]
 
-    ],
+  icons && presets.push(presetIcons({
+    scale: 1.2,
+    autoInstall: true,
+    collections: {
+      custom: typeof iconCustomCollection === 'string'
+        ? FileSystemIconLoader(
+          `${resolve(cwd(), iconCustomCollection)}`,
+          (svg) => {
+            // return svg.replace(/#fff/, 'currentColor')
+            return svg
+          },
+        )
+        : undefined,
+    },
+    extraProperties: {
+      'display': 'inline-block',
+      'vertical-align': 'middle',
+    },
+  }))
+
+  webFonts && presets.push(presetWebFonts({
+    // https://fonts.bunny.net/
+    provider: 'bunny',
+    fonts: {
+      sans: 'DM Sans',
+      serif: 'DM Serif Display',
+      mono: 'DM Mono',
+    },
+  }))
+
+  return {
+    presets,
     transformers: [
       transformerVariantGroup(),
       transformerDirectives(),
@@ -67,9 +72,19 @@ export default function base(options?: Options): UserConfig {
 
 interface Options {
   /**
+   * Enable web fonts
+   * @default true
+   */
+  webFonts?: boolean
+  /**
+   * Enable icons
+   * @default true
+   */
+  icons?: boolean
+  /**
    * Enable custom icons
    * @example 'app/assets/icons/custom'
    * @default false
    */
-  customIcons?: false | string
+  iconCustomCollection?: false | string
 }
