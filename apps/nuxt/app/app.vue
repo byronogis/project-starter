@@ -4,7 +4,7 @@ import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 <template>
   <NuxtPwaManifest />
-  <NuxtLayout>
+  <NuxtLayout class="font-sans">
     <NuxtPage />
   </NuxtLayout>
 
