@@ -18,6 +18,23 @@ const colorModeIconName = computed(() => {
   }
   return ''
 })
+
+const topbarElRef = useTemplateRef('topbarElRef')
+async function handleTopbarExtraActionClick(e: MouseEvent, action: SakaiTopbarExtraActionItem) {
+  const _closeTiming = action.closePopover
+  const _closeFn = () => topbarElRef.value?.classList.add('hidden')
+
+  _closeTiming === 'begining' && _closeFn()
+
+  try {
+    await action.onClick(e)
+    _closeTiming === 'end' && _closeFn()
+  }
+  catch (error: any) {
+    _closeTiming === 'end-force' && _closeFn()
+    throw new Error(error?.message ?? error)
+  }
+}
 </script>
 
 <template>
@@ -80,14 +97,26 @@ const colorModeIconName = computed(() => {
         <i class="i-prime:ellipsis-v" />
       </button>
 
-      <div class="layout-topbar-menu hidden lg:block">
+      <div ref="topbarElRef" class="layout-topbar-menu hidden lg:block">
         <div class="layout-topbar-menu-content">
-          <slot name="extra-actions" />
+          <template
+            v-for="(action, index) in toValue(sakaiStore.topbarExtraActionList)"
+            :key="index"
+          >
+            <button
+              type="button"
+              class="layout-topbar-action"
+              :style="{ order: action.order }"
+              @click="handleTopbarExtraActionClick($event, action)"
+            >
+              <component :is="action.custom" v-if="action.custom" />
 
-          <button type="button" class="layout-topbar-action">
-            <i class="i-prime:user" />
-            <span>Profile</span>
-          </button>
+              <template v-else>
+                <i :class="action.icon" />
+                <span>{{ action.label }}</span>
+              </template>
+            </button>
+          </template>
         </div>
       </div>
     </div>

@@ -15,10 +15,10 @@ export interface SakaiOptions {
    * 标题
    */
   title?: MaybeRefOrGetter<string | undefined>
-  // /**
-  //  * 禁用顶部用户按钮
-  //  */
-  // dis
+  /**
+   * 顶部额外操作按钮
+   */
+  topbarExtraActionList?: MaybeRefOrGetter<SakaiTopbarExtraActionItem[] | undefined>
 }
 
 export type SakaiSidebarMenuItem = MenuItem & {

@@ -12,6 +12,7 @@ import SakaiTopbar from '../SakaiTopbar.vue'
 //  */
 // const props = defineProps</* @vue-ignore */ SakaiOptions>()
 const props = defineProps<{
+  topbarExtraActionList?: SakaiTopbarExtraActionItem[]
   sidebarMenuList?: SakaiSidebarMenuItem[]
   title?: string
 }>()
@@ -39,10 +40,6 @@ const containerClass = computed(() => {
     <SakaiTopbar>
       <template #logo>
         <slot name="topbar-logo" />
-      </template>
-
-      <template #extra-actions>
-        <slot name="topbar-extra-actions" />
       </template>
     </SakaiTopbar>
 

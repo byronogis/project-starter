@@ -5,13 +5,23 @@ import Nora from '@primevue/themes/nora'
 
 export function useSakaiStore(options?: SakaiOptions) {
   const {
+    title = 'Sakai',
     sidebarMenuList = [
       {
         label: 'Home',
         items: [{ label: 'Dashboard', icon: 'i-prime:home', to: '/' }],
       },
     ],
-    title = 'Sakai',
+    topbarExtraActionList = [
+      {
+        label: 'Profile',
+        icon: 'i-prime:user',
+        onClick: () => {
+          console.info('Profile')
+        },
+        closePopover: 'end',
+      },
+    ],
   } = options ?? {}
 
   /**
@@ -234,8 +244,10 @@ export function useSakaiStore(options?: SakaiOptions) {
   }
 
   return reactive({
-    sidebarMenuList,
     title,
+    sidebarMenuList,
+    topbarExtraActionList,
+
     config,
     state,
     presets,
