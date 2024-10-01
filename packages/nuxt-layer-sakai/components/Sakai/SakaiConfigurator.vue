@@ -3,7 +3,7 @@ const { isDark } = useSharedColorMode()
 
 const sakaiStore = inject(SakaiStoreInjectionKey)!
 
-const presetsOptions = ref(Object.keys(sakaiStore.presets))
+const presetsOptions = ref(Object.keys(SakaiThemePresetsCST))
 
 const menuModeOptions = ref<{
   label: string
@@ -23,7 +23,7 @@ const menuModeOptions = ref<{
         <span class="text-muted-color text-sm font-semibold">Primary</span>
         <div class="flex flex-wrap justify-between gap-2 pt-2">
           <button
-            v-for="primaryColor of sakaiStore.primaryColorList"
+            v-for="primaryColor of SakaiPrimaryColorListCST"
             :key="primaryColor.name"
             type="button"
             :title="primaryColor.name"
@@ -43,7 +43,7 @@ const menuModeOptions = ref<{
         <span class="text-muted-color text-sm font-semibold">Surface</span>
         <div class="flex flex-wrap justify-between gap-2 pt-2">
           <button
-            v-for="surface of sakaiStore.surfaceList"
+            v-for="surface of SakaiSurfaceListCST"
             :key="surface.name"
             type="button"
             :title="surface.name"
