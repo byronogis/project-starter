@@ -3,6 +3,7 @@ body,
 #__nuxt {
   height: 100vh;
   font-size: 16px;
+  line-height: normal;
 }
 
 html.dark {
