@@ -439,6 +439,7 @@ defineExpose({
 
         <Column
           v-if="!props.disableExpander"
+          frozen
           expander
           style="width: 5rem"
           :exportable="false"
