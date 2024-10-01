@@ -15,7 +15,9 @@ export function useSakaiStore(options?: SakaiOptions) {
   /**
    * 配置
    */
-  const config = useLocalStorage<SakaiConfig>('sakai-config', SakaiConfigDefaultCST)
+  const config = useCookie<SakaiConfig>('sakai-config', {
+    default: () => SakaiConfigDefaultCST,
+  })
 
   /**
    * 状态
@@ -36,7 +38,7 @@ export function useSakaiStore(options?: SakaiOptions) {
   /**
    * preset 变化时
    */
-  watch(() => config.value.preset, (_preset) => {
+  watchImmediate(() => config.value.preset, (_preset) => {
     const presetValue = SakaiThemePresetsCST[_preset]
     const surfacePalette = SakaiSurfaceListCST.find(s => s.name === config.value.surface)?.palette
     $t()
