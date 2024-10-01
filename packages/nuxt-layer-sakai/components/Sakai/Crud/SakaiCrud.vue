@@ -453,7 +453,6 @@ defineExpose({
         <Column
           v-if="!props.disableActionsColumn"
           :exportable="false"
-          style="min-width: 12rem"
           frozen
           align-frozen="right"
           class="space-x-2"
