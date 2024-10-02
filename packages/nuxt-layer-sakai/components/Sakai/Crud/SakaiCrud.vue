@@ -136,6 +136,7 @@ const props = withDefaults(defineProps<{
 const sakaiCrudLogger = Utils.logger.withTag(`SakaiCrud`).withTag(`${Utils._.upperFirst(props.itemAlias)}`)
 
 const toast = inject(SakaiToastInjectionKey, useSakaiToast())
+const dialog = useSakaiDialog()
 
 /**
  * 分页 \
@@ -272,57 +273,58 @@ async function saveItem() {
 /**
  * 删除
  */
-const showItemDeleteDialog = ref(false)
-const showItemsDeleteDialog = ref(false)
-const isDeleteing = ref(false)
 const selectedItems = ref<T[]>()
 
 function confirmDeleteSelected() {
-  showItemsDeleteDialog.value = true
+  dialog.dialogConfirm({
+    header: 'Confirm',
+    message: h('div', { class: 'flex items-center gap-4' }, [
+      h('i', { class: 'i-prime:exclamation-triangle !text-3xl' }),
+      h('span', null, 'Are you sure you want to delete the selected items?'),
+    ]),
+    async confirmFn() {
+      try {
+        await baseDeleteItems(selectedItems.value ?? [])
+        selectedItems.value = undefined
+        toast.toastSuccess(`${Utils._.upperFirst(props.itemAlias)}s Deleted`)
+      }
+      catch (error: any) {
+        toast.toastError(String(error?.message))
+        sakaiCrudLogger.withTag(`deleteSelectedItems`).error(error?.message)
+      }
+    },
+  })
 }
 
 function confirmDeleteItem(_item: T) {
-  setValues(JSON.parse(JSON.stringify(_item)))
-  showItemDeleteDialog.value = true
+  dialog.dialogConfirm({
+    header: 'Confirm',
+    message: h('div', { class: 'flex items-center gap-4' }, [
+      h('i', { class: 'i-prime:exclamation-triangle !text-3xl' }),
+      h('span', null, [
+        'Are you sure you want to delete ',
+        h('b', null, _item._label),
+        '?',
+      ]),
+    ]),
+    async confirmFn() {
+      try {
+        await baseDeleteItems([_item])
+        toast.toastSuccess(`${Utils._.upperFirst(props.itemAlias)} Deleted`)
+      }
+      catch (error: any) {
+        toast.toastError(String(error?.message))
+        sakaiCrudLogger.withTag(`deleteItem`).error(error?.message)
+      }
+    },
+  })
 }
 
 // base
 async function baseDeleteItems(items: T[]) {
   sakaiCrudLogger.withTag(`baseDeleteItems`).log(items)
 
-  isDeleteing.value = true
   await props.deleteFn?.(items)
-}
-
-async function deleteItem() {
-  try {
-    await baseDeleteItems([values as T])
-    showItemDeleteDialog.value = false
-    toast.toastSuccess(`${Utils._.upperFirst(props.itemAlias)} Deleted`)
-  }
-  catch (error: any) {
-    toast.toastError(String(error?.message))
-    sakaiCrudLogger.withTag(`deleteItem`).error(error?.message)
-  }
-  finally {
-    isDeleteing.value = false
-  }
-}
-
-async function deleteSelectedItems() {
-  try {
-    await baseDeleteItems(selectedItems.value ?? [])
-    showItemsDeleteDialog.value = false
-    selectedItems.value = undefined
-    toast.toastSuccess(`${Utils._.upperFirst(props.itemAlias)}s Deleted`)
-  }
-  catch (error: any) {
-    toast.toastError(String(error?.message))
-    sakaiCrudLogger.withTag(`deleteSelectedItems`).error(error?.message)
-  }
-  finally {
-    isDeleteing.value = false
-  }
 }
 
 /**
@@ -351,9 +353,8 @@ function exportCSV() {
 /**
  * 关闭弹窗时重置表单
  */
-watch([showItemDialog, showItemDeleteDialog], ([_item, _itemDelete]) => {
-  // NOTE 目前不会存在两个弹窗同时打开的情况, 所以一个关闭时另一个一定是已经处于关闭状态的
-  if (!_item && !_itemDelete) {
+watch([showItemDialog], ([_item]) => {
+  if (!_item) {
     forceResetFormValues()
   }
 })
@@ -502,40 +503,6 @@ defineExpose({
       <template #footer>
         <Button label="Cancel" icon="i-prime:times" text @click="showItemDialog = false" />
         <Button label="Save" icon="i-prime:check" :loading="isSaving" @click="saveItem" />
-      </template>
-    </Dialog>
-
-    <Dialog
-      v-model:visible="showItemDeleteDialog"
-      :style="{ width: '450px' }"
-      header="Confirm"
-      :modal="true"
-      append-to="self"
-    >
-      <div class="flex items-center gap-4">
-        <i class="i-prime:exclamation-triangle !text-3xl" />
-        <span>Are you sure you want to delete <b>{{ values._label }}</b>?</span>
-      </div>
-      <template #footer>
-        <Button label="No" icon="i-prime:times" text @click="showItemDeleteDialog = false" />
-        <Button label="Yes" icon="i-prime:check" :loading="isDeleteing" @click="deleteItem" />
-      </template>
-    </Dialog>
-
-    <Dialog
-      v-model:visible="showItemsDeleteDialog"
-      :style="{ width: '450px' }"
-      header="Confirm"
-      :modal="true"
-      append-to="self"
-    >
-      <div class="flex items-center gap-4">
-        <i class="i-prime:exclamation-triangle !text-3xl" />
-        <span>Are you sure you want to delete the selected items?</span>
-      </div>
-      <template #footer>
-        <Button label="No" icon="i-prime:times" text @click="showItemsDeleteDialog = false" />
-        <Button label="Yes" icon="i-prime:check" text @click="deleteSelectedItems" />
       </template>
     </Dialog>
   </div>
