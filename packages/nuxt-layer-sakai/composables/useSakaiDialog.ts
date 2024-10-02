@@ -6,33 +6,25 @@ export function useSakaiDialog() {
 
   return {
     dialog,
-    open: async ({
+    dialogConfirm: async ({
       message,
       header = 'Dialog',
       confirmFn = async () => {},
     }: {
-      message: string
+      message: string | VNode
       header?: string
       confirmFn?: () => Promise<void> | void
     }) => {
+      const _content = typeof message === 'string'
+        ? h('span', null, message)
+        : message
+
       return new Promise((resolve, reject) => {
         // TODO fix loading reactivity (h props not reactive ?)
         const loading = ref(false)
 
         const dialogRef = dialog.open(
-          h(
-            'p',
-            null,
-            h(
-              'span',
-              null,
-              [
-                // TODO pref rich text and wrap
-                message,
-              ],
-            ),
-          )
-          ,
+          _content,
           {
             props: {
               header,
