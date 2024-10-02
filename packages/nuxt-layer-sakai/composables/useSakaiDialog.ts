@@ -20,7 +20,6 @@ export function useSakaiDialog() {
         : message
 
       return new Promise((resolve, reject) => {
-        // TODO fix loading reactivity (h props not reactive ?)
         const loading = ref(false)
 
         const dialogRef = dialog.open(
@@ -31,7 +30,7 @@ export function useSakaiDialog() {
               modal: true,
             },
             templates: {
-              footer: h(
+              footer: () => h(
                 'div',
                 null,
                 [
@@ -47,7 +46,7 @@ export function useSakaiDialog() {
                   h(Button, {
                     label: 'Yes',
                     icon: 'i-prime:check',
-                    // loading,
+                    loading: loading.value,
                     onClick: async () => {
                       try {
                         loading.value = true
@@ -62,14 +61,6 @@ export function useSakaiDialog() {
                         toast.toastError(error?.message)
                       }
                     },
-                  }, {
-                    // icon: () => h('i', {
-                    //   class: [
-                    //     loading.value
-                    //       ? 'i-prime:spinner animate-spin'
-                    //       : 'i-prime:check',
-                    //   ],
-                    // }),
                   }),
                 ],
               ),
