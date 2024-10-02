@@ -25,7 +25,7 @@ export default function base(options?: Options): UserConfig {
   ]
 
   icons && presets.push(presetIcons({
-    scale: 1.2,
+    scale: 1,
     autoInstall: true,
     collections: {
       custom: typeof iconCustomCollection === 'string'
