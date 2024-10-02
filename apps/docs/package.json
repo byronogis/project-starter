@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "generate": "vitepress build",
+    "preview": "vitepress preview",
+    "clear": "rm -rf .vitepress/dist .vitepress/cache"
+  },
+  "dependencies": {
+    "vitepress": "^1.3.4"
+  }
+}
