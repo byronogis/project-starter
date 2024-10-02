@@ -166,6 +166,7 @@ function handlePage(e: DataTablePageEvent) {
 
 /**
  * 数据过滤器
+ * TODO 目前使用时必须传入 filters (哪怕为空对象), 否则默认的全局搜索(过滤)将不会生效
  */
 const filters = defineModel<DataTableFilterMeta & {
   /**
@@ -329,7 +330,7 @@ async function deleteSelectedItems() {
  */
 const dataTableRef = ref()
 const dataTableProps = ref({
-  dataKey: 'id',
+  dataKey: '_id',
   paginator: true,
   filterDisplay: 'menu' as const,
   paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown',
