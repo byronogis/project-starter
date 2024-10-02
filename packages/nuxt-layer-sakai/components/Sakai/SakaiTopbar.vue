@@ -1,24 +1,6 @@
 <script setup lang="ts">
 const sakaiStore = inject(SakaiStoreInjectionKey)!
 
-const {
-  state,
-  toggle,
-} = useSharedColorMode()
-
-const colorModeIconName = computed(() => {
-  if (toValue(state) === 'dark') {
-    return 'i-prime:moon'
-  }
-  if (toValue(state) === 'light') {
-    return 'i-prime:sun'
-  }
-  if (['auto', 'system'].includes(toValue(state))) {
-    return 'i-prime:desktop'
-  }
-  return ''
-})
-
 const topbarElRef = useTemplateRef('topbarElRef')
 async function handleTopbarExtraActionClick(e: MouseEvent, action: SakaiTopbarExtraActionItem) {
   const _closeTiming = action.closePopover
@@ -40,7 +22,7 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: SakaiTopbarEx
 <template>
   <div class="layout-topbar component-sakai-topbar">
     <div class="layout-topbar-logo-container">
-      <button class="layout-menu-button layout-topbar-action" @click="sakaiStore.onMenuToggle">
+      <button class="layout-topbar-action layout-menu-button" @click="sakaiStore.onMenuToggle">
         <i class="i-prime:bars" />
       </button>
 
@@ -70,25 +52,7 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: SakaiTopbarEx
     </div>
 
     <div class="layout-topbar-actions">
-      <div class="layout-config-menu">
-        <!-- color mode -->
-        <button type="button" class="layout-topbar-action" @click="toggle()">
-          <ClientOnly>
-            <i :class="colorModeIconName" />
-          </ClientOnly>
-        </button>
-
-        <div class="relative">
-          <button
-            v-styleclass="sakaiStore.styleClass.actionBtn"
-            type="button"
-            class="layout-topbar-action layout-topbar-action-highlight"
-          >
-            <i class="i-prime:palette" />
-          </button>
-          <SakaiConfigurator />
-        </div>
-      </div>
+      <SakaiAction />
 
       <template v-if="toValue(sakaiStore.topbarExtraActionList)?.length">
         <button
