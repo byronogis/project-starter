@@ -1,7 +1,8 @@
+export { _ } from './_'
+export { color } from './color'
+export { date } from './date'
 export { HTTP } from './http'
 export { logger } from './logger'
-export { date } from './date'
-export { _ } from './_'
 export { timer } from './timer'
 
 /**

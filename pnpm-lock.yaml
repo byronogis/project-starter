@@ -247,6 +247,9 @@ importers:
       '@project-starter/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@types/tinycolor2':
+        specifier: ^1.4.6
+        version: 1.4.6
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -259,6 +262,9 @@ importers:
       es-toolkit:
         specifier: ^1.23.0
         version: 1.23.0
+      tinycolor2:
+        specifier: ^1.6.0
+        version: 1.6.0
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -2251,6 +2257,9 @@ packages:
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
+
+  '@types/tinycolor2@1.4.6':
+    resolution: {integrity: sha512-iEN8J0BoMnsWBqjVbWH/c0G0Hh7O21lpR2/+PrvAVgWdzL7eexIFm4JN/Wn10PTcmNdtS6U67r499mlWMXOxNw==}
 
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
@@ -5928,6 +5937,9 @@ packages:
   tiny-invariant@1.3.3:
     resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==}
 
+  tinycolor2@1.6.0:
+    resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
+
   tinyexec@0.3.0:
     resolution: {integrity: sha512-tVGE0mVJPGb0chKhqmsoosjsS+qUnJVGJpZgsHYQcGoPlG3B51R3PouqTgEGH2Dc9jjFyOqOpix6ZHNMXp1FZg==}
 
@@ -8837,6 +8849,8 @@ snapshots:
   '@types/nprogress@0.2.3': {}
 
   '@types/resolve@1.20.2': {}
+
+  '@types/tinycolor2@1.4.6': {}
 
   '@types/trusted-types@2.0.7': {}
 
@@ -13420,6 +13434,8 @@ snapshots:
   text-table@0.2.0: {}
 
   tiny-invariant@1.3.3: {}
+
+  tinycolor2@1.6.0: {}
 
   tinyexec@0.3.0: {}
 
