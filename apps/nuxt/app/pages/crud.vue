@@ -48,6 +48,7 @@ async function submitFn(items: Partial<ExampleItemWithForm>[]) {
 }
 
 async function deleteFn(items: Partial<ExampleItemWithForm>[]) {
+  await Utils._.delay(1000)
   exampleLogger.warn('Deleting example', items)
   // return deleteExample(items)
 }
@@ -72,6 +73,8 @@ const filters = ref<DataTableFilterMeta>({
       :submit-fn="submitFn"
       :delete-fn="deleteFn"
       :disable-global-filter="false"
+      :disable-multi-select="false"
+      :disabled-multi-delete="false"
       :data-table-props="{
         // totalRecords: data?.list.length,
         // lazy: true,
