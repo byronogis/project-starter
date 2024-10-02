@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type {
+  DataTableFilterMeta,
+} from 'primevue/datatable'
+
 definePageMeta({
   layout: 'sakai-primary',
 })
@@ -47,12 +51,20 @@ async function deleteFn(items: Partial<ExampleItemWithForm>[]) {
   exampleLogger.warn('Deleting example', items)
   // return deleteExample(items)
 }
+
+/**
+ * 数据过滤器
+ */
+const filters = ref<DataTableFilterMeta>({
+  // ...
+})
 </script>
 
 <template>
   <div id="page-crud">
     <SakaiCrud
       ref="crudRef"
+      v-model:filters="filters"
       :item-alias="name"
       :items="data?.list"
       :loading="isLoading"
@@ -60,6 +72,10 @@ async function deleteFn(items: Partial<ExampleItemWithForm>[]) {
       :submit-fn="submitFn"
       :delete-fn="deleteFn"
       :disable-global-filter="false"
+      :data-table-props="{
+        // totalRecords: data?.list.length,
+        // lazy: true,
+      }"
     >
       <template #columns>
         <Column field="id" header="ID" style="min-width: 10rem" />
