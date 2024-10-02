@@ -13,11 +13,13 @@ export function useSakaiDialog() {
     }: {
       message: string | VNode
       header?: string
-      confirmFn?: () => Promise<void> | void
+      confirmFn?: SakaiConfirmDialogConfirmFn
     }) => {
       const _content = typeof message === 'string'
         ? h('span', null, message)
         : message
+
+      const _controller = new AbortController()
 
       return new Promise((resolve, reject) => {
         const loading = ref(false)
@@ -28,6 +30,17 @@ export function useSakaiDialog() {
             props: {
               header,
               modal: true,
+            },
+            onClose(options) {
+              const { data } = options ?? {}
+
+              if (data?._flag) {
+                resolve((data as SakaiConfirmDialogResolveData)._res)
+              }
+              else {
+                _controller.abort()
+                reject(new Error('User canceled'))
+              }
             },
             templates: {
               footer: () => h(
@@ -40,7 +53,6 @@ export function useSakaiDialog() {
                     text: true,
                     onClick: () => {
                       dialogRef.close()
-                      reject(new Error('User canceled'))
                     },
                   }),
                   h(Button, {
@@ -50,11 +62,16 @@ export function useSakaiDialog() {
                     onClick: async () => {
                       try {
                         loading.value = true
-                        await confirmFn()
+                        const _res = await confirmFn({
+                          signal: _controller.signal,
+                        })
                         loading.value = false
-                        dialogRef.close()
 
-                        resolve('User confirmed')
+                        const _data: SakaiConfirmDialogResolveData = {
+                          _flag: true,
+                          _res,
+                        }
+                        dialogRef.close(_data)
                       }
                       catch (error: any) {
                         loading.value = false
@@ -71,3 +88,14 @@ export function useSakaiDialog() {
     },
   }
 }
+
+interface SakaiConfirmDialogResolveData {
+  _flag: boolean
+  _res: any
+}
+
+interface SakaiConfirmDialogComfirmParams {
+  signal: AbortSignal
+}
+
+type SakaiConfirmDialogConfirmFn = (p: SakaiConfirmDialogComfirmParams) => Promise<any> | any
