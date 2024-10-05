@@ -1,7 +1,7 @@
 import { exec } from 'node:child_process'
 
 export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook('render:html', (html) => {
+  nitroApp.hooks.hook('render:html', async (html) => {
     const commands = [
       {
         name: 'git:commit',
