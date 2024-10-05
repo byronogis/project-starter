@@ -33,7 +33,8 @@ const {
       })),
     }
   },
-  placeholderData: () => ({ list: [] }),
+  // placeholderData 的存在会导致 isLoading (isFetching && isPending) 一直为 false
+  // placeholderData: () => ({ list: [] }),
 })
 
 async function submitFn(items: Partial<ExampleItemWithForm>[]) {
