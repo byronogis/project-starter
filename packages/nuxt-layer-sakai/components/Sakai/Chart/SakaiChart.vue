@@ -50,20 +50,9 @@ function setColorOptions() {
     surfaceBorderColor,
   }
 
-  const _chartGenerators: Record<
-    SakaiChartType,
-    (o: SakaiChartGeneratorOptions) => any
-  > = {
-    bar: sakaiChartOptionsBarGenerator,
-    pie: sakaiChartOptionsPieGenerator,
-    line: sakaiChartOptionsLineGenerator,
-    polarArea: sakaiChartOptionsPolarAreaGenerator,
-    radar: sakaiChartOptionsRadarGenerator,
-  }
-
   const _options = props.disabledGenerator
     ? {}
-    : _chartGenerators[props.type](_generateOptions)
+    : SakaiChartOptionsGeneratorsCST[props.type](_generateOptions)
 
   options.value = defu(
     props.options,
