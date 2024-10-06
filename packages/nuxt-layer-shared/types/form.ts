@@ -28,7 +28,7 @@ export interface SharedFormOptions<
   /**
    * 表单字段信息
    */
-  fieldsInfo: MaybeRefOrGetter<Partial<SharedFormFieldsInfo<T, G, P, E>> | SharedFormFieldsInfoGroup<T, G, P, E>>
+  fieldsInfo: MaybeRefOrGetter<Partial<SharedFormFieldsInfo<T, G, P, E>> | SharedFormFieldsInfoGroupItem<T, G, P, E>[]>
   /**
    * 表单字段数据
    */
@@ -120,11 +120,6 @@ export interface SharedFormFieldItem<
    * @default name 的值
    */
   gridArea?: string
-  // /**
-  //  * 传递给表单组件的 props / attrs \
-  //  * TODO 需要考虑传递位置以通用
-  //  */
-  // props?: Record<string, any>
   /**
    * 占位文本
    */
@@ -133,26 +128,12 @@ export interface SharedFormFieldItem<
    * 当前用于下拉框(select 类型)的选项
    */
   options?: { label: string, value: any }[]
-  // /**
-  //  * file upload process
-  //  * @see ~/component/uploader.vue:props:serverProcessCallback
-  //  * TODO 需要考虑传递位置以通用
-  //  */
-  // fileUploadProcess?: SharedFormFieldFileUploadProcess
   /**
    * 当前表单项所属的分组 \
    * NOTE 也会被用于类名, 此时不支持的字符会在添加到类名前被替换为下划线
    * @default '_default'
    */
   group?: SharedFormFieldsGroupName<G>
-  // /**
-  //  * 上传组件的 props \
-  //  * 目前在 image 类型中传递给 Uploader 组件使用
-  //  * TODO 需要考虑传递位置以通用
-  //  */
-  // uploaderProps?: FilePondOptions & {
-  //   [key: string]: any
-  // }
   /**
    * 其他属性 \
    */
@@ -189,17 +170,6 @@ export type SharedFormFieldsInfo<
 > = {
   [K in keyof Partial<T>]: SharedFormFieldItem<K, T[K], G, P, E>
 }
-
-/**
- * 表单字段配置信息(分组)
- * TODO 移除, 无用, 直接使用 SharedFormFieldsInfoGroupItem[]
- */
-export type SharedFormFieldsInfoGroup<
-  T extends SharedFormItem,
-  G = string,
-  P = SharedFormFieldItemType,
-  E = Record<string, any>,
-> = SharedFormFieldsInfoGroupItem<T, G, P, E>[]
 
 /**
  * 表单字段分组项

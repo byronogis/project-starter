@@ -197,8 +197,6 @@ function handleGlobalFilter(val: string | undefined) {
     return
   }
 
-  // TODO 不生效 ? 表格内容不会更新
-  console.log('handleGlobalFilter', val)
   filters.value.global!.value = val
 }
 
@@ -237,7 +235,6 @@ function editItem(_item: T) {
 
 async function saveItem() {
   const _item = values
-  // TODO id judege
   const hasId = '_id' in _item && _item._id
 
   sakaiCrudLogger.withTag(`saveItem`).log({ ..._item })
