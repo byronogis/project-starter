@@ -55,6 +55,17 @@ const fieldPropsMerged = computed(() => {
     case 'text':
       break
 
+    case 'password':
+      _props = {
+        inputId: field.value.name,
+        toggleMask: true,
+        feedback: false,
+        fluid: true,
+
+        ..._props,
+      }
+      break
+
     case 'textarea':
       _props = {
         // autoResize: true,
@@ -210,6 +221,12 @@ function handleFieldImageCancel() {
     <template v-if="field.type === 'text'">
       <!-- TODO fix type: value -->
       <InputText
+        v-bind="fieldPropsMerged"
+      />
+    </template>
+
+    <template v-else-if="field.type === 'password'">
+      <Password
         v-bind="fieldPropsMerged"
       />
     </template>

@@ -152,6 +152,7 @@ export type SharedFormFieldItemType =
   | 'number'
   | 'textarea'
   | 'select'
+  | 'password'
   | string
   // | 'select-group'
   // | 'image'
