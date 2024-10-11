@@ -411,10 +411,13 @@ defineExpose({
       >
         <template v-if="!props.disableTableHeader" #header>
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <h4 class="m-0">
+            <h4 class="order-1 m-0">
               Manage {{ Utils._.upperFirst(props.itemAlias) }}
             </h4>
-            <IconField v-if="!props.disableGlobalFilter">
+
+            <slot name="header-extra" />
+
+            <IconField v-if="!props.disableGlobalFilter" class="order-10">
               <InputIcon>
                 <i class="i-prime:search" />
               </InputIcon>
