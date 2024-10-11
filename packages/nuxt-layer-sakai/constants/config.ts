@@ -4,7 +4,7 @@ import Nora from '@primevue/themes/nora'
 
 export const SakaiConfigDefaultCST: SakaiConfig = {
   preset: 'Aura',
-  primary: 'emerald',
+  primary: 'sky',
   surface: null,
   menuMode: 'static',
 }
