@@ -362,8 +362,8 @@ defineExpose({
 </script>
 
 <template>
-  <div class="component-sakai-crud">
-    <div class="component-card">
+  <div class="component-sakai-crud [&>.card]:p-1rem">
+    <div class="card">
       <Toolbar v-if="!props.disableHeaderActionBar" class="mb-6">
         <template #start>
           <Button
