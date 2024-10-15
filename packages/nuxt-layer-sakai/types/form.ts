@@ -35,6 +35,9 @@ export type SakaiFormFieldsInfoGroupItem<
 
 export type SakaiFormFieldItemType = SharedFormFieldItemType
   | 'select-group'
+  | 'multi-select'
+  | 'multi-select-group'
+  | 'slider'
   | 'image'
   | 'images'
   | 'datetime'

@@ -128,6 +128,45 @@ const fieldPropsMerged = computed(() => {
 
       break
 
+    case 'multi-select':
+      _props = {
+        inputId: field.value.name,
+        optionLabel: 'label',
+        optionValue: 'value',
+
+        ..._props,
+
+        options: field.value.options ?? [],
+      }
+
+      break
+
+    case 'multi-select-group':
+      _props = {
+        inputId: field.value.name,
+        optionLabel: 'label',
+        optionValue: 'value',
+        optionGroupLabel: 'label',
+        optionGroupChildren: 'children',
+
+        ..._props,
+
+        options: field.value.options ?? [],
+      }
+
+      break
+
+    case 'slider':
+      _props = {
+        min: 0,
+        max: 100,
+        step: 1,
+
+        ..._props,
+      }
+
+      break
+
     case 'image':
       _props = {
         preview: true,
@@ -257,6 +296,24 @@ function handleFieldImageCancel() {
 
     <template v-else-if="field.type === 'select-group'">
       <Select
+        v-bind="fieldPropsMerged"
+      />
+    </template>
+
+    <template v-else-if="field.type === 'multi-select'">
+      <MultiSelect
+        v-bind="fieldPropsMerged"
+      />
+    </template>
+
+    <template v-else-if="field.type === 'multi-select-group'">
+      <MultiSelect
+        v-bind="fieldPropsMerged"
+      />
+    </template>
+
+    <template v-else-if="field.type === 'slider'">
+      <Slider
         v-bind="fieldPropsMerged"
       />
     </template>
