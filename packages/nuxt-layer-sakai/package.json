@@ -17,27 +17,27 @@
     "postcss-nesting": "^13.0.0"
   },
   "dependencies": {
-    "@iconify-json/prime": "^1.2.0",
-    "@primevue/nuxt-module": "^4.0.7",
-    "@primevue/themes": "^4.0.7",
+    "@iconify-json/prime": "^1.2.1",
+    "@primevue/nuxt-module": "^4.2.1",
+    "@primevue/themes": "^4.2.1",
     "@project-starter/nuxt-layer-shared": "workspace:*",
     "@project-starter/shared": "workspace:*",
     "@types/nprogress": "^0.2.3",
-    "chart.js": "^4.4.4",
-    "filepond": "^4.31.4",
+    "chart.js": "^4.4.6",
+    "filepond": "^4.32.1",
     "filepond-plugin-file-rename": "^1.1.8",
     "filepond-plugin-file-validate-type": "^1.2.9",
     "filepond-plugin-image-preview": "^4.6.12",
-    "json-editor-vue": "^0.16.0",
+    "json-editor-vue": "^0.17.3",
     "lossless-json": "^4.0.2",
     "nprogress": "^0.2.0",
-    "primevue": "^4.0.7",
-    "unocss": "^0.62.4",
-    "vanilla-jsoneditor": "^0.23.8",
+    "primevue": "^4.2.1",
+    "unocss": "^0.64.0",
+    "vanilla-jsoneditor": "^2.0.2",
     "vue-filepond": "^7.0.4"
   },
   "devDependencies": {
-    "nuxt": "^3.13.2",
-    "typescript": "^5.6.2"
+    "nuxt": "^3.14.159",
+    "typescript": "^5.6.3"
   }
 }
