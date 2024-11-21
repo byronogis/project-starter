@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@iconify-json/prime": "^1.2.1",
-    "@primevue/nuxt-module": "^4.2.1",
-    "@primevue/themes": "^4.2.1",
+    "@primevue/nuxt-module": "^4.2.2",
+    "@primevue/themes": "^4.2.2",
     "@project-starter/nuxt-layer-shared": "workspace:*",
     "@project-starter/shared": "workspace:*",
     "@types/nprogress": "^0.2.3",
@@ -31,13 +31,13 @@
     "json-editor-vue": "^0.17.3",
     "lossless-json": "^4.0.2",
     "nprogress": "^0.2.0",
-    "primevue": "^4.2.1",
-    "unocss": "^0.64.0",
-    "vanilla-jsoneditor": "^2.0.2",
+    "primevue": "^4.2.2",
+    "unocss": "^0.64.1",
+    "vanilla-jsoneditor": "^2.1.0",
     "vue-filepond": "^7.0.4"
   },
   "devDependencies": {
-    "nuxt": "^3.14.159",
+    "nuxt": "^3.14.1592",
     "typescript": "^5.6.3"
   }
 }
