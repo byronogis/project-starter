@@ -1,4 +1,3 @@
-import axios from 'axios'
 import type {
   AxiosInstance,
   AxiosRequestConfig,
@@ -6,6 +5,7 @@ import type {
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
 } from 'axios'
+import axios from 'axios'
 
 export class HTTP {
   static axios = axios
