@@ -34,7 +34,7 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Appa',
+        text: 'Apps',
         items: [
           { text: 'nuxt', link: '/apps/nuxt' },
         ],
