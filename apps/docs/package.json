@@ -3,10 +3,10 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "vitepress dev",
+    "dev": "vitepress dev --host",
     "build": "vitepress build",
     "generate": "vitepress build",
-    "preview": "vitepress preview",
+    "preview": "vitepress preview --host",
     "clear": "rm -rf .vitepress/dist .vitepress/cache"
   },
   "dependencies": {
