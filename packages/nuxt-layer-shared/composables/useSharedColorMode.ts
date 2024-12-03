@@ -6,7 +6,7 @@ export function useSharedColorMode() {
   const cycleList = computed<SharedColorModeItemName[]>(() => [
     isDarkPreferred.value ? 'light' : 'dark',
     isDarkPreferred.value ? 'dark' : 'light',
-    'auto',
+    'system',
   ])
 
   const { state, next } = useCycleList<SharedColorModeItemName>(cycleList, {
@@ -24,4 +24,4 @@ export function useSharedColorMode() {
   }
 }
 
-type SharedColorModeItemName = 'light' | 'dark' | 'auto'
+type SharedColorModeItemName = 'light' | 'dark' | 'system'
