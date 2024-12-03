@@ -14,7 +14,7 @@ const exampleLogger = Utils.logger.withTag(name)
 const crudRef = useTemplateRef('crudRef')
 const isUpdating = computed(() => !!crudRef.value?.isUpdating)
 
-const formFieldsInfo = ref(exampleFormFieldsInfoCST)
+const formFields = ref(exampleFormFieldsInfoCST)
 
 const {
   data,
@@ -70,7 +70,7 @@ const filters = ref<DataTableFilterMeta>({
       :item-alias="name"
       :items="data?.list"
       :loading="isLoading"
-      :form-fields-info="formFieldsInfo"
+      :form-fields
       :submit-fn="submitFn"
       :delete-fn="deleteFn"
       :disable-global-filter="false"
