@@ -1,4 +1,10 @@
 import type {
+  SharedFormData,
+  SharedFormFields,
+  SharedFormGroup,
+  SharedFormGroups,
+} from '@project-starter/shared/composables'
+import type {
   FilePondOptions,
   ProcessServerConfigFunction,
 } from 'filepond'
@@ -6,34 +12,47 @@ import type {
 /**
  * Sakai 表单项
  */
-export type SakaiFormItem = SharedFormItem & {
-  //
-}
+export type SakaiFormData<D = object> = SharedFormData<D>
 
 /**
  * Sakai 表单字段配置
  */
-export type SakaiFormFieldInfo<
-  T extends SakaiFormItem = SakaiFormItem,
-  G = string,
-> = SharedFormFieldsInfo<
-  T,
+export type SakaiFormFields<
+  D extends SakaiFormData = SakaiFormData,
+  G extends string = never,
+> = SharedFormFields<
+  D,
   G,
-  SakaiFormFieldItemType,
-  SakaiFormFieldItemExtra
+  SakaiFormFieldType,
+  SakaiFormFieldExtra
 >
 
-export type SakaiFormFieldsInfoGroupItem<
-  T extends SakaiFormItem = SakaiFormItem,
-  G = string,
-> = SharedFormFieldsInfoGroupItem<
-  T,
+export type SakaiFormGroups<
+  D extends SakaiFormData = SakaiFormData,
+  G extends string = never,
+> = SharedFormGroups<
+  D,
   G,
-  SakaiFormFieldItemType,
-  SakaiFormFieldItemExtra
+  SakaiFormFieldType,
+  SakaiFormFieldExtra
 >
 
-export type SakaiFormFieldItemType = SharedFormFieldItemType
+export type SakaiFormGroup<
+  D extends SakaiFormData = SakaiFormData,
+  G extends string = never,
+> = SharedFormGroup<
+  D,
+  G,
+  SakaiFormFieldType,
+  SakaiFormFieldExtra
+>
+
+export type SakaiFormFieldType =
+  | 'text'
+  | 'textarea'
+  | 'number'
+  | 'password'
+  | 'select'
   | 'select-group'
   | 'multi-select'
   | 'multi-select-group'
@@ -43,7 +62,7 @@ export type SakaiFormFieldItemType = SharedFormFieldItemType
   | 'datetime'
   | 'json'
 
-export interface SakaiFormFieldItemExtra {
+export interface SakaiFormFieldExtra {
   /**
    * 传递给表单组件的 props / attrs \
    * TODO 需要考虑传递位置以通用

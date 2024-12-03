@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="
-  T extends SharedFormItem,
+  D extends SakaiFormData,
+  G extends string = never
 "
 >
 import type {
@@ -8,6 +9,7 @@ import type {
   DataTablePageEvent,
 } from 'primevue/datatable'
 import { FilterMatchMode } from '@primevue/core/api'
+import { useSharedForm } from '@project-starter/shared/composables'
 import SakaiForm from '../Form/SakaiForm.vue'
 
 defineOptions({
@@ -24,13 +26,16 @@ const props = withDefaults(defineProps<{
    * 主体数据
    * @default []
    */
-  items?: T[]
+  items?: D[]
+  /**
+   * 表单字段组信息
+   */
+  groups?: SakaiFormGroups<D, G>
   /**
    * 表单字段信息
    */
-  formFieldsInfo?:
-    | Partial<SakaiFormFieldInfo<T, string>>
-    | SakaiFormFieldsInfoGroupItem<T, string>[]
+  formFields?:
+    | Partial<SakaiFormFields<D, G>>
   /**
    * 起始页码
    * @default 1
@@ -41,12 +46,12 @@ const props = withDefaults(defineProps<{
    * @param items
    * @param update 是否为编辑(更改)
    */
-  submitFn?: (items: Partial<T>[], update?: boolean) => Promise<void>
+  submitFn?: (items: Partial<D>[], update?: boolean) => Promise<void>
   /**
    * (单条/多条) 删除时调用的函数
    * @param items
    */
-  deleteFn?: (items: T[]) => Promise<void>
+  deleteFn?: (items: D[]) => Promise<void>
   /**
    * 自定义全局过滤处理函数
    */
@@ -114,7 +119,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   itemAlias: 'item',
   items: () => [],
-  formFieldsInfo: () => ({}),
+  formFields: () => ({}),
   pageNoFirst: 1,
   loading: false,
   disableDelete: false,
@@ -205,21 +210,17 @@ function handleGlobalFilter(val: string | undefined) {
  */
 // const sakaiFormRef = ref<ComponentExposed<typeof SakaiForm>>()
 const {
-  fieldsInfoGroup,
-  // fieldsInfoFlat,
-  values,
-  setValues,
-  validate,
+  context,
+  groupList,
   forceResetFormValues,
-
-  // context,
 } = useSharedForm<
-  T,
-  string,
-  SakaiFormFieldItemType,
-  SakaiFormFieldItemExtra
+  D,
+  G,
+  SakaiFormFieldType,
+  SakaiFormFieldExtra
 >({
-  fieldsInfo: () => props.formFieldsInfo,
+  fields: () => props.formFields,
+  groups: () => props.groups,
 })
 
 /**
@@ -228,13 +229,14 @@ const {
 const showItemDialog = ref(false)
 const isSaving = ref(false)
 
-function editItem(_item: T) {
-  setValues(JSON.parse(JSON.stringify(_item)))
+// TODO 考虑增加详情需要额外获取的情况
+function editItem(_item: D) {
+  context.setValues(JSON.parse(JSON.stringify(_item)))
   showItemDialog.value = true
 }
 
 async function saveItem() {
-  const _item = values
+  const _item = context.values
   const hasId = '_id' in _item && _item._id
 
   sakaiCrudLogger.withTag(`saveItem`).log({ ..._item })
@@ -242,17 +244,17 @@ async function saveItem() {
   try {
     isSaving.value = true
 
-    const { valid } = await validate()
+    const { valid } = await context.validate()
     if (!valid) {
       throw new Error('Validation Error')
     }
 
     if (hasId) {
-      await props.submitFn?.([_item] as T[], true)
+      await props.submitFn?.([_item] as D[], true)
       toast.toastSuccess(`${Utils._.upperFirst(props.itemAlias)} Updated`)
     }
     else {
-      await props.submitFn?.([_item] as T[])
+      await props.submitFn?.([_item] as D[])
       toast.toastSuccess(`${Utils._.upperFirst(props.itemAlias)} Created`)
     }
 
@@ -270,7 +272,7 @@ async function saveItem() {
 /**
  * 删除
  */
-const selectedItems = ref<T[]>()
+const selectedItems = ref<D[]>()
 
 function confirmDeleteSelected() {
   dialog.dialogConfirm({
@@ -293,7 +295,7 @@ function confirmDeleteSelected() {
   })
 }
 
-function confirmDeleteItem(_item: T) {
+function confirmDeleteItem(_item: D) {
   dialog.dialogConfirm({
     header: 'Confirm',
     message: h('div', { class: 'flex items-center gap-4' }, [
@@ -318,7 +320,7 @@ function confirmDeleteItem(_item: T) {
 }
 
 // base
-async function baseDeleteItems(items: T[]) {
+async function baseDeleteItems(items: D[]) {
   sakaiCrudLogger.withTag(`baseDeleteItems`).log(items)
 
   await props.deleteFn?.(items)
@@ -357,7 +359,7 @@ watch([showItemDialog], ([_item]) => {
 })
 
 defineExpose({
-  isUpdating: computed(() => !!values._id),
+  isUpdating: computed(() => !!context.values._id),
 })
 </script>
 
@@ -476,7 +478,7 @@ defineExpose({
               @click="confirmDeleteItem(slotProps.data)"
             />
 
-            <slot name="action-extra" :item="(slotProps.data as T)" />
+            <slot name="action-extra" :item="(slotProps.data as D)" />
           </template>
         </Column>
 
@@ -496,7 +498,7 @@ defineExpose({
     >
       <template #default>
         <SakaiForm
-          :fields-info-group="fieldsInfoGroup"
+          :group-list
         />
       </template>
 

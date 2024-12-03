@@ -75,7 +75,7 @@ export interface SharedFormField<
    * NOTE 在 fieldArray 为 true 时必须传入
    */
   //
-  fieldArrayItemFormFields?: SharedFormFields<any>
+  fieldArrayItemFormFields?: SharedFormFields<any, G, T>
   /**
    * Grid 布局中的位置 \
    * 用于指示在该表单项的容器上添加的 css grid-area 的值 \

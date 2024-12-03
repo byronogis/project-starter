@@ -1,34 +1,29 @@
 <script setup lang="ts" generic="
-  T extends SharedFormFieldItem<any, any, any, SakaiFormFieldItemType, SakaiFormFieldItemExtra>
+  F extends SharedFormField<any, any, any, SakaiFormFieldType, SakaiFormFieldExtra>
 "
 >
+import type { SharedFormField } from '@project-starter/shared/composables'
 import SakaiUploader from '../SakaiUploader.vue'
 
 const props = defineProps<{
-  field: T
+  field: F
   /**
    * solve: form values will be covered by the initialValue value of usefield
    * @see https://github.com/logaretm/vee-validate/issues/4846
    */
-  forceValue?: T['valueType']
+  forceValue?: F['valueType']
 }>()
 
 const toast = inject(SakaiToastInjectionKey, useSakaiToast())
 
 const field = computed(() => props.field)
-const gridArea = computed(() => (props.field.gridArea ?? props.field.name)
-// TODO regex replace
-  .replaceAll('.', '_')
-  .replaceAll('[', '_')
-  .replaceAll(']', '_'),
-)
 
 const {
   value,
   errorMessage,
 } = useField(
   () => props.field.name,
-  props.field.schema,
+  toTypedSchema(props.field.schema),
   {
     initialValue: props.forceValue ?? props.field.initialValue,
   },
@@ -42,7 +37,7 @@ const fieldPropsMerged = computed(() => {
     'class': 'w-full',
     'id': field.value.name,
     'modelValue': value.value,
-    'onUpdate:modelValue': (val: T['valueType']) => {
+    'onUpdate:modelValue': (val: F['valueType']) => {
       value.value = val
     },
     'disabled': field.value.disable,
@@ -199,7 +194,7 @@ const fieldPropsMerged = computed(() => {
         'modelValue': typeof value.value === 'string'
           ? Utils.safeJSONParse(value.value).value ?? null
           : toValue(value),
-        'onUpdate:modelValue': (val: T['valueType']) => {
+        'onUpdate:modelValue': (val: F['valueType']) => {
           value.value = typeof value.value === 'string'
             ? JSON.stringify(val)
             : val
@@ -251,7 +246,7 @@ function handleFieldImageCancel() {
     class="component-sakai-from-field"
     :style="[
       {
-        'grid-area': gridArea,
+        'grid-area': props.field.gridArea!,
       },
     ]"
   >

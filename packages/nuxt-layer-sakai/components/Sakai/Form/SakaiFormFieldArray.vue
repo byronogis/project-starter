@@ -1,20 +1,17 @@
 <script setup lang="ts" generic="
-  T extends SharedFormFieldItem<any, any, any, SakaiFormFieldItemType, SakaiFormFieldItemExtra>
+  F extends SharedFormField<any, any, any, SakaiFormFieldType, SakaiFormFieldExtra>
 "
 >
+import type { SharedFormField } from '@project-starter/shared/composables'
+
 const props = defineProps<{
-  field: T
+  field: F
 }>()
 
 // const toast = inject(SakaiToastInjectionKey, useSakaiToast())
 
 const field = computed(() => props.field)
-const gridArea = computed(() => (props.field.gridArea ?? props.field.name)
-// TODO regex replace
-  .replaceAll('.', '_')
-  .replaceAll('[', '_')
-  .replaceAll(']', '_'),
-)
+const gridArea = computed(() => (props.field.gridArea!))
 
 const {
   remove,
@@ -46,14 +43,14 @@ const {
       >
         <!-- 数组字段中的子字段 -->
         <template
-          v-for="j in field.fieldArrayItemFormFieldInfos"
+          v-for="j in field.fieldArrayItemFormFields"
           :key="j.name"
         >
           <SakaiFormField
             :field="{
-              ...j,
-              name: `${field.name}[${idx}].${j.name}`,
-              gridArea: `${field.name}.${j.name}`,
+              ...j!,
+              name: `${field.name}[${idx}].${j!.name}`,
+              gridArea: `${field.name}.${j!.name}`,
             }"
           />
         </template>
