@@ -17,30 +17,30 @@
     "postcss-nesting": "^13.0.0"
   },
   "dependencies": {
-    "@iconify-json/prime": "^1.2.1",
-    "@primevue/nuxt-module": "^4.2.4",
-    "@primevue/themes": "^4.2.4",
+    "@iconify-json/prime": "catalog:",
+    "@primevue/nuxt-module": "catalog:",
+    "@primevue/themes": "catalog:",
     "@project-starter/nuxt-layer-shared": "workspace:*",
     "@project-starter/shared": "workspace:*",
-    "@types/nprogress": "^0.2.3",
-    "@vee-validate/nuxt": "^4.14.7",
-    "@vee-validate/zod": "^4.14.7",
-    "chart.js": "^4.4.7",
-    "filepond": "^4.32.5",
-    "filepond-plugin-file-rename": "^1.1.8",
-    "filepond-plugin-file-validate-type": "^1.2.9",
-    "filepond-plugin-image-preview": "^4.6.12",
-    "json-editor-vue": "^0.17.3",
-    "lossless-json": "^4.0.2",
-    "nprogress": "^0.2.0",
-    "primevue": "^4.2.4",
-    "unocss": "^0.65.0",
-    "vanilla-jsoneditor": "^2.3.1",
-    "vee-validate": "^4.14.7",
-    "vue-filepond": "^7.0.4"
+    "@types/nprogress": "catalog:",
+    "@vee-validate/nuxt": "catalog:",
+    "@vee-validate/zod": "catalog:",
+    "chart.js": "catalog:",
+    "filepond": "catalog:",
+    "filepond-plugin-file-rename": "catalog:",
+    "filepond-plugin-file-validate-type": "catalog:",
+    "filepond-plugin-image-preview": "catalog:",
+    "json-editor-vue": "catalog:",
+    "lossless-json": "catalog:",
+    "nprogress": "catalog:",
+    "primevue": "catalog:",
+    "unocss": "catalog:",
+    "vanilla-jsoneditor": "catalog:",
+    "vee-validate": "catalog:",
+    "vue-filepond": "catalog:"
   },
   "devDependencies": {
-    "nuxt": "^3.14.1592",
-    "typescript": "^5.7.2"
+    "nuxt": "catalog:",
+    "typescript": "catalog:"
   }
 }

@@ -30,11 +30,11 @@
     "unocss": "^0.62.3"
   },
   "dependencies": {
-    "@iconify/utils": "^2.1.33"
+    "@iconify/utils": "catalog:"
   },
   "devDependencies": {
     "@project-starter/typescript-config": "workspace:*",
-    "typescript": "^5.7.2",
-    "unbuild": "3.0.0-rc.7"
+    "typescript": "catalog:",
+    "unbuild": "catalog:"
   }
 }

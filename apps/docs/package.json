@@ -10,6 +10,6 @@
     "clear": "rm -rf .vitepress/dist .vitepress/cache"
   },
   "dependencies": {
-    "vitepress": "^1.5.0"
+    "vitepress": "catalog:"
   }
 }
