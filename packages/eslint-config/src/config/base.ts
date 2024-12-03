@@ -1,6 +1,6 @@
 import antfu from '@antfu/eslint-config'
 
-// fix type reference
+// TODO fix type reference
 export type { FlatConfigComposer } from 'eslint-flat-config-utils'
 
 export default function base(

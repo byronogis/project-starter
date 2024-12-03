@@ -3,21 +3,31 @@
   "type": "module",
   "private": true,
   "exports": {
+    "./composables": "./src/composables/index.ts",
+    "./composables/*": "./src/composables/*.ts",
+    "./types": "./src/types/index.ts",
+    "./types/*": "./src/types/*.ts",
     "./utils": "./src/utils/index.ts",
     "./utils/*": "./src/utils/*.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@project-starter/typescript-config": "workspace:*",
+  "dependencies": {
     "@types/tinycolor2": "^1.4.6",
     "axios": "^1.7.8",
     "consola": "^3.2.3",
     "dayjs": "^1.11.13",
     "es-toolkit": "^1.27.0",
     "tinycolor2": "^1.6.0",
-    "typescript": "^5.7.2",
-    "worker-timers": "^8.0.11"
+    "type-fest": "^4.29.1",
+    "vee-validate": "^4.14.7",
+    "vue": "^3.5.13",
+    "worker-timers": "^8.0.11",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@project-starter/typescript-config": "workspace:*",
+    "typescript": "^5.7.2"
   }
 }
