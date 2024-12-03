@@ -94,7 +94,7 @@ export interface SharedFormField<
   options?: { label: string, value: any }[]
   /**
    * 当前表单项所属的分组
-   * @default '_default'
+   * @default SharedFormGroupDefaultId
    */
   group?: SharedFormGroupId<G>
   /**
@@ -107,20 +107,7 @@ export interface SharedFormField<
  * 表单字段项类型
  */
 export type SharedFormFieldType<T extends string = never> =
-  | SharedFormFieldTypeBuiltIn
   | T
-
-type SharedFormFieldTypeBuiltIn =
-  | 'text'
-  | 'number'
-  | 'textarea'
-  | 'select'
-  | 'password'
-  // | 'select-group'
-  // | 'image'
-  // | 'images'
-  // | 'datetime'
-  // | 'json'
 
 /**
  * 表单字段项信息
@@ -192,5 +179,4 @@ export interface SharedFormGroup<
  * NOTE 默认也会被用于类名, 此时不支持的字符会在添加到类名前被替换为下划线
  */
 export type SharedFormGroupId<G extends string = never> =
-  | '_default'
   | G

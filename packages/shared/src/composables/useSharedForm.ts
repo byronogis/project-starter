@@ -15,6 +15,8 @@ export * from '../types/form'
 // TODO fix type reference
 export type { PartialDeep } from 'type-fest'
 
+export const SharedFormGroupDefaultId = '_default'
+
 export function useSharedForm<
   D extends SharedFormData,
   G extends string = never,
@@ -25,6 +27,7 @@ export function useSharedForm<
     fields,
     data,
     groups,
+    groupDefaultId = SharedFormGroupDefaultId,
   } = options ?? {}
 
   /**
@@ -35,7 +38,7 @@ export function useSharedForm<
 
     const _groups = (Object.values(_fields) as SharedFormField<Extract<keyof D, string>, D[Extract<keyof D, string>], G, T, E>[])
       .reduce<Record<string, SharedFormGroup<D, G, T, E>>>((acc, field) => {
-        const _gid = (field.group ?? '_default') as G
+        const _gid = (field.group ?? groupDefaultId) as G
 
         acc[_gid] ??= {
           id: _gid,
@@ -124,4 +127,9 @@ export interface SharedFormOptions<
    * 表单字段分组信息
    */
   groups?: MaybeRefOrGetter<Partial<SharedFormGroups<D, G, T, E>> | undefined>
+  /**
+   * 修改默认分组标识 \
+   * @default @see SharedFormGroupDefaultId
+   */
+  groupDefaultId?: string
 }
