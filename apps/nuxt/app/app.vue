@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
+
+const globalToast = useSakaiToast()
+provide(SakaiToastInjectionKey, globalToast)
 </script>
 
 <template>
@@ -7,6 +10,8 @@ import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
   <NuxtLayout class="font-sans">
     <NuxtPage />
   </NuxtLayout>
+
+  <Toast />
 
   <VueQueryDevtools />
 </template>
