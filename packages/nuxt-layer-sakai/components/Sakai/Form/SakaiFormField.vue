@@ -2,7 +2,6 @@
   F extends SharedFormField<any, any, any, SakaiFormFieldType, SakaiFormFieldExtra>
 "
 >
-import type { SharedFormField } from '@project-starter/shared/composables'
 import SakaiUploader from '../SakaiUploader.vue'
 
 const props = defineProps<{

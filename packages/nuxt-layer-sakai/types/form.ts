@@ -1,10 +1,4 @@
 import type {
-  SharedFormData,
-  SharedFormFields,
-  SharedFormGroup,
-  SharedFormGroups,
-} from '@project-starter/shared/composables'
-import type {
   FilePondOptions,
   ProcessServerConfigFunction,
 } from 'filepond'

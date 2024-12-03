@@ -2,8 +2,6 @@
   F extends SharedFormField<any, any, any, SakaiFormFieldType, SakaiFormFieldExtra>
 "
 >
-import type { SharedFormField } from '@project-starter/shared/composables'
-
 const props = defineProps<{
   field: F
 }>()

@@ -9,7 +9,6 @@ import type {
   DataTablePageEvent,
 } from 'primevue/datatable'
 import { FilterMatchMode } from '@primevue/core/api'
-import { useSharedForm } from '@project-starter/shared/composables'
 import SakaiForm from '../Form/SakaiForm.vue'
 
 defineOptions({
