@@ -13,10 +13,6 @@ export default defineNuxtConfig({
     join(currentDir, './assets/styles/index.css'),
   ],
 
-  modules: [
-    ['@primevue/nuxt-module', primevue],
-  ],
-
   imports: {
     dirs: [
       join(currentDir, './types'),
@@ -24,9 +20,23 @@ export default defineNuxtConfig({
       join(currentDir, './constants'),
     ],
     imports: [
+      { name: 'toTypedSchema', from: '@vee-validate/zod' },
       { name: '*', as: 'Utils', from: '@project-starter/shared/utils' },
     ],
   },
+
+  modules: [
+    ['@primevue/nuxt-module', primevue],
+
+    ['@vee-validate/nuxt', {
+      componentNames: {
+        Form: 'VeeForm',
+        Field: 'VeeField',
+        FieldArray: 'VeeFieldArray',
+        ErrorMessage: 'VeeErrorMessage',
+      },
+    }],
+  ],
 
   compatibilityDate: '2024-08-14',
 })

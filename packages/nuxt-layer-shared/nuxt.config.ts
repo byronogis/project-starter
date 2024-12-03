@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     ],
     imports: [
       { name: 'z', as: 'z', from: 'zod' },
-      { name: 'toTypedSchema', from: '@vee-validate/zod' },
       { name: 'ComponentProps', from: 'vue-component-type-helpers', type: true },
       { name: 'ComponentExposed', from: 'vue-component-type-helpers', type: true },
     ],
@@ -23,15 +22,6 @@ export default defineNuxtConfig({
 
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt',
-
-    ['@vee-validate/nuxt', {
-      componentNames: {
-        Form: 'VeeForm',
-        Field: 'VeeField',
-        FieldArray: 'VeeFieldArray',
-        ErrorMessage: 'VeeErrorMessage',
-      },
-    }],
   ],
 
   compatibilityDate: '2024-08-14',
