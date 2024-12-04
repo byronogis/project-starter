@@ -1,6 +1,8 @@
 {
   "recommendations": [
     "antfu.unocss",
+    "antfu.iconify",
+    "antfu.pnpm-catalog-lens",
     "dbaeumer.vscode-eslint",
     "vue.volar"
   ]
