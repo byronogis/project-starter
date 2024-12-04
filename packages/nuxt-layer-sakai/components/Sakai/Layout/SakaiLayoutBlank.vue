@@ -17,7 +17,7 @@ provide(SakaiStoreInjectionKey, sakaiStore)
 </script>
 
 <template>
-  <div class="component-sakai-layout-blank min-h-100vh">
+  <div class="layout-wrapper component-sakai-layout-blank">
     <slot />
 
     <Toast />
