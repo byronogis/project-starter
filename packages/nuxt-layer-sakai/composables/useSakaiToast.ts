@@ -1,6 +1,6 @@
 import type { ToastMessageOptions } from 'primevue/toast'
 
-export function useSakaiToast() {
+export function useSakaiToast(baseOptions: ToastMessageOptions = {}) {
   const toast = useToast()
 
   return {
@@ -10,6 +10,7 @@ export function useSakaiToast() {
       summary: 'Successful',
       detail: message,
       life: 3000,
+      ...baseOptions,
       ...extraOptions,
     }),
     toastError: (message: string, extraOptions: ToastMessageOptions = {}) => toast.add({
@@ -17,6 +18,7 @@ export function useSakaiToast() {
       summary: 'Error',
       detail: message,
       life: 3000,
+      ...baseOptions,
       ...extraOptions,
     }),
     toastWarn: (message: string, extraOptions: ToastMessageOptions = {}) => toast.add({
@@ -24,6 +26,7 @@ export function useSakaiToast() {
       summary: 'Warn',
       detail: message,
       life: 3000,
+      ...baseOptions,
       ...extraOptions,
     }),
     toastInfo: (message: string, extraOptions: ToastMessageOptions = {}) => toast.add({
@@ -31,6 +34,7 @@ export function useSakaiToast() {
       summary: 'Info',
       detail: message,
       life: 3000,
+      ...baseOptions,
       ...extraOptions,
     }),
   }
