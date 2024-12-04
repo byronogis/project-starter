@@ -1,9 +1,12 @@
-html,
-body,
-#__nuxt {
-  height: 100vh;
+html {
+  height: 100%;
   font-size: 16px;
   line-height: normal;
+}
+
+body,
+#__nuxt {
+  min-height: 100vh;
 }
 
 html.dark {
