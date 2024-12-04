@@ -117,7 +117,3 @@ export function useSakaiStore(options?: SakaiOptions) {
     styleClass,
   })
 }
-
-export const SakaiStoreInjectionKey = Symbol('SakaiStoreInjectionKey') as InjectionKey<
-  ReturnType<typeof useSakaiStore>
->
