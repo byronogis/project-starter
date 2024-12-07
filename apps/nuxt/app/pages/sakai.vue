@@ -3,14 +3,14 @@ definePageMeta({
   layout: 'sakai-primary',
 })
 
-const appToast = useSakaiToast()
+const global = useGlobalToast()
 </script>
 
 <template>
   <div id="page-sakai">
     <h4>Sakai Page</h4>
     <InputText />
-    <Button label="fine" @click="appToast.toastSuccess('fine')" />
+    <Button label="fine" @click="global.toastSuccess('fine')" />
   </div>
 </template>
 
