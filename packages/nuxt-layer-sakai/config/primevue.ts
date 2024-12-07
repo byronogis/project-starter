@@ -1,3 +1,4 @@
+import type { NuxtOptions } from '@nuxt/schema'
 import { definePreset } from '@primevue/themes'
 import Aura from '@primevue/themes/aura'
 import { SakaiPrimaryColorListCST } from '../constants/config'
@@ -9,7 +10,7 @@ const CustomPreset = definePreset(Aura, {
   ...sakakiThemePresetGenerator(SakaiPrimaryColorListCST.find(i => i.name === 'sky')!),
 })
 
-export const primevue = {
+export const primevue: NuxtOptions['primevue'] = {
   options: {
     theme: {
       preset: CustomPreset,

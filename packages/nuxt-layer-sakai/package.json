@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@iconify-json/prime": "catalog:",
+    "@nuxt/schema": "catalog:",
     "@primevue/nuxt-module": "catalog:",
     "@primevue/themes": "catalog:",
     "@project-starter/nuxt-layer-shared": "workspace:*",
