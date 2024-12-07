@@ -1,13 +1,13 @@
 import type { NuxtOptions } from '@nuxt/schema'
 import { definePreset } from '@primevue/themes'
 import Aura from '@primevue/themes/aura'
-import { SakaiPrimaryColorListCST } from '../constants/config'
+import { SakaiConfigDefaultCST, SakaiPrimaryColorListCST } from '../constants/config'
 import { sakakiThemePresetGenerator } from '../utils/theme'
 
 const CustomPreset = definePreset(Aura, {
   // see https://primevue.org/theming/styled/#customization
   // ...
-  ...sakakiThemePresetGenerator(SakaiPrimaryColorListCST.find(i => i.name === 'sky')!),
+  ...sakakiThemePresetGenerator(SakaiPrimaryColorListCST.find(i => i.name === SakaiConfigDefaultCST.primary)!),
 })
 
 export const primevue: NuxtOptions['primevue'] = {
