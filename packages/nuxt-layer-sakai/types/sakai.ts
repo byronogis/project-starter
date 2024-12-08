@@ -61,6 +61,7 @@ export type SakaiThemePresetName =
   | 'Aura'
   | 'Lara'
   | 'Nora'
+  | 'Material'
 
 export type SakaiPrimaryColorName =
   | 'noir'

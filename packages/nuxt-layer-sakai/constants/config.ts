@@ -1,5 +1,6 @@
 import Aura from '@primevue/themes/aura'
 import Lara from '@primevue/themes/lara'
+import Material from '@primevue/themes/material'
 import Nora from '@primevue/themes/nora'
 
 export const SakaiConfigDefaultCST: SakaiConfig = {
@@ -13,6 +14,7 @@ export const SakaiThemePresetsCST: Record<SakaiThemePresetName, any> = {
   Aura,
   Lara,
   Nora,
+  Material,
 }
 
 export const SakaiPrimaryColorListCST: SakaiPrimaryColorItem[] = [
