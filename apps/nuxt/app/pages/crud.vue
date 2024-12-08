@@ -4,7 +4,7 @@ import type {
 } from 'primevue/datatable'
 
 definePageMeta({
-  layout: 'sakai-primary',
+  layout: 'primo-primary',
 })
 
 const name = 'example'
@@ -64,7 +64,7 @@ const filters = ref<DataTableFilterMeta>({
 
 <template>
   <div id="page-crud">
-    <SakaiCrud
+    <PrimoCrud
       ref="crudRef"
       v-model:filters="filters"
       :item-alias="name"
@@ -86,7 +86,7 @@ const filters = ref<DataTableFilterMeta>({
 
         <Column field="name" header="Name" style="min-width: 10rem" />
       </template>
-    </SakaiCrud>
+    </PrimoCrud>
   </div>
 </template>
 
@@ -98,7 +98,7 @@ const filters = ref<DataTableFilterMeta>({
     'id  name  avatar' auto / 1fr 1fr 1fr;
 }
 
-:deep(.component-sakai-form-field-array-item-contacts) {
+:deep(.component-primo-form-field-array-item-contacts) {
   display: grid;
   grid-template:
     'contacts_email contacts_phone contacts_website .      ' auto

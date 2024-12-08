@@ -12,10 +12,10 @@ const description = computed(() => props.error.statusMessage
 </script>
 
 <template>
-  <SakaiLayoutBlank>
-    <SakaiPageError
+  <PrimoLayoutBlank>
+    <PrimoPageError
       :title="String(props.error.statusCode)"
       :description
     />
-  </SakaiLayoutBlank>
+  </PrimoLayoutBlank>
 </template>

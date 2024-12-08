@@ -30,7 +30,7 @@ features:
   - title: Typescript
     details: A basic TypeScript configuration that can be imported and used in the project.
     link: /packages/typescript-config
-  - title: Sakai
+  - title: Primo
     details: A basic theme layer for nuxt.
-    link: /packages/nuxt-layer-sakai
+    link: /packages/nuxt-layer-primo
 ---

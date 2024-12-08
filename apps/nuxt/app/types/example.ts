@@ -1,6 +1,6 @@
-export type ExampleFormFieldInfo = SakaiFormFields<ExampleItemWithForm, ExampleFormFieldsGroup>
+export type ExampleFormFieldInfo = PrimoFormFields<ExampleItemWithForm, ExampleFormFieldsGroup>
 
-export type ExampleItemWithForm = SakaiFormData<ExampleItem>
+export type ExampleItemWithForm = PrimoFormData<ExampleItem>
 
 export type ExampleFormFieldsGroup =
   | 'contacts'

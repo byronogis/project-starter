@@ -21,7 +21,7 @@
     "@nuxt/icon": "catalog:",
     "@pinia/nuxt": "catalog:",
     "@project-starter/eslint-config": "workspace:*",
-    "@project-starter/nuxt-layer-sakai": "workspace:*",
+    "@project-starter/nuxt-layer-primo": "workspace:*",
     "@project-starter/shared": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
     "@tanstack/vue-query": "catalog:",

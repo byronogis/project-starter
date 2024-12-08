@@ -1,11 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'sakai-blank',
+  layout: 'primo-blank',
 })
 </script>
 
 <template>
-  <SakaiPageLogin id="page-login" />
+  <PrimoPageLogin id="page-login" />
 </template>
 
 <style scoped lang="postcss"></style>

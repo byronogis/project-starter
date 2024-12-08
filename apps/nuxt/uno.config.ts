@@ -1,4 +1,4 @@
-import { sakaiPreset } from '@project-starter/nuxt-layer-sakai/unocss'
+import { primoPreset } from '@project-starter/nuxt-layer-primo/unocss'
 import { base } from '@project-starter/unocss-config'
 import { defu } from 'defu'
 import {
@@ -8,7 +8,7 @@ import {
 export default defineConfig(defu(
   {
     presets: [
-      sakaiPreset(),
+      primoPreset(),
     ],
   },
   base({

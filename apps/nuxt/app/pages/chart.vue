@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'sakai-primary',
+  layout: 'primo-primary',
 })
 
 const chartData = ref()
@@ -28,8 +28,8 @@ function setChartData() {
 
 <template>
   <div id="page-chart" class="grid grid-cols-12 gap-8">
-    <SakaiChart
-      v-for="i in (['pie', 'bar', 'line', 'polarArea', 'radar'] as SakaiChartType[])"
+    <PrimoChart
+      v-for="i in (['pie', 'bar', 'line', 'polarArea', 'radar'] as PrimoChartType[])"
       :key="i"
       :type="i "
       :data="chartData"

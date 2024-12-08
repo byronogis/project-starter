@@ -1,5 +1,4 @@
 /* @see nuxt.config.ts app.head.style */
-/* @layer nuxt-icon, reset, primevue, uno-primevue-sakai, layout-sakai, base, transition; */
 
 @import '@unocss/reset/tailwind.css' layer(reset);
 @import './base.css' layer(base);

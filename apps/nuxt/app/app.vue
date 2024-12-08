@@ -2,7 +2,7 @@
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 const globalToast = useGlobalToast()
-provide(SakaiToastInjectionKey, globalToast)
+provide(PrimoToastInjectionKey, globalToast)
 </script>
 
 <template>
@@ -11,7 +11,7 @@ provide(SakaiToastInjectionKey, globalToast)
     <NuxtPage />
   </NuxtLayout>
 
-  <Toast :group="SakaiToastGroupGlobalCST" />
+  <Toast :group="PrimoToastGroupGlobalCST" />
 
   <VueQueryDevtools />
 </template>

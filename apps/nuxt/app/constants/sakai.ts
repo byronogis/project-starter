@@ -1,1 +1,1 @@
-export const SakaiToastGroupGlobalCST = 'SakaiToastGroupGlobalCST'
+export const PrimoToastGroupGlobalCST = 'PrimoToastGroupGlobalCST'

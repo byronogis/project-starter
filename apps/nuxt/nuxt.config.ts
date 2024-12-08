@@ -53,10 +53,10 @@ export default defineNuxtConfig({
             'nuxt-icon',
             'reset',
 
-            // @project-starter/nuxt-layer-sakai
-            'nuxt-layer-sakai_primevue',
-            'uno-nuxt-layer-sakai_unocss',
-            'nuxt-layer-sakai_index',
+            // @project-starter/nuxt-layer-primo
+            'nuxt-layer-primo-primevue',
+            'uno-nuxt-layer-primo-unocss',
+            'nuxt-layer-primo-layout',
 
             'base',
             'transition',
@@ -101,7 +101,7 @@ export default defineNuxtConfig({
   },
 
   extends: [
-    '@project-starter/nuxt-layer-sakai',
+    '@project-starter/nuxt-layer-primo',
   ],
 
   future: {

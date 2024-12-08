@@ -1,14 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'sakai-primary',
+  layout: 'primo-primary',
 })
 
 const userStore = useUserStore()
 
 const name = computed(() => userStore.name)
 
-// const toast = useSakaiToast()
-const confirm = useSakaiDialog()
+// const toast = usePrimoToast()
+const confirm = usePrimoDialog()
 async function dialog() {
   // toast.toastError('Hello World!')
   const res = await confirm.dialogConfirm({

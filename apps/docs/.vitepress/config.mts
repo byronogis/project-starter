@@ -18,7 +18,7 @@ export default defineConfig({
       {
         text: 'Packages',
         items: [
-          { text: 'nuxt-layer-sakai', link: '/packages/nuxt-layer-sakai' },
+          { text: 'nuxt-layer-primo', link: '/packages/nuxt-layer-primo' },
           { text: 'nuxt-layer-shared', link: '/packages/nuxt-layer-shared' },
           { text: 'unocss-config', link: '/packages/unocss-config' },
           { text: 'eslint-config', link: '/packages/eslint-config' },
@@ -42,7 +42,7 @@ export default defineConfig({
       {
         text: 'Packages',
         items: [
-          { text: 'nuxt-layer-sakai', link: '/packages/nuxt-layer-sakai' },
+          { text: 'nuxt-layer-primo', link: '/packages/nuxt-layer-primo' },
           { text: 'nuxt-layer-shared', link: '/packages/nuxt-layer-shared' },
           { text: 'unocss-config', link: '/packages/unocss-config' },
           { text: 'eslint-config', link: '/packages/eslint-config' },

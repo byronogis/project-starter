@@ -1,7 +1,7 @@
 /**
  * 文件上传处理
  */
-export const exampleFileUploadProcessCST: SakaiFormFieldFileUploadProcess = async (
+export const exampleFileUploadProcessCST: PrimoFormFieldFileUploadProcess = async (
   cxt,
   { signal },
 ) => {
