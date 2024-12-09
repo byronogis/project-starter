@@ -9,8 +9,8 @@ const global = useGlobalToast()
 <template>
   <div id="page-primo">
     <h4>Primo Page</h4>
-    <InputText />
-    <Button label="fine" @click="global.toastSuccess('fine')" />
+    <PrimeInputText />
+    <PrimeButton label="fine" @click="global.toastSuccess('fine')" />
   </div>
 </template>
 

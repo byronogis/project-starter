@@ -65,7 +65,7 @@ const menuModeOptions = ref<{
       </div>
       <div class="flex flex-col gap-2">
         <span class="text-muted-color text-sm font-semibold">Presets</span>
-        <SelectButton
+        <PrimeSelectButton
           v-model="primoStore.config.preset"
           :options="presetsOptions"
           :allow-empty="false"
@@ -73,7 +73,7 @@ const menuModeOptions = ref<{
       </div>
       <div class="flex flex-col gap-2">
         <span class="text-muted-color text-sm font-semibold">Menu Mode</span>
-        <SelectButton
+        <PrimeSelectButton
           v-model="primoStore.config.menuMode"
           :options="menuModeOptions"
           :allow-empty="false"

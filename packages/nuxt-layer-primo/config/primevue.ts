@@ -26,7 +26,12 @@ export const primevue: NuxtOptions['primevue'] = {
 
   },
   components: {
-    // @see https://github.com/primefaces/primevue/issues/6007
-    // prefix: 'Prime',
+    prefix: 'Prime',
+    exclude: [
+      'Chart',
+      'Editor',
+      'Form',
+      'FormField',
+    ],
   },
 }

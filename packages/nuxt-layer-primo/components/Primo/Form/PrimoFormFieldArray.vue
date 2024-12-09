@@ -53,7 +53,7 @@ const {
           />
         </template>
 
-        <Button
+        <PrimeButton
           :style="[
             {
               'grid-area': '_remove',
@@ -66,13 +66,13 @@ const {
         />
       </div>
 
-      <Divider />
+      <PrimeDivider />
     </template>
 
     <div
       class="component-primo-form-field-array-add grid place-content-center"
     >
-      <Button
+      <PrimeButton
         label="Add"
         icon="i-prime:plus"
         severity="secondary"

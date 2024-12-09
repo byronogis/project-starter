@@ -11,7 +11,7 @@ provide(PrimoToastInjectionKey, globalToast)
     <NuxtPage />
   </NuxtLayout>
 
-  <Toast :group="PrimoToastGroupGlobalCST" />
+  <PrimeToast :group="PrimoToastGroupGlobalCST" />
 
   <VueQueryDevtools />
 </template>

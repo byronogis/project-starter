@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defu } from 'defu'
-import Chart from 'primevue/chart'
+import PrimeChart from 'primevue/chart'
 
 const props = withDefaults(defineProps<{
   type: PrimoChartType
@@ -74,7 +74,7 @@ function setColorOptions() {
       card: !props.noCard,
     }]"
   >
-    <Chart
+    <PrimeChart
       :type="props.type"
       :data="props.data"
       :options

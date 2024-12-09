@@ -258,40 +258,40 @@ async function handleSubmit() {
 
             <div class="mb-4 flex flex-col space-y-6">
               <div class="relative flex flex-col pb-1.2em">
-                <FloatLabel>
+                <PrimeFloatLabel>
                   <label for="username1">Username</label>
-                  <InputText id="username1" v-model="username" type="text" class="w-full md:w-[30rem]" @keypress.enter.exact="handleSubmit()" />
-                </FloatLabel>
+                  <PrimeInputText id="username1" v-model="username" type="text" class="w-full md:w-[30rem]" @keypress.enter.exact="handleSubmit()" />
+                </PrimeFloatLabel>
                 <small v-if="toValue(form.errors).username" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(form.errors).username }}</small>
               </div>
 
               <div v-if="step === 'sign-up'" class="relative flex flex-col pb-1.2em">
-                <FloatLabel>
+                <PrimeFloatLabel>
                   <label for="email1">Email</label>
-                  <InputText id="email1" v-model="email" type="text" class="w-full md:w-[30rem]" @keypress.enter.exact="handleSubmit()" />
-                </FloatLabel>
+                  <PrimeInputText id="email1" v-model="email" type="text" class="w-full md:w-[30rem]" @keypress.enter.exact="handleSubmit()" />
+                </PrimeFloatLabel>
                 <small v-if="toValue(signupForm.errors).email" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(signupForm.errors).email }}</small>
               </div>
 
               <div class="relative flex flex-col pb-1.2em">
-                <FloatLabel>
+                <PrimeFloatLabel>
                   <label for="password1" class="z-2">Password</label>
-                  <Password v-model="password" input-id="password1" :toggle-mask="true" class="" fluid :feedback="false" @keypress.enter.exact="handleSubmit()" />
-                </FloatLabel>
+                  <PrimePassword v-model="password" input-id="password1" :toggle-mask="true" class="" fluid :feedback="false" @keypress.enter.exact="handleSubmit()" />
+                </PrimeFloatLabel>
                 <small v-if="toValue(form.errors).password" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(form.errors).password }}</small>
               </div>
 
               <div v-if="step === 'sign-up'" class="relative flex flex-col pb-1.2em">
-                <FloatLabel>
+                <PrimeFloatLabel>
                   <label for="passwordConfirm1" class="z-2">Password Confirm</label>
-                  <Password v-model="passwordConfirm" input-id="passwordConfirm1" :toggle-mask="true" class="" fluid :feedback="false" @keypress.enter.exact="handleSubmit()" />
-                </FloatLabel>
+                  <PrimePassword v-model="passwordConfirm" input-id="passwordConfirm1" :toggle-mask="true" class="" fluid :feedback="false" @keypress.enter.exact="handleSubmit()" />
+                </PrimeFloatLabel>
                 <small v-if="toValue(signupForm.errors).passwordConfirm" v-motion-fade class="absolute bottom-0 color-#f00">{{ toValue(signupForm.errors).passwordConfirm }}</small>
               </div>
 
               <div class="mb-8 mt-2 flex items-center justify-between gap-8">
                 <div class="flex items-center">
-                  <Checkbox v-model="rememberChecked" input-id="rememberme1" binary class="mr-2" />
+                  <PrimeCheckbox v-model="rememberChecked" input-id="rememberme1" binary class="mr-2" />
                   <label for="rememberme1">Remember me</label>
                 </div>
                 <span
@@ -300,7 +300,7 @@ async function handleSubmit() {
                 >{{ stepInfos[step].footerText }}</span>
               </div>
 
-              <Button
+              <PrimeButton
                 :loading="isSubmiting"
                 :label="stepInfos[step].buttonText"
                 class="w-full"

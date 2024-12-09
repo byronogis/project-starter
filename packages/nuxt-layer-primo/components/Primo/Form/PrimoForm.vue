@@ -20,20 +20,20 @@ const props = withDefaults(defineProps<{
 
 <template>
   <div class="component-primo-form">
-    <Accordion multiple :value="['_default']">
-      <AccordionPanel
+    <PrimeAccordion multiple :value="['_default']">
+      <PrimeAccordionPanel
         v-for="group in props.groupList"
         :key="group.id"
         :value="group.id"
       >
-        <AccordionHeader v-if="group.id !== '_default'">
+        <PrimeAccordionHeader v-if="group.id !== '_default'">
           <div class="flex items-center gap-2">
             <i class="i-prime:th-large" />
             {{ group.label ?? group.id }}
           </div>
-        </AccordionHeader>
+        </PrimeAccordionHeader>
 
-        <AccordionContent>
+        <PrimeAccordionContent>
           <div class="gap-6" :class="[group.formClass]">
             <template
               v-for="field in group.fields"
@@ -63,9 +63,9 @@ const props = withDefaults(defineProps<{
               />
             </template>
           </div>
-        </AccordionContent>
-      </AccordionPanel>
-    </Accordion>
+        </PrimeAccordionContent>
+      </PrimeAccordionPanel>
+    </PrimeAccordion>
   </div>
 </template>
 

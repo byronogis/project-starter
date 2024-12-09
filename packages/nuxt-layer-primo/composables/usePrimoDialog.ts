@@ -1,4 +1,4 @@
-import Button from 'primevue/button'
+import PrimeButton from 'primevue/button'
 
 export function usePrimoDialog() {
   const dialog = useDialog()
@@ -47,7 +47,7 @@ export function usePrimoDialog() {
                 'div',
                 null,
                 [
-                  h(Button, {
+                  h(PrimeButton, {
                     label: 'No',
                     icon: 'i-prime:times',
                     text: true,
@@ -55,7 +55,7 @@ export function usePrimoDialog() {
                       dialogRef.close()
                     },
                   }),
-                  h(Button, {
+                  h(PrimeButton, {
                     label: 'Yes',
                     icon: 'i-prime:check',
                     loading: loading.value,

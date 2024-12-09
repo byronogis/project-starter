@@ -20,6 +20,6 @@ provide(PrimoStoreInjectionKey, primoStore)
   <div class="layout-wrapper component-primo-layout-blank">
     <slot />
 
-    <Toast />
+    <PrimeToast />
   </div>
 </template>

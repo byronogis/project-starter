@@ -365,9 +365,9 @@ defineExpose({
 <template>
   <div class="component-primo-crud [&>.card]:p-1rem">
     <div class="card">
-      <Toolbar v-if="!props.disableHeaderActionBar" class="mb-6">
+      <PrimeToolbar v-if="!props.disableHeaderActionBar" class="mb-6">
         <template #start>
-          <Button
+          <PrimeButton
             v-if="!props.disableAdd"
             label="New"
             icon="i-prime:plus"
@@ -375,7 +375,7 @@ defineExpose({
             class="mr-2"
             @click="showItemDialog = true"
           />
-          <Button
+          <PrimeButton
             v-if="!props.disabledMultiDelete"
             label="Delete"
             icon="i-prime:trash"
@@ -386,7 +386,7 @@ defineExpose({
         </template>
 
         <template #end>
-          <Button
+          <PrimeButton
             v-if="!props.disableExport"
             label="Export"
             icon="i-prime:upload"
@@ -394,9 +394,9 @@ defineExpose({
             @click="exportCSV"
           />
         </template>
-      </Toolbar>
+      </PrimeToolbar>
 
-      <DataTable
+      <PrimeDataTable
         ref="dataTableRef"
         v-model:selection="selectedItems"
         v-model:filters="filters"
@@ -418,21 +418,21 @@ defineExpose({
 
             <slot name="header-extra" />
 
-            <IconField v-if="!props.disableGlobalFilter" class="order-10">
-              <InputIcon>
+            <PrimeIconField v-if="!props.disableGlobalFilter" class="order-10">
+              <PrimeInputIcon>
                 <i class="i-prime:search" />
-              </InputIcon>
-              <InputText
+              </PrimeInputIcon>
+              <PrimeInputText
                 placeholder="Search..."
                 :model-value="filters.global!.value"
                 @update:model-value="handleGlobalFilter"
               />
-            </IconField>
+            </PrimeIconField>
           </div>
         </template>
 
         <!-- TODO props -->
-        <Column
+        <PrimeColumn
           v-if="!props.disableMultiSelect"
           selection-mode="multiple"
           style="width: 3rem"
@@ -440,7 +440,7 @@ defineExpose({
           frozen
         />
 
-        <Column
+        <PrimeColumn
           v-if="!props.disableExpander"
           frozen
           expander
@@ -453,7 +453,7 @@ defineExpose({
         </slot>
 
         <!-- TODO props -->
-        <Column
+        <PrimeColumn
           v-if="!props.disableActionsColumn"
           :exportable="false"
           frozen
@@ -461,14 +461,14 @@ defineExpose({
           class="space-x-2"
         >
           <template #body="slotProps">
-            <Button
+            <PrimeButton
               v-if="!props.disableEdit"
               icon="i-prime:pencil"
               outlined
               rounded
               @click="editItem(slotProps.data)"
             />
-            <Button
+            <PrimeButton
               v-if="!props.disableDelete"
               icon="i-prime:trash"
               outlined
@@ -479,16 +479,16 @@ defineExpose({
 
             <slot name="action-extra" :item="(slotProps.data as D)" />
           </template>
-        </Column>
+        </PrimeColumn>
 
         <!-- TODO pref v-for $slot -->
         <template #expansion="slotProps">
           <slot name="expansion" v-bind="slotProps" />
         </template>
-      </DataTable>
+      </PrimeDataTable>
     </div>
 
-    <Dialog
+    <PrimeDialog
       v-model:visible="showItemDialog"
       :style="{ width: 'clamp(450px, 80vw, 1200px)' }"
       :header="`${Utils._.upperFirst(props.itemAlias)} Details`"
@@ -502,10 +502,10 @@ defineExpose({
       </template>
 
       <template #footer>
-        <Button label="Cancel" icon="i-prime:times" text @click="showItemDialog = false" />
-        <Button label="Save" icon="i-prime:check" :loading="isSaving" @click="saveItem" />
+        <PrimeButton label="Cancel" icon="i-prime:times" text @click="showItemDialog = false" />
+        <PrimeButton label="Save" icon="i-prime:check" :loading="isSaving" @click="saveItem" />
       </template>
-    </Dialog>
+    </PrimeDialog>
   </div>
 </template>
 

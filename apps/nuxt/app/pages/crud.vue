@@ -82,9 +82,9 @@ const filters = ref<DataTableFilterMeta>({
       }"
     >
       <template #columns>
-        <Column field="id" header="ID" style="min-width: 10rem" />
+        <PrimeColumn field="id" header="ID" style="min-width: 10rem" />
 
-        <Column field="name" header="Name" style="min-width: 10rem" />
+        <PrimeColumn field="name" header="Name" style="min-width: 10rem" />
       </template>
     </PrimoCrud>
   </div>

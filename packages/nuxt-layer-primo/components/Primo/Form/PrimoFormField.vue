@@ -253,61 +253,61 @@ function handleFieldImageCancel() {
 
     <template v-if="field.type === 'text'">
       <!-- TODO fix type: value -->
-      <InputText
+      <PrimeInputText
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'password'">
-      <Password
+      <PrimePassword
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'textarea'">
-      <Textarea
+      <PrimeTextarea
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'number'">
-      <InputNumber
+      <PrimeInputNumber
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'datetime'">
-      <DatePicker
+      <PrimeDatePicker
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'select'">
-      <Select
+      <PrimeSelect
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'select-group'">
-      <Select
+      <PrimeSelect
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'multi-select'">
-      <MultiSelect
+      <PrimeMultiSelect
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'multi-select-group'">
-      <MultiSelect
+      <PrimeMultiSelect
         v-bind="fieldPropsMerged"
       />
     </template>
 
     <template v-else-if="field.type === 'slider'">
-      <Slider
+      <PrimeSlider
         v-bind="fieldPropsMerged"
       />
     </template>
@@ -320,7 +320,7 @@ function handleFieldImageCancel() {
             gridTemplateColumns: `repeat(auto-fill, minmax(100px, 1fr))`,
           }"
         >
-          <Button
+          <PrimeButton
             class="w-full"
             outlined
             icon="i-prime:plus"
@@ -328,7 +328,7 @@ function handleFieldImageCancel() {
             @click.stop="handleFieldImageEdit"
           />
 
-          <Image
+          <PrimeImage
             v-for="(i, idx) in value"
             v-bind="fieldPropsMerged"
             :key="i"
@@ -343,11 +343,11 @@ function handleFieldImageCancel() {
                 />
               </div>
             </template>
-          </Image>
+          </PrimeImage>
         </div>
       </template>
 
-      <Image v-else v-bind="fieldPropsMerged">
+      <PrimeImage v-else v-bind="fieldPropsMerged">
         <template #previewicon>
           <div class="flex flex-row gap-x-4 text-1.5em">
             <i class="i-prime:file-edit" @click.stop="handleFieldImageEdit" />
@@ -359,9 +359,9 @@ function handleFieldImageCancel() {
             />
           </div>
         </template>
-      </Image>
+      </PrimeImage>
 
-      <Dialog
+      <PrimeDialog
         v-model:visible="showFieldImageEditDialog"
         :style="{ width: '450px' }"
         header="Upload Image"
@@ -378,20 +378,20 @@ function handleFieldImageCancel() {
           />
         </div>
         <template #footer>
-          <Button
+          <PrimeButton
             label="Cancel"
             icon="i-prime:times"
             text
             @click="handleFieldImageCancel"
           />
-          <Button
+          <PrimeButton
             label="Save"
             icon="i-prime:check"
             :disabled="uploaderRef?.isUploading"
             @click="handleFieldImageSave"
           />
         </template>
-      </Dialog>
+      </PrimeDialog>
     </template>
 
     <template v-else-if="field.type === 'json'">
@@ -401,7 +401,7 @@ function handleFieldImageCancel() {
     </template>
 
     <template v-else>
-      <InputText
+      <PrimeInputText
         :id="field.name"
         v-model.trim="value"
         class="w-full"
