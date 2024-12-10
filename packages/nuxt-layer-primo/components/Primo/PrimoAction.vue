@@ -22,7 +22,7 @@ const colorModeIconName = computed(() => {
 
 <template>
   <div class="component-primo-action layout-config-menu">
-    <button type="button" class="layout-topbar-action" @click="toggle()">
+    <button type="button" class="layout-topbar-action" @click="toggle">
       <ClientOnly>
         <i :class="colorModeIconName" />
       </ClientOnly>

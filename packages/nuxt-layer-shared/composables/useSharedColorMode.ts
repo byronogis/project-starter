@@ -9,17 +9,41 @@ export function useSharedColorMode() {
     'system',
   ])
 
-  const { state, next } = useCycleList<SharedColorModeItemName>(cycleList, {
+  const { state, index, next } = useCycleList<SharedColorModeItemName>(cycleList, {
     initialValue: colorMode.preference as SharedColorModeItemName,
   })
 
   watchEffect(() => colorMode.preference = state.value)
 
-  const isDark = computed(() => colorMode.preference === 'dark')
+  const isDark = computed(() => colorMode.value === 'dark')
+
+  const toggle = (event: MouseEvent) => {
+    const _currentValue = colorMode.preference === 'system'
+      ? isDarkPreferred.value ? 'dark' : 'light'
+      : colorMode.preference
+
+    const _nextMode = cycleList.value[(index.value + 1) % cycleList.value.length]
+    const _nextValue = _nextMode === 'system'
+      ? isDarkPreferred.value ? 'dark' : 'light'
+      : _nextMode
+
+    if (_currentValue === _nextValue) {
+      next()
+      return
+    }
+
+    sharedToogleDarkUtil(event, {
+      isDark: !isDark.value,
+      toogle: async () => {
+        next()
+        await nextTick()
+      },
+    })
+  }
 
   return {
     state,
-    toggle: next,
+    toggle,
     isDark,
   }
 }
