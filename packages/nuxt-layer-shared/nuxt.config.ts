@@ -1,5 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { icon } from './config/icon'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
@@ -20,9 +21,13 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxt/devtools',
+
     ['@nuxtjs/color-mode', {
       classSuffix: '',
     }],
+
+    ['@nuxt/icon', icon],
 
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt',
@@ -30,6 +35,7 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-08-14',
 
-  // @ts-expect-error type error
-  telemetry: true,
+  telemetry: {
+    enabled: false,
+  },
 })

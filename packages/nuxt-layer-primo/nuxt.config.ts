@@ -37,9 +37,4 @@ export default defineNuxtConfig({
       },
     }],
   ],
-
-  compatibilityDate: '2024-08-14',
-
-  // @ts-expect-error type error
-  telemetry: true,
 })

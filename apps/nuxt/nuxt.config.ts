@@ -77,8 +77,6 @@ export default defineNuxtConfig({
     foo: 'bar',
   },
 
-  compatibilityDate: '2024-08-14',
-
   css: [
     '~/assets/styles/index.css',
   ],
@@ -108,6 +106,15 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
+  icon: {
+    customCollections: [
+      {
+        prefix: 'custom',
+        dir: './app/assets/icons/custom',
+      },
+    ],
+  },
+
   imports: {
     dirs: [
       'api',
@@ -120,8 +127,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxt/devtools',
-
     ['@pinia/nuxt', {
       storesDirs: ['./app/stores'],
     }],
@@ -134,21 +139,6 @@ export default defineNuxtConfig({
 
     ['@unocss/nuxt', {
       // ...
-    }],
-
-    ['@nuxt/icon', {
-      cssLayer: 'nuxt-icon',
-      componentName: 'NuxtIcon',
-      customCollections: [
-        {
-          prefix: 'custom',
-          dir: './app/assets/icons/custom',
-        },
-      ],
-      provider: 'server',
-      clientBundle: {
-        sizeLimitKb: 0,
-      },
     }],
 
     ['@vite-pwa/nuxt', pwa],
@@ -176,7 +166,4 @@ export default defineNuxtConfig({
   },
 
   // ssr: false,
-
-  // @ts-expect-error type error
-  telemetry: true,
 })

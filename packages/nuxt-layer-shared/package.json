@@ -9,6 +9,8 @@
     "postinstall": "nuxi prepare"
   },
   "dependencies": {
+    "@nuxt/devtools": "catalog:",
+    "@nuxt/icon": "catalog:",
     "@nuxtjs/color-mode": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",

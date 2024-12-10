@@ -16,9 +16,7 @@
   },
   "devDependencies": {
     "@hebilicious/vue-query-nuxt": "catalog:",
-    "@nuxt/devtools": "catalog:",
     "@nuxt/eslint": "catalog:",
-    "@nuxt/icon": "catalog:",
     "@pinia/nuxt": "catalog:",
     "@project-starter/eslint-config": "workspace:*",
     "@project-starter/nuxt-layer-primo": "workspace:*",
