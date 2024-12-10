@@ -8,6 +8,7 @@ import type {
   DataTableFilterMetaData,
   DataTablePageEvent,
 } from 'primevue/datatable'
+import { NuxtIcon } from '#components'
 import { FilterMatchMode } from '@primevue/core/api'
 import PrimoForm from '../Form/PrimoForm.vue'
 
@@ -277,7 +278,7 @@ function confirmDeleteSelected() {
   dialog.dialogConfirm({
     header: 'Confirm',
     message: h('div', { class: 'flex items-center gap-4' }, [
-      h('i', { class: 'i-prime:exclamation-triangle !text-3xl' }),
+      h(NuxtIcon, { name: 'i-prime:exclamation-triangle', class: '!text-3xl' }),
       h('span', null, 'Are you sure you want to delete the selected items?'),
     ]),
     async confirmFn() {
@@ -298,7 +299,7 @@ function confirmDeleteItem(_item: D) {
   dialog.dialogConfirm({
     header: 'Confirm',
     message: h('div', { class: 'flex items-center gap-4' }, [
-      h('i', { class: 'i-prime:exclamation-triangle !text-3xl' }),
+      h(NuxtIcon, { name: 'i-prime:exclamation-triangle', class: '!text-3xl' }),
       h('span', null, [
         'Are you sure you want to delete ',
         h('b', null, _item._label),
@@ -370,29 +371,38 @@ defineExpose({
           <PrimeButton
             v-if="!props.disableAdd"
             label="New"
-            icon="i-prime:plus"
             severity="secondary"
             class="mr-2"
             @click="showItemDialog = true"
-          />
+          >
+            <template #icon>
+              <NuxtIcon name="i-prime:plus" />
+            </template>
+          </PrimeButton>
           <PrimeButton
             v-if="!props.disabledMultiDelete"
             label="Delete"
-            icon="i-prime:trash"
             severity="secondary"
             :disabled="!selectedItems?.length"
             @click="confirmDeleteSelected"
-          />
+          >
+            <template #icon>
+              <NuxtIcon name="i-prime:trash" />
+            </template>
+          </PrimeButton>
         </template>
 
         <template #end>
           <PrimeButton
             v-if="!props.disableExport"
             label="Export"
-            icon="i-prime:upload"
             severity="secondary"
             @click="exportCSV"
-          />
+          >
+            <template #icon>
+              <NuxtIcon name="i-prime:upload" />
+            </template>
+          </PrimeButton>
         </template>
       </PrimeToolbar>
 
@@ -420,7 +430,7 @@ defineExpose({
 
             <PrimeIconField v-if="!props.disableGlobalFilter" class="order-10">
               <PrimeInputIcon>
-                <i class="i-prime:search" />
+                <NuxtIcon name="i-prime:search" />
               </PrimeInputIcon>
               <PrimeInputText
                 placeholder="Search..."
@@ -463,19 +473,25 @@ defineExpose({
           <template #body="slotProps">
             <PrimeButton
               v-if="!props.disableEdit"
-              icon="i-prime:pencil"
               outlined
               rounded
               @click="editItem(slotProps.data)"
-            />
+            >
+              <template #icon>
+                <NuxtIcon name="i-prime:pencil" />
+              </template>
+            </PrimeButton>
             <PrimeButton
               v-if="!props.disableDelete"
-              icon="i-prime:trash"
               outlined
               rounded
               severity="danger"
               @click="confirmDeleteItem(slotProps.data)"
-            />
+            >
+              <template #icon>
+                <NuxtIcon name="i-prime:trash" />
+              </template>
+            </PrimeButton>
 
             <slot name="action-extra" :item="(slotProps.data as D)" />
           </template>
@@ -502,8 +518,16 @@ defineExpose({
       </template>
 
       <template #footer>
-        <PrimeButton label="Cancel" icon="i-prime:times" text @click="showItemDialog = false" />
-        <PrimeButton label="Save" icon="i-prime:check" :loading="isSaving" @click="saveItem" />
+        <PrimeButton label="Cancel" text @click="showItemDialog = false">
+          <template #icon>
+            <NuxtIcon name="i-prime:times" />
+          </template>
+        </PrimeButton>
+        <PrimeButton label="Save" :loading="isSaving" @click="saveItem">
+          <template #icon>
+            <NuxtIcon name="i-prime:check" />
+          </template>
+        </PrimeButton>
       </template>
     </PrimeDialog>
   </div>

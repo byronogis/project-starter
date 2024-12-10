@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<{
       >
         <PrimeAccordionHeader v-if="group.id !== '_default'">
           <div class="flex items-center gap-2">
-            <i class="i-prime:th-large" />
+            <NuxtIcon name="i-prime:th-large" />
             {{ group.label ?? group.id }}
           </div>
         </PrimeAccordionHeader>

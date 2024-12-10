@@ -1,3 +1,4 @@
+import { NuxtIcon } from '#components'
 import PrimeButton from 'primevue/button'
 
 export function usePrimoDialog() {
@@ -49,15 +50,15 @@ export function usePrimoDialog() {
                 [
                   h(PrimeButton, {
                     label: 'No',
-                    icon: 'i-prime:times',
                     text: true,
                     onClick: () => {
                       dialogRef.close()
                     },
+                  }, {
+                    icon: () => h(NuxtIcon, { name: 'i-prime:times' }),
                   }),
                   h(PrimeButton, {
                     label: 'Yes',
-                    icon: 'i-prime:check',
                     loading: loading.value,
                     onClick: async () => {
                       try {
@@ -78,6 +79,8 @@ export function usePrimoDialog() {
                         toast.toastError(error?.message)
                       }
                     },
+                  }, {
+                    icon: () => h(NuxtIcon, { name: 'i-prime:check' }),
                   }),
                 ],
               ),

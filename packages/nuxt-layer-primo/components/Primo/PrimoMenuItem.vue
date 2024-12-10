@@ -90,7 +90,7 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
       >
         <i :class="item.icon" class="layout-menuitem-icon" />
         <span class="layout-menuitem-text">{{ item.label }}</span>
-        <i v-if="item.items" class="layout-submenu-toggler i-prime:angle-down" />
+        <NuxtIcon v-if="item.items" name="i-prime:angle-down" class="layout-submenu-toggler" />
       </a>
 
       <router-link
@@ -103,9 +103,9 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
         :to="item.to"
         @click="itemClick($event, item, index)"
       >
-        <i :class="item.icon" class="layout-menuitem-icon" />
+        <NuxtIcon v-if="item.icon" :name="item.icon" class="layout-menuitem-icon" />
         <span class="layout-menuitem-text">{{ item.label }}</span>
-        <i v-if="item.items" class="i-prime:angle-down layout-submenu-toggler" />
+        <NuxtIcon v-if="item.items" name="i-prime:angle-down" class="layout-submenu-toggler" />
       </router-link>
 
       <Transition v-if="item.items" name="layout-submenu">

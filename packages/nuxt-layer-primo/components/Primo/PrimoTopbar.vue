@@ -23,7 +23,7 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: PrimoTopbarEx
   <div class="layout-topbar component-primo-topbar">
     <div class="layout-topbar-logo-container">
       <button class="layout-topbar-action layout-menu-button" @click="primoStore.onMenuToggle">
-        <i class="i-prime:bars" />
+        <NuxtIcon name="i-prime:bars" class="layout-topbar-action-icon" />
       </button>
 
       <router-link to="/" class="layout-topbar-logo">
@@ -59,7 +59,7 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: PrimoTopbarEx
           v-styleclass="primoStore.styleClass.actionBtn"
           class="layout-topbar-action layout-topbar-menu-button"
         >
-          <i class="i-prime:ellipsis-v" />
+          <NuxtIcon name="i-prime:ellipsis-v" class="layout-topbar-action-icon" />
         </button>
 
         <div ref="topbarElRef" class="layout-topbar-menu hidden lg:block">
@@ -77,8 +77,8 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: PrimoTopbarEx
                 <component :is="action.custom" v-if="action.custom" />
 
                 <template v-else>
-                  <i :class="action.icon" />
-                  <span>{{ action.label }}</span>
+                  <NuxtIcon :name="action.icon" class="layout-topbar-action-icon" />
+                  <span class="layout-topbar-action-label">{{ action.label }}</span>
                 </template>
               </button>
             </template>

@@ -60,10 +60,13 @@ const {
             },
           ]"
           label="Remove"
-          icon="i-prime:minus"
           severity="warn"
           @click="remove(idx)"
-        />
+        >
+          <template #icon>
+            <NuxtIcon name="i-prime:minus" />
+          </template>
+        </PrimeButton>
       </div>
 
       <PrimeDivider />
@@ -74,10 +77,13 @@ const {
     >
       <PrimeButton
         label="Add"
-        icon="i-prime:plus"
         severity="secondary"
         @click="push({})"
-      />
+      >
+        <template #icon>
+          <NuxtIcon name="i-prime:plus" />
+        </template>
+      </PrimeButton>
     </div>
   </div>
 </template>

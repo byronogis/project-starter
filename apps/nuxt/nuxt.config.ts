@@ -49,7 +49,6 @@ export default defineNuxtConfig({
           textContent: ['@layer', [
             'uno-preflights',
             'uno-shortcuts',
-            'uno-icons',
             'nuxt-icon',
             'reset',
 

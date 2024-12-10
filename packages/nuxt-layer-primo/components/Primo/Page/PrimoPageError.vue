@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<{
           <div class="bg-surface-0 dark:bg-surface-900 w-full flex flex-col items-center px-8 py-20 sm:px-20" style="border-radius: 53px">
             <div class="flex flex-col items-center gap-4">
               <div class="flex items-center justify-center border-2 border-pink-500 rounded-full" style="height: 3.2rem; width: 3.2rem">
-                <i class="i-prime:exclamation-circle text-pink-500 !text-2xl" />
+                <NuxtIcon name="i-prime:exclamation-circle" class="text-pink-500 !text-2xl" />
               </div>
               <h1 class="text-surface-900 dark:text-surface-0 mb-2 text-5xl font-bold">
                 {{ props.title }}

@@ -323,10 +323,13 @@ function handleFieldImageCancel() {
           <PrimeButton
             class="w-full"
             outlined
-            icon="i-prime:plus"
             aria-label="Filter"
             @click.stop="handleFieldImageEdit"
-          />
+          >
+            <template #icon>
+              <NuxtIcon name="i-prime:plus" />
+            </template>
+          </PrimeButton>
 
           <PrimeImage
             v-for="(i, idx) in value"
@@ -336,11 +339,8 @@ function handleFieldImageCancel() {
           >
             <template #previewicon>
               <div class="flex flex-row gap-x-4 text-1.5em">
-                <i class="i-prime:eye" />
-                <i
-                  class="i-prime:times"
-                  @click.stop="value.splice(idx, 1)"
-                />
+                <NuxtIcon name="i-prime:eye" />
+                <NuxtIcon name="i-prime:times" @click.stop="value.splice(idx, 1)" />
               </div>
             </template>
           </PrimeImage>
@@ -350,13 +350,9 @@ function handleFieldImageCancel() {
       <PrimeImage v-else v-bind="fieldPropsMerged">
         <template #previewicon>
           <div class="flex flex-row gap-x-4 text-1.5em">
-            <i class="i-prime:file-edit" @click.stop="handleFieldImageEdit" />
-            <i class="i-prime:eye" />
-            <i
-              v-if="fieldPropsMerged.src"
-              class="i-prime:times"
-              @click.stop="value = ''"
-            />
+            <NuxtIcon name="i-prime:file-edit" @click.stop="handleFieldImageEdit" />
+            <NuxtIcon name="i-prime:eye" />
+            <NuxtIcon v-if="fieldPropsMerged.src" name="i-prime:times" @click.stop="value = ''" />
           </div>
         </template>
       </PrimeImage>
@@ -380,16 +376,22 @@ function handleFieldImageCancel() {
         <template #footer>
           <PrimeButton
             label="Cancel"
-            icon="i-prime:times"
             text
             @click="handleFieldImageCancel"
-          />
+          >
+            <template #icon>
+              <NuxtIcon name="i-prime:times" />
+            </template>
+          </PrimeButton>
           <PrimeButton
             label="Save"
-            icon="i-prime:check"
             :disabled="uploaderRef?.isUploading"
             @click="handleFieldImageSave"
-          />
+          >
+            <template #icon>
+              <NuxtIcon name="i-prime:check" />
+            </template>
+          </PrimeButton>
         </template>
       </PrimeDialog>
     </template>

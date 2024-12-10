@@ -24,7 +24,7 @@ const colorModeIconName = computed(() => {
   <div class="component-primo-action layout-config-menu">
     <button type="button" class="layout-topbar-action" @click="toggle">
       <ClientOnly>
-        <i :class="colorModeIconName" />
+        <NuxtIcon :name="colorModeIconName" class="layout-topbar-action-icon" />
       </ClientOnly>
     </button>
     <div class="relative">
@@ -33,7 +33,7 @@ const colorModeIconName = computed(() => {
         type="button"
         class="layout-topbar-action layout-topbar-action-highlight"
       >
-        <i class="i-prime:palette" />
+        <NuxtIcon name="i-prime:palette" class="layout-topbar-action-icon" />
       </button>
       <PrimoConfigurator />
     </div>
