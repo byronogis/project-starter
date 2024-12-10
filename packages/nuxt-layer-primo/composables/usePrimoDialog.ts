@@ -44,46 +44,42 @@ export function usePrimoDialog() {
               }
             },
             templates: {
-              footer: () => h(
-                'div',
-                null,
-                [
-                  h(PrimeButton, {
-                    label: 'No',
-                    text: true,
-                    onClick: () => {
-                      dialogRef.close()
-                    },
-                  }, {
-                    icon: () => h(NuxtIcon, { name: 'i-prime:times' }),
-                  }),
-                  h(PrimeButton, {
-                    label: 'Yes',
-                    loading: loading.value,
-                    onClick: async () => {
-                      try {
-                        loading.value = true
-                        const _res = await confirmFn({
-                          signal: _controller.signal,
-                        })
-                        loading.value = false
+              footer: () => [
+                h(PrimeButton, {
+                  label: 'No',
+                  text: true,
+                  onClick: () => {
+                    dialogRef.close()
+                  },
+                }, {
+                  icon: () => h(NuxtIcon, { name: 'i-prime:times' }),
+                }),
+                h(PrimeButton, {
+                  label: 'Yes',
+                  loading: loading.value,
+                  onClick: async () => {
+                    try {
+                      loading.value = true
+                      const _res = await confirmFn({
+                        signal: _controller.signal,
+                      })
+                      loading.value = false
 
-                        const _data: PrimoConfirmDialogResolveData = {
-                          _flag: true,
-                          _res,
-                        }
-                        dialogRef.close(_data)
+                      const _data: PrimoConfirmDialogResolveData = {
+                        _flag: true,
+                        _res,
                       }
-                      catch (error: any) {
-                        loading.value = false
-                        toast.toastError(error?.message)
-                      }
-                    },
-                  }, {
-                    icon: () => h(NuxtIcon, { name: 'i-prime:check' }),
-                  }),
-                ],
-              ),
+                      dialogRef.close(_data)
+                    }
+                    catch (error: any) {
+                      loading.value = false
+                      toast.toastError(error?.message)
+                    }
+                  },
+                }, {
+                  icon: () => h(NuxtIcon, { name: 'i-prime:check' }),
+                }),
+              ],
             },
           },
         )
