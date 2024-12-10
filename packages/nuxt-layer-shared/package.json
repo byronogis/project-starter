@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi prepare",
+    "dev": "nuxi dev --port 3100",
     "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
   },

@@ -8,7 +8,7 @@
   },
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi prepare",
+    "dev": "nuxi dev --port 3101",
     "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
   },

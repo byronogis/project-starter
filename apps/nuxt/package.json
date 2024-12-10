@@ -28,6 +28,7 @@
     "@unocss/reset": "catalog:",
     "@vite-pwa/nuxt": "catalog:",
     "nuxt": "catalog:",
+    "nuxt-layers-prepare": "^1.0.0",
     "pinia": "catalog:",
     "postcss-mixins": "catalog:",
     "postcss-nesting": "catalog:",
