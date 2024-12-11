@@ -8,7 +8,7 @@
     "node": ">=20.16.0"
   },
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo watch dev",
     "build": "turbo run build",
     "generate": "turbo run generate",
     "preview": "turbo run preview",

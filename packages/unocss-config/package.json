@@ -21,7 +21,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "unbuild --stub",
+    "dev": "unbuild",
     "build": "unbuild",
     "check-types": "tsc --noEmit",
     "postinstall": "pnpm build"

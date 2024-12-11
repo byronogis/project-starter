@@ -147,9 +147,6 @@ export default defineNuxtConfig({
         enableDevtoolsV6Plugin: true,
       },
     }],
-
-    // TODO @see https://github.com/nuxt/nuxt/issues/24048
-    'nuxt-layers-prepare',
   ],
 
   /**
