@@ -6,16 +6,13 @@ import PrimoUploader from '../PrimoUploader.vue'
 
 const props = defineProps<{
   field: F
-  /**
-   * solve: form values will be covered by the initialValue value of usefield
-   * @see https://github.com/logaretm/vee-validate/issues/4846
-   */
-  forceValue?: F['valueType']
 }>()
 
 const toast = inject(PrimoToastInjectionKey, usePrimoToast())
 
 const field = computed(() => props.field)
+
+const currentValue = useFieldValue(props.field.name)
 
 const {
   value,
@@ -24,7 +21,7 @@ const {
   () => props.field.name,
   toTypedSchema(props.field.schema),
   {
-    initialValue: props.forceValue ?? props.field.initialValue,
+    initialValue: currentValue.value ?? props.field.initialValue,
   },
 )
 

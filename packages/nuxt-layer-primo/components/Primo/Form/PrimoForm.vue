@@ -8,13 +8,8 @@ const props = withDefaults(defineProps<{
    * 表单字段信息
    */
   groupList?: PrimoFormGroup<D, G>[]
-  /**
-   * 表单字段值
-   */
-  values?: Record<string, any>
 }>(), {
   groupList: () => ([]),
-  values: () => ({}),
 })
 </script>
 
@@ -59,7 +54,6 @@ const props = withDefaults(defineProps<{
               <PrimoFormField
                 v-else
                 :field="field!"
-                :force-value="values[String(field!.name)]"
               />
             </template>
           </div>
