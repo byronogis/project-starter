@@ -33,6 +33,7 @@ export const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
     type: 'text',
     schema: (z.string().trim()),
     // group: '_default',
+    initialValue: 'Anon',
   },
   avatar: {
     name: 'avatar',
@@ -60,6 +61,7 @@ export const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
         label: 'Email',
         type: 'text',
         schema: (z.string()),
+        initialValue: 'foo@bar.zag',
       },
       phone: {
         name: 'phone',
