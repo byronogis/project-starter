@@ -75,13 +75,15 @@ export interface SharedFormField<
    * NOTE 在 fieldArray 为 true 时必须传入
    */
   //
-  fieldArrayItemFormFields?: SharedFormFields<any, G, T>
+  fieldArrayItemFormFields?: SharedFormFields<any, G, T, E>
   /**
    * Grid 布局中的位置 \
    * 用于指示在该表单项的容器上添加的 css grid-area 的值 \
    * NOTE 允许的字符为 a-z, A-Z, 0-9, 下划线, 中横线
    * 其它字符会被替换为下划线 \
    * @default name 的值
+   * @default2 fieldArrayItemFormFields 下所属该字段的值会检查是否以上级 name 开头,
+   * 如果不是则添加上级 name 作为前缀
    */
   gridArea?: string
   /**

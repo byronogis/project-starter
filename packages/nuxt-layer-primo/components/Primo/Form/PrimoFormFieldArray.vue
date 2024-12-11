@@ -48,7 +48,6 @@ const {
             :field="{
               ...j!,
               name: `${field.name}[${idx}].${j!.name}`,
-              gridArea: `${field.name}.${j!.name}`,
             }"
           />
         </template>

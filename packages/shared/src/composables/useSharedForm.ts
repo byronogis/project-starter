@@ -30,13 +30,15 @@ export function useSharedForm<
     groupDefaultId = SharedFormGroupDefaultId,
   } = options ?? {}
 
+  type _SharedFormField = SharedFormField<Extract<keyof D, string>, D[Extract<keyof D, string>], G, T, E>
+
   /**
    * 以组划分的字段信息
    */
   const groupList = computed<SharedFormGroup<D, G, T, E>[]>(() => {
     const _fields = toValue(fields)
 
-    const _groups = (Object.values(_fields) as SharedFormField<Extract<keyof D, string>, D[Extract<keyof D, string>], G, T, E>[])
+    const _groups = (Object.values(_fields) as _SharedFormField[])
       .reduce<Record<string, SharedFormGroup<D, G, T, E>>>((acc, field) => {
         const _gid = (field.group ?? groupDefaultId) as G
 
@@ -45,13 +47,7 @@ export function useSharedForm<
           fields: {},
         }
 
-        acc[_gid].fields[field.name] = {
-          ...field,
-          // 处理默认值
-          type: field.type ?? 'text' as T,
-          gridArea: sanitizeString(field.gridArea ?? field.name),
-          group: _gid,
-        }
+        acc[_gid].fields[field.name] = _standardField(field, _gid)
 
         return acc
       }, (toValue(groups) ?? {}) as Record<string, SharedFormGroup<D, G, T, E>>)
@@ -88,6 +84,40 @@ export function useSharedForm<
     }, {
       force: true,
     })
+  }
+
+  /**
+   * 规范字段信息
+   */
+  function _standardField(rawField: _SharedFormField, _gid: G): _SharedFormField {
+    const _field: _SharedFormField = {
+      ...rawField,
+      // 处理默认值
+      type: rawField.type ?? 'text' as T,
+      gridArea: sanitizeString(rawField.gridArea ?? rawField.name),
+      group: _gid,
+    }
+
+    // 处理数组字段下的各字段
+    if (_field.fieldArray) {
+      _field.fieldArrayItemFormFields ??= {}
+      _field.fieldArrayItemFormFields = (Object.values(_field.fieldArrayItemFormFields) as _SharedFormField[])
+        .reduce<Record<string, _SharedFormField>>((acc, __field) => {
+          acc[__field.name] = {
+            ..._standardField(__field, _gid),
+            gridArea: sanitizeString(
+              __field.gridArea
+                ? __field.gridArea.startsWith(_field.name)
+                  ? __field.gridArea
+                  : `${_field.name}.${__field.gridArea}`
+                : `${_field.name}.${__field.name}`,
+            ),
+          }
+          return acc
+        }, {})
+    }
+
+    return _field
   }
 
   return {
