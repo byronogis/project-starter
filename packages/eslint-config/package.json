@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@project-starter/shared": "workspace:*",
     "@unocss/eslint-plugin": "catalog:",
     "eslint": "catalog:",
     "eslint-flat-config-utils": "catalog:",

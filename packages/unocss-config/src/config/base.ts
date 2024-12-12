@@ -1,11 +1,11 @@
-import type {
-  UserConfig,
-} from 'unocss'
+import type { MergeOptions } from '@project-starter/shared/utils/merge'
+import type { UserConfig } from 'unocss'
 import { resolve } from 'node:path'
 import { cwd } from 'node:process'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+import { merge } from '@project-starter/shared/utils/merge'
 import {
-  // defineConfig,
+  defineConfig,
   presetIcons,
   presetUno,
   presetWebFonts,
@@ -13,11 +13,20 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-export default function base(options?: Options): UserConfig {
+/**
+ * Base configuration for UnoCSS
+ * @param options
+ * @param configs
+ * **Leftmost** arguments have more priority when assigning defaults.
+ * @returns
+ * The merged configuration
+ */
+export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserConfig {
   const {
     webFonts = true,
     icons = true,
     iconCustomCollection = false,
+    mergeOptions = {},
   } = options ?? {}
 
   const presets = [
@@ -54,7 +63,7 @@ export default function base(options?: Options): UserConfig {
     },
   }))
 
-  return {
+  const baseConfig: UserConfig = {
     presets,
     transformers: [
       transformerVariantGroup(),
@@ -68,9 +77,16 @@ export default function base(options?: Options): UserConfig {
     ],
 
   }
+
+  configs.push(baseConfig)
+
+  return defineConfig(merge(
+    mergeOptions,
+    ...configs,
+  ))
 }
 
-interface Options {
+interface BaseOptions {
   /**
    * Enable web fonts
    * @default true
@@ -87,4 +103,5 @@ interface Options {
    * @default false
    */
   iconCustomCollection?: false | string
+  mergeOptions?: MergeOptions
 }

@@ -1,1 +1,1 @@
-export { default as base } from './config/base'
+export { withBase } from './config/base'

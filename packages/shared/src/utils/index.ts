@@ -3,6 +3,7 @@ export { color } from './color'
 export { date } from './date'
 export { HTTP } from './http'
 export { logger } from './logger'
+export { merge } from './merge'
 export { timer } from './timer'
 
 /**

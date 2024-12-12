@@ -1,7 +1,8 @@
 // @ts-check
-import base from '@project-starter/eslint-config/base'
+import { withBase } from '@project-starter/eslint-config/base'
 
-export default base(
+export default withBase(
+  {},
   {
     ignores: [
       '.github',

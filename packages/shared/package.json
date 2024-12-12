@@ -18,6 +18,7 @@
     "axios": "catalog:",
     "consola": "catalog:",
     "dayjs": "catalog:",
+    "defu": "catalog:",
     "es-toolkit": "catalog:",
     "tinycolor2": "catalog:",
     "type-fest": "catalog:",

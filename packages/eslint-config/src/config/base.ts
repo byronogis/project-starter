@@ -1,12 +1,26 @@
 import antfu from '@antfu/eslint-config'
+// import { merge } from '@project-starter/shared/utils/merge'
+// import type { MergeOptions } from '@project-starter/shared/utils/merge'
 
 // TODO fix type reference
 export type { FlatConfigComposer } from 'eslint-flat-config-utils'
 
-export default function base(
-  extraOptions: Parameters<typeof antfu>[0] = undefined,
-  ...extraConfigs: Parameters<typeof antfu>[1][]
+/**
+ * Base configuration for ESLint
+ * @param options
+ * @param configs
+ * **Leftmost** arguments have more priority when assigning defaults.
+ * @returns
+ * The merged configuration
+ */
+export function withBase(
+  options?: BaseOptions,
+  ...configs: Parameters<typeof antfu>[1][]
 ) {
+  const {
+    extraOptions,
+  } = options ?? {}
+
   return antfu(
     {
       formatters: true,
@@ -46,6 +60,14 @@ export default function base(
         '@stylistic/brace-style': ['error', 'stroustrup'],
       },
     },
-    ...extraConfigs,
+    /**
+     * **Rightmost** arguments have more priority when assigning defaults.
+     * @see https://eslint.org/docs/latest/use/configure/configuration-files#cascading-configuration-objects
+     */
+    ...configs.reverse(),
   )
+}
+
+interface BaseOptions {
+  extraOptions?: Parameters<typeof antfu>[0]
 }

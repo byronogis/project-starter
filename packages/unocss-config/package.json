@@ -30,7 +30,8 @@
     "unocss": "^0.62.3"
   },
   "dependencies": {
-    "@iconify/utils": "catalog:"
+    "@iconify/utils": "catalog:",
+    "@project-starter/shared": "workspace:*"
   },
   "devDependencies": {
     "@project-starter/typescript-config": "workspace:*",
