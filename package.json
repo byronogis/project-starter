@@ -24,13 +24,15 @@
   "devDependencies": {
     "@project-starter/eslint-config": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
+    "@vitest/coverage-v8": "catalog:",
     "defu": "catalog:",
     "eslint": "catalog:",
     "husky": "catalog:",
     "jiti": "catalog:",
     "lint-staged": "catalog:",
     "rimraf": "catalog:",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitest": "catalog:"
   },
   "pnpm": {
     "patchedDependencies": {

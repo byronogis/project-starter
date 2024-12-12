@@ -1,5 +1,13 @@
+# misc
 node_modules
 dist
 temp
+
+# turborepo
 .turbo
+
+# nuxt
 .nuxt
+
+# test
+coverage
