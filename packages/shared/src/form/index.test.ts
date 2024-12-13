@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { defineSharedForm } from './index'
 
 // 定义基本的表单字段类型
-type BaseFieldType = 'text' | 'number' | 'array' | 'object'
+type BaseFieldType = 'text' | 'number' | 'array' | 'object' | 'select'
 
 describe('defineSharedForm', () => {
   // 基本表单配置测试
@@ -555,5 +555,60 @@ describe('defineSharedForm', () => {
     expect(consoleSpy).toHaveBeenCalledWith(
       '[Form] "info:branch" is marked as cascade but missing cascadeFields configuration.',
     )
+  })
+
+  // Select类型和额外选项测试
+  it('should handle select type with options in extra', () => {
+    interface TestForm extends SharedFormData {
+      gender: string
+      role: string
+    }
+
+    interface SelectExtra {
+      options: Array<{
+        label: string
+        value: string | number
+      }>
+    }
+
+    const form = defineSharedForm<TestForm, never, BaseFieldType, SelectExtra>({
+      fields: {
+        gender: {
+          name: 'gender',
+          label: '性别',
+          type: 'select',
+          schema: z.string(),
+          extra: {
+            options: [
+              { label: '男', value: 'male' },
+              { label: '女', value: 'female' },
+              { label: '其他', value: 'other' },
+            ],
+          },
+        },
+        role: {
+          name: 'role',
+          label: '角色',
+          type: 'select',
+          schema: z.string(),
+          extra: {
+            options: [
+              { label: '管理员', value: 'admin' },
+              { label: '用户', value: 'user' },
+              { label: '访客', value: 'guest' },
+            ],
+          },
+        },
+      },
+    })
+
+    const fields = form.groupList[0]!.fields!
+    expect(fields.gender!.type).toBe('select')
+    expect(fields.gender!.extra!.options).toHaveLength(3)
+    expect(fields.gender!.extra!.options[0]).toEqual({ label: '男', value: 'male' })
+
+    expect(fields.role!.type).toBe('select')
+    expect(fields.role!.extra!.options).toHaveLength(3)
+    expect(fields.role!.extra!.options[0]).toEqual({ label: '管理员', value: 'admin' })
   })
 })
