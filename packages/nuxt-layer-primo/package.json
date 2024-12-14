@@ -9,6 +9,7 @@
   "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi prepare",
+    "check-types": "nuxi typecheck",
     "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
   },
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "nuxt": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }
