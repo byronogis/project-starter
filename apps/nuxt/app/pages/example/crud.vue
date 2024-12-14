@@ -91,17 +91,48 @@ const filters = ref<DataTableFilterMeta>({
 </template>
 
 <style scoped lang="postcss">
-:deep(.shared-form__default) {
+/* 基础信息分组布局 */
+:deep(.shared-form_basic) {
   display: grid;
-  grid-template:
-    'id  name  avatar' auto
-    'id  name  avatar' auto / 1fr 1fr 1fr;
+  grid-template: 'id      name       avatar' auto / 1fr 1fr 1fr;
+  gap: 1rem;
 }
 
+/* 个人资料分组布局 */
+:deep(.shared-form_profile) {
+  display: grid;
+  grid-template:
+    'description  description' auto
+    'tags         birthday   ' auto
+    'score        _         ' auto / 1fr 1fr;
+  gap: 1rem;
+}
+
+/* 系统设置分组布局 */
+:deep(.shared-form_settings .component-primo-form-field-cascade-settings) {
+  display: grid;
+  grid-template: 'settings_theme  settings_notifications' auto / 1fr 1fr;
+  gap: 1rem;
+}
+
+/* 联系方式分组布局 */
 :deep(.shared-form_contacts .component-primo-form-field-array-item-contacts) {
   display: grid;
   grid-template:
-    'contacts___email contacts___phone contacts___website .      ' auto
-    'contacts___email contacts___phone contacts___website _remove' auto / 1fr 1fr 1fr;
+    'contacts___email  contacts___phone  contacts___website  _     ' auto
+    'contacts___email  contacts___phone  contacts___website  _remove' auto / 1fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* 分组之间的间距 */
+:deep(.shared-form_basic),
+:deep(.shared-form_profile),
+:deep(.shared-form_settings),
+:deep(.shared-form_contacts) {
+  padding: 1rem;
+  background-color: var(--surface-card);
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
 }
 </style>
