@@ -65,6 +65,8 @@ catalog:
   vue: ^3.5.13
   vue-component-type-helpers: ^2.1.10
   vue-filepond: ^7.0.4
-  vue-tsc: ^2.1.10
+  # vue-tsc: ^2.1.10
+  # see https://github.com/vuejs/language-tools/issues/5018
+  vue-tsc: https://pkg.pr.new/vuejs/language-tools/vue-tsc@3fb59af
   worker-timers: ^8.0.11
   zod: ^3.23.8
