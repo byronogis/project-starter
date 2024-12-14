@@ -1,8 +1,10 @@
+import type { SharedAppearanceOptions } from '.'
+
 /**
  * Credit to [@hooray](https://github.com/hooray)
  * @see https://github.com/vuejs/vitepress/pull/2347
  */
-export function sharedToogleDarkUtil(event: MouseEvent, options: SharedToogleDarkUtilOptions) {
+export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
   const {
     isDark,
     toogle,
@@ -23,8 +25,8 @@ export function sharedToogleDarkUtil(event: MouseEvent, options: SharedToogleDar
     Math.max(x, innerWidth - x),
     Math.max(y, innerHeight - y),
   )
-  const transition = document.startViewTransition(() => {
-    toogle()
+  const transition = document.startViewTransition(async () => {
+    await toogle()
   })
   transition.ready
     .then(() => {
@@ -49,11 +51,7 @@ export function sharedToogleDarkUtil(event: MouseEvent, options: SharedToogleDar
     })
 }
 
-interface SharedToogleDarkUtilOptions {
-  isDark: boolean
-  toogle: () => void
-}
-
+// Add those styles to your CSS
 /*
 ::view-transition-old(root),
 ::view-transition-new(root) {

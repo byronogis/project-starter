@@ -1,3 +1,5 @@
+import { toogleAppearance } from '@project-starter/shared'
+
 export function useSharedColorMode() {
   const colorMode = useColorMode()
 
@@ -32,7 +34,7 @@ export function useSharedColorMode() {
       return
     }
 
-    sharedToogleDarkUtil(event, {
+    toogleAppearance(event, {
       isDark: !isDark.value,
       toogle: async () => {
         next()

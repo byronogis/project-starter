@@ -1,4 +1,4 @@
-/* @see ~/utils/sharedToogleDarkUtil */
+/* @see packages/shared/appearance/dynamic */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;

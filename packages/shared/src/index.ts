@@ -1,4 +1,5 @@
 export * from './_'
+export * from './appearance'
 export * from './color'
 export * from './date'
 export * from './form'

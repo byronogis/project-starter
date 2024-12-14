@@ -13,6 +13,7 @@
     "@nuxt/devtools": "catalog:",
     "@nuxt/icon": "catalog:",
     "@nuxtjs/color-mode": "catalog:",
+    "@project-starter/shared": "workspace:*",
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",
     "@vueuse/nuxt": "catalog:",
