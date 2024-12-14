@@ -1,18 +1,18 @@
 import { toogleAppearance } from '@project-starter/shared'
 
-export function useSharedColorMode() {
+export function useBasicColorMode() {
   const colorMode = useColorMode()
 
   const isDarkPreferred = usePreferredDark()
 
-  const cycleList = computed<SharedColorModeItemName[]>(() => [
+  const cycleList = computed<BasicColorModeItemName[]>(() => [
     isDarkPreferred.value ? 'light' : 'dark',
     isDarkPreferred.value ? 'dark' : 'light',
     'system',
   ])
 
-  const { state, index, next } = useCycleList<SharedColorModeItemName>(cycleList, {
-    initialValue: colorMode.preference as SharedColorModeItemName,
+  const { state, index, next } = useCycleList<BasicColorModeItemName>(cycleList, {
+    initialValue: colorMode.preference as BasicColorModeItemName,
   })
 
   watchEffect(() => colorMode.preference = state.value)
@@ -50,4 +50,4 @@ export function useSharedColorMode() {
   }
 }
 
-type SharedColorModeItemName = 'light' | 'dark' | 'system'
+type BasicColorModeItemName = 'light' | 'dark' | 'system'

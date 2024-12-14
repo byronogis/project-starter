@@ -4,7 +4,7 @@ import PrimoConfigurator from './PrimoConfigurator.vue'
 const {
   toggle,
   state,
-} = useSharedColorMode()
+} = useBasicColorMode()
 
 const colorModeIconName = computed(() => {
   if (toValue(state) === 'dark') {

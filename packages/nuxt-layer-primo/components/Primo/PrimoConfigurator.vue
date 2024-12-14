@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { isDark } = useSharedColorMode()
+const { isDark } = useBasicColorMode()
 
 const primoStore = inject(PrimoStoreInjectionKey)!
 
@@ -16,7 +16,7 @@ const menuModeOptions = ref<{
 
 <template>
   <div
-    class="bg-surface-0 dark:bg-surface-900 config-panel component-primo-configurator rounded-border border-surface absolute right-0 top-[3.25rem] hidden w-64 origin-top border p-4 shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]"
+    class="config-panel component-primo-configurator rounded-border bg-surface-0 border-surface dark:bg-surface-900 absolute right-0 top-[3.25rem] hidden w-64 origin-top border p-4 shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]"
   >
     <div class="flex flex-col gap-4">
       <div>

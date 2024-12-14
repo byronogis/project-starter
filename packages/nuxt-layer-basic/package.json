@@ -1,5 +1,5 @@
 {
-  "name": "@project-starter/nuxt-layer-shared",
+  "name": "@project-starter/nuxt-layer-basic",
   "type": "module",
   "version": "0.0.1",
   "main": "./nuxt.config.ts",

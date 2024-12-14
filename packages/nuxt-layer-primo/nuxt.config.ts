@@ -6,7 +6,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url))
 
 export default defineNuxtConfig({
   extends: [
-    '@project-starter/nuxt-layer-shared',
+    '@project-starter/nuxt-layer-basic',
   ],
 
   css: [

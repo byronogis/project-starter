@@ -19,7 +19,7 @@ export default defineConfig({
         text: 'Packages',
         items: [
           { text: 'nuxt-layer-primo', link: '/packages/nuxt-layer-primo' },
-          { text: 'nuxt-layer-shared', link: '/packages/nuxt-layer-shared' },
+          { text: 'nuxt-layer-basic', link: '/packages/nuxt-layer-basic' },
           { text: 'unocss-config', link: '/packages/unocss-config' },
           { text: 'eslint-config', link: '/packages/eslint-config' },
           { text: 'typescript-config', link: '/packages/typescript-config' },
@@ -43,7 +43,7 @@ export default defineConfig({
         text: 'Packages',
         items: [
           { text: 'nuxt-layer-primo', link: '/packages/nuxt-layer-primo' },
-          { text: 'nuxt-layer-shared', link: '/packages/nuxt-layer-shared' },
+          { text: 'nuxt-layer-basic', link: '/packages/nuxt-layer-basic' },
           { text: 'unocss-config', link: '/packages/unocss-config' },
           { text: 'eslint-config', link: '/packages/eslint-config' },
           { text: 'typescript-config', link: '/packages/typescript-config' },

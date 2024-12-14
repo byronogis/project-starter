@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<{
 })
 
 const primoStore = inject(PrimoStoreInjectionKey)!
-const { isDark } = useSharedColorMode()
+const { isDark } = useBasicColorMode()
 
 const options = ref<object>()
 

@@ -1,4 +1,4 @@
-# nuxt-layer-shared
+# nuxt-layer-basic
 
 这是一个 [Nuxt](https://nuxt.com) 层，提供了一些灵活的功能.
 
