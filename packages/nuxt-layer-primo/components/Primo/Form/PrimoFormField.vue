@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="
-  F extends SharedFormField<any, any, any, PrimoFormFieldType, PrimoFormFieldExtra>
+  F extends PrimoFormField
 "
 >
 import PrimoUploader from '../PrimoUploader.vue'
@@ -33,7 +33,7 @@ const fieldPropsMerged = computed(() => {
     'class': 'w-full',
     'id': field.value.name,
     'modelValue': value.value,
-    'onUpdate:modelValue': (val: F['valueType']) => {
+    'onUpdate:modelValue': (val: F['initialValue']) => {
       value.value = val
     },
     'disabled': field.value.disable,
@@ -101,7 +101,7 @@ const fieldPropsMerged = computed(() => {
 
         ..._props,
 
-        options: field.value.options ?? [],
+        options: toValue(field.value.extra?.options ?? []),
       }
       break
 
@@ -114,7 +114,7 @@ const fieldPropsMerged = computed(() => {
 
         ..._props,
 
-        options: field.value.options ?? [],
+        options: toValue(field.value.extra?.options ?? []),
       }
 
       break
@@ -127,7 +127,7 @@ const fieldPropsMerged = computed(() => {
 
         ..._props,
 
-        options: field.value.options ?? [],
+        options: toValue(field.value.extra?.options ?? []),
       }
 
       break
@@ -142,7 +142,7 @@ const fieldPropsMerged = computed(() => {
 
         ..._props,
 
-        options: field.value.options ?? [],
+        options: toValue(field.value.extra?.options ?? []),
       }
 
       break
@@ -190,7 +190,7 @@ const fieldPropsMerged = computed(() => {
         'modelValue': typeof value.value === 'string'
           ? Utils.safeJSONParse(value.value).value ?? null
           : toValue(value),
-        'onUpdate:modelValue': (val: F['valueType']) => {
+        'onUpdate:modelValue': (val: F['initialValue']) => {
           value.value = typeof value.value === 'string'
             ? JSON.stringify(val)
             : val

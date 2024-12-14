@@ -25,14 +25,12 @@ export const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
     type: 'text',
     schema: (z.string().trim().optional()),
     disable: true,
-    // group: '_default',
   },
   name: {
     name: 'name',
     label: 'Name',
     type: 'text',
     schema: (z.string().trim()),
-    // group: '_default',
     initialValue: 'Anon',
   },
   avatar: {
@@ -40,7 +38,6 @@ export const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
     label: 'Avatar',
     type: 'image',
     schema: (z.string().trim()),
-    // group: '_default',
     extra: {
       fileUploadProcess: exampleFileUploadProcessCST,
     },
@@ -48,14 +45,15 @@ export const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
   contacts: {
     name: 'contacts',
     label: 'Contacts',
-    group: 'contacts',
+    groupId: 'contacts',
+    type: '_array',
     schema: (z.array(z.object({
       email: z.string(),
       phone: z.string(),
       website: z.string(),
     }))),
-    fieldArray: true,
-    fieldArrayItemFormFields: {
+    isArray: true,
+    arrayFields: {
       email: {
         name: 'email',
         label: 'Email',

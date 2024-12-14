@@ -44,7 +44,8 @@ export interface SharedFormField<
    */
   schema: ZodSchema
   /**
-   * 初始值
+   * 初始值 \
+   * 也可用于对于当前字段值的类型推断
    */
   initialValue?: V
   /**
@@ -116,9 +117,14 @@ export interface SharedFormField<
 }
 
 /**
- * 表单字段项类型
+ * 表单字段项类型 \
+ * 内置 `_array` 和 `_cascade` 两个类型, \
+ * 可选择用于标识数组字段和级联字段, 目前仅用于类型检查 \
+ *
  */
 export type SharedFormFieldType<T extends string = never> =
+  | '_array'
+  | '_cascade'
   | T
 
 /**
@@ -156,7 +162,7 @@ export interface SharedFormGroup<
 > {
   /**
    * 分组标识 \
-   * 为空时表示默认分组 \
+   * 为空时表示默认分组 '_default' \
    * 默认用作 containerClass 类名后缀 \
    */
   id: G
@@ -186,7 +192,9 @@ export interface SharedFormGroup<
 
 /**
  * 表单字段分组项名称 \
- * NOTE 默认也会被用于类名, 此时不支持的字符会在添加到类名前被替换为下划线
+ * NOTE 默认也会被用于类名, 此时不支持的字符会在添加到类名前被替换为下划线 \
+ * 内置 `_default` 用于默认分组 \
  */
 export type SharedFormGroupId<G extends string = never> =
+  | '_default'
   | G

@@ -1,7 +1,7 @@
 import type {
   DefineSharedFormOptions,
   SharedFormData,
-  // SharedFormField,
+  SharedFormField,
   SharedFormFields,
   SharedFormGroup,
   SharedFormGroups,
@@ -87,13 +87,20 @@ export type PrimoFormOptions<
 export type PrimoFormReturns = ReturnType<typeof usePrimoForm>
 
 /**
- * Primo 表单数据
+ * extend shared form types
+ * SharedFormData -> PrimoFormData
+ * SharedFormField -> PrimoFormField
+ * SharedFormFields -> PrimoFormFields
+ * SharedFormGroup -> PrimoFormGroup
+ * SharedFormGroups -> PrimoFormGroups
+ * SharedFormFieldType -> PrimoFormFieldType
+ * SharedFormFieldExtra -> PrimoFormFieldExtra
  */
+
 export type PrimoFormData<D = object> = SharedFormData<D>
 
-/**
- * Primo 表单字段配置
- */
+export type PrimoFormField<V = any> = SharedFormField<any, V, any, PrimoFormFieldType, PrimoFormFieldExtra>
+
 export type PrimoFormFields<
   D extends PrimoFormData = PrimoFormData,
   G extends string = never,

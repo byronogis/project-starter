@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<{
         </PrimeAccordionHeader>
 
         <PrimeAccordionContent>
-          <div class="gap-6" :class="[group.formClass]">
+          <div class="gap-6" :class="[group.containerClass]">
             <template
               v-for="field in group.fields"
               :key="field!.name"
@@ -46,8 +46,8 @@ const props = withDefaults(defineProps<{
 
               <!-- 数组字段 -->
               <PrimoFormFieldArray
-                v-else-if="field?.fieldArray"
-                :field="field!"
+                v-else-if="field?.isArray"
+                :field="(field! as any)"
               />
 
               <!-- 默认渲染 -->

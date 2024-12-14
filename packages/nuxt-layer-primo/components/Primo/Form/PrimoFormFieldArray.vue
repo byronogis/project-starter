@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="
-  F extends SharedFormField<any, any, any, PrimoFormFieldType, PrimoFormFieldExtra>
+  F extends PrimoFormField<Array<PrimoFormField>>
 "
 >
 const props = defineProps<{
@@ -41,12 +41,13 @@ const {
       >
         <!-- 数组字段中的子字段 -->
         <template
-          v-for="j in field.fieldArrayItemFormFields"
+          v-for="j in field.arrayFields"
           :key="j.name"
         >
           <PrimoFormField
             :field="{
               ...j!,
+              // for vee-validate array field
               name: `${field.name}[${idx}].${j!.name}`,
             }"
           />

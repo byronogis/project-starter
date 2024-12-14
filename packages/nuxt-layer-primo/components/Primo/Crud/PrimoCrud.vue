@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<{
   /**
    * 表单字段组信息
    */
-  groups?: PrimoFormGroups<D, G>
+  formGroups?: PrimoFormGroups<D, G>
   /**
    * 表单字段信息
    */
@@ -218,7 +218,7 @@ const {
   G
 >({
   fields: () => props.formFields,
-  groups: () => props.groups,
+  groups: () => props.formGroups,
 })
 
 /**
@@ -511,7 +511,7 @@ defineExpose({
     >
       <template #default>
         <PrimoForm
-          :group-list
+          :group-list="(groupList as any)"
         />
       </template>
 
