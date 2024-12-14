@@ -91,17 +91,17 @@ const filters = ref<DataTableFilterMeta>({
 </template>
 
 <style scoped lang="postcss">
-:deep(.shared-form-fields-group-_default) {
+:deep(.shared-form__default) {
   display: grid;
   grid-template:
     'id  name  avatar' auto
     'id  name  avatar' auto / 1fr 1fr 1fr;
 }
 
-:deep(.component-primo-form-field-array-item-contacts) {
+:deep(.shared-form_contacts .component-primo-form-field-array-item-contacts) {
   display: grid;
   grid-template:
-    'contacts_email contacts_phone contacts_website .      ' auto
-    'contacts_email contacts_phone contacts_website _remove' auto / 1fr 1fr 1fr;
+    'contacts___email contacts___phone contacts___website .      ' auto
+    'contacts___email contacts___phone contacts___website _remove' auto / 1fr 1fr 1fr;
 }
 </style>

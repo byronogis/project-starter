@@ -4,11 +4,16 @@ const sidebarMenuList = ref<PrimoSidebarMenuItem[]>([
     label: 'Main',
     items: [
       { label: 'Dashboard', icon: 'i-prime:home', to: '/' },
-      { label: 'Mouse', icon: 'i-prime:book', to: '/mouse' },
-      { label: 'Primo', icon: 'i-prime:bell', to: '/primo' },
-      { label: 'Crud', icon: 'i-prime:bell', to: '/crud' },
-      { label: 'Login', icon: 'i-prime:bell', to: '/login' },
-      { label: 'Chart', icon: 'i-prime:bell', to: '/chart' },
+    ],
+  },
+  {
+    label: 'Example',
+    items: [
+      { label: 'Mouse', icon: 'i-prime:book', to: '/example/mouse' },
+      { label: 'Primo', icon: 'i-prime:bell', to: '/example/primo' },
+      { label: 'Crud', icon: 'i-prime:bell', to: '/example/crud' },
+      { label: 'Login', icon: 'i-prime:bell', to: '/example/login' },
+      { label: 'Chart', icon: 'i-prime:bell', to: '/example/chart' },
     ],
   },
 ])
