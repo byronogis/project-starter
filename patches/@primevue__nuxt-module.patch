@@ -1,0 +1,156 @@
+diff --git a/dist/module.d.mts b/dist/module.d.mts
+index 11e951e34551f47f66e21e9b55784aff2bbfb7da..fd5c9a33b0bcaaa856ee9e4304a47ebbf0ce360a 100644
+--- a/dist/module.d.mts
++++ b/dist/module.d.mts
+@@ -8,6 +8,10 @@ interface ConstructsType {
+     exclude?: '*' | Array<string | { name: string; use?: { as: string } }> | ((list: any) => string[] | undefined) | undefined;
+ }
+ 
++interface ComponentsType extends ConstructsType {
++    global?: boolean;
++}
++
+ interface ModuleOptions {
+     usePrimeVue?: boolean;
+     autoImport?: boolean;
+@@ -17,7 +21,7 @@ interface ModuleOptions {
+     importTheme?: ImportOptions;
+     loadStyles?: boolean;
+     options?: PrimeVueOptions;
+-    components?: ConstructsType;
++    components?: ComponentsType;
+     directives?: ConstructsType;
+     composables?: Omit<ConstructsType, 'prefix'>;
+ }
+diff --git a/dist/module.d.ts b/dist/module.d.ts
+index 11e951e34551f47f66e21e9b55784aff2bbfb7da..fd5c9a33b0bcaaa856ee9e4304a47ebbf0ce360a 100644
+--- a/dist/module.d.ts
++++ b/dist/module.d.ts
+@@ -8,6 +8,10 @@ interface ConstructsType {
+     exclude?: '*' | Array<string | { name: string; use?: { as: string } }> | ((list: any) => string[] | undefined) | undefined;
+ }
+ 
++interface ComponentsType extends ConstructsType {
++    global?: boolean;
++}
++
+ interface ModuleOptions {
+     usePrimeVue?: boolean;
+     autoImport?: boolean;
+@@ -17,7 +21,7 @@ interface ModuleOptions {
+     importTheme?: ImportOptions;
+     loadStyles?: boolean;
+     options?: PrimeVueOptions;
+-    components?: ConstructsType;
++    components?: ComponentsType;
+     directives?: ConstructsType;
+     composables?: Omit<ConstructsType, 'prefix'>;
+ }
+diff --git a/dist/module.mjs b/dist/module.mjs
+index 7817794af46593525923a353f3791ebf80e62126..142f3a08c0e5eeb8bb4b278ef396e1d9859c3651 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -1,8 +1,5 @@
+ import { addComponent, addImports, defineNuxtModule, createResolver, addTemplate, addPlugin, addPluginTemplate } from '@nuxt/kit';
+-import { isNotEmpty as isNotEmpty$1 } from '@primeuix/utils';
+-import { PrimeVueResolver } from '@primevue/auto-import-resolver';
+ import { normalize } from 'pathe';
+-import Components from 'unplugin-vue-components/nuxt';
+ import { isFunction, isNotEmpty, resolve, isString } from '@primeuix/utils/object';
+ import { components, directives, composables } from '@primevue/metadata';
+ import { createStyleAsString } from '@primeuix/utils/dom';
+@@ -53,9 +50,9 @@ function registerComponents(resolvePath, moduleOptions) {
+       export: "default",
+       name,
+       filePath: from,
+-      global: true
++      global: options.global
+     };
+-    !moduleOptions.autoImport && addComponent(opt);
++    moduleOptions.autoImport && addComponent(opt);
+     return {
+       ..._item,
+       ...opt
+@@ -85,7 +82,7 @@ function registerComposables(resolvePath, moduleOptions) {
+       name,
+       from: resolvePath({ name, as: item.as, from: item.from, type: "composable" })
+     };
+-    addImports(opt);
++    moduleOptions.autoImport && addImports(opt);
+     return opt;
+   });
+ }
+@@ -107,7 +104,7 @@ function registerStyles(resolvePath, registered, moduleOptions) {
+       from: resolvePath({ name: "BaseStyle", as: "BaseStyle", from: "@primevue/core/base/style", type: "style" })
+     }
+   ];
+-  if (!moduleOptions.autoImport && !options?.unstyled) {
++  if (moduleOptions.autoImport && !options?.unstyled) {
+     if (isNotEmpty(registered?.components)) {
+       styles.push({
+         name: "BaseComponentStyle",
+@@ -175,6 +172,7 @@ const module = defineNuxtModule({
+     options: {},
+     components: {
+       prefix: "",
++      global: false,
+       name: void 0,
+       include: void 0,
+       exclude: void 0
+@@ -194,7 +192,7 @@ const module = defineNuxtModule({
+   },
+   hooks: {},
+   setup(moduleOptions, nuxt) {
+-    moduleOptions.components.exclude = moduleOptions.components.exclude || ["Editor", "Chart"];
++    moduleOptions.components.exclude = moduleOptions.components.exclude || ["Editor", "Chart", "Form", "FormField"];
+     const resolver = createResolver(import.meta.url);
+     const registered = register(moduleOptions);
+     const { autoImport, importPT, importTheme, options, loadStyles } = moduleOptions;
+@@ -205,29 +203,6 @@ const module = defineNuxtModule({
+     };
+     nuxt.options.build.transpile.push("primevue");
+     let registeredStyles = registered.styles;
+-    if (autoImport) {
+-      const dts = isNotEmpty$1(moduleOptions.components?.prefix) || isNotEmpty$1(moduleOptions.directives?.prefix);
+-      Components(
+-        {
+-          dts,
+-          resolvers: [
+-            PrimeVueResolver({
+-              components: moduleOptions.components,
+-              directives: moduleOptions.directives,
+-              resolve: (meta) => {
+-                registeredStyles.push({
+-                  ...meta,
+-                  name: `${meta.name}Style`,
+-                  as: `${meta.as}Style`,
+-                  from: `${meta.from}/style`
+-                });
+-              }
+-            })
+-          ]
+-        },
+-        nuxt
+-      );
+-    }
+     const styleContent = () => {
+       if (!loadStyles)
+         return `export const styles = [], stylesToTop = [], themes = [];`;
+@@ -275,7 +250,7 @@ export { styles, stylesToTop, themes };
+ import { defineNuxtPlugin, useRuntimeConfig } from '#imports';
+ ${registered.config.map((config) => `import ${config.as} from '${config.from}';`).join("\n")}
+ ${registered.services.map((service) => `import ${service.as} from '${service.from}';`).join("\n")}
+-${!autoImport && registered.directives.map((directive) => `import ${directive.as} from '${directive.from}';`).join("\n")}
++${autoImport ? registered.directives.map((directive) => `import ${directive.as} from '${directive.from}';`).join("\n") : ""}
+ ${importPT ? `import ${importPT.as} from '${normalize(importPT.from)}';
+ ` : ""}
+ ${hasTheme && importTheme ? `import ${importTheme.as} from '${normalize(importTheme.from)}';
+@@ -290,7 +265,7 @@ export default defineNuxtPlugin(({ vueApp }) => {
+ 
+   usePrimeVue && vueApp.use(PrimeVue, { ...options, ...pt, ...theme });
+   ${registered.services.map((service) => `vueApp.use(${service.as});`).join("\n")}
+-  ${!autoImport && registered.directives.map((directive) => `vueApp.directive('${directive.name}', ${directive.as});`).join("\n")}
++  ${autoImport ? registered.directives.map((directive) => `vueApp.directive('${directive.name}', ${directive.as});`).join("\n") : ""}
+ });
+         `;
+       }

@@ -36,7 +36,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "nprogress": "patches/nprogress.patch"
+      "nprogress": "patches/nprogress.patch",
+      "@primevue/nuxt-module": "patches/@primevue__nuxt-module.patch"
     }
   },
   "lint-staged": {
