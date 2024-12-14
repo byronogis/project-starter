@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { MenuItem } from 'primevue/menuitem'
+
 const { isDark } = useBasicColorMode()
 
 const primoStore = inject(PrimoStoreInjectionKey)!
-
-const presetsOptions = ref(Object.keys(PrimoThemePresetsCST))
 
 const menuModeOptions = ref<{
   label: string
@@ -12,75 +12,118 @@ const menuModeOptions = ref<{
   { label: 'Static', value: 'static' },
   { label: 'Overlay', value: 'overlay' },
 ])
+
+const model: MenuItem[] = [
+  {
+    label: 'Primary',
+    items: [{
+      _value: PrimoPrimaryColorListCST,
+      _cate: 'primary',
+    }],
+  },
+  {
+    label: 'Surface',
+    items: [{
+      _value: PrimoSurfaceListCST,
+      _cate: 'surface',
+    }],
+  },
+  {
+    label: 'Presets',
+    items: [{
+      _value: PrimoThemePresetsCST,
+      _cate: 'preset',
+    }],
+  },
+  {
+    label: 'Menu Mode',
+    items: [{
+      _value: menuModeOptions,
+      _cate: 'menumode',
+    }],
+  },
+]
+
+function isOutlinePrimary(name: PrimoPrimaryColorName | PrimoSurfaceName, cate: 'primary' | 'surface') {
+  let flag = false
+
+  switch (cate) {
+    case 'primary':
+      flag = primoStore.config.primary === name
+      break
+    case 'surface':
+      flag = primoStore.config.surface
+        ? primoStore.config.surface === name
+        : isDark
+          ? name === 'zinc'
+          : name === 'slate'
+      break
+    default:
+      break
+  }
+
+  return flag
+}
+
+function handleColorChange(name: PrimoPrimaryColorName | PrimoSurfaceName, cate: 'primary' | 'surface') {
+  switch (cate) {
+    case 'primary':
+      primoStore.config.primary = name as PrimoPrimaryColorName
+      break
+    case 'surface':
+      primoStore.config.surface = name as PrimoSurfaceName
+      break
+    default:
+      break
+  }
+}
 </script>
 
 <template>
-  <div
-    class="config-panel component-primo-configurator rounded-border bg-surface-0 border-surface dark:bg-surface-900 absolute right-0 top-[3.25rem] hidden w-64 origin-top border p-4 shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]"
+  <PrimeMenu
+    :model
+    :pt="{
+      root: 'w-56 border-0',
+      list: 'p-0',
+      submenuLabel: 'pl-0',
+      itemContent: 'bg-transparent',
+    }"
   >
-    <div class="flex flex-col gap-4">
-      <div>
-        <span class="text-muted-color text-sm font-semibold">Primary</span>
-        <div class="flex flex-wrap justify-between gap-2 pt-2">
-          <button
-            v-for="primaryColor of PrimoPrimaryColorListCST"
-            :key="primaryColor.name"
-            type="button"
-            :title="primaryColor.name"
+    <template #item="{ item: { _cate, _value } }">
+      <template v-if="['primary', 'surface'].includes(_cate)">
+        <div class="grid gap-2 grid-wrap-5">
+          <PrimeButton
+            v-for="i in _value"
+            :key="i.name"
+            :title="i.name"
             data-allow-mismatch
-            class="h-5 w-5 cursor-pointer rounded-full border-none p-0 outline-transparent outline-offset-1 outline-solid"
-            :class="[
-              {
-                '!outline-primary': primoStore.config.primary === primaryColor.name,
-              },
-            ]"
-            :style="{ backgroundColor: `${primaryColor.name === 'noir' ? 'var(--text-color)' : primaryColor.palette['500']}` }"
-            @click="primoStore.config.primary = primaryColor.name"
+            class="h-5 w-5 rounded-full border-none p-0 outline-transparent outline-offset-1 outline-solid"
+            :class="[{ '!outline-primary': isOutlinePrimary(i.name, _cate) }]"
+            :style="{ backgroundColor: `${i.name === 'noir' ? 'var(--text-color)' : i.palette['500']}` }"
+            @click="handleColorChange(i.name, _cate)"
           />
         </div>
-      </div>
-      <div>
-        <span class="text-muted-color text-sm font-semibold">Surface</span>
-        <div class="flex flex-wrap justify-between gap-2 pt-2">
-          <button
-            v-for="surface of PrimoSurfaceListCST"
-            :key="surface.name"
-            type="button"
-            :title="surface.name"
-            data-allow-mismatch
-            class="h-5 w-5 cursor-pointer rounded-full border-none p-0 outline-transparent outline-offset-1 outline-solid"
-            :class="[
-              {
-                '!outline-primary': primoStore.config.surface
-                  ? primoStore.config.surface === surface.name
-                  : isDark
-                    ? surface.name === 'zinc'
-                    : surface.name === 'slate',
-              },
-            ]"
-            :style="{ backgroundColor: `${surface.palette['500']}` }"
-            @click="primoStore.config.surface = surface.name"
-          />
-        </div>
-      </div>
-      <div class="flex flex-col gap-2">
-        <span class="text-muted-color text-sm font-semibold">Presets</span>
+      </template>
+
+      <template v-else-if="_cate === 'preset'">
         <PrimeSelectButton
           v-model="primoStore.config.preset"
-          :options="presetsOptions"
+          :pt="{ root: 'grid grid-wrap-25' }"
+          :options="Object.keys(PrimoThemePresetsCST)"
           :allow-empty="false"
         />
-      </div>
-      <div class="flex flex-col gap-2">
-        <span class="text-muted-color text-sm font-semibold">Menu Mode</span>
+      </template>
+
+      <template v-else-if="_cate === 'menumode'">
         <PrimeSelectButton
           v-model="primoStore.config.menuMode"
+          :pt="{ root: 'grid grid-wrap-25' }"
           :options="menuModeOptions"
           :allow-empty="false"
           option-label="label"
           option-value="value"
         />
-      </div>
-    </div>
-  </div>
+      </template>
+    </template>
+  </PrimeMenu>
 </template>
