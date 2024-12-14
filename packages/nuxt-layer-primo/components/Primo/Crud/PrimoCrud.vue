@@ -213,11 +213,9 @@ const {
   context,
   groupList,
   forceResetFormValues,
-} = useSharedForm<
+} = usePrimoForm<
   D,
-  G,
-  PrimoFormFieldType,
-  PrimoFormFieldExtra
+  G
 >({
   fields: () => props.formFields,
   groups: () => props.groups,
