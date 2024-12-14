@@ -50,6 +50,12 @@ const props = withDefaults(defineProps<{
                 :field="(field! as any)"
               />
 
+              <!-- 级联字段 -->
+              <PrimoFormFieldCascade
+                v-else-if="field?.isCascade"
+                :field="(field! as any)"
+              />
+
               <!-- 默认渲染 -->
               <PrimoFormField
                 v-else
