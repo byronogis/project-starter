@@ -3,12 +3,8 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./composables": "./src/composables/index.ts",
-    "./composables/*": "./src/composables/*.ts",
-    "./types": "./src/types/index.ts",
-    "./types/*": "./src/types/*.ts",
-    "./utils": "./src/utils/index.ts",
-    "./utils/*": "./src/utils/*.ts"
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
   },
   "scripts": {
     "test": "vitest",

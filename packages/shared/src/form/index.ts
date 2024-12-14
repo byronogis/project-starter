@@ -5,7 +5,9 @@ import type {
   SharedFormGroup,
   SharedFormGroups,
 } from './type'
-import { sanitizeString } from '../utils'
+import { sanitizeString } from '..'
+
+export type * from './type'
 
 export function defineSharedForm<
   D extends SharedFormData,

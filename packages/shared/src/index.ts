@@ -1,10 +1,11 @@
-export { _ } from './_'
-export { color } from './color'
-export { date } from './date'
-export { HTTP } from './http'
-export { logger } from './logger'
-export { merge } from './merge'
-export { timer } from './timer'
+export * from './_'
+export * from './color'
+export * from './date'
+export * from './form'
+export * from './http'
+export * from './logger'
+export * from './merge'
+export * from './timer'
 
 /**
  * 安全的 JSON 解析 \
