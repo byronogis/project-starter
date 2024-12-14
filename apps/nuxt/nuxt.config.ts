@@ -121,7 +121,7 @@ export default defineNuxtConfig({
       'types',
     ],
     imports: [
-      { name: '*', as: 'Utils', from: '@project-starter/shared/utils' },
+      { name: '*', as: 'Utils', from: '@project-starter/shared' },
     ],
   },
 

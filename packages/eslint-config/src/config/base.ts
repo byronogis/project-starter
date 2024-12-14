@@ -1,6 +1,6 @@
 import antfu from '@antfu/eslint-config'
-// import { merge } from '@project-starter/shared/utils/merge'
-// import type { MergeOptions } from '@project-starter/shared/utils/merge'
+// import { merge } from '@project-starter/shared'
+// import type { MergeOptions } from '@project-starter/shared'
 
 // TODO fix type reference
 export type { FlatConfigComposer } from 'eslint-flat-config-utils'

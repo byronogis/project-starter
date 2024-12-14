@@ -1,9 +1,9 @@
-import type { MergeOptions } from '@project-starter/shared/utils/merge'
+import type { MergeOptions } from '@project-starter/shared'
 import type { UserConfig } from 'unocss'
 import { resolve } from 'node:path'
 import { cwd } from 'node:process'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
-import { merge } from '@project-starter/shared/utils/merge'
+import { merge } from '@project-starter/shared'
 import {
   defineConfig,
   presetIcons,

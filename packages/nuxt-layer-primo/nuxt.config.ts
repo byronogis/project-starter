@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     ],
     imports: [
       { name: 'toTypedSchema', from: '@vee-validate/zod' },
-      { name: '*', as: 'Utils', from: '@project-starter/shared/utils' },
+      { name: '*', as: 'Utils', from: '@project-starter/shared' },
     ],
   },
 

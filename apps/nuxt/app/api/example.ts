@@ -1,4 +1,4 @@
-import type { RequestConfig } from '@project-starter/shared/utils/http'
+import type { RequestConfig } from '@project-starter/shared'
 import { exampleHttp } from './index'
 
 /**
