@@ -77,7 +77,7 @@ export interface SharedFormField<
   fieldPath?: string
   /**
    * Grid 布局中的位置 \
-   * @default `${identify}_${fieldPath}`
+   * @default `${fieldPath}` ?? `${name}`
    * @description 不合法的字符会被替换为下划线
    */
   gridArea?: string
