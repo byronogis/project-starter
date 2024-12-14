@@ -78,17 +78,17 @@ const fieldPropsMerged = computed(() => {
 
     case 'datetime':
       _props = {
-        inputId: field.value.name,
-        showTime: true,
-        showSeconds: true,
+        'inputId': field.value.name,
+        'showTime': true,
+        'showSeconds': true,
 
         ..._props,
 
-        id: undefined,
-        modelValue: toValue(value)
+        'id': undefined,
+        'modelValue': toValue(value)
           ? new Date(Number(String(toValue(value)).padEnd(13, '0')))
           : undefined,
-        onUpdateModelValue: (val: Date) => {
+        'onUpdate:modelValue': (val: Date) => {
           value.value = val.valueOf()
         },
       }
