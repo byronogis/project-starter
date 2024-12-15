@@ -23,9 +23,8 @@ export function usePrimoStore(options?: PrimoOptions) {
    * 状态
    */
   const state = useLocalStorage<PrimoState>('primo-state', {
-    staticMenuMobileActive: false,
-    staticMenuDesktopInactive: false,
-    overlayMenuActive: false,
+    menuMobileActive: false,
+    menuDesktopInactive: false,
 
     profileSidebarVisible: false,
     configSidebarVisible: false,
@@ -69,16 +68,11 @@ export function usePrimoStore(options?: PrimoOptions) {
   }
 
   function onMenuToggle() {
-    if (config.value.menuMode === 'overlay') {
-      state.value.overlayMenuActive = !state.value.overlayMenuActive
-    }
-
-    // 992 is the breakpoint of the layout
-    if (window.innerWidth > 991) {
-      state.value.staticMenuDesktopInactive = !state.value.staticMenuDesktopInactive
+    if (isMobile()) {
+      state.value.menuMobileActive = !state.value.menuMobileActive
     }
     else {
-      state.value.staticMenuMobileActive = !state.value.staticMenuMobileActive
+      state.value.menuDesktopInactive = !state.value.menuDesktopInactive
     }
   };
 
@@ -87,10 +81,15 @@ export function usePrimoStore(options?: PrimoOptions) {
   };
 
   function resetMenu() {
-    state.value.overlayMenuActive = false
-    state.value.staticMenuMobileActive = false
+    state.value.menuDesktopInactive = false
+    state.value.menuMobileActive = false
     state.value.menuHoverActive = false
   };
+
+  function isMobile() {
+    // 992 is the breakpoint of the layout
+    return !(window.innerWidth > 992)
+  }
 
   const styleClass = {
     actionBtn: {
@@ -114,6 +113,7 @@ export function usePrimoStore(options?: PrimoOptions) {
     onMenuToggle,
     setActiveMenuItem,
     resetMenu,
+    isMobile,
     styleClass,
   })
 }

@@ -26,15 +26,13 @@ export interface PrimoConfig {
   preset: PrimoThemePresetName
   primary: PrimoPrimaryColorName
   surface: PrimoSurfaceName | null
-  menuMode: PrimoSidebarMenuMode
 }
 
 export interface PrimoState {
-  staticMenuDesktopInactive: boolean
-  overlayMenuActive: boolean
+  menuDesktopInactive: boolean
+  menuMobileActive: boolean
   profileSidebarVisible: boolean
   configSidebarVisible: boolean
-  staticMenuMobileActive: boolean
   menuHoverActive: boolean
   activeMenuItem: string | null
 }

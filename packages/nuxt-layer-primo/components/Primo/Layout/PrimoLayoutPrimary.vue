@@ -22,28 +22,35 @@ const primoStore = usePrimoStore(props)
 provide(PrimoStoreInjectionKey, primoStore)
 
 const appSidebarRef = ref<InstanceType<typeof PrimoSidebar>>()
-onClickOutside(appSidebarRef, () => primoStore.resetMenu())
+onClickOutside(appSidebarRef, () => primoStore.isMobile() && primoStore.resetMenu())
 
 const containerClass = computed(() => {
   return {
-    'layout-overlay': primoStore.config.menuMode === 'overlay',
-    'layout-static': primoStore.config.menuMode === 'static',
-    'layout-static-inactive': primoStore.state.staticMenuDesktopInactive && primoStore.config.menuMode === 'static',
-    'layout-overlay-active': primoStore.state.overlayMenuActive,
-    'layout-mobile-active': primoStore.state.staticMenuMobileActive,
+    'layout-desktop-inactive': primoStore.state.menuDesktopInactive,
+    'layout-mobile-active': primoStore.state.menuMobileActive,
   }
 })
 </script>
 
 <template>
   <div class="layout-wrapper component-primo-layout-primary" :class="containerClass">
-    <PrimoTopbar>
-      <template #logo>
-        <slot name="topbar-logo" />
-      </template>
-    </PrimoTopbar>
+    <PrimoTopbar class="lg:hidden" />
 
     <PrimoSidebar ref="appSidebarRef" />
+
+    <PrimoActionToogle
+      class="fixed bottom-0 top-0 z-1000 m-auto hidden size-2.5rem transition-left duration-[--element-transition-duration] lg:block"
+      :class="[primoStore.state.menuDesktopInactive ? 'left-0' : 'left-22rem']"
+      data-allow-mismatch
+    >
+      <template #icon>
+        <NuxtIcon
+          data-allow-mismatch
+          :name="primoStore.state.menuDesktopInactive ? 'i-prime:chevron-right' : 'i-prime:chevron-left'"
+          class="size-6"
+        />
+      </template>
+    </PrimoActionToogle>
 
     <div class="layout-main-container">
       <div class="layout-main">

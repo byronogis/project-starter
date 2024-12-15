@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import PrimoMenu from './PrimoMenu.vue'
 </script>
 
 <template>
-  <div class="layout-sidebar component-primo-sidebar">
-    <PrimoMenu />
+  <div class="layout-sidebar component-primo-sidebar grid grid-rows-[auto_1fr_auto] gap-2">
+    <PrimoTitle class="lt-lg:hidden" />
+
+    <PrimeScrollPanel class="min-h-0">
+      <PrimoMenu />
+    </PrimeScrollPanel>
+
+    <PrimoAction class="lt-lg:hidden" />
   </div>
 </template>
 

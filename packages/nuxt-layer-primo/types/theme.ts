@@ -51,7 +51,3 @@ export type PrimoSurfaceName =
   | 'soho'
   | 'viva'
   | 'ocean'
-
-export type PrimoSidebarMenuMode =
-  | 'static'
-  | 'overlay'

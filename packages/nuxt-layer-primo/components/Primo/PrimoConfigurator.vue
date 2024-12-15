@@ -5,14 +5,6 @@ const { isDark } = useBasicColorMode()
 
 const primoStore = inject(PrimoStoreInjectionKey)!
 
-const menuModeOptions = ref<{
-  label: string
-  value: PrimoSidebarMenuMode
-}[]>([
-  { label: 'Static', value: 'static' },
-  { label: 'Overlay', value: 'overlay' },
-])
-
 const model: MenuItem[] = [
   {
     label: 'Primary',
@@ -33,13 +25,6 @@ const model: MenuItem[] = [
     items: [{
       _value: PrimoThemePresetsCST,
       _cate: 'preset',
-    }],
-  },
-  {
-    label: 'Menu Mode',
-    items: [{
-      _value: menuModeOptions,
-      _cate: 'menumode',
     }],
   },
 ]
@@ -111,17 +96,6 @@ function handleColorChange(name: PrimoPrimaryColorName | PrimoSurfaceName, cate:
           :pt="{ root: 'grid grid-wrap-25' }"
           :options="Object.keys(PrimoThemePresetsCST)"
           :allow-empty="false"
-        />
-      </template>
-
-      <template v-else-if="_cate === 'menumode'">
-        <PrimeSelectButton
-          v-model="primoStore.config.menuMode"
-          :pt="{ root: 'grid grid-wrap-25' }"
-          :options="menuModeOptions"
-          :allow-empty="false"
-          option-label="label"
-          option-value="value"
         />
       </template>
     </template>
