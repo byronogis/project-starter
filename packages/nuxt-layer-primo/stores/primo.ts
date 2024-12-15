@@ -78,7 +78,7 @@ export function usePrimoStore(options?: PrimoOptions) {
   }
 
   function onMenuToggle() {
-    if (isMobile) {
+    if (toValue(isMobile)) {
       state.value.menuMobileActive = !state.value.menuMobileActive
     }
     else {
