@@ -18,6 +18,43 @@ const sidebarMenuList = ref<PrimoSidebarMenuItem[]>([
   },
 ])
 
+const dialog = usePrimoDialog()
+const toast = usePrimoToast()
+
+const extraActionList = ref<PrimoExtraActionItem[]>([
+  {
+    label: 'Profile',
+    icon: 'i-prime:user',
+    onClick: () => console.log('Profile'),
+  },
+  {
+    label: 'Setting',
+    icon: 'i-prime:cog',
+    onClick: () => console.log('Setting'),
+  },
+  {
+    label: 'Setting',
+    icon: 'i-prime:cog',
+    onClick: () => console.log('Setting'),
+  },
+  {
+    label: 'Setting',
+    icon: 'i-prime:cog',
+    onClick: () => console.log('Setting'),
+  },
+  {
+    label: 'Logout',
+    icon: 'i-prime:sign-out',
+    onClick: () => dialog.dialogConfirm({
+      message: h('p', { class: 'w-80' }, 'Are you sure?'),
+      confirmFn: async () => {
+        await Utils._.delay(2000)
+        toast.toastSuccess('Logout success')
+      },
+    }),
+  },
+])
+
 const title = ref(appCST.title)
 </script>
 
@@ -26,6 +63,7 @@ const title = ref(appCST.title)
     id="layout-primo-primary"
     data-allow-mismatch
     :sidebar-menu-list
+    :extra-action-list
     :title
   >
     <slot />
