@@ -3,8 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "exports": {
-    ".": "./nuxt.config.ts",
-    "./unocss": "./config/unocss.ts"
+    ".": "./nuxt.config.ts"
   },
   "main": "./nuxt.config.ts",
   "scripts": {

@@ -1,14 +1,13 @@
-import { primoPreset } from '@project-starter/nuxt-layer-primo/unocss'
 import { withBase } from '@project-starter/unocss-config'
+import { mergeConfigs } from 'unocss'
+import config from './.nuxt/uno.config.mjs'
 
-export default withBase(
-  {
-    icons: false,
+export default mergeConfigs([
+  config,
+  withBase(
+    {
+      icons: false,
     // iconCustomCollection: 'app/assets/icons/custom',
-  },
-  {
-    presets: [
-      primoPreset(),
-    ],
-  },
-)
+    },
+  ) as any,
+])

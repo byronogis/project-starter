@@ -138,6 +138,7 @@ export default defineNuxtConfig({
 
     ['@unocss/nuxt', {
       // ...
+      nuxtLayers: true,
     }],
 
     ['@vite-pwa/nuxt', pwa],
