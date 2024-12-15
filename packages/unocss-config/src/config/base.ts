@@ -76,7 +76,7 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
       // ...
     ],
     rules: [
-      [/^grid-wrap-(\d+)$/, ([, d]) => ({ 'grid-template-columns': `repeat(auto-fit, minmax(${Number(d) / 4}rem, 1fr))` })],
+      [/^grid-wrap-(.+)$/, ([, s]) => ({ 'grid-template-columns': `repeat(auto-fit, minmax(${s}, 1fr))` })],
     ],
   }
 

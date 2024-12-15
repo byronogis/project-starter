@@ -15,7 +15,7 @@ export interface PrimoOptions {
   /**
    * 顶部额外操作按钮
    */
-  topbarExtraActionList?: MaybeRefOrGetter<PrimoTopbarExtraActionItem[] | undefined>
+  extraActionList?: MaybeRefOrGetter<PrimoExtraActionItem[] | undefined>
 }
 
 export type PrimoSidebarMenuItem = MenuItem & {

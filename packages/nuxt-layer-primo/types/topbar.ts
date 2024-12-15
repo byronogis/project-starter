@@ -1,4 +1,4 @@
-export interface PrimoTopbarExtraActionItem {
+export interface PrimoExtraActionItem {
   icon: string
   label: string
   /**
@@ -12,6 +12,7 @@ export interface PrimoTopbarExtraActionItem {
    * begining: 点击方法执行前即关闭弹出层 \
    * end: 点击方法执行后关闭弹出层, 失败时不关闭 \
    * end-force: 点击方法执行后关闭弹出层, 失败时也关闭
+   * @default 'begining'
    */
   closePopover?: 'begining' | 'end' | 'end-force'
   /**

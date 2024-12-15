@@ -9,8 +9,18 @@ export function usePrimoStore(options?: PrimoOptions) {
         items: [{ label: 'Dashboard', icon: 'i-prime:home', to: '/' }],
       },
     ],
-    topbarExtraActionList = [],
+    extraActionList = [],
   } = options ?? {}
+
+  const breakpoints = useBreakpoints({
+    'sm': 576,
+    'md': 768,
+    'lg': 992,
+    'xl': 1200,
+    '2xl': 1920,
+  })
+
+  const isMobile = breakpoints.smaller('lg')
 
   /**
    * 配置
@@ -68,7 +78,7 @@ export function usePrimoStore(options?: PrimoOptions) {
   }
 
   function onMenuToggle() {
-    if (isMobile()) {
+    if (isMobile) {
       state.value.menuMobileActive = !state.value.menuMobileActive
     }
     else {
@@ -86,11 +96,6 @@ export function usePrimoStore(options?: PrimoOptions) {
     state.value.menuHoverActive = false
   };
 
-  function isMobile() {
-    // 992 is the breakpoint of the layout
-    return !(window.innerWidth > 992)
-  }
-
   const styleClass = {
     actionBtn: {
       selector: '@next',
@@ -105,7 +110,7 @@ export function usePrimoStore(options?: PrimoOptions) {
   return reactive({
     title,
     sidebarMenuList,
-    topbarExtraActionList,
+    extraActionList,
 
     config,
     state,

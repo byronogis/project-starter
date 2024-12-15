@@ -12,7 +12,7 @@ import PrimoTopbar from '../PrimoTopbar.vue'
 //  */
 // const props = defineProps</* @vue-ignore */ PrimoOptions>()
 const props = defineProps<{
-  topbarExtraActionList?: PrimoTopbarExtraActionItem[]
+  extraActionList?: PrimoExtraActionItem[]
   sidebarMenuList?: PrimoSidebarMenuItem[]
   title?: string
 }>()
@@ -22,7 +22,7 @@ const primoStore = usePrimoStore(props)
 provide(PrimoStoreInjectionKey, primoStore)
 
 const appSidebarRef = ref<InstanceType<typeof PrimoSidebar>>()
-onClickOutside(appSidebarRef, () => primoStore.isMobile() && primoStore.resetMenu())
+onClickOutside(appSidebarRef, () => primoStore.isMobile && primoStore.resetMenu())
 
 const containerClass = computed(() => {
   return {

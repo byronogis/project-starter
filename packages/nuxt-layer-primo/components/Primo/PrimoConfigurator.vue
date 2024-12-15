@@ -76,7 +76,7 @@ function handleColorChange(name: PrimoPrimaryColorName | PrimoSurfaceName, cate:
   >
     <template #item="{ item: { _cate, _value } }">
       <template v-if="['primary', 'surface'].includes(_cate)">
-        <div class="grid gap-2 grid-wrap-5">
+        <div class="grid gap-2 grid-wrap-1.25rem">
           <PrimeButton
             v-for="i in _value"
             :key="i.name"
@@ -93,7 +93,7 @@ function handleColorChange(name: PrimoPrimaryColorName | PrimoSurfaceName, cate:
       <template v-else-if="_cate === 'preset'">
         <PrimeSelectButton
           v-model="primoStore.config.preset"
-          :pt="{ root: 'grid grid-wrap-25' }"
+          :pt="{ root: 'grid grid-wrap-6.25rem' }"
           :options="Object.keys(PrimoThemePresetsCST)"
           :allow-empty="false"
         />
