@@ -13,6 +13,15 @@ export default defineNuxtConfig({
     join(currentDir, './assets/styles/index.css'),
   ],
 
+  icon: {
+    customCollections: [
+      {
+        prefix: 'primo',
+        dir: join(currentDir, './assets/icons/primo'),
+      },
+    ],
+  },
+
   imports: {
     dirs: [
       join(currentDir, './types'),
