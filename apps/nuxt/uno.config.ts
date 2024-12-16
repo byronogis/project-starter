@@ -7,7 +7,6 @@ export default mergeConfigs([
   withBase(
     {
       icons: false,
-    // iconCustomCollection: 'app/assets/icons/custom',
     },
   ) as any,
 ])

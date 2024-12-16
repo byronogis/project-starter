@@ -1,9 +1,8 @@
 import type { MergeOptions } from '@project-starter/shared'
 import type { UserConfig } from 'unocss'
+import type { IconsOptions } from 'unocss/preset-icons'
 import type { TypographyOptions } from 'unocss/preset-typography'
-import { resolve } from 'node:path'
-import { cwd } from 'node:process'
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+import type { WebFontsOptions } from 'unocss/preset-web-fonts'
 import { merge } from '@project-starter/shared'
 import {
   defineConfig,
@@ -14,6 +13,9 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+// import { resolve } from 'node:path'
+// import { cwd } from 'node:process'
+// import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 /**
  * Base configuration for UnoCSS
@@ -25,10 +27,33 @@ import {
  */
 export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserConfig {
   const {
-    typography = true,
-    webFonts = true,
-    icons = true,
-    iconCustomCollection = false,
+    typography = {},
+    webFonts = {
+      // https://fonts.bunny.net/
+      provider: 'bunny',
+      fonts: {
+        sans: 'DM Sans',
+        serif: 'DM Serif Display',
+        mono: 'DM Mono',
+      },
+    },
+    icons = {
+      scale: 1,
+      autoInstall: true,
+      // collections: {
+      //   custom: FileSystemIconLoader(
+      //     `${resolve(cwd(), iconCustomCollection)}`,
+      //     (svg) => {
+      //       // return svg.replace(/#fff/, 'currentColor')
+      //       return svg
+      //     },
+      //   ),
+      // },
+      extraProperties: {
+        'display': 'inline-block',
+        'vertical-align': 'middle',
+      },
+    },
     mergeOptions = {},
   } = options ?? {}
 
@@ -36,37 +61,11 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
     presetUno(),
   ]
 
-  icons && presets.push(presetIcons({
-    scale: 1,
-    autoInstall: true,
-    collections: {
-      custom: typeof iconCustomCollection === 'string'
-        ? FileSystemIconLoader(
-          `${resolve(cwd(), iconCustomCollection)}`,
-          (svg) => {
-            // return svg.replace(/#fff/, 'currentColor')
-            return svg
-          },
-        )
-        : undefined,
-    },
-    extraProperties: {
-      'display': 'inline-block',
-      'vertical-align': 'middle',
-    },
-  }))
+  icons && presets.push(presetIcons(icons))
 
-  webFonts && presets.push(presetWebFonts({
-    // https://fonts.bunny.net/
-    provider: 'bunny',
-    fonts: {
-      sans: 'DM Sans',
-      serif: 'DM Serif Display',
-      mono: 'DM Mono',
-    },
-  }))
+  webFonts && presets.push(presetWebFonts(webFonts))
 
-  typography && presets.push(presetTypography(typography === true ? {} : typography))
+  typography && presets.push(presetTypography(typography))
 
   const baseConfig: UserConfig = {
     presets,
@@ -96,24 +95,35 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
 interface BaseOptions {
   /**
    * Enable typography
-   * @default true
+   * @default {}
    */
-  typography?: boolean | TypographyOptions
+  typography?: false | TypographyOptions
   /**
    * Enable web fonts
-   * @default true
+   * @default
+     {
+        // https://fonts.bunny.net/
+        provider: 'bunny',
+        fonts: {
+          sans: 'DM Sans',
+          serif: 'DM Serif Display',
+          mono: 'DM Mono',
+        },
+      }
    */
-  webFonts?: boolean
+  webFonts?: false | WebFontsOptions
   /**
    * Enable icons
-   * @default true
+   * @default
+    {
+      scale: 1,
+      autoInstall: true,
+      extraProperties: {
+        'display': 'inline-block',
+        'vertical-align': 'middle',
+      },
+    }
    */
-  icons?: boolean
-  /**
-   * Enable custom icons
-   * @example 'app/assets/icons/custom'
-   * @default false
-   */
-  iconCustomCollection?: false | string
+  icons?: false | IconsOptions
   mergeOptions?: MergeOptions
 }
