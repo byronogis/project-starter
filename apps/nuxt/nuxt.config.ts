@@ -51,6 +51,7 @@ export default defineNuxtConfig({
             'uno-shortcuts',
             'nuxt-icon',
             'reset',
+            'uno-typography',
 
             // @project-starter/nuxt-layer-primo
             'nuxt-layer-primo-primevue',

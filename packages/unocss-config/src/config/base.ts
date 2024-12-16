@@ -1,5 +1,6 @@
 import type { MergeOptions } from '@project-starter/shared'
 import type { UserConfig } from 'unocss'
+import type { TypographyOptions } from 'unocss/preset-typography'
 import { resolve } from 'node:path'
 import { cwd } from 'node:process'
 import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
@@ -7,6 +8,7 @@ import { merge } from '@project-starter/shared'
 import {
   defineConfig,
   presetIcons,
+  presetTypography,
   presetUno,
   presetWebFonts,
   transformerDirectives,
@@ -23,6 +25,7 @@ import {
  */
 export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserConfig {
   const {
+    typography = true,
     webFonts = true,
     icons = true,
     iconCustomCollection = false,
@@ -63,6 +66,8 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
     },
   }))
 
+  typography && presets.push(presetTypography(typography === true ? {} : typography))
+
   const baseConfig: UserConfig = {
     presets,
     transformers: [
@@ -89,6 +94,11 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
 }
 
 interface BaseOptions {
+  /**
+   * Enable typography
+   * @default true
+   */
+  typography?: boolean | TypographyOptions
   /**
    * Enable web fonts
    * @default true
