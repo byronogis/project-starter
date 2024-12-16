@@ -3,7 +3,7 @@
 
 <template>
   <div
-    class="component-primo-action gap-2 lg:(grid grid-wrap-2.5rem) lt-lg:(flex items-center justify-start)"
+    class="component-primo-actions gap-2 lg:(grid grid-wrap-2.5rem) lt-lg:(flex items-center justify-start)"
   >
     <PrimoActionApperance />
     <PrimoActionConfigurator />

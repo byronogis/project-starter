@@ -10,7 +10,7 @@ const popoverRef = useTemplateRef('popoverRef')
       <PrimoTitle />
     </div>
 
-    <PrimoAction class="ml-auto">
+    <PrimoActions class="ml-auto">
       <PrimeButton
         aria-label="More"
         variant="text"
@@ -31,6 +31,6 @@ const popoverRef = useTemplateRef('popoverRef')
       >
         <PrimoActionExtra @hide-panel="popoverRef?.hide()" />
       </PrimePopover>
-    </PrimoAction>
+    </PrimoActions>
   </div>
 </template>

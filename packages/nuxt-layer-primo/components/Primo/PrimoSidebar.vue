@@ -9,9 +9,9 @@
       <PrimoMenu />
     </PrimeScrollPanel>
 
-    <PrimoAction class="!lt-lg:hidden">
+    <PrimoActions class="!lt-lg:hidden">
       <PrimoActionExtra />
-    </PrimoAction>
+    </PrimoActions>
   </div>
 </template>
 
