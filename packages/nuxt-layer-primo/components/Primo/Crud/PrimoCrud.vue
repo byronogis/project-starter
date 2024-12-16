@@ -107,11 +107,6 @@ const props = withDefaults(defineProps<{
    */
   disableHeaderActionBar?: boolean
   /**
-   * 是否禁用表格 header
-   * @default false
-   */
-  disableTableHeader?: boolean
-  /**
    * 是否禁用操作列
    * @default false
    */
@@ -131,7 +126,6 @@ const props = withDefaults(defineProps<{
   disableExpander: true,
   disableGlobalFilter: true,
   disableHeaderActionBar: false,
-  disableTableHeader: false,
   disableActionsColumn: false,
 })
 
@@ -362,145 +356,101 @@ defineExpose({
 </script>
 
 <template>
-  <div class="component-primo-crud [&>.card]:p-1rem">
-    <div class="card">
-      <PrimeToolbar v-if="!props.disableHeaderActionBar" class="mb-6">
-        <template #start>
+  <div class="component-primo-crud">
+    <h4 class="mb-8 h-12 text-6 font-500 leading-12">
+      {{ Utils._.upperFirst(props.itemAlias) }}
+    </h4>
+
+    <div class="grid mb-4 h-12">
+      <PrimoCrudToolbar
+        v-if="!props.disableHeaderActionBar"
+        :is-checked="!!selectedItems?.length"
+        :disable-add
+        :disabled-multi-delete
+        :disable-export
+        :disable-global-filter
+        @add="showItemDialog = true"
+        @delete-checked="confirmDeleteSelected"
+        @export="exportCSV"
+        @global-filte="handleGlobalFilter"
+      />
+    </div>
+
+    <PrimeDataTable
+      ref="dataTableRef"
+      v-model:selection="selectedItems"
+      v-model:filters="filters"
+      v-bind="{
+        ...dataTableProps,
+        value: props.items,
+        loading: props.loading,
+        first: (pagination.pageNo - props.pageNoFirst) * pagination.pageSize,
+        rows: pagination.pageSize,
+        ...($attrs?.['data-table-props'] ?? {}),
+      }"
+      @page="handlePage"
+    >
+      <!-- TODO props -->
+      <PrimeColumn
+        v-if="!props.disableMultiSelect"
+        selection-mode="multiple"
+        style="width: 3rem"
+        :exportable="false"
+        frozen
+      />
+
+      <PrimeColumn
+        v-if="!props.disableExpander"
+        frozen
+        expander
+        style="width: 5rem"
+        :exportable="false"
+      />
+
+      <slot name="columns">
+        <!-- Column -->
+      </slot>
+
+      <!-- TODO props -->
+      <PrimeColumn
+        v-if="!props.disableActionsColumn"
+        :exportable="false"
+        frozen
+        align-frozen="right"
+        class="space-x-2"
+      >
+        <template #body="slotProps">
           <PrimeButton
-            v-if="!props.disableAdd"
-            label="New"
-            severity="secondary"
-            class="mr-2"
-            @click="showItemDialog = true"
+            v-if="!props.disableEdit"
+            outlined
+            rounded
+            @click="editItem(slotProps.data)"
           >
             <template #icon>
-              <NuxtIcon name="i-prime:plus" />
+              <NuxtIcon name="i-prime:pencil" />
             </template>
           </PrimeButton>
           <PrimeButton
-            v-if="!props.disabledMultiDelete"
-            label="Delete"
-            severity="secondary"
-            :disabled="!selectedItems?.length"
-            @click="confirmDeleteSelected"
+            v-if="!props.disableDelete"
+            outlined
+            rounded
+            severity="danger"
+            @click="confirmDeleteItem(slotProps.data)"
           >
             <template #icon>
               <NuxtIcon name="i-prime:trash" />
             </template>
           </PrimeButton>
+
+          <slot name="action-extra" :item="(slotProps.data as D)" />
         </template>
+      </PrimeColumn>
 
-        <template #end>
-          <PrimeButton
-            v-if="!props.disableExport"
-            label="Export"
-            severity="secondary"
-            @click="exportCSV"
-          >
-            <template #icon>
-              <NuxtIcon name="i-prime:upload" />
-            </template>
-          </PrimeButton>
-        </template>
-      </PrimeToolbar>
-
-      <PrimeDataTable
-        ref="dataTableRef"
-        v-model:selection="selectedItems"
-        v-model:filters="filters"
-        v-bind="{
-          ...dataTableProps,
-          value: props.items,
-          loading: props.loading,
-          first: (pagination.pageNo - props.pageNoFirst) * pagination.pageSize,
-          rows: pagination.pageSize,
-          ...($attrs?.['data-table-props'] ?? {}),
-        }"
-        @page="handlePage"
-      >
-        <template v-if="!props.disableTableHeader" #header>
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <h4 class="order-1 m-0">
-              Manage {{ Utils._.upperFirst(props.itemAlias) }}
-            </h4>
-
-            <slot name="header-extra" />
-
-            <PrimeIconField v-if="!props.disableGlobalFilter" class="order-10">
-              <PrimeInputIcon>
-                <NuxtIcon name="i-prime:search" />
-              </PrimeInputIcon>
-              <PrimeInputText
-                placeholder="Search..."
-                :model-value="filters.global!.value"
-                @update:model-value="handleGlobalFilter"
-              />
-            </PrimeIconField>
-          </div>
-        </template>
-
-        <!-- TODO props -->
-        <PrimeColumn
-          v-if="!props.disableMultiSelect"
-          selection-mode="multiple"
-          style="width: 3rem"
-          :exportable="false"
-          frozen
-        />
-
-        <PrimeColumn
-          v-if="!props.disableExpander"
-          frozen
-          expander
-          style="width: 5rem"
-          :exportable="false"
-        />
-
-        <slot name="columns">
-          <!-- Column -->
-        </slot>
-
-        <!-- TODO props -->
-        <PrimeColumn
-          v-if="!props.disableActionsColumn"
-          :exportable="false"
-          frozen
-          align-frozen="right"
-          class="space-x-2"
-        >
-          <template #body="slotProps">
-            <PrimeButton
-              v-if="!props.disableEdit"
-              outlined
-              rounded
-              @click="editItem(slotProps.data)"
-            >
-              <template #icon>
-                <NuxtIcon name="i-prime:pencil" />
-              </template>
-            </PrimeButton>
-            <PrimeButton
-              v-if="!props.disableDelete"
-              outlined
-              rounded
-              severity="danger"
-              @click="confirmDeleteItem(slotProps.data)"
-            >
-              <template #icon>
-                <NuxtIcon name="i-prime:trash" />
-              </template>
-            </PrimeButton>
-
-            <slot name="action-extra" :item="(slotProps.data as D)" />
-          </template>
-        </PrimeColumn>
-
-        <!-- TODO pref v-for $slot -->
-        <template #expansion="slotProps">
-          <slot name="expansion" v-bind="slotProps" />
-        </template>
-      </PrimeDataTable>
-    </div>
+      <!-- TODO pref v-for $slot -->
+      <template #expansion="slotProps">
+        <slot name="expansion" v-bind="slotProps" />
+      </template>
+    </PrimeDataTable>
 
     <PrimeDialog
       v-model:visible="showItemDialog"
