@@ -29,9 +29,7 @@ const colorModeIconName = computed(() => {
       @click="toggle"
     >
       <template #icon>
-        <ClientOnly>
-          <NuxtIcon :name="colorModeIconName" class="size-6" />
-        </ClientOnly>
+        <NuxtIcon :name="colorModeIconName" class="size-6" />
       </template>
     </PrimeButton>
   </div>

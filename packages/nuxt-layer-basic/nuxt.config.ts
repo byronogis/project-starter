@@ -1,5 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { colorMode } from './config/colorMode'
 import { icon } from './config/icon'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
@@ -23,9 +24,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/devtools',
 
-    ['@nuxtjs/color-mode', {
-      classSuffix: '',
-    }],
+    ['@nuxtjs/color-mode', colorMode],
 
     ['@nuxt/icon', icon],
 
