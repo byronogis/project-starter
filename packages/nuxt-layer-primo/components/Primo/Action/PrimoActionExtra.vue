@@ -32,12 +32,14 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: PrimoExtraAct
     <PrimeButton
       v-else
       variant="text"
-      :rounded="!primoStore.isMobile"
       severity="secondary"
       :style="{ order: action.order }"
       :aria-label="action.label"
-      :title="primoStore.isMobile ? undefined : action.label"
-      :label="primoStore.isMobile ? action.label : undefined"
+      :label="action.label"
+      :pt="{
+        root: 'lg:rounded-full',
+        label: 'lg:hidden',
+      }"
       @click="handleTopbarExtraActionClick($event, action)"
     >
       <template #icon>
