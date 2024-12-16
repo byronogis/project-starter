@@ -93,7 +93,7 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
         <NuxtIcon v-if="item.items" name="i-prime:angle-down" class="layout-submenu-toggler" />
       </a>
 
-      <router-link
+      <NuxtLink
         v-if="item.to && !item.items"
         :class="[
           item.class,
@@ -106,7 +106,7 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
         <NuxtIcon v-if="item.icon" :name="item.icon" class="layout-menuitem-icon" />
         <span class="layout-menuitem-text">{{ item.label }}</span>
         <NuxtIcon v-if="item.items" name="i-prime:angle-down" class="layout-submenu-toggler" />
-      </router-link>
+      </NuxtLink>
 
       <Transition v-if="item.items" name="layout-submenu">
         <ul v-show="root ? true : isActiveMenu" class="layout-submenu">
