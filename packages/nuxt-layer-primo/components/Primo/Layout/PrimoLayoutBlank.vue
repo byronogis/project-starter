@@ -3,6 +3,7 @@
 //  * @vue-ignore
 //  * @see https://github.com/vuejs/core/issues/11123
 //  * @update 会造成props 丢失 到attrs 中 因此手动声明各属性类型
+//  * Unresolvable type reference or unsupported built-in utility type
 //  * TODO
 //  */
 // const props = defineProps</* @vue-ignore */ PrimoOptions>()

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import PrimeDynamicDialog from 'primevue/dynamicdialog'
-import PrimoFooter from '../PrimoFooter.vue'
 import PrimoSidebar from '../PrimoSidebar.vue'
 import PrimoTopbar from '../PrimoTopbar.vue'
 
@@ -56,12 +55,13 @@ const containerClass = computed(() => {
       <div class="layout-main">
         <slot />
       </div>
-
+      <!--
       <PrimoFooter>
         <template #default>
           <slot name="footer" />
         </template>
       </PrimoFooter>
+       -->
     </div>
     <div class="layout-mask animate-fade-in animate-duration-150" />
 
