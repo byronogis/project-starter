@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="layout-sidebar component-primo-sidebar grid grid-rows-[auto_1fr_auto] gap-2">
+  <div class="layout-sidebar component-primo-sidebar grid grid-rows-[auto_1fr_auto] gap-2 lg:p-0">
     <PrimoTitle class="!lt-lg:hidden" />
 
     <PrimeScrollPanel class="min-h-0">
