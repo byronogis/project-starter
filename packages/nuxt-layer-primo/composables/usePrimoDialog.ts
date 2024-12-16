@@ -1,3 +1,4 @@
+import type { DialogProps } from 'primevue/dialog'
 import { NuxtIcon } from '#components'
 import PrimeButton from 'primevue/button'
 
@@ -11,10 +12,14 @@ export function usePrimoDialog() {
       message,
       header = 'Dialog',
       confirmFn = async () => {},
+      cancelFn = async () => {},
+      extraProps = {},
     }: {
       message: string | VNode
       header?: string
       confirmFn?: PrimoConfirmDialogConfirmFn
+      cancelFn?: () => void
+      extraProps?: DialogProps
     }) => {
       const _content = typeof message === 'string'
         ? h('span', null, message)
@@ -31,6 +36,7 @@ export function usePrimoDialog() {
             props: {
               header,
               modal: true,
+              ...extraProps,
             },
             onClose(options) {
               const { data } = options ?? {}
@@ -49,6 +55,7 @@ export function usePrimoDialog() {
                   label: 'No',
                   text: true,
                   onClick: () => {
+                    cancelFn()
                     dialogRef.close()
                   },
                 }, {
