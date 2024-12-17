@@ -88,7 +88,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    viewTransition: true,
+    viewTransition: !true,
     /**
      * '@vite-pwa/nuxt' related
      * when using generate, payload js assets included in sw(service-worker) precache manifest
