@@ -46,7 +46,7 @@ export function usePrimoDialog() {
               }
               else {
                 _controller.abort()
-                reject(new Error('User canceled'))
+                reject(new Error(`[PrimoDialog canceled] ${header}`))
               }
             },
             templates: {
