@@ -44,6 +44,7 @@ describe('http', () => {
 
   describe('constructor', () => {
     it('不传配置时应使用默认配置', () => {
+      // @ts-expect-error '_http' is declared but its value is never read.
       const _http = new HTTP()
       expect(axios.create).toHaveBeenCalledWith({})
     })
@@ -54,6 +55,7 @@ describe('http', () => {
         timeout: 5000,
         headers: { 'X-Custom-Header': 'test' },
       }
+      // @ts-expect-error '_http' is declared but its value is never read.
       const _http = new HTTP(config)
       expect(axios.create).toHaveBeenCalledWith(config)
     })
