@@ -36,11 +36,6 @@ export function usePrimoStore(options?: PrimoOptions) {
     menuMobileActive: false,
     menuDesktopInactive: false,
 
-    profileSidebarVisible: false,
-    configSidebarVisible: false,
-
-    menuHoverActive: false,
-
     activeMenuItem: null,
   })
 
@@ -93,7 +88,6 @@ export function usePrimoStore(options?: PrimoOptions) {
   function resetMenu() {
     state.value.menuDesktopInactive = false
     state.value.menuMobileActive = false
-    state.value.menuHoverActive = false
   };
 
   const styleClass = {

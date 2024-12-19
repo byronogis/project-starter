@@ -31,8 +31,5 @@ export interface PrimoConfig {
 export interface PrimoState {
   menuDesktopInactive: boolean
   menuMobileActive: boolean
-  profileSidebarVisible: boolean
-  configSidebarVisible: boolean
-  menuHoverActive: boolean
   activeMenuItem: string | null
 }
