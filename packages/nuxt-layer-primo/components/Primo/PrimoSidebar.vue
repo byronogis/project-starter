@@ -3,7 +3,9 @@
 
 <template>
   <div class="layout-sidebar component-primo-sidebar">
-    <PrimoMenu />
+    <PrimeScrollPanel class="h-full max-w-full">
+      <PrimoMenu />
+    </PrimeScrollPanel>
   </div>
 </template>
 

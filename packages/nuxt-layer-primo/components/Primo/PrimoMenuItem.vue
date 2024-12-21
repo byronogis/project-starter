@@ -79,7 +79,7 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
     }"
   >
     <template v-if="!item.hidden">
-      <div v-if="root" class="layout-menuitem-root-text">
+      <div v-if="root" class="layout-menuitem-root-text truncate">
         {{ item.label }}
       </div>
 
@@ -91,8 +91,8 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
         tabindex="0"
         @click="itemClick($event, item, index)"
       >
-        <i :class="item.icon" class="layout-menuitem-icon" />
-        <span class="layout-menuitem-text">{{ item.label }}</span>
+        <NuxtIcon v-if="item.icon" :name="item.icon" class="layout-menuitem-icon size-5 flex-none" />
+        <span class="layout-menuitem-text truncate">{{ item.label }}</span>
         <NuxtIcon v-if="item.items" name="i-prime:angle-down" class="layout-submenu-toggler size-5" />
       </a>
 
@@ -106,8 +106,8 @@ function checkActiveRoute(item: PrimoSidebarMenuItem) {
         :to="item.to"
         @click="itemClick($event, item, index)"
       >
-        <NuxtIcon v-if="item.icon" :name="item.icon" class="layout-menuitem-icon size-5" />
-        <span class="layout-menuitem-text">{{ item.label }}</span>
+        <NuxtIcon v-if="item.icon" :name="item.icon" class="layout-menuitem-icon size-5 flex-none" />
+        <span class="layout-menuitem-text truncate">{{ item.label }}</span>
         <NuxtIcon v-if="item.items" name="i-prime:angle-down" class="layout-submenu-toggler size-5" />
       </NuxtLink>
 
