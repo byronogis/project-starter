@@ -5,6 +5,12 @@ interface Props {
   disabledMultiDelete?: boolean
   disableExport?: boolean
   disableGlobalFilter?: boolean
+  order?: {
+    add?: number
+    delete?: number
+    export?: number
+    globalFilter?: number
+  }
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -13,6 +19,12 @@ const props = withDefaults(defineProps<Props>(), {
   disabledMultiDelete: false,
   disableExport: false,
   disableGlobalFilter: false,
+  order: () => ({
+    add: 0,
+    delete: 1,
+    export: 2,
+    globalFilter: 3,
+  }),
 })
 
 const emits = defineEmits<{
@@ -33,8 +45,8 @@ watch(globalFilterText, (value) => {
     <PrimeButton
       v-if="!props.disableAdd"
       label="New"
+      :class="`order-${props.order.add}`"
       severity="secondary"
-      class="mr-2"
       @click="emits('add')"
     >
       <template #icon>
@@ -45,6 +57,7 @@ watch(globalFilterText, (value) => {
     <PrimeButton
       v-if="!props.disabledMultiDelete"
       label="Delete"
+      :class="`order-${props.order.delete}`"
       severity="secondary"
       :disabled="!props.isChecked"
       @click="emits('deleteChecked')"
@@ -57,6 +70,7 @@ watch(globalFilterText, (value) => {
     <PrimeButton
       v-if="!props.disableExport"
       label="Export"
+      :class="`order-${props.order.export}`"
       severity="secondary"
       @click="emits('export')"
     >
@@ -65,7 +79,11 @@ watch(globalFilterText, (value) => {
       </template>
     </PrimeButton>
 
-    <PrimeIconField v-if="!props.disableGlobalFilter" class="order-101">
+    <PrimeIconField
+      v-if="!props.disableGlobalFilter"
+      class="order-101"
+      :class="`order-${props.order.globalFilter}`"
+    >
       <PrimeInputIcon>
         <NuxtIcon name="i-prime:search" />
       </PrimeInputIcon>
@@ -74,8 +92,6 @@ watch(globalFilterText, (value) => {
         placeholder="Search..."
       />
     </PrimeIconField>
-
-    <i class="order-100 flex-1" />
 
     <slot name="extra" />
   </div>

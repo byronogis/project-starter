@@ -33,8 +33,9 @@ export function usePrimoStore(options?: PrimoOptions) {
    * 状态
    */
   const state = useLocalStorage<PrimoState>('primo-state', {
-    menuMobileActive: false,
-    menuDesktopInactive: false,
+    staticMenuMobileActive: false,
+    staticMenuDesktopInactive: false,
+    overlayMenuActive: false,
 
     activeMenuItem: null,
   })
@@ -73,11 +74,14 @@ export function usePrimoStore(options?: PrimoOptions) {
   }
 
   function onMenuToggle() {
+    if (config.value.menuMode === 'overlay') {
+      state.value.overlayMenuActive = !state.value.overlayMenuActive
+    }
     if (toValue(isMobile)) {
-      state.value.menuMobileActive = !state.value.menuMobileActive
+      state.value.staticMenuMobileActive = !state.value.staticMenuMobileActive
     }
     else {
-      state.value.menuDesktopInactive = !state.value.menuDesktopInactive
+      state.value.staticMenuDesktopInactive = !state.value.staticMenuDesktopInactive
     }
   };
 
@@ -86,8 +90,8 @@ export function usePrimoStore(options?: PrimoOptions) {
   };
 
   function resetMenu() {
-    state.value.menuDesktopInactive = false
-    state.value.menuMobileActive = false
+    state.value.overlayMenuActive = false
+    state.value.staticMenuMobileActive = false
   };
 
   const styleClass = {

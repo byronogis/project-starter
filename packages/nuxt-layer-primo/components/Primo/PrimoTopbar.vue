@@ -4,17 +4,16 @@ const popoverRef = useTemplateRef('popoverRef')
 
 <template>
   <div class="layout-topbar component-primo-topbar">
-    <div class="layout-topbar-logo-container">
-      <PrimoActionToogle />
+    <PrimoActionToogle />
 
-      <PrimoTitle />
-    </div>
+    <PrimoTitle />
 
     <PrimoActions class="ml-auto">
       <PrimeButton
         aria-label="More"
         variant="text"
         rounded
+        class="lg:hidden"
         severity="secondary"
         @click="popoverRef?.toggle"
       >
@@ -22,6 +21,10 @@ const popoverRef = useTemplateRef('popoverRef')
           <NuxtIcon name="i-prime:ellipsis-v" class="size-6" />
         </template>
       </PrimeButton>
+
+      <div class="hidden lg:block">
+        <PrimoActionExtra @hide-panel="popoverRef?.hide()" />
+      </div>
 
       <PrimePopover
         ref="popoverRef"

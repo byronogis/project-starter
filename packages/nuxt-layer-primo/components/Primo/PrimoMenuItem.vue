@@ -44,7 +44,10 @@ function itemClick(event: any, item: PrimoSidebarMenuItem, _index?: number) {
     return
   }
 
-  if ((item.to || item.url) && primoStore.isMobile) {
+  if (
+    (item.to || item.url)
+    && (primoStore.state.staticMenuMobileActive || primoStore.state.overlayMenuActive)
+  ) {
     primoStore.onMenuToggle()
   }
 

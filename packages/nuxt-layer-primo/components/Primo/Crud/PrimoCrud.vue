@@ -356,25 +356,27 @@ defineExpose({
 </script>
 
 <template>
-  <div class="component-primo-crud">
-    <h4 class="mb-8 h-12 text-6 font-500 leading-12">
-      {{ Utils._.upperFirst(props.itemAlias) }}
-    </h4>
+  <div class="component-primo-crud card">
+    <PrimoCrudToolbar
+      v-if="!props.disableHeaderActionBar"
+      :is-checked="!!selectedItems?.length"
+      :disable-add
+      :disabled-multi-delete
+      :disable-export
+      :disable-global-filter
+      @add="showItemDialog = true"
+      @delete-checked="confirmDeleteSelected"
+      @export="exportCSV"
+      @global-filte="handleGlobalFilter"
+    >
+      <template #extra>
+        <h4 class="order--2 h-12 text-6 font-500 leading-12">
+          {{ Utils._.upperFirst(props.itemAlias) }}
+        </h4>
 
-    <div class="grid mb-4 h-12">
-      <PrimoCrudToolbar
-        v-if="!props.disableHeaderActionBar"
-        :is-checked="!!selectedItems?.length"
-        :disable-add
-        :disabled-multi-delete
-        :disable-export
-        :disable-global-filter
-        @add="showItemDialog = true"
-        @delete-checked="confirmDeleteSelected"
-        @export="exportCSV"
-        @global-filte="handleGlobalFilter"
-      />
-    </div>
+        <i class="order--1 flex-1" />
+      </template>
+    </PrimoCrudToolbar>
 
     <PrimeDataTable
       ref="dataTableRef"

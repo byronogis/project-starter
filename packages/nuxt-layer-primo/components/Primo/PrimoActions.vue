@@ -3,7 +3,7 @@
 
 <template>
   <div
-    class="component-primo-actions"
+    class="component-primo-actions flex items-center justify-start gap-2"
   >
     <PrimoActionApperance />
     <PrimoActionConfigurator />
@@ -12,12 +12,4 @@
   </div>
 </template>
 
-<style scoped lang="postcss">
-.component-primo-actions {
-  @apply gap-2 overflow-hidden;
-
-  @apply lg:(grid grid-wrap-2.5rem [&>*]:place-self-center);
-
-  @apply lt-lg:(flex items-center justify-start);
-}
-</style>
+<style scoped lang="postcss"></style>

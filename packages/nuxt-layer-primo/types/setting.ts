@@ -26,10 +26,12 @@ export interface PrimoConfig {
   preset: PrimoThemePresetName
   primary: PrimoPrimaryColorName
   surface: PrimoSurfaceName | null
+  menuMode: PrimoMenuMode
 }
 
 export interface PrimoState {
-  menuDesktopInactive: boolean
-  menuMobileActive: boolean
+  staticMenuDesktopInactive: boolean
+  staticMenuMobileActive: boolean
+  overlayMenuActive: boolean
   activeMenuItem: string | null
 }

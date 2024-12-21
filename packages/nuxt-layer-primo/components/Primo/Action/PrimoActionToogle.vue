@@ -13,9 +13,7 @@ const primoStore = inject(PrimoStoreInjectionKey)!
       @click="primoStore.onMenuToggle"
     >
       <template #icon>
-        <slot name="icon">
-          <NuxtIcon name="i-prime:bars" class="size-6" />
-        </slot>
+        <NuxtIcon name="i-prime:bars" class="size-6" />
       </template>
     </PrimeButton>
   </div>
