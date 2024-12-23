@@ -1,10 +1,10 @@
-import type { RequestConfig } from '@project-starter/shared'
+import type { BaseExampleHResult, ExampleRequestConfig } from './index'
 import { exampleHttp } from './index'
 
 /**
  * 查询列表 example
  */
-export function getExampleListAPI(data: GetExampleListData, extraConfig: RequestConfig = {}) {
+export function getExampleListAPI(data: GetExampleListData, extraConfig: ExampleRequestConfig = {}) {
   return exampleHttp.request<GetExampleListData, GetExampleListResult>({
     url: '/example',
     method: 'GET',
@@ -19,7 +19,6 @@ interface GetExampleListData {
   // ...
 }
 
-interface GetExampleListResult {
-  code: number
+interface GetExampleListResult extends BaseExampleHResult {
   data: ExampleItem[]
 }

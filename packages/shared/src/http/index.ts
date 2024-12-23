@@ -7,7 +7,7 @@ import type {
 } from 'axios'
 import axios from 'axios'
 
-export class HTTP {
+export class HTTP<Result = any, ExtraConfig = any> {
   static axios = axios
 
   static axiosDefaultTransformRequests = Array.isArray(axios.defaults.transformRequest)
@@ -27,7 +27,7 @@ export class HTTP {
   /**
    * 发送请求
    */
-  request<T = any, R = any>(config: RequestConfig<T>): Promise<Response<R, T>> {
+  request<T = any, R = Result, E = ExtraConfig>(config: RequestConfig<T, E>): Promise<Response<R, T, E>> {
     return this.instance.request(config)
   }
 }
@@ -42,24 +42,24 @@ interface CreateHTTPConfig extends CreateAxiosDefaults {
 /**
  * 额外的请求配置
  */
-export interface ExtraRequestConfig {
+export type ExtraRequestConfig<E = any> = {
   // ...
-}
+} & E
 
 /**
  * 可接收传入的请求配置
  */
-export type RequestConfig<T = any> = AxiosRequestConfig<T> & ExtraRequestConfig
+export type RequestConfig<T = any, E = any> = AxiosRequestConfig<T> & ExtraRequestConfig<E>
 
 /**
  * 经过 axios 处理后的传入的请求配置 \
  * 1. 添加了处理后的 headers \
- * 2. 自行扩展了一些属性 \
+ * 2. 可自行扩展一些属性 \
  * @see ExtraRequestConfig
  */
-type InternalRequestConfig<T = any> = InternalAxiosRequestConfig<T> & Required<ExtraRequestConfig>
+type InternalRequestConfig<T = any, E = any> = InternalAxiosRequestConfig<T> & Partial<ExtraRequestConfig<E>>
 
 /**
  * 经过 axios 处理后的响应 \
  */
-type Response<R = any, T = any> = AxiosResponse<R, T> & { config: InternalRequestConfig<T> }
+export type Response<R = any, T = any, E = any> = AxiosResponse<R, T> & { config: InternalRequestConfig<T, E> }

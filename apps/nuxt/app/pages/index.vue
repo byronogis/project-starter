@@ -17,13 +17,9 @@ async function dialog() {
       h('span', null, 'Hello World!'),
     ]),
     header: 'Hello World!',
-    async confirmFn(p) {
+    async confirmFn(_p) {
       await Utils._.delay(1000)
-      return await Utils.HTTP.axios({
-        url: '/api/example',
-        method: 'GET',
-        signal: p.signal,
-      })
+      return true
     },
   })
   console.info(res)
