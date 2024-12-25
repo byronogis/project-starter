@@ -1,8 +1,8 @@
 import { pwa } from './app/config'
-import { appCST } from './app/constants/app'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // see https://nuxt.com/docs/getting-started/configuration#environment-overrides
   $production: {
     app: {
       head: {
@@ -21,48 +21,6 @@ export default defineNuxtConfig({
     },
   },
   app: {
-    head: {
-      title: appCST.title,
-      link: [
-        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-      ],
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover' },
-        { name: 'description', content: appCST.description },
-        { name: 'keywords', content: appCST.keywords },
-        { name: 'author', content: appCST.author },
-        { name: 'mobile-web-app-capable', content: 'yes' },
-        { name: 'apple-mobile-web-app-title', content: appCST.name },
-        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
-        { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
-        { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
-      ],
-      style: [
-        {
-          /**
-           * 在此处定义 @layer, 保证顺序完全与期望一致
-           * @see ./app/assets/styles/index.css
-           */
-          textContent: ['@layer', [
-            'reset',
-            'uno-preflights',
-            'uno-shortcuts',
-            'uno-typography',
-            'nuxt-icon',
-
-            'nuxt-layer-basic',
-            'nuxt-layer-primo',
-
-            'base',
-            'transition',
-            'uno-default',
-          ].join(', '), ';'].join(' '),
-        },
-      ],
-    },
     pageTransition: { name: 'fade', mode: 'out-in' },
     layoutTransition: { name: 'fade', mode: 'out-in' },
   },
