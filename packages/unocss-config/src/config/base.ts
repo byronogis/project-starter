@@ -2,6 +2,7 @@ import type { MergeOptions } from '@project-starter/shared'
 import type { UserConfig } from 'unocss'
 import type { IconsOptions } from 'unocss/preset-icons'
 import type { TypographyOptions } from 'unocss/preset-typography'
+import type { PresetUnoOptions } from 'unocss/preset-uno'
 import type { WebFontsOptions } from 'unocss/preset-web-fonts'
 import { merge } from '@project-starter/shared'
 import {
@@ -27,6 +28,7 @@ import {
  */
 export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserConfig {
   const {
+    uno = {},
     typography = {},
     webFonts = {
       // https://fonts.bunny.net/
@@ -57,14 +59,11 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
     mergeOptions = {},
   } = options ?? {}
 
-  const presets = [
-    presetUno(),
-  ]
+  const presets = []
 
+  uno && presets.push(presetUno(uno))
   icons && presets.push(presetIcons(icons))
-
   webFonts && presets.push(presetWebFonts(webFonts))
-
   typography && presets.push(presetTypography(typography))
 
   const baseConfig: UserConfig = {
@@ -93,6 +92,11 @@ export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserC
 }
 
 interface BaseOptions {
+  /**
+   * Enable presetUno
+   * @default {}
+   */
+  uno?: false | PresetUnoOptions
   /**
    * Enable typography
    * @default {}
