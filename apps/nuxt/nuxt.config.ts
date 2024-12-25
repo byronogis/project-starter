@@ -47,16 +47,14 @@ export default defineNuxtConfig({
            * @see ./app/assets/styles/index.css
            */
           textContent: ['@layer', [
+            'reset',
             'uno-preflights',
             'uno-shortcuts',
-            'nuxt-icon',
-            'reset',
             'uno-typography',
+            'nuxt-icon',
 
-            // @project-starter/nuxt-layer-primo
-            'nuxt-layer-primo-primevue',
-            'uno-nuxt-layer-primo-unocss',
-            'nuxt-layer-primo-layout',
+            'nuxt-layer-basic',
+            'nuxt-layer-primo',
 
             'base',
             'transition',

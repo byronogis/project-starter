@@ -96,7 +96,7 @@ export default defineConfig({
     ['backface-hidden', {
       'backface-visibility': 'hidden',
     }],
-  ].map(i => [...i, { layer: 'nuxt-layer-primo-unocss' }] as any),
+  ].map(i => [...i, { layer: 'nuxt-layer-primo.unocss' }] as any),
   safelist: [
     'i-prime:bars',
     'i-prime:ellipsis-v',

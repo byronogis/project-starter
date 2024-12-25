@@ -1,24 +1,26 @@
-/* @see packages/shared/appearance/dynamic */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-::view-transition-old(root) {
-  z-index: 1;
-}
-::view-transition-new(root) {
-  z-index: 2147483646;
-}
-.dark::view-transition-old(root) {
-  z-index: 2147483646;
-}
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
+@layer nuxt-layer-basic {
+  /* @see packages/shared/appearance/dynamic */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  ::view-transition-new(root) {
+    z-index: 2147483646;
+  }
+  .dark::view-transition-old(root) {
+    z-index: 2147483646;
+  }
+  .dark::view-transition-new(root) {
+    z-index: 1;
+  }
 
-/*@see ~/config/icon */
-.nuxt-icon {
-  display: inline-block;
-  vertical-align: middle;
+  /*@see ~/config/icon */
+  .nuxt-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }

@@ -17,7 +17,7 @@ export const primevue: NuxtOptions['primevue'] = {
       preset: CustomPreset,
       options: {
         cssLayer: {
-          name: 'nuxt-layer-primo-primevue',
+          name: 'nuxt-layer-primo.primevue',
         },
         darkModeSelector: 'html.dark',
       },

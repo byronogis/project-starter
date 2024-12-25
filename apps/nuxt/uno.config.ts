@@ -8,5 +8,10 @@ export default mergeConfigs([
     {
       icons: false,
     },
+    {
+      outputToCssLayers: {
+        cssLayerName: layer => layer.startsWith('nuxt-layer-') ? layer : `uno-${layer}`,
+      },
+    },
   ) as any,
 ])
