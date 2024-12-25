@@ -1,7 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { colorMode } from './config/colorMode'
-import { icon } from './config/icon'
+import { colorMode, icon } from './config'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 

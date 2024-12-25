@@ -1,6 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { primevue } from './config/primevue'
+import { primevue, veeValidate } from './config'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
@@ -37,13 +37,6 @@ export default defineNuxtConfig({
   modules: [
     ['@primevue/nuxt-module', primevue],
 
-    ['@vee-validate/nuxt', {
-      componentNames: {
-        Form: 'VeeForm',
-        Field: 'VeeField',
-        FieldArray: 'VeeFieldArray',
-        ErrorMessage: 'VeeErrorMessage',
-      },
-    }],
+    ['@vee-validate/nuxt', veeValidate],
   ],
 })
