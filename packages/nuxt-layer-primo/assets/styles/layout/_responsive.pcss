@@ -1,13 +1,13 @@
-@media screen and (min-width: 1960px) {
+@screen 2xl {
   .layout-main,
   .landing-wrapper {
-    width: 1504px;
+    width: min(calc(theme('breakpoints.2xl') * 0.8), 100%);
     margin-left: auto !important;
     margin-right: auto !important;
   }
 }
 
-@media (min-width: 992px) {
+@screen lg {
   .layout-wrapper {
     &.layout-overlay {
       .layout-main-container {
@@ -63,7 +63,7 @@
   }
 }
 
-@media (max-width: 991px) {
+@screen lt-lg {
   .blocked-scroll {
     overflow: hidden;
   }
