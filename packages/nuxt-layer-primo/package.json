@@ -12,10 +12,6 @@
     "clear": "rm -rf .nuxt .output",
     "postinstall": "nuxi prepare"
   },
-  "peerDependencies": {
-    "postcss-mixins": "^11.0.1",
-    "postcss-nesting": "^13.0.0"
-  },
   "dependencies": {
     "@iconify-json/prime": "catalog:",
     "@nuxt/schema": "catalog:",

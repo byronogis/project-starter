@@ -107,20 +107,5 @@ export default defineNuxtConfig({
     }],
   ],
 
-  /**
-   * By default, Nuxt comes with the following plugins already pre-configured:
-   * postcss-import: Improves the @import rule
-   * postcss-url: Transforms url() statements
-   * autoprefixer: Automatically adds vendor prefixes
-   * cssnano: Minification and purge
-   * @see https://nuxt.com/docs/getting-started/styling#using-postcss
-   */
-  postcss: {
-    plugins: {
-      'postcss-mixins': {},
-      'postcss-nesting': {},
-    },
-  },
-
   // ssr: false,
 })

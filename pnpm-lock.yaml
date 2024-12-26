@@ -371,6 +371,12 @@ importers:
       '@vueuse/nuxt':
         specifier: 'catalog:'
         version: 12.2.0(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.4.1)(@types/node@22.7.4)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.28.1)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(typescript@5.7.2)(vite@5.4.11(@types/node@22.7.4)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.28.1)(typescript@5.7.2)
+      postcss-mixins:
+        specifier: 'catalog:'
+        version: 11.0.3(postcss@8.4.49)
+      postcss-nesting:
+        specifier: 'catalog:'
+        version: 13.0.1(postcss@8.4.49)
       vue-component-type-helpers:
         specifier: 'catalog:'
         version: 2.2.0
@@ -441,12 +447,6 @@ importers:
       nprogress:
         specifier: 'catalog:'
         version: 0.2.0(patch_hash=tznqcri2c4pv4hu6n62lp5h3bq)
-      postcss-mixins:
-        specifier: ^11.0.1
-        version: 11.0.3(postcss@8.4.49)
-      postcss-nesting:
-        specifier: ^13.0.0
-        version: 13.0.1(postcss@8.4.49)
       primevue:
         specifier: 'catalog:'
         version: 4.2.4(vue@3.5.13(typescript@5.7.2))
