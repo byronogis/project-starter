@@ -29,8 +29,6 @@
     "@vite-pwa/nuxt": "catalog:",
     "nuxt": "catalog:",
     "pinia": "catalog:",
-    "postcss-mixins": "catalog:",
-    "postcss-nesting": "catalog:",
     "typescript": "catalog:",
     "unocss": "catalog:",
     "vue-tsc": "catalog:"

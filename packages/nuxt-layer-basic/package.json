@@ -17,8 +17,7 @@
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",
     "@vueuse/nuxt": "catalog:",
-    "postcss-mixins": "catalog:",
-    "postcss-nesting": "catalog:",
+    "postcss-preset-env": "catalog:",
     "vue-component-type-helpers": "catalog:",
     "zod": "catalog:"
   },
