@@ -87,17 +87,6 @@ export default defineNuxtConfig({
       storesDirs: ['./app/stores'],
     }],
 
-    ['@nuxt/eslint', {
-      config: {
-        standalone: false,
-      },
-    }],
-
-    ['@unocss/nuxt', {
-      // ...
-      nuxtLayers: true,
-    }],
-
     ['@vite-pwa/nuxt', pwa],
 
     ['@hebilicious/vue-query-nuxt', {

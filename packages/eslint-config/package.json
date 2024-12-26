@@ -24,6 +24,7 @@
     "dev": "unbuild",
     "build": "unbuild",
     "check-types": "tsc --noEmit",
+    "clear": "rm -rf dist",
     "postinstall": "pnpm build"
   },
   "dependencies": {

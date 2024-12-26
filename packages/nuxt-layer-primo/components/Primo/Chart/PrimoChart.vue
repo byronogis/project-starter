@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defu } from 'defu'
 import PrimeChart from 'primevue/chart'
 
 const props = withDefaults(defineProps<{
@@ -54,7 +53,8 @@ function setColorOptions() {
     ? {}
     : PrimoChartOptionsGeneratorsCST[props.type](_generateOptions)
 
-  options.value = defu(
+  options.value = Utils.merge(
+    {},
     props.options,
     {
       plugins: {

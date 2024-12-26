@@ -18,7 +18,7 @@
     "@primevue/nuxt-module": "catalog:",
     "@primevue/themes": "catalog:",
     "@project-starter/nuxt-layer-basic": "workspace:*",
-    "@project-starter/shared": "workspace:*",
+    "@project-starter/unocss-config": "workspace:*",
     "@types/nprogress": "catalog:",
     "@vee-validate/nuxt": "catalog:",
     "@vee-validate/zod": "catalog:",

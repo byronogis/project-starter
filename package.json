@@ -17,15 +17,15 @@
     "check-types": "turbo run check-types",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
-    "clear": "turbo run clear && rimraf ./**/dist ./**/node_modules ./**/.turbo",
+    "clear": "turbo run clear && rimraf ./**/node_modules ./**/.turbo",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@project-starter/eslint-config": "workspace:*",
+    "@project-starter/shared": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
     "@vitest/coverage-v8": "catalog:",
-    "defu": "catalog:",
     "eslint": "catalog:",
     "husky": "catalog:",
     "jiti": "catalog:",
