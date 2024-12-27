@@ -26,7 +26,7 @@ import {
  * @returns
  * The merged configuration
  */
-export function withBase(options?: BaseOptions, ...configs: UserConfig[]): UserConfig {
+export function base(options?: BaseOptions, ...configs: UserConfig[]): UserConfig {
   const {
     uno = {},
     typography = {},

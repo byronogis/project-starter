@@ -1,5 +1,5 @@
 // @ts-check
-import { withBase } from '@project-starter/eslint-config/base'
+import { base } from '@project-starter/eslint-config'
 import nuxt from './.nuxt/eslint.config.mjs'
 
-export default nuxt(withBase())
+export default nuxt(base())

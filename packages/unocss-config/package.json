@@ -7,11 +7,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    },
-    "./base": {
-      "types": "./dist/config/base.d.ts",
-      "import": "./dist/config/base.mjs",
-      "require": "./dist/config/base.cjs"
     }
   },
   "main": "./dist/index.cjs",

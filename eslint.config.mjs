@@ -1,7 +1,7 @@
 // @ts-check
-import { withBase } from '@project-starter/eslint-config/base'
+import { base } from '@project-starter/eslint-config'
 
-export default withBase(
+export default base(
   {},
   {
     ignores: [

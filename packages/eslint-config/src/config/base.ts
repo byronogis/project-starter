@@ -13,7 +13,7 @@ export type { FlatConfigComposer } from 'eslint-flat-config-utils'
  * @returns
  * The merged configuration
  */
-export function withBase(
+export function base(
   options?: BaseOptions,
   ...configs: Parameters<typeof antfu>[1][]
 ) {
