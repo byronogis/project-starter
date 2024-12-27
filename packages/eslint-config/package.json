@@ -2,37 +2,17 @@
   "name": "@project-starter/eslint-config",
   "type": "module",
   "private": true,
+  "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
+    ".": "./src/index.ts"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "dev": "unbuild",
-    "build": "unbuild",
-    "check-types": "tsc --noEmit",
-    "clear": "rm -rf dist",
-    "postinstall": "pnpm build"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@antfu/eslint-config": "catalog:",
-    "@project-starter/shared": "workspace:*",
     "@unocss/eslint-plugin": "catalog:",
-    "eslint": "catalog:",
     "eslint-flat-config-utils": "catalog:",
     "eslint-plugin-format": "catalog:"
-  },
-  "devDependencies": {
-    "@project-starter/typescript-config": "workspace:*",
-    "typescript": "catalog:",
-    "unbuild": "catalog:"
   }
 }

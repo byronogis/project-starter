@@ -24,6 +24,7 @@
   "devDependencies": {
     "@project-starter/eslint-config": "workspace:*",
     "@project-starter/shared": "workspace:*",
+    "@project-starter/typescript-config": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
     "@vitest/coverage-v8": "catalog:",
     "eslint": "catalog:",
@@ -32,6 +33,8 @@
     "lint-staged": "catalog:",
     "rimraf": "catalog:",
     "turbo": "latest",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
     "vitest": "catalog:"
   },
   "pnpm": {

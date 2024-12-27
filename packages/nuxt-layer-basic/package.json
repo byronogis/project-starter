@@ -15,8 +15,6 @@
     "@nuxt/icon": "catalog:",
     "@nuxt/schema": "catalog:",
     "@nuxtjs/color-mode": "catalog:",
-    "@project-starter/eslint-config": "workspace:*",
-    "@project-starter/unocss-config": "workspace:*",
     "@unocss/nuxt": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",
@@ -27,7 +25,6 @@
   },
   "devDependencies": {
     "nuxt": "catalog:",
-    "typescript": "catalog:",
     "vue-tsc": "catalog:"
   }
 }

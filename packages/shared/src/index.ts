@@ -1,12 +1,12 @@
-export * from './_'
-export * from './appearance'
-export * from './color'
-export * from './date'
-export * from './form'
-export * from './http'
+export * as _ from './_'
+export * as appearance from './appearance'
+export * as color from './color'
+export * as date from './date'
+export * as form from './form'
+export * as http from './http'
 export * from './logger'
 export * from './merge'
-export * from './timer'
+export * as timer from './timer'
 
 /**
  * 安全的 JSON 解析 \

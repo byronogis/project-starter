@@ -2,6 +2,7 @@
   "name": "@project-starter/shared",
   "type": "module",
   "private": true,
+  "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
     "./*": "./src/*.ts"
@@ -11,21 +12,16 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/tinycolor2": "catalog:",
+    "@ctrl/tinycolor": "catalog:",
     "axios": "catalog:",
     "consola": "catalog:",
-    "dayjs": "catalog:",
+    "date-fns": "catalog:",
     "defu": "catalog:",
     "es-toolkit": "catalog:",
-    "tinycolor2": "catalog:",
     "type-fest": "catalog:",
     "vee-validate": "catalog:",
     "vue": "catalog:",
     "worker-timers": "catalog:",
     "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@project-starter/typescript-config": "workspace:*",
-    "typescript": "catalog:"
   }
 }

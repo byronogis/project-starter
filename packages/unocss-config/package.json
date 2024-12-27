@@ -2,36 +2,15 @@
   "name": "@project-starter/unocss-config",
   "type": "module",
   "private": true,
+  "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
+    ".": "./src/index.ts"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "dev": "unbuild",
-    "build": "unbuild",
-    "check-types": "tsc --noEmit",
-    "clear": "rm -rf dist",
-    "postinstall": "pnpm build"
+    "check-types": "tsc --noEmit"
   },
   "peerDependencies": {
-    "unocss": "catalog:"
-  },
-  "dependencies": {
     "@iconify/utils": "catalog:",
-    "@project-starter/shared": "workspace:*"
-  },
-  "devDependencies": {
-    "@project-starter/typescript-config": "workspace:*",
-    "typescript": "catalog:",
-    "unbuild": "catalog:"
+    "unocss": "catalog:"
   }
 }

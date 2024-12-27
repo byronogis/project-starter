@@ -4,7 +4,7 @@ import { dynamic } from './dynamic'
  * Credit to [@hooray](https://github.com/hooray)
  * @see https://github.com/vuejs/vitepress/pull/2347
  */
-export function toogleAppearance(event: MouseEvent, options: SharedAppearanceOptions & {
+export function toogle(event: MouseEvent, options: SharedAppearanceOptions & {
   /**
    * @default 'dynamic'
    */

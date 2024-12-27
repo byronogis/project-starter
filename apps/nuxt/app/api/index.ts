@@ -1,5 +1,5 @@
-import type { RequestConfig, Response } from '@project-starter/shared'
-import { HTTP } from '@project-starter/shared'
+import type { RequestConfig, Response } from '@project-starter/shared/http/index'
+import { HTTP } from '@project-starter/shared/http/index'
 
 /**
  * 初始化示例

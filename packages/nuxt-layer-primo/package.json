@@ -17,8 +17,6 @@
     "@nuxt/schema": "catalog:",
     "@primevue/nuxt-module": "catalog:",
     "@primevue/themes": "catalog:",
-    "@project-starter/nuxt-layer-basic": "workspace:*",
-    "@project-starter/unocss-config": "workspace:*",
     "@types/nprogress": "catalog:",
     "@vee-validate/nuxt": "catalog:",
     "@vee-validate/zod": "catalog:",
@@ -38,7 +36,6 @@
   },
   "devDependencies": {
     "nuxt": "catalog:",
-    "typescript": "catalog:",
     "vue-tsc": "catalog:"
   }
 }

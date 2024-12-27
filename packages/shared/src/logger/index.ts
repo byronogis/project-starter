@@ -2,6 +2,10 @@ import {
   consola,
   // createConsola,
 } from 'consola'
-import { date } from '../date'
+import { date } from '..'
 
-export const logger = consola.withTag(`${date().format('YYYY-MM-DD HH:mm:ss')}`)
+export function loggerWithTime(formatStr: string = 'yyyy-MM-dd HH:mm:ss') {
+  return consola.withTag(`${date.format(new Date(), formatStr)}`)
+}
+
+export const logger = consola

@@ -5,15 +5,15 @@ import type {
   SharedFormFields,
   SharedFormGroup,
   SharedFormGroups,
-} from '@project-starter/shared'
+} from '@project-starter/shared/form/index'
 import type {
   FilePondOptions,
   ProcessServerConfigFunction,
 } from 'filepond'
 import type { MaybeRefOrGetter } from 'vue'
 import {
-  defineSharedForm,
-} from '@project-starter/shared'
+  define as defineSharedForm,
+} from '@project-starter/shared/form/index'
 import { useForm } from 'vee-validate'
 
 // TODO fix type reference

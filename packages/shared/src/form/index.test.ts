@@ -1,7 +1,7 @@
 import type { SharedFormData } from './type'
 import { describe, expect, it, vi } from 'vitest'
 import { z } from 'zod'
-import { defineSharedForm } from './index'
+import { define as defineSharedForm } from './index'
 
 // 定义基本的表单字段类型
 type BaseFieldType = 'text' | 'number' | 'array' | 'object' | 'select'

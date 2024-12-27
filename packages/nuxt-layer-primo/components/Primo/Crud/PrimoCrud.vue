@@ -132,7 +132,7 @@ const props = withDefaults(defineProps<{
 /**
  * 工具
  */
-const primoCrudLogger = Utils.logger.withTag(`PrimoCrud`).withTag(`${Utils._.upperFirst(props.itemAlias)}`)
+const primoCrudLogger = Utils.loggerWithTime().withTag(`PrimoCrud`).withTag(`${Utils._.upperFirst(props.itemAlias)}`)
 
 const toast = inject(PrimoToastInjectionKey, usePrimoToast())
 const dialog = usePrimoDialog()

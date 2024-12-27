@@ -1,3 +1,1 @@
-import tinycolor from 'tinycolor2'
-
-export const color = tinycolor
+export * from '@ctrl/tinycolor'

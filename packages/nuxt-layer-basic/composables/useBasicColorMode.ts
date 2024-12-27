@@ -1,4 +1,4 @@
-import { toogleAppearance } from '@project-starter/shared'
+import { appearance } from '@project-starter/shared'
 
 export function useBasicColorMode() {
   const colorMode = useColorMode()
@@ -38,7 +38,7 @@ export function useBasicColorMode() {
       return
     }
 
-    toogleAppearance(event, {
+    appearance.toogle(event, {
       isDark: !isDark.value,
       toogle: async () => {
         next()

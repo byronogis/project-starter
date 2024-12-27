@@ -1,3 +1,1 @@
-import * as esToolkit from 'es-toolkit'
-
-export const _ = esToolkit
+export * from 'es-toolkit'

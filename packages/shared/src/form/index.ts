@@ -9,7 +9,7 @@ import { sanitizeString } from '..'
 
 export type * from './type'
 
-export function defineSharedForm<
+export function define<
   D extends SharedFormData,
   G extends string = never,
   T extends string = never,
@@ -153,4 +153,4 @@ export interface DefineSharedFormOptions<
 
 }
 
-export type DefineSharedFormReturns = ReturnType<typeof defineSharedForm>
+export type DefineSharedFormReturns = ReturnType<typeof define>

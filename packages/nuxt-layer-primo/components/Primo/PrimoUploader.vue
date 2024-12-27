@@ -41,7 +41,7 @@ const emits = defineEmits<{
   done: [res: Awaited<ReturnType<PrimoFormFieldFileUploadProcess>>]
 }>()
 
-const uploaderLogger = Utils.logger.withTag('Uploader')
+const uploaderLogger = Utils.loggerWithTime().withTag('Uploader')
 
 /**
  * 上传状态
