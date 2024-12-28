@@ -5,7 +5,7 @@ import type {
   SharedFormGroup,
   SharedFormGroups,
 } from './type'
-import { sanitizeString } from '..'
+import { sanitizeString } from '../index'
 
 export type * from './type'
 

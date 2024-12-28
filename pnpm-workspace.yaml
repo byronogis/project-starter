@@ -48,6 +48,7 @@ catalog:
   lossless-json: ^4.0.2
   nprogress: ^0.2.0
   nuxt: ^3.15.0
+  pausable-timers: ^0.2.0
   pinia: ^2.3.0
   postcss-preset-env: ^10.1.2
   primevue: ^4.2.4

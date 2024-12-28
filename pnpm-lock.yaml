@@ -144,6 +144,9 @@ catalogs:
     nuxt:
       specifier: ^3.15.0
       version: 3.15.0
+    pausable-timers:
+      specifier: ^0.2.0
+      version: 0.2.0
     pinia:
       specifier: ^2.3.0
       version: 2.3.0
@@ -456,6 +459,9 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.31.0
+      pausable-timers:
+        specifier: 'catalog:'
+        version: 0.2.0
       type-fest:
         specifier: 'catalog:'
         version: 4.31.0
@@ -6082,6 +6088,9 @@ packages:
   pathval@2.0.0:
     resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
     engines: {node: '>= 14.16'}
+
+  pausable-timers@0.2.0:
+    resolution: {integrity: sha512-v+F4rQwaUMP3iNMR+R7bsWV1ah+ZDy8QbERvMYYXCAz9zHG/JwLehWQKRGBsrur2Kw8ocX320Ov0uPZMoLaxfA==}
 
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
@@ -14854,6 +14863,8 @@ snapshots:
   pathe@1.1.2: {}
 
   pathval@2.0.0: {}
+
+  pausable-timers@0.2.0: {}
 
   perfect-debounce@1.0.0: {}
 
