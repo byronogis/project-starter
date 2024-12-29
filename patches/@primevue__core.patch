@@ -1,0 +1,42 @@
+diff --git a/config/index.d.ts b/config/index.d.ts
+index 9e36adc8696cebb069646968be9519a4baac654f..c4e3378128aaa96f4c87d3b2bff25c61facaf9d1 100644
+--- a/config/index.d.ts
++++ b/config/index.d.ts
+@@ -1,6 +1,8 @@
+ import { Plugin } from 'vue';
+ 
+ export interface PrimeVueConfiguration {
++    /** Skip style load to prevent style flash in first time, like on nuxtjs */
++    loadedStyleNames?: string[];
+     ripple?: boolean;
+     /**
+      * @deprecated since v4.0. Use 'inputVariant' instead.
+diff --git a/config/index.mjs b/config/index.mjs
+index 9bbafe3c798fe6774df851ee3148bd9ad0ec93a9..b7e5a0819b1208ba203ee82744b04281235cd47f 100644
+--- a/config/index.mjs
++++ b/config/index.mjs
+@@ -12,6 +12,7 @@ function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object
+ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+ var defaultOptions = {
++  loadedStyleNames: [],
+   ripple: false,
+   inputStyle: null,
+   inputVariant: null,
+@@ -187,6 +188,16 @@ function clearConfig() {
+ function setupConfig(app, PrimeVue) {
+   var isThemeChanged = ref(false);
+ 
++  /** Skip style load to prevent style flash in first time, like on nuxtjs */
++  if (PrimeVue.config.loadedStyleNames.length) {
++    Theme.setTheme(PrimeVue.config.theme);
++    isThemeChanged.value = true;
++
++    PrimeVue.config.loadedStyleNames.forEach((name) => {
++      Theme.setLoadedStyleName(name);
++    });
++  }
++
+   /*** Methods and Services ***/
+   var loadCommonTheme = function loadCommonTheme() {
+     var _PrimeVue$config;

@@ -40,7 +40,9 @@
   "pnpm": {
     "patchedDependencies": {
       "nprogress": "patches/nprogress.patch",
-      "@primevue/nuxt-module": "patches/@primevue__nuxt-module.patch"
+      "@primevue/nuxt-module": "patches/@primevue__nuxt-module.patch",
+      "@primevue/core": "patches/@primevue__core.patch",
+      "primevue": "patches/primevue.patch"
     }
   },
   "lint-staged": {

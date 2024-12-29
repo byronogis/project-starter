@@ -13,6 +13,7 @@ const CustomPreset = definePreset(Aura, {
 
 export const primevue: NuxtOptions['primevue'] = {
   options: {
+    loadedStyleNames: ['common'],
     theme: {
       preset: CustomPreset,
       options: {

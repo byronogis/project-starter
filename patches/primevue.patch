@@ -1,0 +1,13 @@
+diff --git a/config/index.d.ts b/config/index.d.ts
+index 006fd368f8bd3b92054af7e2071e18ccb8b61078..e0d3fa33513256ba3ba9add180817155a5e97494 100644
+--- a/config/index.d.ts
++++ b/config/index.d.ts
+@@ -133,6 +133,8 @@ export * from '@primevue/core/config';
+ export { default } from '@primevue/core/config';
+ 
+ export interface PrimeVueConfiguration {
++    /** Skip style load to prevent style flash in first time, like on nuxtjs */
++    loadedStyleNames?: string[];
+     ripple?: boolean;
+     /**
+      * @deprecated since v4.0. Use 'inputVariant' instead.
