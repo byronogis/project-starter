@@ -103,6 +103,7 @@ export default defineConfig({
     'i-prime:angle-down',
     'i-prime:palette',
     'i-prime:desktop',
+    'i-prime:sun',
     'i-prime:moon',
     'i-prime:user',
     'i-prime:plus',
