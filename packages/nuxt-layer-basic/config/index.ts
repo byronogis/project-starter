@@ -1,4 +1,5 @@
 export { colorMode } from './colorMode'
 export { eslint } from './eslint'
+export { htmlInjectCommands } from './htmlInjectCommands'
 export { icon } from './icon'
 export { unocss } from './unocss'

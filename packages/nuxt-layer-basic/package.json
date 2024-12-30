@@ -19,6 +19,7 @@
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",
     "@vueuse/nuxt": "catalog:",
+    "nuxt-html-inject-commands": "catalog:",
     "postcss-preset-env": "catalog:",
     "vue-component-type-helpers": "catalog:",
     "zod": "catalog:"

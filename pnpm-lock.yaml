@@ -144,6 +144,9 @@ catalogs:
     nuxt:
       specifier: ^3.15.0
       version: 3.15.0
+    nuxt-html-inject-commands:
+      specifier: ^0.1.3
+      version: 0.1.3
     pausable-timers:
       specifier: ^0.2.0
       version: 0.2.0
@@ -358,6 +361,9 @@ importers:
       '@vueuse/nuxt':
         specifier: 'catalog:'
         version: 12.2.0(magicast@0.3.5)(nuxt@3.15.0(@parcel/watcher@2.4.1)(@types/node@22.7.4)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.28.1)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(typescript@5.7.2)(vite@5.4.11(@types/node@22.7.4)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1))(rollup@4.28.1)(typescript@5.7.2)
+      nuxt-html-inject-commands:
+        specifier: 'catalog:'
+        version: 0.1.3(magicast@0.3.5)(rollup@4.28.1)
       postcss-preset-env:
         specifier: 'catalog:'
         version: 10.1.2(postcss@8.4.49)
@@ -5889,6 +5895,9 @@ packages:
     resolution: {integrity: sha512-JDVtBBwEe9VjVkhxwR/crtGJnyLHzvl2F1pjtglekjTVeiMThfhQHcvsI/u007gBAfPpmaCIdRGnoeTF4VKS8w==}
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
+
+  nuxt-html-inject-commands@0.1.3:
+    resolution: {integrity: sha512-Wbn26PiUBV66Ih3uZsg17UE+KqT9fU4v01vnE9smAqjHnlLApo5q0yGrWVS5/aaO2VYdyzJd8MMwwtQZJlwVrw==}
 
   nuxt@3.15.0:
     resolution: {integrity: sha512-pjP/2zEjr57ensZZ1F4b7KldocM9S4SOtukgi9zau1OFlyolUmEgMFbHnwmEKqzuZ1OPTaRS3/1S6B7GUVbbRg==}
@@ -14409,6 +14418,14 @@ snapshots:
       boolbase: 1.0.0
 
   nuxi@3.17.2: {}
+
+  nuxt-html-inject-commands@0.1.3(magicast@0.3.5)(rollup@4.28.1):
+    dependencies:
+      '@nuxt/kit': 3.15.0(magicast@0.3.5)(rollup@4.28.1)
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
 
   nuxt@3.15.0(@parcel/watcher@2.4.1)(@types/node@22.7.4)(db0@0.2.1)(eslint@9.17.0(jiti@2.4.2))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.28.1)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(typescript@5.7.2)(vite@5.4.11(@types/node@22.7.4)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1))(vue-tsc@2.2.0(typescript@5.7.2))(yaml@2.6.1):
     dependencies:
