@@ -1,5 +1,19 @@
 import { appearance } from '@project-starter/shared'
 
+/**
+ * Manages color mode cycling with system preference
+ *
+ * - Respects system preference for initial dark/light ordering
+ * - Handles cycling between modes with transition animations
+ * - Prevents unnecessary transitions when next state matches current appearance
+ *
+ * @lang {zh-CN} \
+ * 管理颜色模式切换，支持系统偏好设置
+ *
+ * - 遵循系统偏好设置进行初始深色/浅色排序
+ * - 处理模式切换时的过渡动画
+ * - 当下一个状态与当前外观相匹配时避免不必要的过渡
+ */
 export function useBasicColorMode() {
   const colorMode = useColorMode()
 
