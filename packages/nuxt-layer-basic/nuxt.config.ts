@@ -1,6 +1,13 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { colorMode, eslint, htmlInjectCommands, icon, unocss } from './config'
+import {
+  colorMode,
+  eslint,
+  htmlInjectCommands,
+  icon,
+  seoCombind,
+  unocss,
+} from './config'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
 
@@ -56,7 +63,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt',
     ['nuxt-html-inject-commands', htmlInjectCommands],
+    '@nuxtjs/seo',
   ],
+  ...seoCombind,
 
   compatibilityDate: '2024-08-14',
 
