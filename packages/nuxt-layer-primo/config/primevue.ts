@@ -1,9 +1,9 @@
 import type { NuxtOptions } from '@nuxt/schema'
 import { definePreset } from '@primevue/themes'
 import Aura from '@primevue/themes/aura'
-import { PrimoConfigDefaultCST } from '../constants/setting'
-import { PrimoPrimaryColorListCST } from '../constants/theme'
-import { sakakiThemePresetGenerator } from '../utils/theme'
+import { PrimoConfigDefaultCST } from '../app/constants/setting'
+import { PrimoPrimaryColorListCST } from '../app/constants/theme'
+import { sakakiThemePresetGenerator } from '../app/utils/theme'
 
 const CustomPreset = definePreset(Aura, {
   // see https://primevue.org/theming/styled/#customization

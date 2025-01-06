@@ -10,23 +10,23 @@ export default defineNuxtConfig({
   ],
 
   css: [
-    join(currentDir, './assets/styles/index.css'),
+    join(currentDir, './app/assets/styles/index.css'),
   ],
 
   icon: {
     customCollections: [
       {
         prefix: 'primo',
-        dir: join(currentDir, './assets/icons/primo'),
+        dir: join(currentDir, './app/assets/icons/primo'),
       },
     ],
   },
 
   imports: {
     dirs: [
-      join(currentDir, './types'),
-      join(currentDir, './stores'),
-      join(currentDir, './constants'),
+      join(currentDir, './app/types'),
+      join(currentDir, './app/stores'),
+      join(currentDir, './app/constants'),
     ],
     imports: [
       { name: 'toTypedSchema', from: '@vee-validate/zod' },
@@ -39,4 +39,8 @@ export default defineNuxtConfig({
 
     ['@vee-validate/nuxt', veeValidate],
   ],
+
+  future: {
+    compatibilityVersion: 4,
+  },
 })
