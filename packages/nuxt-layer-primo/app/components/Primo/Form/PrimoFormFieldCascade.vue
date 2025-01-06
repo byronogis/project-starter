@@ -6,7 +6,7 @@ const props = defineProps<{
   field: F
 }>()
 
-// const toast = inject(PrimoToastInjectionKey, usePrimoToast())
+// const toast = usePrimoToast()
 
 const field = computed(() => props.field)
 const gridArea = computed(() => (props.field.gridArea!))

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const primoStore = inject(PrimoStoreInjectionKey)!
+const primoStore = usePrimoStore()!
 </script>
 
 <template>

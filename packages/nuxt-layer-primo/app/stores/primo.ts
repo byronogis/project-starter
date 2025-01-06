@@ -1,6 +1,6 @@
 import { $t, updatePreset, updateSurfacePalette } from '@primevue/themes'
 
-export function usePrimoStore(options?: PrimoOptions) {
+const [useProvidePrimoStore, usePrimoStore] = createInjectionState((options?: PrimoOptions) => {
   const {
     title = 'Primo',
     sidebarMenuList = [
@@ -119,4 +119,9 @@ export function usePrimoStore(options?: PrimoOptions) {
     isMobile,
     styleClass,
   })
+})
+
+export {
+  usePrimoStore,
+  useProvidePrimoStore,
 }

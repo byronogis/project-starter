@@ -1,3 +1,4 @@
+import { base } from '@project-starter/unocss-config'
 import { mergeConfigs } from 'unocss'
 import config from './.nuxt/uno.config.mjs'
 
@@ -116,6 +117,13 @@ export default mergeConfigs([
       'i-prime:trash',
     ],
   } as any,
+  base(
+    {
+      icons: false,
+      webFonts: false,
+      typography: false,
+    },
+  ) as any,
 ])
 
 function convert(color: string) {

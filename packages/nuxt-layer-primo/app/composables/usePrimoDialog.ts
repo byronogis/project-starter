@@ -4,7 +4,7 @@ import PrimeButton from 'primevue/button'
 
 export function usePrimoDialog() {
   const dialog = useDialog()
-  const toast = inject(PrimoToastInjectionKey, usePrimoToast())
+  const toast = usePrimoToast()
 
   return {
     dialog,

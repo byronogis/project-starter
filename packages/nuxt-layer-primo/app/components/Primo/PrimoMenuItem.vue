@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 
-const primoStore = inject(PrimoStoreInjectionKey)!
+const primoStore = usePrimoStore()!
 
 const isActiveMenu = ref(false)
 const itemKey = ref<string | null>(null)

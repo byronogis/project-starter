@@ -21,9 +21,9 @@ const props = withDefaults(defineProps<{
   //
 })
 
-const primoStore = inject(PrimoStoreInjectionKey)!
+const primoStore = usePrimoStore()!
 
-const toast = inject(PrimoToastInjectionKey, usePrimoToast())
+const toast = usePrimoToast()
 const loginLogger = Utils.loggerWithTime().withTag('Login')
 
 /**

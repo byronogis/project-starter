@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
   extra: () => ({}),
 })
 
-const primoStore = inject(PrimoStoreInjectionKey)!
+const primoStore = usePrimoStore()!
 const { isDark } = useBasicColorMode()
 
 const options = ref<object>()

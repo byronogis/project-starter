@@ -3,7 +3,7 @@ import type { MenuItem } from 'primevue/menuitem'
 
 const { isDark } = useBasicColorMode()
 
-const primoStore = inject(PrimoStoreInjectionKey)!
+const primoStore = usePrimoStore()!
 
 const menuModeOptions = ref<{
   label: string

@@ -3,7 +3,7 @@ const emits = defineEmits<{
   hidePanel: []
 }>()
 
-const primoStore = inject(PrimoStoreInjectionKey)!
+const primoStore = usePrimoStore()!
 
 async function handleTopbarExtraActionClick(e: MouseEvent, action: PrimoExtraActionItem) {
   const _closeTiming = action.closePopover ?? 'begining'

@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<{
                 {{ props.title }}
               </h1>
               <span class="text-muted-color mb-8">{{ props.description }}</span>
-              <img src="../assets/images/asset-error.svg" alt="Error" class="mb-8" width="80%">
+              <img src="~~/assets/images/asset-error.svg" alt="Error" class="mb-8" width="80%">
               <div class="col-span-12 mt-8 text-center">
                 <PrimeButton as="router-link" :label="props.btnLabel" :to="props.btnTo" severity="danger" />
               </div>
