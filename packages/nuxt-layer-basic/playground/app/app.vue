@@ -1,12 +1,32 @@
 <script setup lang="ts">
-const { state } = useBasicColorMode()
+import { useTitle } from '@vueuse/core'
+
+const { state, toggle } = useBasicColorMode()
+
+const title = 'Basic Nuxt Layer'
+useTitle(title)
+
+useHead({
+  style: [
+    {
+      textContent: `@layer reset, nuxt-layer-basic;`,
+      tagPriority: 1,
+    },
+  ],
+})
 </script>
 
 <template>
-  <div class="nuxt-player-basic font-sans">
-    <h1>Basic Nuxt Layer</h1>
-    {{ state }}
+  <div class="min-h-screen flex flex-col items-center justify-center font-sans space-y-2 dark:bg-gray-800 dark:text-white">
+    <h1 class="text-2xl font-bold">
+      {{ title }}
+    </h1>
+    <button @click="toggle">
+      {{ state }}
+    </button>
   </div>
 </template>
 
-<style scoped lang="postcss"></style>
+<style>
+@import '@unocss/reset/tailwind.css' layer(reset);
+</style>
