@@ -73,7 +73,9 @@ export function base(options?: BaseOptions, ...configs: UserConfig[]): UserConfi
       transformerDirectives(),
     ],
     outputToCssLayers: {
-      cssLayerName: layer => `uno-${layer}`,
+      cssLayerName: layer => layer !== 'default'
+        ? `uno.${layer}`
+        : 'uno-default',
     },
     safelist: [
       // ...

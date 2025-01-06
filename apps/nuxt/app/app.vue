@@ -45,9 +45,7 @@ useHead({
        */
       textContent: ['@layer', [
         'reset',
-        'uno-preflights',
-        'uno-shortcuts',
-        'uno-typography',
+        'uno',
         'nuxt-icon',
 
         'nuxt-layer-basic',
