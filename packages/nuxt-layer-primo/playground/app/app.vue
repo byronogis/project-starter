@@ -9,11 +9,15 @@ const sidebarMenuList = ref<PrimoSidebarMenuItem[]>([
   {
     label: 'Example',
     items: [
-      { label: 'Mouse', icon: 'i-prime:book', to: '/example/mouse' },
-      { label: 'Primo', icon: 'i-prime:bell', to: '/example/primo' },
       { label: 'Crud', icon: 'i-prime:bell', to: '/example/crud' },
-      { label: 'Login', icon: 'i-prime:bell', to: '/example/login' },
+      { label: 'Primo', icon: 'i-prime:bell', to: '/example/primo' },
       { label: 'Chart', icon: 'i-prime:bell', to: '/example/chart' },
+    ],
+  },
+  {
+    label: 'Page',
+    items: [
+      { label: 'Login', icon: 'i-prime:sign-in', to: '/page/login' },
     ],
   },
 ])
@@ -33,19 +37,10 @@ const extraActionList = ref<PrimoExtraActionItem[]>([
     onClick: () => console.log('Setting'),
   },
   {
-    label: 'Setting',
-    icon: 'i-prime:cog',
-    onClick: () => console.log('Setting'),
-  },
-  {
-    label: 'Setting',
-    icon: 'i-prime:cog',
-    onClick: () => console.log('Setting'),
-  },
-  {
     label: 'Logout',
     icon: 'i-prime:sign-out',
     onClick: () => dialog.dialogConfirm({
+      header: 'Logout',
       message: h('p', { class: 'w-80' }, 'Are you sure?'),
       confirmFn: async () => {
         await Utils._.delay(2000)
@@ -55,19 +50,21 @@ const extraActionList = ref<PrimoExtraActionItem[]>([
   },
 ])
 
-const title = ref(appCST.title)
+const title = 'Primo Nuxt Layer'
 </script>
 
 <template>
-  <PrimoLayoutPrimary
-    id="layout-primo-primary"
-    data-allow-mismatch
+  <PrimoApp
     :sidebar-menu-list
     :extra-action-list
     :title
   >
-    <slot />
-  </PrimoLayoutPrimary>
+    <NuxtLayout class="font-sans">
+      <NuxtPage />
+    </NuxtLayout>
+  </PrimoApp>
 </template>
 
-<style scoped lang="postcss"></style>
+<style>
+@import '@unocss/reset/tailwind.css' layer(reset);
+</style>

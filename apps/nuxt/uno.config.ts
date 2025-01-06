@@ -7,6 +7,7 @@ export default mergeConfigs([
   base(
     {
       icons: false,
+      webFonts: false,
     },
   ) as any,
 ])

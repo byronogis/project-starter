@@ -2,9 +2,9 @@
 </script>
 
 <template>
-  <PrimoLayoutPrimary id="layout-default">
+  <PrimoLayoutBlank id="layout-primo-blank">
     <slot />
-  </PrimoLayoutPrimary>
+  </PrimoLayoutBlank>
 </template>
 
 <style scoped lang="postcss"></style>

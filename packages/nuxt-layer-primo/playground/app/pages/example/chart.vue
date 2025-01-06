@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'primo-primary',
-})
-
 const chartData = ref()
 const chartOptions = ref()
 

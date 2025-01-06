@@ -20,9 +20,29 @@ export default defineNuxtConfig({
       },
     },
   },
+
   app: {
     pageTransition: { name: 'fade', mode: 'out-in' },
     layoutTransition: { name: 'fade', mode: 'out-in' },
+    head: {
+      style: [
+        {
+          textContent: ['@layer', [
+            'reset',
+            'uno',
+            'nuxt-icon',
+
+            'nuxt-layer-basic',
+            'nuxt-layer-primo',
+
+            'base',
+            'transition',
+            'uno-default',
+          ].join(', '), ';'].join(' '),
+          tagPriority: 1,
+        },
+      ],
+    },
   },
 
   /**

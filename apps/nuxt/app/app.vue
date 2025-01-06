@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
-const globalToast = useGlobalToast()
-provide(PrimoToastInjectionKey, globalToast)
-
 useSeoMeta({
   title: appCST.title,
   description: appCST.description,
@@ -38,35 +35,16 @@ useHead({
     { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
     { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
   ],
-  style: [
-    {
-      /**
-       * 在此处定义 @layer, 保证顺序与期望一致
-       */
-      textContent: ['@layer', [
-        'reset',
-        'uno',
-        'nuxt-icon',
-
-        'nuxt-layer-basic',
-        'nuxt-layer-primo',
-
-        'base',
-        'transition',
-        'uno-default',
-      ].join(', '), ';'].join(' '),
-    },
-  ],
 })
 </script>
 
 <template>
-  <NuxtPwaManifest />
-  <NuxtLayout class="font-sans">
-    <NuxtPage />
-  </NuxtLayout>
+  <PrimoApp title="Nuxt App">
+    <NuxtPwaManifest />
+    <NuxtLayout class="font-sans">
+      <NuxtPage />
+    </NuxtLayout>
 
-  <PrimeToast :group="PrimoToastGroupGlobalCST" />
-
-  <VueQueryDevtools />
+    <VueQueryDevtools />
+  </PrimoApp>
 </template>

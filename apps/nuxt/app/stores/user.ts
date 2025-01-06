@@ -2,7 +2,7 @@ export const useUserStore = defineStore('user', () => {
   /**
    * Current named of the user.
    */
-  const name = ref('')
+  const name = ref('Byron')
 
   return {
     name,

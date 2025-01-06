@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const title = appCST.title
+
 </script>
 
 <template>
-  <PrimoLayoutBlank id="layout-primo-blank" :title>
+  <PrimoLayoutPrimary id="layout-primo-primary">
     <slot />
-  </PrimoLayoutBlank>
+  </PrimoLayoutPrimary>
 </template>
 
 <style scoped lang="postcss"></style>

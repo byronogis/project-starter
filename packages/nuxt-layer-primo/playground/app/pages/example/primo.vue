@@ -1,16 +1,12 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'primo-primary',
-})
-
-const global = useGlobalToast()
+const toast = usePrimoToast()
 </script>
 
 <template>
   <div id="page-primo">
     <h4>Primo Page</h4>
     <PrimeInputText />
-    <PrimeButton label="fine" @click="global.toastSuccess('fine')" />
+    <PrimeButton label="fine" @click="toast.toastSuccess('fine')" />
   </div>
 </template>
 

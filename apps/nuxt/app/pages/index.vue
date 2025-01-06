@@ -1,36 +1,14 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'primo-primary',
-})
-
 const userStore = useUserStore()
 
-const name = computed(() => userStore.name)
-
-// const toast = usePrimoToast()
-const confirm = usePrimoDialog()
-async function dialog() {
-  // toast.toastError('Hello World!')
-  const res = await confirm.dialogConfirm({
-    message: h('div', { style: { width: '450px' } }, [
-      h('b', null, 'Hello World!'),
-      h('span', null, 'Hello World!'),
-    ]),
-    header: 'Hello World!',
-    async confirmFn(_p) {
-      await Utils._.delay(1000)
-      return true
-    },
-  })
-  console.info(res)
-}
+const toast = usePrimoToast()
 </script>
 
 <template>
-  <div id="page-index">
+  <div id="page-index" class="[*:has(>&)]:(grid place-content-center)">
     <h1 class="text-8">
-      Hello World! {{ name }} {{ userStore.name }}
-      <NuxtIcon name="custom:home" @click="dialog" />
+      Hi {{ userStore.name }}
+      <NuxtIcon name="custom:home" @click="toast.toastSuccess(Utils.date.format(Date.now(), 'yyyy-MM-dd HH:mm:dd'))" />
     </h1>
   </div>
 </template>
