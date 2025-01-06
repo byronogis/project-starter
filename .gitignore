@@ -9,6 +9,7 @@ temp
 # nuxt
 .nuxt
 .output
+.data
 
 # test
 coverage

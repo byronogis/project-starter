@@ -1,5 +1,6 @@
 export { colorMode } from './colorMode'
 export { eslint } from './eslint'
+export { fonts } from './fonts'
 export { htmlInjectCommands } from './htmlInjectCommands'
 export { icon } from './icon'
 export { seoCombind } from './seo'

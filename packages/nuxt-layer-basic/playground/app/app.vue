@@ -3,7 +3,7 @@ const { state } = useBasicColorMode()
 </script>
 
 <template>
-  <div class="nuxt-player-basic">
+  <div class="nuxt-player-basic font-sans">
     <h1>Basic Nuxt Layer</h1>
     {{ state }}
   </div>

@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import {
   colorMode,
   eslint,
+  fonts,
   htmlInjectCommands,
   icon,
   seoCombind,
@@ -60,6 +61,7 @@ export default defineNuxtConfig({
     ['@unocss/nuxt', unocss],
     ['@nuxtjs/color-mode', colorMode],
     ['@nuxt/icon', icon],
+    ['@nuxt/fonts', fonts],
     '@vueuse/nuxt',
     '@vueuse/motion/nuxt',
     ['nuxt-html-inject-commands', htmlInjectCommands],
