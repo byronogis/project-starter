@@ -18,6 +18,7 @@ const sidebarMenuList = ref<PrimoSidebarMenuItem[]>([
     label: 'Page',
     items: [
       { label: 'Login', icon: 'i-prime:sign-in', to: '/page/login' },
+      { label: 'Error', icon: 'i-prime:bell', to: '/page/error' },
     ],
   },
 ])
