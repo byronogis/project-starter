@@ -20,7 +20,7 @@ const containerClass = computed(() => {
 </script>
 
 <template>
-  <div class="layout-wrapper component-primo-layout-primary" :class="containerClass">
+  <div class="layout-wrapper component-primo-layout-primary" data-allow-mismatch :class="containerClass">
     <PrimoTopbar>
       <template #logo>
         <slot name="topbar-logo" />
