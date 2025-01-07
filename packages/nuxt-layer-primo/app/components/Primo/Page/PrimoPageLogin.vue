@@ -226,7 +226,7 @@ async function handleSubmit() {
 
 <template>
   <div class="component-primo-page-login">
-    <PrimoFloatingConfigurator />
+    <PrimoFloatingActions />
 
     <div class="bg-surface-50 dark:bg-surface-950 min-h-screen min-w-[100vw] flex items-center justify-center overflow-hidden">
       <div class="flex flex-col items-center justify-center">

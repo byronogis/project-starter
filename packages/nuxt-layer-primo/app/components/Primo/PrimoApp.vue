@@ -16,7 +16,7 @@ useProvidePrimoStore(props)
 </script>
 
 <template>
-  <div class="primo-app">
+  <div class="component-primo-app">
     <slot />
 
     <PrimeToast />
