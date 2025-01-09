@@ -7,8 +7,8 @@
     "dev": "nuxi prepare",
     "dev:playground": "nuxi dev playground --host",
     "check-types": "nuxi typecheck",
-    "clear": "rm -rf .nuxt .output",
-    "postinstall": "nuxi prepare"
+    "clear": "rm -rf **/.nuxt **/.output",
+    "postinstall": "nuxi prepare && nuxi prepare playground"
   },
   "dependencies": {
     "@nuxt/devtools": "catalog:",
