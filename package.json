@@ -15,8 +15,8 @@
     "preview:build": "turbo run preview:build",
     "preview:generate": "turbo run preview:generate",
     "check-types": "turbo run check-types",
-    "root:lint": "eslint --flag unstable_ts_config .",
-    "root:lint:fix": "eslint --flag unstable_ts_config . --fix",
+    "root:lint": "eslint .",
+    "root:lint:fix": "eslint . --fix",
     "clear": "turbo run clear && rimraf ./**/node_modules ./**/.turbo",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -46,6 +46,6 @@
     }
   },
   "lint-staged": {
-    "*": "eslint --flag unstable_ts_config --fix"
+    "*": "eslint --fix"
   }
 }

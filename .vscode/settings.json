@@ -16,7 +16,7 @@
   // TODO TypeScript Configuration Files
   // This feature is currently experimental and may change in future versions.
   // @see https://eslint.org/docs/latest/use/configure/configuration-files#typescript-configuration-files
-  "eslint.options": { "flags": ["unstable_ts_config"] },
+  // "eslint.options": { "flags": ["unstable_ts_config"] },
 
   // Silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
