@@ -26,7 +26,7 @@ export default base(
           },
         ),
         // HBuilderX 必须针对要使用的 Collections 做异步导入
-        carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
+        // carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
       },
     },
   },

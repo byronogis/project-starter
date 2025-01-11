@@ -15,6 +15,10 @@
       "cache": false,
       "persistent": true
     },
+    "@project-starter/uniapp#dev": {
+      "cache": false,
+      "persistent": true
+    },
     "build": {
       "dependsOn": ["^build", "check-types"]
     },
