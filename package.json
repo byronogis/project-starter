@@ -17,7 +17,7 @@
     "check-types": "turbo run check-types",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
-    "clear": "turbo run clear && rimraf ./**/node_modules ./**/.turbo",
+    "clear": "turbo run clear && rimraf **/.turbo; rimraf **/coverage; rimraf **/node_modules || true",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

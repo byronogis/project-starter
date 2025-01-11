@@ -10,7 +10,7 @@
     "dev": "nuxi prepare",
     "dev:playground": "nuxi dev playground --host",
     "check-types": "nuxi typecheck",
-    "clear": "rm -rf **/.nuxt **/.output",
+    "clear": "rimraf **/.nuxt; rimraf **/.output; rimraf **/dist || true",
     "postinstall": "nuxi prepare && nuxi prepare playground"
   },
   "dependencies": {
