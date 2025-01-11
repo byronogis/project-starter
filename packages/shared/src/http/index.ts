@@ -1,3 +1,5 @@
+// TODO support custom data type, make differencr with result type
+
 import type {
   AxiosInstance,
   AxiosRequestConfig,
