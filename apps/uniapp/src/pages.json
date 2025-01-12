@@ -20,6 +20,11 @@
     "navigationBarTitleText": "Vitesse-Uni",
     "navigationStyle": "custom"
   },
-  "__esModule": true,
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+    }
+  },
   "subPackages": []
 }
