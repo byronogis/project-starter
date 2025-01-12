@@ -555,6 +555,9 @@ importers:
       '@primevue/themes':
         specifier: 'catalog:'
         version: 4.2.5
+      '@project-starter/nuxt-layer-basic':
+        specifier: workspace:*
+        version: link:../nuxt-layer-basic
       '@types/nprogress':
         specifier: 'catalog:'
         version: 0.2.3
