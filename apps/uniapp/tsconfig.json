@@ -8,7 +8,7 @@
     },
     // https://uni-typed.netlify.app/other/faq.html#我项目里类型报错-怎么办
     "types": [
-      "wot-design-uni/global",
+      // "wot-design-uni/global",
       "@dcloudio/types",
       "@mini-types/alipay",
       "miniprogram-api-typings",
