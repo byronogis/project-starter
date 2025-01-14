@@ -5,17 +5,6 @@
       "dependsOn": ["^transit"]
     },
     "dev": {
-      "cache": false
-    },
-    "@project-starter/nuxt#dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "@project-starter/docs#dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "@project-starter/uniapp#dev": {
       "cache": false,
       "persistent": true
     },
