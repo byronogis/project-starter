@@ -3,6 +3,7 @@ import { cwd } from 'node:process'
 import Uni from '@dcloudio/vite-plugin-uni'
 import { isH5, isMp } from '@uni-helper/uni-env'
 import UniHelperComponents from '@uni-helper/vite-plugin-uni-components'
+import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers'
 import UniHelperLayouts from '@uni-helper/vite-plugin-uni-layouts'
 import UniHelperManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniHelperPages from '@uni-helper/vite-plugin-uni-pages'
@@ -30,6 +31,7 @@ export default async () => {
       UniHelperComponents({
         dts: 'src/types/components.d.ts',
         directoryAsNamespace: true,
+        resolvers: [WotResolver()],
       }),
       Uni(),
       // https://github.com/antfu/unplugin-auto-import

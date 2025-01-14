@@ -11,5 +11,6 @@ declare module 'vue' {
     AppLogos: typeof import('./../components/AppLogos.vue')['default']
     HiCounter: typeof import('./../components/HiCounter.vue')['default']
     InputEntry: typeof import('./../components/InputEntry.vue')['default']
+    WdButton: typeof import('wot-design-uni/components/wd-button/wd-button.vue')['default']
   }
 }

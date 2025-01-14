@@ -12,12 +12,6 @@ export default defineUniPages({
     navigationBarTitleText: 'Vitesse-Uni',
     navigationStyle: 'custom',
   },
-  easycom: {
-    autoscan: true,
-    custom: {
-      '^wd-(.*)': 'wot-design-uni/components/wd-$1/wd-$1.vue',
-    },
-  },
   // tabBar: {
   //   backgroundColor: "@tabBgColor",
   //   borderStyle: "@tabBorderStyle",

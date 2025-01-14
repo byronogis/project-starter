@@ -21,7 +21,9 @@
     "plugins": ["@uni-helper/uni-types/volar-plugin"]
   },
   "include": [
-    "src",
-    "plugins"
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
   ]
 }
