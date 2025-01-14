@@ -1,0 +1,19 @@
+{
+  "name": "@project-starter/nuxt-layer-basic-playground",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev --host",
+    "check-types": "nuxi typecheck",
+    "clear": "rimraf **/.nuxt; rimraf **/.output; rimraf **/dist || true",
+    "postinstall": "nuxi prepare"
+  },
+  "dependencies": {
+    "@project-starter/nuxt-layer-basic": "workspace:*"
+  },
+  "devDependencies": {
+    "nuxt": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

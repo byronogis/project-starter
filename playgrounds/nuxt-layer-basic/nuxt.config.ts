@@ -4,7 +4,7 @@
 
 export default defineNuxtConfig({
   extends: [
-    '../',
+    '@project-starter/nuxt-layer-basic',
   ],
 
   future: {

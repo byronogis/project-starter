@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   extends: [
-    '../',
+    '@project-starter/nuxt-layer-primo',
   ],
 
   app: {

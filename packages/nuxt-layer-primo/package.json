@@ -8,10 +8,9 @@
   "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi prepare",
-    "dev:playground": "nuxi dev playground --host",
     "check-types": "nuxi typecheck",
-    "clear": "rimraf **/.nuxt; rimraf **/.output; rimraf **/dist || true",
-    "postinstall": "nuxi prepare && nuxi prepare playground"
+    "clear": "rimraf .nuxt; rimraf .output; rimraf dist || true",
+    "postinstall": "nuxi prepare"
   },
   "dependencies": {
     "@iconify-json/prime": "catalog:",
