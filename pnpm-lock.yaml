@@ -664,6 +664,32 @@ importers:
         specifier: 'catalog:'
         version: 65.4.0(@unocss/webpack@65.4.0(rollup@4.30.0)(webpack@5.94.0))(postcss@8.4.49)(rollup@4.30.0)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.28.2)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.7.3))
 
+  playgrounds/nuxt-layer-basic:
+    dependencies:
+      '@project-starter/nuxt-layer-basic':
+        specifier: workspace:*
+        version: link:../../packages/nuxt-layer-basic
+    devDependencies:
+      nuxt:
+        specifier: 'catalog:'
+        version: 3.15.1(@parcel/watcher@2.4.1)(@types/node@22.10.5)(db0@0.2.1)(eslint@9.18.0(jiti@2.4.2))(ioredis@5.4.1)(lightningcss@1.28.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.30.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(typescript@5.7.3)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.28.2)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.3))(yaml@2.6.1)
+      vue-tsc:
+        specifier: 'catalog:'
+        version: 2.2.0(typescript@5.7.3)
+
+  playgrounds/nuxt-layer-primo:
+    dependencies:
+      '@project-starter/nuxt-layer-primo':
+        specifier: workspace:*
+        version: link:../../packages/nuxt-layer-primo
+    devDependencies:
+      nuxt:
+        specifier: 'catalog:'
+        version: 3.15.1(@parcel/watcher@2.4.1)(@types/node@22.10.5)(db0@0.2.1)(eslint@9.18.0(jiti@2.4.2))(ioredis@5.4.1)(lightningcss@1.28.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.30.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(typescript@5.7.3)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.28.2)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.34.1)(tsx@4.19.2)(yaml@2.6.1))(vue-tsc@2.2.0(typescript@5.7.3))(yaml@2.6.1)
+      vue-tsc:
+        specifier: 'catalog:'
+        version: 2.2.0(typescript@5.7.3)
+
 packages:
 
   '@algolia/autocomplete-core@1.9.3':
