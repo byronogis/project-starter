@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxi dev --host",
     "check-types": "nuxi typecheck",
-    "clear": "rimraf **/.nuxt; rimraf **/.output; rimraf **/dist || true",
+    "clear": "pnpx rimraf -g '**/.nuxt' '**/.output' '**/dist'",
     "postinstall": "nuxi prepare"
   },
   "dependencies": {

@@ -11,7 +11,7 @@
     "preview:build": "pnpm build && pnpm preview --host",
     "preview:generate": "pnpm generate && pnpm preview --host",
     "check-types": "nuxi typecheck",
-    "clear": "rimraf .nuxt; rimraf .output; rimraf dist || true",
+    "clear": "pnpx rimraf .nuxt .output dist",
     "postinstall": "nuxi prepare"
   },
   "devDependencies": {

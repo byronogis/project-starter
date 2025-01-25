@@ -17,7 +17,7 @@
     "check-types": "turbo run check-types",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
-    "clear": "turbo run clear && rimraf **/.turbo; rimraf **/coverage; rimraf **/node_modules || true",
+    "clear": "pnpx turbo run clear || pnpx rimraf@^6.0.1 -g '**/.turbo' '**/coverage' '**/node_modules'",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,7 +31,6 @@
     "husky": "catalog:",
     "jiti": "catalog:",
     "lint-staged": "catalog:",
-    "rimraf": "catalog:",
     "turbo": "latest",
     "typescript": "catalog:",
     "unbuild": "catalog:",

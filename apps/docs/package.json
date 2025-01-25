@@ -7,7 +7,7 @@
     "build": "vitepress build",
     "generate": "vitepress build",
     "preview": "vitepress preview --host",
-    "clear": "rimraf .vitepress/dist; rimraf .vitepress/cache || true"
+    "clear": "pnpx rimraf .vitepress/dist .vitepress/cache"
   },
   "dependencies": {
     "vitepress": "catalog:"
