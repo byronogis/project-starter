@@ -16,7 +16,7 @@
     "@nuxt/icon": "catalog:",
     "@nuxt/schema": "catalog:",
     "@nuxtjs/color-mode": "catalog:",
-    "@nuxtjs/seo": "^2.1.0",
+    "@nuxtjs/seo": "^2.1.1",
     "@unocss/nuxt": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/motion": "catalog:",
