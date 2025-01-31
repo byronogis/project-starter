@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "vitest",
-    "check-types": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ctrl/tinycolor": "catalog:",

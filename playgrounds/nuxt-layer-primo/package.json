@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxi dev --host",
-    "check-types": "nuxi typecheck",
+    "typecheck": "nuxi typecheck",
     "clear": "pnpx rimraf -g '**/.nuxt' '**/.output' '**/dist'",
     "postinstall": "nuxi prepare"
   },

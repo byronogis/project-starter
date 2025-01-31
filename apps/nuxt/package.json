@@ -10,7 +10,7 @@
     "preview": "nuxi preview --host",
     "preview:build": "pnpm build && pnpm preview --host",
     "preview:generate": "pnpm generate && pnpm preview --host",
-    "check-types": "nuxi typecheck",
+    "typecheck": "nuxi typecheck",
     "clear": "pnpx rimraf .nuxt .output dist",
     "postinstall": "nuxi prepare"
   },

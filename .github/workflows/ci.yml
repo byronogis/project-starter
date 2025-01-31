@@ -37,7 +37,7 @@ jobs:
           node-version: lts/*
           cache: pnpm
       - run: pnpm install
-      - run: pnpm run check-types
+      - run: pnpm run typecheck
 
   build:
     needs: [lint, typecheck]

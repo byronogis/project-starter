@@ -9,10 +9,10 @@
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build", "check-types"]
+      "dependsOn": ["^build", "typecheck"]
     },
     "generate": {
-      "dependsOn": ["^generate", "check-types"]
+      "dependsOn": ["^generate", "typecheck"]
     },
     "preview": {
       "dependsOn": ["^transit"],
@@ -32,7 +32,7 @@
       "persistent": true,
       "interactive": true
     },
-    "check-types": {
+    "typecheck": {
       "dependsOn": ["^transit"]
     },
     "clear": {
