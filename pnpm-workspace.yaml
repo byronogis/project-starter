@@ -19,9 +19,9 @@ catalog:
   '@tanstack/vue-query': ^5.66.9
   '@tanstack/vue-query-devtools': ^5.66.9
   '@types/nprogress': ^0.2.3
-  '@unocss/eslint-plugin': ^65.5.0
-  '@unocss/nuxt': ^65.5.0
-  '@unocss/reset': ^65.5.0
+  '@unocss/eslint-plugin': ^66.0.0
+  '@unocss/nuxt': ^66.0.0
+  '@unocss/reset': ^66.0.0
   '@vee-validate/nuxt': ^4.15.0
   '@vee-validate/zod': ^4.15.0
   '@vite-pwa/nuxt': ^0.10.6
@@ -57,7 +57,7 @@ catalog:
   type-fest: ^4.35.0
   typescript: ^5.7.3
   unbuild: ^3.3.1
-  unocss: ^65.5.0
+  unocss: ^66.0.0
   vanilla-jsoneditor: ^2.4.0
   vee-validate: ^4.15.0
   vitepress: ^1.6.3

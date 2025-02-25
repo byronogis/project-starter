@@ -6,7 +6,7 @@ import { presetUni } from '@uni-helper/unocss-preset-uni'
 
 export default base(
   {
-    uno: false,
+    wind3: false,
     webFonts: false,
     icons: {
       // scale: 1.2,
