@@ -204,10 +204,10 @@ catalogs:
 
 patchedDependencies:
   '@primevue/core':
-    hash: 5dc41869556afe2fe5b62be683e895a5abb1a2b38bebc98de426a3eaecadea90
+    hash: 09bff7fd872260345368499608e260530349150b0ecf477619c1d0fead689152
     path: patches/@primevue__core.patch
   '@primevue/nuxt-module':
-    hash: fc8807aeeb5475f7ef724ad28cc4040fb9773305535455e0455c46741816d246
+    hash: 6c6a877094f7542e111e87655ae99976c609dddeff79c3c0c7fe2e782dbaa323
     path: patches/@primevue__nuxt-module.patch
   nprogress:
     hash: 6749b8c5e178b723f2c5e4526ae4987c270a736e6306d993b09b196f089347ad
@@ -545,7 +545,7 @@ importers:
         version: 3.15.4
       '@primevue/nuxt-module':
         specifier: 'catalog:'
-        version: 4.3.0(patch_hash=fc8807aeeb5475f7ef724ad28cc4040fb9773305535455e0455c46741816d246)(@babel/parser@7.26.5)(magicast@0.3.5)(rollup@4.30.1)(vue@3.5.13(typescript@5.7.3))
+        version: 4.3.0(patch_hash=6c6a877094f7542e111e87655ae99976c609dddeff79c3c0c7fe2e782dbaa323)(@babel/parser@7.26.5)(magicast@0.3.5)(rollup@4.30.1)(vue@3.5.13(typescript@5.7.3))
       '@primevue/themes':
         specifier: 'catalog:'
         version: 4.3.0
@@ -14439,7 +14439,7 @@ snapshots:
     dependencies:
       '@primevue/metadata': 4.3.0
 
-  '@primevue/core@4.3.0(patch_hash=5dc41869556afe2fe5b62be683e895a5abb1a2b38bebc98de426a3eaecadea90)(vue@3.5.13(typescript@5.7.3))':
+  '@primevue/core@4.3.0(patch_hash=09bff7fd872260345368499608e260530349150b0ecf477619c1d0fead689152)(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@primeuix/styled': 0.5.0
       '@primeuix/utils': 0.5.1
@@ -14448,13 +14448,13 @@ snapshots:
   '@primevue/icons@4.3.0(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@primeuix/utils': 0.5.1
-      '@primevue/core': 4.3.0(patch_hash=5dc41869556afe2fe5b62be683e895a5abb1a2b38bebc98de426a3eaecadea90)(vue@3.5.13(typescript@5.7.3))
+      '@primevue/core': 4.3.0(patch_hash=09bff7fd872260345368499608e260530349150b0ecf477619c1d0fead689152)(vue@3.5.13(typescript@5.7.3))
     transitivePeerDependencies:
       - vue
 
   '@primevue/metadata@4.3.0': {}
 
-  '@primevue/nuxt-module@4.3.0(patch_hash=fc8807aeeb5475f7ef724ad28cc4040fb9773305535455e0455c46741816d246)(@babel/parser@7.26.5)(magicast@0.3.5)(rollup@4.30.1)(vue@3.5.13(typescript@5.7.3))':
+  '@primevue/nuxt-module@4.3.0(patch_hash=6c6a877094f7542e111e87655ae99976c609dddeff79c3c0c7fe2e782dbaa323)(@babel/parser@7.26.5)(magicast@0.3.5)(rollup@4.30.1)(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
       '@primeuix/styled': 0.5.0
@@ -21527,7 +21527,7 @@ snapshots:
       '@primeuix/styled': 0.5.0
       '@primeuix/styles': 1.0.0
       '@primeuix/utils': 0.5.1
-      '@primevue/core': 4.3.0(patch_hash=5dc41869556afe2fe5b62be683e895a5abb1a2b38bebc98de426a3eaecadea90)(vue@3.5.13(typescript@5.7.3))
+      '@primevue/core': 4.3.0(patch_hash=09bff7fd872260345368499608e260530349150b0ecf477619c1d0fead689152)(vue@3.5.13(typescript@5.7.3))
       '@primevue/icons': 4.3.0(vue@3.5.13(typescript@5.7.3))
     transitivePeerDependencies:
       - vue

@@ -47,7 +47,7 @@ index 11e951e34551f47f66e21e9b55784aff2bbfb7da..fd5c9a33b0bcaaa856ee9e4304a47ebb
      composables?: Omit<ConstructsType, 'prefix'>;
  }
 diff --git a/dist/module.mjs b/dist/module.mjs
-index 7817794af46593525923a353f3791ebf80e62126..142f3a08c0e5eeb8bb4b278ef396e1d9859c3651 100644
+index dc6ca89ebbd7e10e41a85e5e9560b3f486cd7f39..9c2617180d3ba5409bd55403b11c08145724c951 100644
 --- a/dist/module.mjs
 +++ b/dist/module.mjs
 @@ -1,8 +1,5 @@
@@ -106,9 +106,9 @@ index 7817794af46593525923a353f3791ebf80e62126..142f3a08c0e5eeb8bb4b278ef396e1d9
      const resolver = createResolver(import.meta.url);
      const registered = register(moduleOptions);
      const { autoImport, importPT, importTheme, options, loadStyles } = moduleOptions;
-@@ -205,29 +203,6 @@ const module = defineNuxtModule({
-     };
-     nuxt.options.build.transpile.push("primevue");
+@@ -207,29 +205,6 @@ const module = defineNuxtModule({
+     hasTheme && nuxt.options.build.transpile.push("@primevue/themes");
+     hasTheme && nuxt.options.build.transpile.push("@primeuix/themes");
      let registeredStyles = registered.styles;
 -    if (autoImport) {
 -      const dts = isNotEmpty$1(moduleOptions.components?.prefix) || isNotEmpty$1(moduleOptions.directives?.prefix);
@@ -136,7 +136,7 @@ index 7817794af46593525923a353f3791ebf80e62126..142f3a08c0e5eeb8bb4b278ef396e1d9
      const styleContent = () => {
        if (!loadStyles)
          return `export const styles = [], stylesToTop = [], themes = [];`;
-@@ -275,7 +250,7 @@ export { styles, stylesToTop, themes };
+@@ -277,7 +252,7 @@ export { styles, stylesToTop, themes };
  import { defineNuxtPlugin, useRuntimeConfig } from '#imports';
  ${registered.config.map((config) => `import ${config.as} from '${config.from}';`).join("\n")}
  ${registered.services.map((service) => `import ${service.as} from '${service.from}';`).join("\n")}
@@ -145,7 +145,7 @@ index 7817794af46593525923a353f3791ebf80e62126..142f3a08c0e5eeb8bb4b278ef396e1d9
  ${importPT ? `import ${importPT.as} from '${normalize(importPT.from)}';
  ` : ""}
  ${hasTheme && importTheme ? `import ${importTheme.as} from '${normalize(importTheme.from)}';
-@@ -290,7 +265,7 @@ export default defineNuxtPlugin(({ vueApp }) => {
+@@ -292,7 +267,7 @@ export default defineNuxtPlugin(({ vueApp }) => {
  
    usePrimeVue && vueApp.use(PrimeVue, { ...options, ...pt, ...theme });
    ${registered.services.map((service) => `vueApp.use(${service.as});`).join("\n")}
