@@ -1,5 +1,5 @@
+import type { SetRequired } from 'type-fest'
 import type {
-  SharedFormData,
   SharedFormField,
   SharedFormFields,
   SharedFormGroup,
@@ -10,12 +10,17 @@ import { sanitizeString } from '../index'
 export type * from './type'
 
 export function define<
-  D extends SharedFormData,
+  D extends object,
   G extends string = never,
   T extends string = never,
   E = Record<string, any>,
 >(options: DefineSharedFormOptions<D, G, T, E>) {
-  type _SharedFormField = SharedFormField<Extract<keyof D, string>, D[Extract<keyof D, string>], G, T, E>
+  type _SharedFormField = SharedFormField<keyof D & string, D[keyof D & string], G, T, E>
+  type _SharedFormFieldWithDefaultKeys = Extract<keyof _SharedFormField, 'label' | 'readonly' | 'disable' | 'hidden' | 'custom' | 'fieldPath' | 'gridArea' | 'isArray' | 'isCascade'>
+  type _SharedFormFieldResolved = SetRequired<_SharedFormField, _SharedFormFieldWithDefaultKeys | 'groupId'>
+
+  type _SharedFormGroup = SharedFormGroup<D, G, T, E>
+  type _SharedFormGroupResolved = Required<_SharedFormGroup>
 
   const {
     fields,
@@ -24,47 +29,54 @@ export function define<
     identify = 'shared-form',
   } = options ?? {}
 
+  const resolvedFieldsAndGroups = Object.values<_SharedFormField>(fields as _SharedFormField[])
+    .reduce<{
+    fields: Record<keyof D & string, _SharedFormFieldResolved>
+    groups: Record<G, _SharedFormGroupResolved>
+  }>((acc, field) => {
+      if (!field) {
+        return acc
+      }
+
+      const _gid = (field.groupId || groupDefaultId) as G
+
+      acc.groups[_gid] ??= _resolveGroup({
+        // @ts-expect-error 类型“G”无法用于索引类型“{}”。ts(2536)
+        ...groups[_gid],
+        id: _gid,
+      })
+
+      const _resolvedField = _resolveField(field, _gid)
+
+      acc.groups[_gid].fields[field.name] = _resolvedField
+      acc.fields[field.name] = _resolvedField
+
+      return acc
+    }, {
+      fields: {},
+      groups: {},
+    } as any)
+
   /**
-   * 生成表单项分组信息 \
+   * 表单项分组列表 \
    * 根据优先级降序排序
    */
-  function _generateGroupList() {
-    const _groups = (Object.values(fields) as _SharedFormField[])
-      .reduce<Record<string, SharedFormGroup<D, G, T, E>>>((acc, field) => {
-        const _gid = (field.groupId ?? groupDefaultId) as G
-
-        acc[_gid] ??= {
-          id: _gid,
-        }
-        acc[_gid].fields ??= {}
-        acc[_gid].fields[field.name] = _standardField(field, _gid)
-
-        return acc
-      }, groups)
-
-    return Object.values(_groups)
-      .map(g => ({
-        ...g,
-        label: g.label ?? g.id,
-        priority: g.priority ?? 0,
-        containerClass: sanitizeString(g.containerClass ?? `${identify}_${g.id}`),
-      })) // 处理默认值
-      .sort((a, b) => (b.priority!) - (a.priority!))
-  }
+  const resolvedGroupList = Object.values<_SharedFormGroupResolved>(resolvedFieldsAndGroups.groups)
+    .sort((a, b) => (b.sort) - (a.sort))
 
   /**
-   * 规范字段信息
+   * 解析字段信息 \
+   * 1. 处理默认值 \
    */
-  function _standardField(rawField: _SharedFormField, _gid: G): _SharedFormField {
-    const _field: _SharedFormField & Required<Omit<
-      _SharedFormField,
-    'initialValue' | 'placeholder' | 'arrayFields' | 'cascadeFields' | 'extra'
-    >> = {
+  function _resolveField(rawField: _SharedFormField, _gid: G): _SharedFormFieldResolved {
+    const _field: _SharedFormFieldResolved = {
       // 处理默认值
+      label: rawField.name,
+      readonly: false,
       disable: false,
       hidden: false,
       custom: false,
-      fieldPath: rawField.fieldPath ?? rawField.name,
+      fieldPath: rawField.name,
       gridArea: sanitizeString(rawField.gridArea ?? rawField.fieldPath ?? rawField.name),
       isArray: false,
       isCascade: false,
@@ -73,44 +85,52 @@ export function define<
     }
 
     const {
-      isArray,
-      isCascade,
+      arrayFields,
+      cascadeFields,
     } = _field
 
-    if (isArray || isCascade) {
-      const _fieldsType = isArray ? 'array' : 'cascade'
-      const _fieldsKey = isArray ? 'arrayFields' : 'cascadeFields'
-      const _fieldSeparator = isArray ? '[].' : '.'
+    if (arrayFields || cascadeFields) {
+      const _fieldsKey = arrayFields ? 'arrayFields' : 'cascadeFields'
+      const _fieldSeparator = arrayFields ? '[].' : '.'
 
-      if (!_field[_fieldsKey]) {
-        console.warn(
-          `[Form] "${_gid}:${_field.fieldPath}" is marked as ${_fieldsType} but missing ${_fieldsKey} configuration.`,
-        )
-      }
-      else {
-        const _fieldPath = _field.fieldPath
-        _field[_fieldsKey] = (Object.values(_field[_fieldsKey]) as _SharedFormField[])
-          .reduce<Record<string, _SharedFormField>>((acc, _subField) => {
-            _subField = {
-              ..._subField,
-              // 拼接字段路径
-              fieldPath: `${_fieldPath}${_fieldSeparator}${_subField.name}`,
-            }
+      const _fieldPath = _field.fieldPath
+      _field[_fieldsKey] = Object.values<_SharedFormField>(_field[_fieldsKey] as any)
+        .reduce<Record<string, _SharedFormField>>((acc, _subField) => {
+          _subField = {
+            ..._subField,
+            // 拼接字段路径
+            fieldPath: `${_fieldPath}${_fieldSeparator}${_subField.name}`,
+          }
 
-            acc[_subField.name] = _standardField(_subField, _gid)
-            return acc
-          }, {}) as any // 这里用 as any 临时解决类型问题，实际上这个类型是安全的
-      }
+          acc[_subField.name] = _resolveField(_subField, _gid)
+          return acc
+        }, {}) as any // 这里用 as any 临时解决类型问题，实际上这个类型是安全的
     }
 
     return _field
   }
 
+  /**
+   * 解析分组信息 \
+   * 1. 处理默认值 \
+   */
+  function _resolveGroup(rawGroup: _SharedFormGroup): _SharedFormGroupResolved {
+    return {
+      label: rawGroup.label ?? rawGroup.id,
+      sort: rawGroup.sort ?? rawGroup.priority ?? 0,
+      priority: rawGroup.priority ?? 0,
+      containerClass: sanitizeString(rawGroup.containerClass ?? `${identify}_${rawGroup.id}`),
+      fields: rawGroup.fields ?? {},
+      ...rawGroup,
+    }
+  }
+
   return {
+    ...resolvedFieldsAndGroups,
     /**
      * 以组划分的字段信息
      */
-    groupList: _generateGroupList(),
+    groupList: resolvedGroupList,
   }
 }
 
@@ -118,7 +138,7 @@ export interface DefineSharedFormOptions<
   /**
    * 表单项类型
    */
-  D extends SharedFormData,
+  D extends object,
   /**
    * 表单分组
    */
@@ -139,7 +159,7 @@ export interface DefineSharedFormOptions<
   /**
    * 表单字段分组信息
    */
-  groups?: Partial<SharedFormGroups<D, G, T, E>> | undefined
+  groups?: Partial<SharedFormGroups<D, G, T, E>>
   /**
    * 修改默认分组标识 \
    * @default '_default'

@@ -1,5 +1,5 @@
 import type { SharedFormData } from './type'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
 import { define as defineSharedForm } from './index'
 
@@ -481,80 +481,6 @@ describe('defineSharedForm', () => {
 
     expect(form.groupList[0]!.fields!['user/name']!.gridArea).toBe('user_name')
     expect(form.groupList[0]!.fields!['@email']!.gridArea).toBe('_email')
-  })
-
-  // 验证缺少配置的警告
-  it('should warn when array/cascade fields missing configuration', () => {
-    const consoleSpy = vi.spyOn(console, 'warn')
-    interface TestForm extends SharedFormData {
-      items: Array<{ name: string }>
-      users: Array<{ name: string }>
-      company: { name: string }
-      branch: { name: string }
-    }
-
-    defineSharedForm<TestForm, 'data' | 'info', BaseFieldType>({
-      fields: {
-        items: {
-          name: 'items',
-          label: '项目',
-          type: 'array',
-          schema: z.array(z.object({ name: z.string() })),
-          isArray: true,
-          // 缺少 arrayFields
-        },
-        users: {
-          name: 'users',
-          label: '用户列表',
-          type: 'array',
-          schema: z.array(z.object({ name: z.string() })),
-          isArray: true,
-          groupId: 'data',
-          // 缺少 arrayFields
-        },
-        company: {
-          name: 'company',
-          label: '公司',
-          type: 'object',
-          schema: z.object({ name: z.string() }),
-          isCascade: true,
-          // 缺少 cascadeFields
-        },
-        branch: {
-          name: 'branch',
-          label: '分公司',
-          type: 'object',
-          schema: z.object({ name: z.string() }),
-          isCascade: true,
-          groupId: 'info',
-          // 缺少 cascadeFields
-        },
-      },
-      groups: {
-        data: {
-          id: 'data',
-          label: '数据组',
-        },
-        info: {
-          id: 'info',
-          label: '信息组',
-        },
-      },
-    })
-
-    expect(consoleSpy).toHaveBeenCalledTimes(4)
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Form] "_default:items" is marked as array but missing arrayFields configuration.',
-    )
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Form] "data:users" is marked as array but missing arrayFields configuration.',
-    )
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Form] "_default:company" is marked as cascade but missing cascadeFields configuration.',
-    )
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Form] "info:branch" is marked as cascade but missing cascadeFields configuration.',
-    )
   })
 
   // Select类型和额外选项测试
