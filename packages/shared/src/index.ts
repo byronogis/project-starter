@@ -56,18 +56,30 @@ export async function catchErrorTyped<
 }
 
 /**
- * 替换字符串中不支持的字符为下划线，并确保结果符合类名规范 \
- * @description 只允许 a-zA-Z0-9_- 字符, 并且不以数字开头 \
- * 不符合规范的字符将被原地替换为下划线, 如果结果以数字开头, 则添加下划线前缀 \
- * @param input 原始字符串
- * @returns 已替换的不含非法字符的字符串
+ * 替换字符串中不受支持的字符(默认 /[^\w-]/g )为指定字符(默认下划线)，并执行回调(默认确保为非数字开头) \
  */
-export function sanitizeString(input: string): string {
+export function sanitizeString(options: {
+  source: string
+  /** @default /[^\w-]/g */
+  regex?: RegExp
+  /** @default '_' */
+  replaceWith?: string
+  /** @default (result: string) => (/^\d/.test(result)) ? `${replaceWith}${result}` : result 如果结果以数字开头，添加 replaceWith 为前缀 */
+  afterReplace?: (result: string) => string
+}): string {
+  const {
+    source,
+    regex = /[^\w-]/g,
+    replaceWith = '_',
+    afterReplace = (result: string) => (/^\d/.test(result)) ? `${replaceWith}${result}` : result,
+  } = options ?? {}
+
   // 替换不支持的字符为下划线
-  let result = input.replace(/[^\w-]/g, '_')
-  // 如果结果以数字开头，添加下划线前缀
-  if (/^\d/.test(result)) {
-    result = `_${result}`
+  let result = source.replace(regex, replaceWith)
+
+  if (afterReplace) {
+    result = afterReplace(result)
   }
+
   return result
 }

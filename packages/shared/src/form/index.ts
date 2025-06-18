@@ -77,7 +77,7 @@ export function define<
       hidden: false,
       custom: false,
       fieldPath: rawField.name,
-      gridArea: sanitizeString(rawField.gridArea ?? rawField.fieldPath ?? rawField.name),
+      gridArea: sanitizeString({ source: rawField.gridArea ?? rawField.fieldPath ?? rawField.name }),
       isArray: false,
       isCascade: false,
       groupId: _gid,
@@ -119,7 +119,7 @@ export function define<
       label: rawGroup.label ?? rawGroup.id,
       sort: rawGroup.sort ?? rawGroup.priority ?? 0,
       priority: rawGroup.priority ?? 0,
-      containerClass: sanitizeString(rawGroup.containerClass ?? `${identify}_${rawGroup.id}`),
+      containerClass: sanitizeString({ source: rawGroup.containerClass ?? `${identify}_${rawGroup.id}` }),
       fields: rawGroup.fields ?? {},
       ...rawGroup,
     }
