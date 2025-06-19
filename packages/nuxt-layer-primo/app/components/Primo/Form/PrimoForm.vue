@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="
-  D extends PrimoFormData,
+  D extends object,
   G extends string = never
 "
 >
@@ -29,13 +29,13 @@ const props = withDefaults(defineProps<{
         </PrimeAccordionHeader>
 
         <PrimeAccordionContent>
-          <div class="gap-6" :class="[group.containerClass]">
+          <div class="gap-6" :class="[group.id]">
             <template
               v-for="field in group.fields"
               :key="field!.name"
             >
               <!-- 自定义字段内容 -->
-              <template v-if="field!.custom">
+              <template v-if="field!.extra?.custom">
                 <slot
                   :name="`field-${group.id}-${String(field!.name)}`"
                   :field="field"
@@ -46,13 +46,13 @@ const props = withDefaults(defineProps<{
 
               <!-- 数组字段 -->
               <PrimoFormFieldArray
-                v-else-if="field?.isArray"
+                v-else-if="field?.arrayFields"
                 :field="(field! as any)"
               />
 
               <!-- 级联字段 -->
               <PrimoFormFieldCascade
-                v-else-if="field?.isCascade"
+                v-else-if="field?.cascadeFields"
                 :field="(field! as any)"
               />
 

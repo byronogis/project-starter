@@ -1,24 +1,5 @@
+import type { SetRequired } from 'type-fest'
 import type { ZodSchema } from 'zod'
-
-/**
- * 表单数据
- * @deprecated
- */
-export type SharedFormData<D = Record<string, any>> = {
-  /**
-   * 当前表单的唯一标识
-   * @deprecated 基础类型中不需要放入此属性, 可选择使用时自行定义
-   */
-  _id?: string
-  /**
-   * 当前表单的名称, 用于显示
-   * @deprecated 基础类型中不需要放入此属性, 可选择使用时自行定义
-   */
-  _label?: string
-  /**
-   * 表单数据
-   */
-} & D
 
 /**
  * 表单字段项
@@ -73,13 +54,6 @@ export interface SharedFormField<
    */
   hidden?: boolean
   /**
-   * 是否自定义模板 \
-   * 用于自定义表单项渲染内容(vue 作用域插槽) \
-   * @default false
-   * @deprecated 基础类型中不需要放入此属性, 可选择使用时自行定义
-   */
-  custom?: boolean
-  /**
    * 字段在表单中的完整路径 \
    * 级联字段的路径使用 `.`分隔 user.name \
    * 数组字段的路径使用 `[].` 分隔 users[].name \
@@ -87,30 +61,11 @@ export interface SharedFormField<
    */
   fieldPath?: string
   /**
-   * Grid 布局中的位置 \
-   * @default `${fieldPath}` ?? `${name}`
-   * @description 不合法的字符会被替换为下划线
-   * @deprecated 基础类型中不需要放入此属性, 可选择使用时自行定义
-   */
-  gridArea?: string
-  /**
-   * 是否为数组字段
-   * @default false
-   * @deprecated 并入 arrayFields 属性中, 直接判断 `arrayFields` 是否存在即可 \
-   */
-  isArray?: boolean
-  /**
    * 数组字段元素的字段信息
    */
   arrayFields?: V extends Array<infer U extends object>
     ? SharedFormFields<U, G, T, E>
     : never
-  /**
-   * 是否为级联字段
-   * @default false
-   * @deprecated 并入 cascadeFields 属性中, 直接判断 `cascadeFields` 是否存在即可 \
-   */
-  isCascade?: boolean
   /**
    * 级联字段的子字段配置
    */
@@ -119,6 +74,7 @@ export interface SharedFormField<
     : never
   /**
    * 当前表单项所属的分组
+   * @default '_default'
    */
   groupId?: SharedFormGroupId<G>
   /**
@@ -126,6 +82,14 @@ export interface SharedFormField<
    */
   extra?: E
 }
+
+export type SharedFormFieldWithDefaultKeys = Extract<keyof SharedFormField<string>, 'label' | 'readonly' | 'disable' | 'hidden' | 'fieldPath' | 'groupId'>
+
+/**
+ * 解析后的表单字段项类型 \
+ * 包含了默认值和其他必要的字段 \
+ */
+export type SharedFormFieldResolved<T extends SharedFormField<any, any, any, any, any>> = SetRequired<T, SharedFormFieldWithDefaultKeys>
 
 /**
  * 表单字段项类型 \
@@ -187,20 +151,6 @@ export interface SharedFormGroup<
    * @default 0
    */
   sort?: number
-  /**
-   * 优先级 \
-   * 数字越大优先级越高，越靠前 \
-   * @default 0
-   * @deprecated 使用 sort 替代
-   */
-  priority?: number
-  /**
-   * 包裹表单项的容器的类名 \
-   * @default `${identify}_${id}`
-   * @description 不合法的字符会被替换为下划线
-   * @deprecated 基础类型中不需要放入此属性, 可选择使用时自行定义
-   */
-  containerClass?: string
   /**
    * 当前分组的字段
    */

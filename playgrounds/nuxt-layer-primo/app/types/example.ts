@@ -1,6 +1,4 @@
-export type ExampleFormFieldInfo = PrimoFormFields<ExampleItemWithForm, ExampleFormFieldsGroup>
-
-export type ExampleItemWithForm = PrimoFormData<ExampleItem>
+export type ExampleFormFieldInfo = PrimoFormFields<ExampleItem, ExampleFormFieldsGroup>
 
 export type ExampleFormFieldsGroup =
   | 'basic' // 基础信息

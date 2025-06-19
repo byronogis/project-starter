@@ -1,6 +1,5 @@
 import type {
   DefineSharedFormOptions,
-  SharedFormData,
   SharedFormField,
   SharedFormFields,
   SharedFormGroup,
@@ -20,7 +19,7 @@ import { useForm } from 'vee-validate'
 export type { PartialDeep } from 'type-fest'
 
 export function usePrimoForm<
-  D extends PrimoFormData,
+  D extends object,
   G extends string = never,
 >(options: PrimoFormOptions<D, G>) {
   const {
@@ -72,7 +71,7 @@ export function usePrimoForm<
 }
 
 export type PrimoFormOptions<
-  D extends SharedFormData,
+  D extends object,
   G extends string = never,
 > = {
   [K in keyof DefineSharedFormOptions<D, G, PrimoFormFieldType, PrimoFormFieldExtra>]:
@@ -88,7 +87,6 @@ export type PrimoFormReturns = ReturnType<typeof usePrimoForm>
 
 /**
  * extend shared form types
- * SharedFormData -> PrimoFormData
  * SharedFormField -> PrimoFormField
  * SharedFormFields -> PrimoFormFields
  * SharedFormGroup -> PrimoFormGroup
@@ -97,12 +95,10 @@ export type PrimoFormReturns = ReturnType<typeof usePrimoForm>
  * SharedFormFieldExtra -> PrimoFormFieldExtra
  */
 
-export type PrimoFormData<D = object> = SharedFormData<D>
-
 export type PrimoFormField<V = any> = SharedFormField<any, V, any, PrimoFormFieldType, PrimoFormFieldExtra>
 
 export type PrimoFormFields<
-  D extends PrimoFormData = PrimoFormData,
+  D extends object = object,
   G extends string = never,
 > = SharedFormFields<
   D,
@@ -112,7 +108,7 @@ export type PrimoFormFields<
 >
 
 export type PrimoFormGroups<
-  D extends PrimoFormData = PrimoFormData,
+  D extends object = object,
   G extends string = never,
 > = SharedFormGroups<
   D,
@@ -122,7 +118,7 @@ export type PrimoFormGroups<
 >
 
 export type PrimoFormGroup<
-  D extends PrimoFormData = PrimoFormData,
+  D extends object = object,
   G extends string = never,
 > = SharedFormGroup<
   D,
@@ -147,6 +143,17 @@ export type PrimoFormFieldType =
   | 'json'
 
 export interface PrimoFormFieldExtra {
+  /**
+   * 是否自定义模板 \
+   * 用于自定义表单项渲染内容(vue 作用域插槽) \
+   */
+  custom?: boolean
+  /**
+   * Grid 布局中的位置 \
+   * @default `${fieldPath}` ?? `${name}`
+   * @description 不合法的字符会被替换为下划线
+   */
+  gridArea?: string
   /**
    * 传递给表单组件的 props / attrs \
    * TODO 需要考虑传递位置以通用

@@ -1,4 +1,3 @@
-import type { SharedFormData } from './type'
 import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
 import { define as defineSharedForm } from './index'
@@ -9,7 +8,7 @@ type BaseFieldType = 'text' | 'number' | 'array' | 'object' | 'select'
 describe('defineSharedForm', () => {
   // 基本表单配置测试
   it('should handle basic form fields', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       name: string
       age: number
     }
@@ -35,14 +34,12 @@ describe('defineSharedForm', () => {
     expect(form.groupList[0]!.id).toBe('_default')
     expect(Object.keys(form.groupList[0]!.fields!)).toHaveLength(2)
     expect(form.groupList[0]!.fields!.name!.fieldPath).toBe('name')
-    expect(form.groupList[0]!.fields!.name!.gridArea).toBe('name')
     expect(form.groupList[0]!.fields!.age!.fieldPath).toBe('age')
-    expect(form.groupList[0]!.fields!.age!.gridArea).toBe('age')
   })
 
   // 分组功能测试
   it('should handle grouped fields', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       name: string
       age: number
       address: string
@@ -76,12 +73,12 @@ describe('defineSharedForm', () => {
         basic: {
           id: 'basic',
           label: '基本信息',
-          priority: 2,
+          sort: 2,
         },
         contact: {
           id: 'contact',
           label: '联系方式',
-          priority: 1,
+          sort: 1,
         },
       },
     })
@@ -90,14 +87,12 @@ describe('defineSharedForm', () => {
     expect(form.groupList[0]!.id).toBe('basic')
     expect(form.groupList[1]!.id).toBe('contact')
     expect(form.groupList[0]!.fields!.name!.fieldPath).toBe('name')
-    expect(form.groupList[0]!.fields!.name!.gridArea).toBe('name')
     expect(form.groupList[1]!.fields!.address!.fieldPath).toBe('address')
-    expect(form.groupList[1]!.fields!.address!.gridArea).toBe('address')
   })
 
   // 数组字段测试
   it('should handle array fields', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       hobbies: Array<{ name: string, level: number }>
     }
 
@@ -108,7 +103,6 @@ describe('defineSharedForm', () => {
           label: '爱好',
           type: 'array',
           schema: z.array(z.object({ name: z.string(), level: z.number() })),
-          isArray: true,
           arrayFields: {
             name: {
               name: 'name',
@@ -128,18 +122,14 @@ describe('defineSharedForm', () => {
     })
 
     expect(form.groupList[0]!.fields!.hobbies!.fieldPath).toBe('hobbies')
-    expect(form.groupList[0]!.fields!.hobbies!.gridArea).toBe('hobbies')
-    expect(form.groupList[0]!.fields!.hobbies!.isArray).toBe(true)
     expect(Object.keys(form.groupList[0]!.fields!.hobbies!.arrayFields!)).toHaveLength(2)
     expect(form.groupList[0]!.fields!.hobbies!.arrayFields!.name!.fieldPath).toBe('hobbies[].name')
-    expect(form.groupList[0]!.fields!.hobbies!.arrayFields!.name!.gridArea).toBe('hobbies___name')
     expect(form.groupList[0]!.fields!.hobbies!.arrayFields!.level!.fieldPath).toBe('hobbies[].level')
-    expect(form.groupList[0]!.fields!.hobbies!.arrayFields!.level!.gridArea).toBe('hobbies___level')
   })
 
   // 级联字段测试
   it('should handle cascade fields', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       user: {
         name: string
         age: number
@@ -153,7 +143,6 @@ describe('defineSharedForm', () => {
           label: '用户信息',
           type: 'object',
           schema: z.object({ name: z.string(), age: z.number() }),
-          isCascade: true,
           cascadeFields: {
             name: {
               name: 'name',
@@ -173,17 +162,13 @@ describe('defineSharedForm', () => {
     })
 
     expect(form.groupList[0]!.fields!.user!.fieldPath).toBe('user')
-    expect(form.groupList[0]!.fields!.user!.gridArea).toBe('user')
-    expect(form.groupList[0]!.fields!.user!.isCascade).toBe(true)
     expect(form.groupList[0]!.fields!.user!.cascadeFields!.name!.fieldPath).toBe('user.name')
-    expect(form.groupList[0]!.fields!.user!.cascadeFields!.name!.gridArea).toBe('user_name')
     expect(form.groupList[0]!.fields!.user!.cascadeFields!.age!.fieldPath).toBe('user.age')
-    expect(form.groupList[0]!.fields!.user!.cascadeFields!.age!.gridArea).toBe('user_age')
   })
 
   // 自定义配置测试
   it('should handle custom identify and groupDefaultId', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       name: string
     }
 
@@ -201,14 +186,12 @@ describe('defineSharedForm', () => {
     })
 
     expect(form.groupList[0]!.id).toBe('main')
-    expect(form.groupList[0]!.containerClass).toBe('test-form_main')
     expect(form.groupList[0]!.fields!.name!.fieldPath).toBe('name')
-    expect(form.groupList[0]!.fields!.name!.gridArea).toBe('name')
   })
 
   // 添加自定义 gridArea 的测试
   it('should handle custom gridArea', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       email: string
     }
 
@@ -219,18 +202,16 @@ describe('defineSharedForm', () => {
           label: '邮箱',
           type: 'text',
           schema: z.string(),
-          gridArea: 'custom-email-area',
         },
       },
     })
 
     expect(form.groupList[0]!.fields!.email!.fieldPath).toBe('email')
-    expect(form.groupList[0]!.fields!.email!.gridArea).toBe('custom-email-area')
   })
 
   // 嵌套级联字段测试
   it('should handle nested cascade fields', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       company: {
         info: {
           name: string
@@ -253,14 +234,12 @@ describe('defineSharedForm', () => {
             info: z.object({ name: z.string(), address: z.string() }),
             contact: z.object({ phone: z.string(), email: z.string() }),
           }),
-          isCascade: true,
           cascadeFields: {
             info: {
               name: 'info',
               label: '基本信息',
               type: 'object',
               schema: z.object({ name: z.string(), address: z.string() }),
-              isCascade: true,
               cascadeFields: {
                 name: {
                   name: 'name',
@@ -281,7 +260,6 @@ describe('defineSharedForm', () => {
               label: '联系方式',
               type: 'object',
               schema: z.object({ phone: z.string(), email: z.string() }),
-              isCascade: true,
               cascadeFields: {
                 phone: {
                   name: 'phone',
@@ -304,14 +282,12 @@ describe('defineSharedForm', () => {
 
     const companyField = form.groupList[0]!.fields!.company!
     expect(companyField.cascadeFields!.info!.cascadeFields!.name!.fieldPath).toBe('company.info.name')
-    expect(companyField.cascadeFields!.info!.cascadeFields!.name!.gridArea).toBe('company_info_name')
     expect(companyField.cascadeFields!.contact!.cascadeFields!.email!.fieldPath).toBe('company.contact.email')
-    expect(companyField.cascadeFields!.contact!.cascadeFields!.email!.gridArea).toBe('company_contact_email')
   })
 
   // 多层级数组字段测试
   it('should handle nested array fields', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       departments: Array<{
         name: string
         employees: Array<{
@@ -331,7 +307,6 @@ describe('defineSharedForm', () => {
             name: z.string(),
             employees: z.array(z.object({ name: z.string(), role: z.string() })),
           })),
-          isArray: true,
           arrayFields: {
             name: {
               name: 'name',
@@ -344,7 +319,6 @@ describe('defineSharedForm', () => {
               label: '员工',
               type: 'array',
               schema: z.array(z.object({ name: z.string(), role: z.string() })),
-              isArray: true,
               arrayFields: {
                 name: {
                   name: 'name',
@@ -367,16 +341,13 @@ describe('defineSharedForm', () => {
 
     const deptField = form.groupList[0]!.fields!.departments!
     expect(deptField.arrayFields!.name!.fieldPath).toBe('departments[].name')
-    expect(deptField.arrayFields!.name!.gridArea).toBe('departments___name')
     expect(deptField.arrayFields!.employees!.arrayFields!.name!.fieldPath).toBe('departments[].employees[].name')
-    expect(deptField.arrayFields!.employees!.arrayFields!.name!.gridArea).toBe('departments___employees___name')
     expect(deptField.arrayFields!.employees!.arrayFields!.role!.fieldPath).toBe('departments[].employees[].role')
-    expect(deptField.arrayFields!.employees!.arrayFields!.role!.gridArea).toBe('departments___employees___role')
   })
 
   // 混合嵌套测试
   it('should handle mixed nested fields (cascade + array)', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       organization: {
         name: string
         branches: Array<{
@@ -399,7 +370,6 @@ describe('defineSharedForm', () => {
               teams: z.array(z.object({ name: z.string() })),
             })),
           }),
-          isCascade: true,
           cascadeFields: {
             name: {
               name: 'name',
@@ -415,7 +385,6 @@ describe('defineSharedForm', () => {
                 location: z.string(),
                 teams: z.array(z.object({ name: z.string() })),
               })),
-              isArray: true,
               arrayFields: {
                 location: {
                   name: 'location',
@@ -428,7 +397,6 @@ describe('defineSharedForm', () => {
                   label: '团队',
                   type: 'array',
                   schema: z.array(z.object({ name: z.string() })),
-                  isArray: true,
                   arrayFields: {
                     name: {
                       name: 'name',
@@ -447,45 +415,15 @@ describe('defineSharedForm', () => {
 
     const orgField = form.groupList[0]!.fields!.organization!
     expect(orgField.cascadeFields!.name!.fieldPath).toBe('organization.name')
-    expect(orgField.cascadeFields!.name!.gridArea).toBe('organization_name')
     const branchField = orgField.cascadeFields!.branches!
     expect(branchField.arrayFields!.location!.fieldPath).toBe('organization.branches[].location')
     const teamField = branchField.arrayFields!.teams!
     expect(teamField.arrayFields!.name!.fieldPath).toBe('organization.branches[].teams[].name')
-    expect(teamField.arrayFields!.name!.gridArea).toBe('organization_branches___teams___name')
-  })
-
-  // 不合法字符替换测试
-  it('should sanitize illegal characters in gridArea', () => {
-    interface TestForm extends SharedFormData {
-      'user/name': string
-      '@email': string
-    }
-
-    const form = defineSharedForm<TestForm, never, BaseFieldType>({
-      fields: {
-        'user/name': {
-          name: 'user/name',
-          label: '用户名',
-          type: 'text',
-          schema: z.string(),
-        },
-        '@email': {
-          name: '@email',
-          label: '邮箱',
-          type: 'text',
-          schema: z.string(),
-        },
-      },
-    })
-
-    expect(form.groupList[0]!.fields!['user/name']!.gridArea).toBe('user_name')
-    expect(form.groupList[0]!.fields!['@email']!.gridArea).toBe('_email')
   })
 
   // Select类型和额外选项测试
   it('should handle select type with options in extra', () => {
-    interface TestForm extends SharedFormData {
+    interface TestForm {
       gender: string
       role: string
     }

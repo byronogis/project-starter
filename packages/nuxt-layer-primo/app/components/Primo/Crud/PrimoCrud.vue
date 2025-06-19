@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="
-  D extends PrimoFormData,
+  D extends object,
   G extends string = never
 "
 >
@@ -17,6 +17,16 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<{
+  /**
+   * 主体数据的唯一标识字段
+   * @default 'id'
+   */
+  itemId?: keyof D
+  /**
+   * 主体数据的标签字段
+   * @default 'label'
+   */
+  itemLabel?: keyof D
   /**
    * 主体数据的别名
    * @default 'item'
@@ -112,6 +122,8 @@ const props = withDefaults(defineProps<{
    */
   disableActionsColumn?: boolean
 }>(), {
+  itemId: 'id' as keyof D,
+  itemLabel: 'label' as keyof D,
   itemAlias: 'item',
   items: () => [],
   formFields: () => ({}),
@@ -213,6 +225,16 @@ const {
 >({
   fields: () => props.formFields,
   groups: () => props.formGroups,
+  identify: `primo-crud-${props.itemAlias}`,
+  onFieldResolved: (field) => {
+    return {
+      ...field,
+      extra: {
+        gridArea: Utils.sanitizeString({ source: field.fieldPath }),
+        ...field.extra,
+      },
+    }
+  },
 })
 
 /**
@@ -229,8 +251,10 @@ function editItem(_item: D) {
 
 async function saveItem() {
   const _item = context.values
-  const hasId = '_id' in _item && _item._id
+  // @ts-expect-error UnwrapRef<D>
+  const hasId = props.itemId in _item && _item[props.itemId]
 
+  // @ts-expect-error UnwrapRef<D>
   primoCrudLogger.withTag(`saveItem`).log({ ..._item })
 
   try {
@@ -294,7 +318,7 @@ function confirmDeleteItem(_item: D) {
       h(NuxtIcon, { name: 'i-prime:exclamation-triangle', class: '!text-3xl' }),
       h('span', null, [
         'Are you sure you want to delete ',
-        h('b', null, _item._label),
+        h('b', null, `${_item[props.itemLabel!]}`),
         '?',
       ]),
     ]),
@@ -323,7 +347,7 @@ async function baseDeleteItems(items: D[]) {
  */
 const dataTableRef = ref()
 const dataTableProps = ref({
-  dataKey: '_id',
+  dataKey: props.itemId,
   paginator: true,
   filterDisplay: 'menu' as const,
   paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown',
@@ -351,7 +375,8 @@ watch([showItemDialog], ([_item]) => {
 })
 
 defineExpose({
-  isUpdating: computed(() => !!context.values._id),
+  // @ts-expect-error UnwrapRef<D>
+  isUpdating: computed(() => !!context.values[props.itemId]),
 })
 </script>
 

@@ -5,7 +5,6 @@ import type {
 import type {
   ExampleFormFieldInfo,
   ExampleItem,
-  ExampleItemWithForm,
 } from '~/types/example'
 
 /**
@@ -129,7 +128,6 @@ const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
       theme: z.string(),
       notifications: z.boolean(),
     })),
-    isCascade: true,
     cascadeFields: {
       theme: {
         name: 'theme',
@@ -170,7 +168,6 @@ const exampleFormFieldsInfoCST: ExampleFormFieldInfo = {
       phone: z.string().regex(/^1[3-9]\d{9}$/, '请输入有效的手机号码'),
       website: z.string().url('请输入有效的网址'),
     }))),
-    isArray: true,
     arrayFields: {
       email: {
         name: 'email',
@@ -212,11 +209,7 @@ const {
 } = await useFetch('/api/example', {
   transform: (res: any) => {
     return {
-      list: (res.data as ExampleItem[]).map(i => ({
-        _id: i.id,
-        _label: i.name,
-        ...i,
-      })),
+      list: res.data as ExampleItem[],
     }
   },
   lazy: true,
@@ -224,7 +217,7 @@ const {
 })
 const isLoading = computed(() => status.value === 'pending')
 
-async function submitFn(items: Partial<ExampleItemWithForm>[]) {
+async function submitFn(items: Partial<ExampleItem>[]) {
   if (isUpdating.value) {
     exampleLogger.info('Updating example', items)
     // return updateExample(items)
@@ -235,7 +228,7 @@ async function submitFn(items: Partial<ExampleItemWithForm>[]) {
   }
 }
 
-async function deleteFn(items: Partial<ExampleItemWithForm>[]) {
+async function deleteFn(items: Partial<ExampleItem>[]) {
   await Utils._.delay(1000)
   exampleLogger.warn('Deleting example', items)
   // return deleteExample(items)
@@ -254,10 +247,11 @@ const filters = ref<DataTableFilterMeta>({
     <PrimoCrud
       ref="crudRef"
       v-model:filters="filters"
+      item-label="name"
       :item-alias="name"
       :items="data?.list"
       :loading="isLoading"
-      :form-fields
+      :form-fields="(formFields as any /* TODO PrimoCrud 没有正确处理 G 泛型 */)"
       :submit-fn="submitFn"
       :delete-fn="deleteFn"
       :disable-global-filter="false"
@@ -279,14 +273,14 @@ const filters = ref<DataTableFilterMeta>({
 
 <style scoped lang="postcss">
 /* 基础信息分组布局 */
-:deep(.shared-form_basic) {
+:deep(.primo-crud-example_basic) {
   display: grid;
   grid-template: 'id      name       avatar' auto / 1fr 1fr 1fr;
   gap: 1rem;
 }
 
 /* 个人资料分组布局 */
-:deep(.shared-form_profile) {
+:deep(.primo-crud-example_profile) {
   display: grid;
   grid-template:
     'description  description' auto
@@ -296,14 +290,14 @@ const filters = ref<DataTableFilterMeta>({
 }
 
 /* 系统设置分组布局 */
-:deep(.shared-form_settings .component-primo-form-field-cascade-settings) {
+:deep(.primo-crud-example_settings .component-primo-form-field-cascade-settings) {
   display: grid;
   grid-template: 'settings_theme  settings_notifications' auto / 1fr 1fr;
   gap: 1rem;
 }
 
 /* 联系方式分组布局 */
-:deep(.shared-form_contacts .component-primo-form-field-array-item-contacts) {
+:deep(.primo-crud-example_contacts .component-primo-form-field-array-item-contacts) {
   display: grid;
   grid-template:
     'contacts___email  contacts___phone  contacts___website  _     ' auto
@@ -313,10 +307,10 @@ const filters = ref<DataTableFilterMeta>({
 }
 
 /* 分组之间的间距 */
-:deep(.shared-form_basic),
-:deep(.shared-form_profile),
-:deep(.shared-form_settings),
-:deep(.shared-form_contacts) {
+:deep(.primo-crud-example_basic),
+:deep(.primo-crud-example_profile),
+:deep(.primo-crud-example_settings),
+:deep(.primo-crud-example_contacts) {
   padding: 1rem;
   background-color: var(--surface-card);
   border-radius: var(--border-radius);

@@ -19,7 +19,7 @@ const {
   errorMessage,
 } = useField(
   () => props.field.name,
-  toTypedSchema(props.field.schema),
+  props.field.schema && toTypedSchema(props.field.schema),
   {
     initialValue: currentValue.value ?? props.field.initialValue,
   },
@@ -242,7 +242,7 @@ function handleFieldImageCancel() {
     class="component-primo-from-field"
     :style="[
       {
-        'grid-area': props.field.gridArea!,
+        'grid-area': props.field.extra?.gridArea,
       },
     ]"
   >

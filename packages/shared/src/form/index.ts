@@ -1,11 +1,10 @@
-import type { SetRequired } from 'type-fest'
 import type {
   SharedFormField,
+  SharedFormFieldResolved,
   SharedFormFields,
   SharedFormGroup,
   SharedFormGroups,
 } from './type'
-import { sanitizeString } from '../index'
 
 export type * from './type'
 
@@ -16,8 +15,7 @@ export function define<
   E = Record<string, any>,
 >(options: DefineSharedFormOptions<D, G, T, E>) {
   type _SharedFormField = SharedFormField<keyof D & string, D[keyof D & string], G, T, E>
-  type _SharedFormFieldWithDefaultKeys = Extract<keyof _SharedFormField, 'label' | 'readonly' | 'disable' | 'hidden' | 'custom' | 'fieldPath' | 'gridArea' | 'isArray' | 'isCascade'>
-  type _SharedFormFieldResolved = SetRequired<_SharedFormField, _SharedFormFieldWithDefaultKeys | 'groupId'>
+  type _SharedFormFieldResolved = SharedFormFieldResolved<_SharedFormField>
 
   type _SharedFormGroup = SharedFormGroup<D, G, T, E>
   type _SharedFormGroupResolved = Required<_SharedFormGroup>
@@ -26,7 +24,8 @@ export function define<
     fields,
     groups = {},
     groupDefaultId = '_default',
-    identify = 'shared-form',
+    // identify = 'shared-form',
+    onFieldResolved,
   } = options ?? {}
 
   const resolvedFieldsAndGroups = Object.values<_SharedFormField>(fields as _SharedFormField[])
@@ -69,17 +68,13 @@ export function define<
    * 1. 处理默认值 \
    */
   function _resolveField(rawField: _SharedFormField, _gid: G): _SharedFormFieldResolved {
-    const _field: _SharedFormFieldResolved = {
+    let _field: _SharedFormFieldResolved = {
       // 处理默认值
       label: rawField.name,
       readonly: false,
       disable: false,
       hidden: false,
-      custom: false,
       fieldPath: rawField.name,
-      gridArea: sanitizeString({ source: rawField.gridArea ?? rawField.fieldPath ?? rawField.name }),
-      isArray: false,
-      isCascade: false,
       groupId: _gid,
       ...rawField,
     }
@@ -107,6 +102,10 @@ export function define<
         }, {}) as any // 这里用 as any 临时解决类型问题，实际上这个类型是安全的
     }
 
+    if (onFieldResolved) {
+      _field = onFieldResolved(_field)
+    }
+
     return _field
   }
 
@@ -117,9 +116,7 @@ export function define<
   function _resolveGroup(rawGroup: _SharedFormGroup): _SharedFormGroupResolved {
     return {
       label: rawGroup.label ?? rawGroup.id,
-      sort: rawGroup.sort ?? rawGroup.priority ?? 0,
-      priority: rawGroup.priority ?? 0,
-      containerClass: sanitizeString({ source: rawGroup.containerClass ?? `${identify}_${rawGroup.id}` }),
+      sort: rawGroup.sort ?? 0,
       fields: rawGroup.fields ?? {},
       ...rawGroup,
     }
@@ -151,6 +148,8 @@ export interface DefineSharedFormOptions<
    * 表单字段额外配置
    */
   E = Record<string, any>,
+  _Field extends SharedFormField<keyof D & string, D[keyof D & string], G, T, E> = SharedFormField<keyof D & string, D[keyof D & string], G, T, E>,
+  _FieldResolved = SharedFormFieldResolved<_Field>,
 > {
   /**
    * 表单字段信息
@@ -170,6 +169,11 @@ export interface DefineSharedFormOptions<
    * @default 'shared-form'
    */
   identify?: string
+  /**
+   * 字段解析完成钩子 \
+   * @description 字段解析完成后会调用此钩子，传入解析后的字段, 可进行额外处理 \
+   */
+  onFieldResolved?: (field: _FieldResolved) => _FieldResolved
 
 }
 

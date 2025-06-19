@@ -9,7 +9,7 @@ const props = defineProps<{
 // const toast = usePrimoToast()
 
 const field = computed(() => props.field)
-const gridArea = computed(() => (props.field.gridArea!))
+const gridArea = computed(() => (props.field.extra?.gridArea))
 
 const {
   remove,
