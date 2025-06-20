@@ -2,7 +2,7 @@ import type { UnConfig, UnResponse } from '@uni-helper/uni-network'
 import { un } from '@uni-helper/uni-network'
 
 export const http = un.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 })
 
 http.interceptors.response.use((response: UnResponse) => {
