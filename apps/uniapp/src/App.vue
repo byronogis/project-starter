@@ -3,5 +3,13 @@
  * 应用生命周期
  * https://uniapp.dcloud.net.cn/collocation/App.html#applifecycle
  */
-onLaunch(() => {})
+onLaunch(() => {
+  console.info('[env]', import.meta.env)
+})
 </script>
+
+<style>
+page:has(.disable-scroll) {
+  overflow: hidden;
+}
+</style>

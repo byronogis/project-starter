@@ -18,12 +18,17 @@ export default async () => {
   const UnoCSS = (await import('unocss/vite')).default
 
   return defineConfig({
+    envDir: 'env',
     plugins: [
       // https://github.com/uni-helper/vite-plugin-uni-manifest
       UniHelperManifest(),
       // https://github.com/uni-helper/vite-plugin-uni-pages
       UniHelperPages({
         dts: 'src/types/uni-pages.d.ts',
+        subPackages: ['src/pages-sub'],
+        exclude: [
+          '**/components/**',
+        ],
       }),
       // https://github.com/uni-helper/vite-plugin-uni-layouts
       UniHelperLayouts(),
@@ -31,6 +36,7 @@ export default async () => {
       UniHelperComponents({
         dts: 'src/types/components.d.ts',
         directoryAsNamespace: true,
+        collapseSamePrefixes: true,
         resolvers: [WotResolver()],
       }),
       Uni(),
