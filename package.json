@@ -17,7 +17,7 @@
     "typecheck": "turbo run typecheck",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
-    "clear": "pnpx turbo run clear || pnpx rimraf@^6.0.1 -g '**/.turbo' '**/coverage' '**/node_modules'",
+    "clear": "pnpx turbo run clear && pnpx rimraf@^6.0.1 -g '**/.turbo' '**/coverage' '**/node_modules'",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
