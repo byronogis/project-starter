@@ -1,0 +1,36 @@
+diff --git a/index.d.mts b/index.d.mts
+index ae10f8899e6fe9a2b0891be7e2f1c52169c8b493..4ef390f27023c39a7bf3c1b2bc9a3b5d67c7042b 100644
+--- a/index.d.mts
++++ b/index.d.mts
+@@ -4944,7 +4944,7 @@ type EasingFunction = (n: number) => number;
+ /**
+  * Transition options
+  */
+-interface TransitionOptions {
++interface TransitionOptions extends ConfigurableWindow {
+     /**
+      * Manually abort a transition
+      */
+diff --git a/index.mjs b/index.mjs
+index 43003b6bdad319521dc9056cd3eb4e755dfb08d1..9174be6f5f93006d6e286ba6d67b549c7d956d8a 100644
+--- a/index.mjs
++++ b/index.mjs
+@@ -6983,6 +6983,9 @@ function toVec(t) {
+   return (typeof t === "number" ? [t] : t) || [];
+ }
+ function executeTransition(source, from, to, options = {}) {
++  const {
++    window = defaultWindow
++  } = options;
+   var _a, _b;
+   const fromVal = toValue(from);
+   const toVal = toValue(to);
+@@ -7012,7 +7015,7 @@ function executeTransition(source, from, to, options = {}) {
+       else if (typeof source.value === "number")
+         source.value = arr[0];
+       if (now < endAt) {
+-        requestAnimationFrame(tick);
++        toValue(window).requestAnimationFrame(tick);
+       } else {
+         source.value = toVal;
+         resolve();
