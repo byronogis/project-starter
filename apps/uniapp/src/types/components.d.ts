@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AnimationFrameMock: typeof import('./../components/AnimationFrameMock.vue')['default']
     AppFooter: typeof import('./../components/AppFooter.vue')['default']
     AppLogos: typeof import('./../components/AppLogos.vue')['default']
     HiCounter: typeof import('./../components/HiCounter.vue')['default']
