@@ -6,4 +6,6 @@
       [Default Layout]
     </view>
   </view>
+
+  <AnimationFrameMock />
 </template>
