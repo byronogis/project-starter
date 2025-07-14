@@ -8,6 +8,10 @@
   <navigator url="/pages/transition">
     <button>go transition</button>
   </navigator>
+
+  <navigator url="/pages/icon">
+    <button>go icon</button>
+  </navigator>
 </template>
 
 <style></style>
