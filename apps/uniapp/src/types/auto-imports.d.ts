@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const GetOpenIdDoneEventBusKeyConst: typeof import('../constants/eventbus')['GetOpenIdDoneEventBusKeyConst']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -342,6 +343,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly GetOpenIdDoneEventBusKeyConst: UnwrapRef<typeof import('../constants/eventbus')['GetOpenIdDoneEventBusKeyConst']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

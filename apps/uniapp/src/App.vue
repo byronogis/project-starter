@@ -5,6 +5,8 @@
  */
 onLaunch(() => {
   console.info('[env]', import.meta.env)
+
+  useUserStore().startSession()
 })
 </script>
 

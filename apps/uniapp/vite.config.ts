@@ -44,7 +44,7 @@ export default async () => {
       AutoImport({
         imports: ['vue', '@vueuse/core', 'uni-app'],
         dts: 'src/types/auto-imports.d.ts',
-        dirs: ['src/composables', 'src/stores', 'src/utils', 'src/api'],
+        dirs: ['src/composables', 'src/stores', 'src/utils', 'src/api', 'src/constants'],
         vueTemplate: true,
       }),
       // https://github.com/antfu/unocss

@@ -4,6 +4,20 @@ import { un } from '@uni-helper/uni-network'
 const _http = un.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   _directResponse: true, // 默认直接返回响应数据
+  _checkOpenId: false, // 默认不检查 openId
+})
+
+_http.interceptors.request.use(async (config: RequestConfig) => {
+  const {
+    openId,
+    startSession,
+  } = useUserStore()
+
+  if (config._checkOpenId && !openId.value) {
+    await startSession()
+  }
+
+  return config
 })
 
 _http.interceptors.response.use((response: UnResponse) => {
@@ -70,6 +84,12 @@ interface ExtraRequestConfig {
    * @default true
    */
   _directResponse?: boolean
+  /**
+   * 是否检查 openId 存在, 如果为 true 且 openId 不存在时, 先去获取 openId \
+   * 针对于需要 openId 作为前置条件的请求
+   * @default false
+   */
+  _checkOpenId?: boolean
 }
 
 export type RequestConfig<R = any, T = any> = UnConfig<R, T> & ExtraRequestConfig
