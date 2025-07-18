@@ -1,5 +1,3 @@
-// TODO support custom data type, make differencr with result type
-
 import type {
   AxiosInstance,
   AxiosRequestConfig,
@@ -9,7 +7,7 @@ import type {
 } from 'axios'
 import axios from 'axios'
 
-export class HTTP<Result = any, ExtraConfig = any> {
+export class HTTP<Result = any, Extra = any> {
   static axios = axios
 
   static axiosDefaultTransformRequests = Array.isArray(axios.defaults.transformRequest)
@@ -29,8 +27,14 @@ export class HTTP<Result = any, ExtraConfig = any> {
   /**
    * 发送请求
    */
-  request<T = any, R = Result, E = ExtraConfig>(config: RequestConfig<T, E>): Promise<Response<R, T, E>> {
-    return this.instance.request(config)
+  request<
+    Params = any,
+    Result2 = Result,
+    Extra2 = Extra,
+    Response2 = Response<Result2, Params, Extra2>,
+  >(config: RequestConfig<Params, Extra2>,
+  ) {
+    return this.instance.request<Result2, Response2, Params>(config)
   }
 }
 
@@ -44,14 +48,14 @@ interface CreateHTTPConfig extends CreateAxiosDefaults {
 /**
  * 额外的请求配置
  */
-export type ExtraRequestConfig<E = any> = {
+export type ExtraRequestConfig<Extra = any> = {
   // ...
-} & E
+} & Extra
 
 /**
  * 可接收传入的请求配置
  */
-export type RequestConfig<T = any, E = any> = AxiosRequestConfig<T> & ExtraRequestConfig<E>
+export type RequestConfig<Params = any, Extra = any> = AxiosRequestConfig<Params> & ExtraRequestConfig<Extra>
 
 /**
  * 经过 axios 处理后的传入的请求配置 \
@@ -59,9 +63,9 @@ export type RequestConfig<T = any, E = any> = AxiosRequestConfig<T> & ExtraReque
  * 2. 可自行扩展一些属性 \
  * @see ExtraRequestConfig
  */
-type InternalRequestConfig<T = any, E = any> = InternalAxiosRequestConfig<T> & Partial<ExtraRequestConfig<E>>
+type InternalRequestConfig<Params = any, Extra = any> = InternalAxiosRequestConfig<Params> & Partial<ExtraRequestConfig<Extra>>
 
 /**
  * 经过 axios 处理后的响应 \
  */
-export type Response<R = any, T = any, E = any> = AxiosResponse<R, T> & { config: InternalRequestConfig<T, E> }
+export type Response<Result = any, Params = any, Extra = any> = AxiosResponse<Result, Params> & { config: InternalRequestConfig<Params, Extra> }
