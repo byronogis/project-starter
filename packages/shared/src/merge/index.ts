@@ -9,16 +9,16 @@ import { defu } from 'defu'
  * @returns
  * The merged configuration
  */
-export function merge(
+export function merge<Source extends Input = Input>(
   options?: MergeOptions,
-  ...args: Record<string | number | symbol, any>[]
+  ...args: Source[]
 ) {
   const {
     merger = defu,
   } = options ?? {}
 
   return merger(
-    args.shift() ?? {},
+    args.shift() ?? {} as Source,
     ...args,
   )
 }
@@ -29,3 +29,5 @@ export interface MergeOptions {
    */
   merger?: typeof defuFn
 }
+
+type Input = Record<string | number | symbol, any>

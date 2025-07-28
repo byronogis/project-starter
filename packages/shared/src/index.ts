@@ -12,10 +12,10 @@ export * as timer from './timer'
  * 安全的 JSON 解析 \
  * eg: `const res = safeJSONParse(str).value ?? {} // 默认值`
  */
-export function safeJSONParse(text: string, reviver?: (this: any, key: string, value: any) => any) {
+export function safeJSONParse<T>(text: string, reviver?: (this: any, key: string, value: any) => any) {
   try {
     return {
-      value: JSON.parse(text, reviver),
+      value: JSON.parse(text, reviver) as T,
     }
   }
   catch (error) {
