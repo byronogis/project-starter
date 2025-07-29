@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@iconify/utils": "catalog:",
-    "unocss": "catalog:"
+    "@iconify/utils": "catalog:icons",
+    "unocss": "catalog:frontend"
   }
 }

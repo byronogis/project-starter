@@ -10,6 +10,6 @@
     "clear": "pnpx rimraf .vitepress/dist .vitepress/cache"
   },
   "dependencies": {
-    "vitepress": "catalog:"
+    "vitepress": "catalog:docs"
   }
 }

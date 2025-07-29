@@ -26,15 +26,15 @@
     "@project-starter/shared": "workspace:*",
     "@project-starter/typescript-config": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
-    "@vitest/coverage-v8": "catalog:",
-    "eslint": "catalog:",
-    "husky": "catalog:",
-    "jiti": "catalog:",
-    "lint-staged": "catalog:",
-    "tsdown": "catalog:",
+    "@vitest/coverage-v8": "catalog:testing",
+    "eslint": "catalog:lint",
+    "husky": "catalog:lint",
+    "jiti": "catalog:building",
+    "lint-staged": "catalog:lint",
+    "tsdown": "catalog:building",
     "turbo": "latest",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "catalog:dev",
+    "vitest": "catalog:testing"
   },
   "pnpm": {
     "patchedDependencies": {

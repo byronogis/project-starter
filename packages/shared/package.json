@@ -12,17 +12,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ctrl/tinycolor": "catalog:",
-    "axios": "catalog:",
-    "consola": "catalog:",
-    "date-fns": "catalog:",
-    "defu": "catalog:",
-    "es-toolkit": "catalog:",
-    "pausable-timers": "catalog:",
-    "type-fest": "catalog:",
-    "vee-validate": "catalog:",
-    "vue": "catalog:",
-    "worker-timers": "catalog:",
-    "zod": "catalog:"
+    "@ctrl/tinycolor": "catalog:deps",
+    "axios": "catalog:deps",
+    "consola": "catalog:deps",
+    "date-fns": "catalog:deps",
+    "defu": "catalog:deps",
+    "es-toolkit": "catalog:inlined",
+    "pausable-timers": "catalog:deps",
+    "type-fest": "catalog:types",
+    "vee-validate": "catalog:frontend-vue",
+    "vue": "catalog:frontend-vue",
+    "worker-timers": "catalog:deps",
+    "zod": "catalog:deps"
   }
 }

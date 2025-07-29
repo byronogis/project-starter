@@ -13,7 +13,7 @@
     "@project-starter/nuxt-layer-primo": "workspace:*"
   },
   "devDependencies": {
-    "nuxt": "catalog:",
-    "vue-tsc": "catalog:"
+    "nuxt": "catalog:frontend-nuxt",
+    "vue-tsc": "catalog:dev"
   }
 }

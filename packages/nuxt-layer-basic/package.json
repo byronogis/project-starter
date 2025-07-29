@@ -10,24 +10,24 @@
     "postinstall": "nuxi prepare"
   },
   "dependencies": {
-    "@nuxt/devtools": "catalog:",
-    "@nuxt/eslint": "catalog:",
-    "@nuxt/fonts": "catalog:",
-    "@nuxt/icon": "catalog:",
-    "@nuxt/schema": "catalog:",
-    "@nuxtjs/color-mode": "catalog:",
-    "@nuxtjs/seo": "^3.1.0",
-    "@unocss/nuxt": "catalog:",
-    "@vueuse/core": "catalog:",
-    "@vueuse/motion": "catalog:",
-    "@vueuse/nuxt": "catalog:",
-    "nuxt-html-inject-commands": "catalog:",
-    "postcss-preset-env": "catalog:",
-    "vue-component-type-helpers": "catalog:",
-    "zod": "catalog:"
+    "@nuxt/devtools": "catalog:dev",
+    "@nuxt/eslint": "catalog:lint",
+    "@nuxt/fonts": "catalog:frontend-nuxt",
+    "@nuxt/icon": "catalog:icons",
+    "@nuxt/schema": "catalog:types",
+    "@nuxtjs/color-mode": "catalog:frontend-nuxt",
+    "@nuxtjs/seo": "catalog:frontend-nuxt",
+    "@unocss/nuxt": "catalog:frontend-nuxt",
+    "@vueuse/core": "catalog:frontend-vue",
+    "@vueuse/motion": "catalog:frontend-vue",
+    "@vueuse/nuxt": "catalog:frontend-nuxt",
+    "nuxt-html-inject-commands": "catalog:frontend-nuxt",
+    "postcss-preset-env": "catalog:building",
+    "vue-component-type-helpers": "catalog:types",
+    "zod": "catalog:deps"
   },
   "devDependencies": {
-    "nuxt": "catalog:",
-    "vue-tsc": "catalog:"
+    "nuxt": "catalog:frontend-nuxt",
+    "vue-tsc": "catalog:dev"
   }
 }

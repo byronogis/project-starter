@@ -55,8 +55,8 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4070520250711001",
     "@dcloudio/uni-mp-xhs": "3.0.0-4070520250711001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4070520250711001",
-    "@vueuse/core": "catalog:",
-    "vue": "catalog:"
+    "@vueuse/core": "catalog:frontend-vue",
+    "vue": "catalog:frontend-vue"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.16",
@@ -65,11 +65,11 @@
     "@dcloudio/uni-stacktracey": "3.0.0-4070520250711001",
     "@dcloudio/uni-vue-devtools": "3.0.0-4070520250711001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4070520250711001",
-    "@iconify-json/carbon": "^1.2.11",
+    "@iconify-json/carbon": "catalog:icons",
     "@mini-types/alipay": "^3.0.14",
     "@project-starter/eslint-config": "workspace:*",
     "@project-starter/unocss-config": "workspace:*",
-    "@types/node": "^24.1.0",
+    "@types/node": "catalog:types",
     "@uni-helper/eslint-config": "^0.4.0",
     "@uni-helper/uni-env": "^0.1.7",
     "@uni-helper/uni-network": "^0.21.5",
@@ -81,17 +81,17 @@
     "@uni-helper/vite-plugin-uni-pages": "^0.2.29",
     "@uni-helper/volar-service-uni-pages": "^0.2.29",
     "@unocss/eslint-config": "^66.3.3",
-    "@vue/tsconfig": "^0.7.0",
+    "@vue/tsconfig": "catalog:dev",
     "core-js": "^3.44.0",
     "miniprogram-api-typings": "^4.1.0",
-    "postcss-preset-env": "^10.2.4",
+    "postcss-preset-env": "catalog:building",
     "sass": "1.78.0",
-    "typescript": "catalog:",
+    "typescript": "catalog:dev",
     "unocss": "66.1.0-beta.10",
-    "unplugin-auto-import": "^19.3.0",
-    "vite": "^7.0.6",
+    "unplugin-auto-import": "catalog:dev",
+    "vite": "catalog:building",
     "vite-plugin-legacy-swc": "^2.0.0",
-    "vue-tsc": "^3.0.4",
+    "vue-tsc": "catalog:dev",
     "wot-design-uni": "^1.11.1"
   }
 }

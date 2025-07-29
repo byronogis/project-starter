@@ -13,30 +13,30 @@
     "postinstall": "nuxi prepare"
   },
   "dependencies": {
-    "@iconify-json/prime": "catalog:",
-    "@nuxt/schema": "catalog:",
-    "@primevue/nuxt-module": "catalog:",
-    "@primevue/themes": "catalog:",
+    "@iconify-json/prime": "catalog:icons",
+    "@nuxt/schema": "catalog:types",
+    "@primevue/nuxt-module": "catalog:frontend-nuxt",
+    "@primevue/themes": "catalog:frontend-vue",
     "@project-starter/nuxt-layer-basic": "workspace:*",
-    "@types/nprogress": "catalog:",
-    "@vee-validate/nuxt": "catalog:",
-    "@vee-validate/zod": "catalog:",
-    "chart.js": "catalog:",
-    "filepond": "catalog:",
-    "filepond-plugin-file-rename": "catalog:",
-    "filepond-plugin-file-validate-type": "catalog:",
-    "filepond-plugin-image-preview": "catalog:",
-    "json-editor-vue": "catalog:",
-    "lossless-json": "catalog:",
-    "nprogress": "catalog:",
-    "primevue": "catalog:",
-    "unocss": "catalog:",
-    "vanilla-jsoneditor": "catalog:",
-    "vee-validate": "catalog:",
-    "vue-filepond": "catalog:"
+    "@types/nprogress": "catalog:types",
+    "@vee-validate/nuxt": "catalog:frontend-nuxt",
+    "@vee-validate/zod": "catalog:frontend-vue",
+    "chart.js": "catalog:frontend",
+    "filepond": "catalog:frontend",
+    "filepond-plugin-file-rename": "catalog:frontend",
+    "filepond-plugin-file-validate-type": "catalog:frontend",
+    "filepond-plugin-image-preview": "catalog:frontend",
+    "json-editor-vue": "catalog:frontend-vue",
+    "lossless-json": "catalog:deps",
+    "nprogress": "catalog:frontend",
+    "primevue": "catalog:frontend-vue",
+    "unocss": "catalog:frontend",
+    "vanilla-jsoneditor": "catalog:frontend",
+    "vee-validate": "catalog:frontend-vue",
+    "vue-filepond": "catalog:frontend-vue"
   },
   "devDependencies": {
-    "nuxt": "catalog:",
-    "vue-tsc": "catalog:"
+    "nuxt": "catalog:frontend-nuxt",
+    "vue-tsc": "catalog:dev"
   }
 }

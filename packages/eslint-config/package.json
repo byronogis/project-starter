@@ -10,9 +10,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "@unocss/eslint-plugin": "catalog:",
-    "eslint-flat-config-utils": "catalog:",
-    "eslint-plugin-format": "catalog:"
+    "@antfu/eslint-config": "catalog:lint",
+    "@unocss/eslint-plugin": "catalog:lint",
+    "eslint-flat-config-utils": "catalog:dev",
+    "eslint-plugin-format": "catalog:lint"
   }
 }
