@@ -42,7 +42,7 @@ export const useUserStore = createGlobalState(() => {
             const openId = uni.getStorageSync('openId')
             console.warn('[startSession] 等待 openId 超时, 直接取值: ', openId)
             resolve(openId)
-          }, 600)
+          }, 3000)
         }),
       ])
     }
