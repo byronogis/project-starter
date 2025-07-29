@@ -56,9 +56,9 @@ catalog:
   pinia: ^3.0.3
   postcss-preset-env: ^10.2.3
   primevue: ^4.3.5
+  tsdown: ^0.13.0
   type-fest: ^4.41.0
   typescript: ^5.8.3
-  unbuild: ^3.5.0
   unocss: ^66.2.3
   vanilla-jsoneditor: ^3.6.0
   vee-validate: ^4.15.1
