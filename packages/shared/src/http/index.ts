@@ -26,30 +26,38 @@ export class HTTP<Result = any, Extra = any> {
 
   /**
    * 发送请求
+   *
+   * 当 _directResponse 为 true 时，直接返回响应数据
+   * 当 _directResponse 为 false 或未设置时，返回完整的响应对象
    */
-  request<
-    Params = any,
-    Result2 = Result,
-    Extra2 = Extra,
-    Response2 = Response<Result2, Params, Extra2>,
-  >(config: RequestConfig<Params, Extra2>,
-  ) {
-    return this.instance.request<Result2, Response2, Params>(config)
+  request<Params = any, Result2 = Result, Extra2 = Extra, _Response2 = Response<Result2, Params, Extra2>>(
+    config: RequestConfig<Params, Extra2> & { _directResponse: true }
+  ): Promise<Result2>
+  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 = Response<Result2, Params, Extra2>>(
+    config: RequestConfig<Params, Extra2>
+  ): Promise<Response2>
+  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 = Response<Result2, Params, Extra2>>(
+    config: RequestConfig<Params, Extra2>,
+  ): Promise<Result2 | Response2> {
+    return this.instance.request<Result2, Response2, Params>(config) as any
   }
 }
 
 /**
  * 创建 HTTP 实例的配置
  */
-interface CreateHTTPConfig extends CreateAxiosDefaults {
+interface CreateHTTPConfig extends CreateAxiosDefaults, ExtraRequestConfig {
   // ...
 }
 
 /**
  * 额外的请求配置
  */
-export type ExtraRequestConfig<Extra = any> = {
-  // ...
+export type ExtraRequestConfig<Extra = object> = {
+  /**
+   * 直接返回响应数据, 会直接取 data 字段作为结果
+   */
+  _directResponse?: boolean
 } & Extra
 
 /**

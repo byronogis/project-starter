@@ -136,5 +136,117 @@ describe('http', () => {
         }),
       ).rejects.toThrow('Network Error')
     })
+
+    describe('_directResponse 功能测试', () => {
+      const mockAxiosInstance = {
+        request: vi.fn(),
+      }
+
+      beforeEach(() => {
+        vi.mocked(axios.create).mockReturnValue(mockAxiosInstance as any)
+        mockAxiosInstance.request.mockResolvedValue(mockResponse)
+      })
+
+      it('当 _directResponse 为 true 时，应直接返回数据部分', async () => {
+        const http = new HTTP()
+
+        // 模拟实际的拦截器逻辑，直接返回数据
+        mockAxiosInstance.request.mockResolvedValue(mockResponse.data)
+
+        const result = await http.request<TestRequestData, TestResponseData>({
+          url: '/users',
+          method: 'GET',
+          params: { id: 1 },
+          _directResponse: true,
+        })
+
+        // 验证返回的是数据本身，而不是完整的响应对象
+        expect(result).toEqual(mockResponse.data)
+        expect(result.id).toBe(1)
+        expect(result.name).toBe('Test User')
+
+        // 验证类型：result 应该是 TestResponseData 类型
+        // TypeScript 编译时会验证这些属性存在
+        expect(typeof result.id).toBe('number')
+        expect(typeof result.name).toBe('string')
+      })
+
+      it('当 _directResponse 为 false 或未设置时，应返回完整的响应对象', async () => {
+        const http = new HTTP()
+
+        // 测试 _directResponse: false - 这里需要明确类型，因为重载会返回 Response 类型
+        const resultFalse = await http.request<TestRequestData, TestResponseData>({
+          url: '/users',
+          method: 'GET',
+          params: { id: 1 },
+          _directResponse: false,
+        } as const)
+
+        // resultFalse 应该是 Response 类型，有 status 和 data 属性
+        expect(resultFalse.status).toBe(200)
+        expect(resultFalse.data).toEqual(mockResponse.data)
+
+        // 测试未设置 _directResponse（默认为 false）
+        const resultDefault = await http.request<TestRequestData, TestResponseData>({
+          url: '/users',
+          method: 'GET',
+          params: { id: 1 },
+        })
+
+        // resultDefault 也应该是 Response 类型
+        expect(resultDefault.status).toBe(200)
+        expect(resultDefault.data).toEqual(mockResponse.data)
+      })
+
+      it('应正确处理不同的数据类型', async () => {
+        interface SimpleData {
+          message: string
+          success: boolean
+        }
+
+        const simpleResponse: AxiosResponse<SimpleData> = {
+          data: { message: 'Hello World', success: true },
+          status: 200,
+          statusText: 'OK',
+          headers: {},
+          config: {} as any,
+        }
+
+        mockAxiosInstance.request.mockResolvedValue(simpleResponse.data)
+
+        const http = new HTTP()
+        const result = await http.request<any, SimpleData>({
+          url: '/simple',
+          method: 'GET',
+          _directResponse: true,
+        })
+
+        expect(result.message).toBe('Hello World')
+        expect(result.success).toBe(true)
+        expect(typeof result.message).toBe('string')
+        expect(typeof result.success).toBe('boolean')
+      })
+
+      it('应正确处理数组类型的响应数据', async () => {
+        const arrayData = [
+          { id: 1, name: 'User 1' },
+          { id: 2, name: 'User 2' },
+        ]
+
+        mockAxiosInstance.request.mockResolvedValue(arrayData)
+
+        const http = new HTTP()
+        const result = await http.request<any, typeof arrayData>({
+          url: '/users',
+          method: 'GET',
+          _directResponse: true,
+        })
+
+        expect(Array.isArray(result)).toBe(true)
+        expect(result).toHaveLength(2)
+        expect(result[0]?.id).toBe(1)
+        expect(result[1]?.name).toBe('User 2')
+      })
+    })
   })
 })
