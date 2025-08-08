@@ -59,7 +59,7 @@
     "vue": "catalog:frontend-vue"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.4.16",
+    "@dcloudio/types": "^3.4.19",
     "@dcloudio/uni-automator": "3.0.0-4070520250711001",
     "@dcloudio/uni-cli-shared": "3.0.0-4070520250711001",
     "@dcloudio/uni-stacktracey": "3.0.0-4070520250711001",
@@ -80,9 +80,9 @@
     "@uni-helper/vite-plugin-uni-manifest": "^0.2.8",
     "@uni-helper/vite-plugin-uni-pages": "^0.2.29",
     "@uni-helper/volar-service-uni-pages": "^0.2.29",
-    "@unocss/eslint-config": "^66.3.3",
+    "@unocss/eslint-config": "^66.4.2",
     "@vue/tsconfig": "catalog:dev",
-    "core-js": "^3.44.0",
+    "core-js": "^3.45.0",
     "miniprogram-api-typings": "^4.1.0",
     "postcss-preset-env": "catalog:building",
     "sass": "1.78.0",

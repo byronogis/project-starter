@@ -40,7 +40,7 @@ export default defineNuxtConfig({
          * @see https://browsersl.ist/#q=fully+supports+css-cascade-layers
          */
         browsers: 'fully supports css-cascade-layers',
-      },
+      } satisfies import('postcss-preset-env').pluginOptions,
     },
   },
 
