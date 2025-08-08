@@ -17,7 +17,7 @@
     "consola": "catalog:deps",
     "date-fns": "catalog:deps",
     "defu": "catalog:deps",
-    "es-toolkit": "catalog:inlined",
+    "es-toolkit": "catalog:inline",
     "pausable-timers": "catalog:deps",
     "type-fest": "catalog:types",
     "vee-validate": "catalog:frontend-vue",

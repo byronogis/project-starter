@@ -22,7 +22,7 @@
     "@vueuse/motion": "catalog:frontend-vue",
     "@vueuse/nuxt": "catalog:frontend-nuxt",
     "nuxt-html-inject-commands": "catalog:frontend-nuxt",
-    "postcss-preset-env": "catalog:building",
+    "postcss-preset-env": "catalog:build",
     "vue-component-type-helpers": "catalog:types",
     "zod": "catalog:deps"
   },
