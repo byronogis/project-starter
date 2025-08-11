@@ -30,16 +30,21 @@ export class HTTP<Result = any, Extra = any> {
    * 当 _directResponse 为 true 时，直接返回响应数据
    * 当 _directResponse 为 false 或未设置时，返回完整的响应对象
    */
-  request<Params = any, Result2 = Result, Extra2 = Extra, _Response2 = Response<Result2, Params, Extra2>>(
+  request<Params = any, Result2 = Result, Extra2 = Extra>(
     config: RequestConfig<Params, Extra2> & { _directResponse: true }
   ): Promise<Result2>
-  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 = Response<Result2, Params, Extra2>>(
+  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 extends Response<Result2, Params, Extra2> = Response<Result2, Params, Extra2>>(
     config: RequestConfig<Params, Extra2>
   ): Promise<Response2>
-  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 = Response<Result2, Params, Extra2>>(
+  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 extends Response<Result2, Params, Extra2> = Response<Result2, Params, Extra2>>(
     config: RequestConfig<Params, Extra2>,
   ): Promise<Result2 | Response2> {
-    return this.instance.request<Result2, Response2, Params>(config) as any
+    return this.instance.request<Result2, Response2, Params>(config).then((res) => {
+      if (config._directResponse) {
+        return res.data
+      }
+      return res
+    })
   }
 }
 
