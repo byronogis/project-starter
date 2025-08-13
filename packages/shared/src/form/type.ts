@@ -1,5 +1,5 @@
 import type { SetRequired } from 'type-fest'
-import type { ZodSchema } from 'zod'
+import type { ZodType } from 'zod'
 
 /**
  * 表单字段项
@@ -28,7 +28,7 @@ export interface SharedFormField<
   /**
    * 验证规则
    */
-  schema?: ZodSchema
+  schema?: ZodType
   /**
    * 初始值 \
    * 也可用于对于当前字段值的类型推断
@@ -97,10 +97,9 @@ export type SharedFormFieldResolved<T extends SharedFormField<any, any, any, any
  * 可选择用于标识数组字段和级联字段, 目前仅用于类型检查 \
  *
  */
-export type SharedFormFieldType<T extends string = never> =
+export type SharedFormFieldType<T extends string = never> = | T
   | '_array'
   | '_cascade'
-  | T
 
 /**
  * 表单字段项信息
@@ -161,6 +160,5 @@ export interface SharedFormGroup<
  * 表单字段分组项标识 \
  * 内置 `_default` 用于默认分组 \
  */
-export type SharedFormGroupId<G extends string = never> =
+export type SharedFormGroupId<G extends string = never> = | G
   | '_default'
-  | G
