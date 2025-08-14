@@ -7,7 +7,7 @@ import type { SharedAppearanceOptions } from '.'
 export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
   const {
     isDark,
-    toogle,
+    toggle,
   } = options
 
   // @ts-expect-error experimental API
@@ -15,7 +15,7 @@ export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
     && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   if (!isAppearanceTransition) {
-    toogle()
+    toggle()
     return
   }
 
@@ -26,7 +26,7 @@ export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
     Math.max(y, window.innerHeight - y),
   )
   const transition = document.startViewTransition(async () => {
-    await toogle()
+    await toggle()
   })
   transition.ready
     .then(() => {

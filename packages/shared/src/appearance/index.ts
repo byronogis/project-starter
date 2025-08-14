@@ -4,7 +4,7 @@ import { dynamic } from './dynamic'
  * Credit to [@hooray](https://github.com/hooray)
  * @see https://github.com/vuejs/vitepress/pull/2347
  */
-export function toogle(event: MouseEvent, options: SharedAppearanceOptions & {
+export function toggle(event: MouseEvent, options: SharedAppearanceOptions & {
   /**
    * @default 'dynamic'
    */
@@ -12,7 +12,7 @@ export function toogle(event: MouseEvent, options: SharedAppearanceOptions & {
 }) {
   const {
     isDark,
-    toogle,
+    toggle,
     effect = 'dynamic',
   } = options
 
@@ -21,16 +21,16 @@ export function toogle(event: MouseEvent, options: SharedAppearanceOptions & {
   }
 
   if (typeof effect === 'string') {
-    dict[effect](event, { isDark, toogle })
+    dict[effect](event, { isDark, toggle })
   }
   else {
-    effect(event, { isDark, toogle })
+    effect(event, { isDark, toggle })
   }
 }
 
 export interface SharedAppearanceOptions {
   isDark: boolean
-  toogle: () => Promise<void> | void
+  toggle: () => Promise<void> | void
 }
 
 type SharedAppearanceEffectCustom = (e: MouseEvent, opt: SharedAppearanceOptions) => void

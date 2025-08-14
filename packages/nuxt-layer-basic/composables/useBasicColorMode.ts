@@ -52,9 +52,9 @@ export function useBasicColorMode() {
       return
     }
 
-    appearance.toogle(event, {
+    appearance.toggle(event, {
       isDark: !isDark.value,
-      toogle: async () => {
+      toggle: async () => {
         next()
         await nextTick()
       },
