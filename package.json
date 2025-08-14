@@ -8,16 +8,16 @@
     "node": ">=22.14.0"
   },
   "scripts": {
-    "dev": "turbo watch dev",
-    "build": "turbo run build",
-    "generate": "turbo run generate",
-    "preview": "turbo run preview",
-    "preview:build": "turbo run preview:build",
-    "preview:generate": "turbo run preview:generate",
-    "typecheck": "turbo run typecheck",
+    "dev": "pnpm run -r --parallel dev",
+    "build": "pnpm run -r build",
+    "generate": "pnpm run -r generate",
+    "preview": "pnpm run -r --parallel preview",
+    "preview:build": "pnpm run build && pnpm run preview",
+    "preview:generate": "pnpm run generate && pnpm run preview",
+    "typecheck": "pnpm run -r typecheck",
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
-    "clear": "pnpx turbo run clear && pnpx rimraf@^6.0.1 -g '**/.turbo' '**/coverage' '**/node_modules'",
+    "clear": "pnpm run -r clear && pnpx rimraf@^6.0.1 -g '**/coverage' '**/node_modules'",
     "postinstall": "husky || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,7 +32,6 @@
     "jiti": "catalog:build",
     "lint-staged": "catalog:lint",
     "tsdown": "catalog:build",
-    "turbo": "latest",
     "typescript": "catalog:dev",
     "vitest": "catalog:test"
   },

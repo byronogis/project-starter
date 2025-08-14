@@ -18,9 +18,9 @@ features:
   - title: Monorepo
     details: A monorepo project structure powered by pnpm workspaces.
     link: https://pnpm.io/workspaces
-  - title: Turborepo
-    details: Manage your monorepo with TurboRepo.
-    link: https://turbo.build/repo/docs
+  - title: PNPM
+    details: Manage your monorepo with pnpm.
+    link: https://pnpm.io
   - title: UnoCSS
     details: A utility-first CSS framework for rapid UI development.
     link: /packages/unocss-config
