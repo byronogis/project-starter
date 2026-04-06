@@ -1,7 +1,10 @@
 {
-  "extends": "@project-starter/typescript-config/tsconfig.base.json",
+  "extends": "./src/config/ts/tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "src"

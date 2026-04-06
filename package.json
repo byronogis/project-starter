@@ -3,47 +3,27 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=22.14.0"
+    "node": ">=22.18.0"
   },
   "scripts": {
-    "dev": "pnpm run -r --parallel dev",
-    "build": "pnpm run -r build",
-    "generate": "pnpm run -r generate",
-    "preview": "pnpm run -r --parallel preview",
-    "preview:build": "pnpm run build && pnpm run preview",
-    "preview:generate": "pnpm run generate && pnpm run preview",
-    "typecheck": "pnpm run -r typecheck",
-    "root:lint": "eslint .",
-    "root:lint:fix": "eslint . --fix",
-    "clear": "pnpm run -r clear && pnpx rimraf@^6.0.1 -g '**/coverage' '**/node_modules'",
-    "postinstall": "husky || true",
+    "dev": "vp run -r --parallel dev",
+    "build": "vp run -r build",
+    "preview": "vp run -r --parallel preview",
+    "clear": "vp run -r clear && pnpx rimraf@^6.0.1 -g '**/coverage' '**/node_modules'",
+    "prepare": "vp config",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@project-starter/eslint-config": "workspace:*",
+    "@antfu/eslint-config": "catalog:lint",
     "@project-starter/shared": "workspace:*",
-    "@project-starter/typescript-config": "workspace:*",
-    "@project-starter/unocss-config": "workspace:*",
+    "@types/node": "catalog:types",
     "@vitest/coverage-v8": "catalog:test",
     "eslint": "catalog:lint",
-    "husky": "catalog:lint",
     "jiti": "catalog:build",
-    "lint-staged": "catalog:lint",
-    "tsdown": "catalog:build",
-    "typescript": "catalog:dev",
-    "vitest": "catalog:test"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "nprogress": "patches/nprogress.patch",
-      "@primevue/nuxt-module": "patches/@primevue__nuxt-module.patch",
-      "@primevue/core": "patches/@primevue__core.patch",
-      "primevue": "patches/primevue.patch"
-    }
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
+    "typescript": "catalog:types",
+    "vite-plus": "catalog:build",
+    "vitest": "catalog:"
   }
 }

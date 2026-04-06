@@ -14,7 +14,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url))
 
 export default defineNuxtConfig({
   css: [
-    join(currentDir, './assets/styles/index.css'),
+    join(currentDir, './app/assets/styles/index.css'),
   ],
 
   /**
@@ -46,7 +46,7 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: [
-      join(currentDir, './types'),
+      // join(currentDir, './types'),
     ],
     imports: [
       { name: 'z', as: 'z', from: 'zod' },
@@ -69,7 +69,11 @@ export default defineNuxtConfig({
   ],
   ...seoCombind,
 
-  compatibilityDate: '2024-08-14',
+  compatibilityDate: 'latest',
+
+  future: {
+    compatibilityVersion: 5,
+  },
 
   telemetry: {
     enabled: false,

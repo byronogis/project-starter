@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "vitepress dev --host",
     "build": "vitepress build",
-    "generate": "vitepress build",
     "preview": "vitepress preview --host",
     "clear": "pnpx rimraf .vitepress/dist .vitepress/cache"
   },

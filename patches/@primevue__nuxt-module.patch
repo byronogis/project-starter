@@ -5,7 +5,7 @@ index 11e951e34551f47f66e21e9b55784aff2bbfb7da..fd5c9a33b0bcaaa856ee9e4304a47ebb
 @@ -8,6 +8,10 @@ interface ConstructsType {
      exclude?: '*' | Array<string | { name: string; use?: { as: string } }> | ((list: any) => string[] | undefined) | undefined;
  }
- 
+
 +interface ComponentsType extends ConstructsType {
 +    global?: boolean;
 +}
@@ -29,7 +29,7 @@ index 11e951e34551f47f66e21e9b55784aff2bbfb7da..fd5c9a33b0bcaaa856ee9e4304a47ebb
 @@ -8,6 +8,10 @@ interface ConstructsType {
      exclude?: '*' | Array<string | { name: string; use?: { as: string } }> | ((list: any) => string[] | undefined) | undefined;
  }
- 
+
 +interface ComponentsType extends ConstructsType {
 +    global?: boolean;
 +}
@@ -107,7 +107,7 @@ index dc6ca89ebbd7e10e41a85e5e9560b3f486cd7f39..9c2617180d3ba5409bd55403b11c0814
      const registered = register(moduleOptions);
      const { autoImport, importPT, importTheme, options, loadStyles } = moduleOptions;
 @@ -207,29 +205,6 @@ const module = defineNuxtModule({
-     hasTheme && nuxt.options.build.transpile.push("@primevue/themes");
+     hasTheme && nuxt.options.build.transpile.push("@primeuix/themes");
      hasTheme && nuxt.options.build.transpile.push("@primeuix/themes");
      let registeredStyles = registered.styles;
 -    if (autoImport) {
@@ -146,7 +146,7 @@ index dc6ca89ebbd7e10e41a85e5e9560b3f486cd7f39..9c2617180d3ba5409bd55403b11c0814
  ` : ""}
  ${hasTheme && importTheme ? `import ${importTheme.as} from '${normalize(importTheme.from)}';
 @@ -292,7 +267,7 @@ export default defineNuxtPlugin(({ vueApp }) => {
- 
+
    usePrimeVue && vueApp.use(PrimeVue, { ...options, ...pt, ...theme });
    ${registered.services.map((service) => `vueApp.use(${service.as});`).join("\n")}
 -  ${!autoImport && registered.directives.map((directive) => `vueApp.directive('${directive.name}', ${directive.as});`).join("\n")}

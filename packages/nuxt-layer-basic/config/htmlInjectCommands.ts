@@ -1,6 +1,6 @@
 import type { NuxtOptions } from '@nuxt/schema'
 
-export const htmlInjectCommands: NuxtOptions['htmlInjectCommands'] = {
+export const htmlInjectCommands: Exclude<NuxtOptions['htmlInjectCommands'], false> = {
   commands: [
     {
       name: 'git:commit',

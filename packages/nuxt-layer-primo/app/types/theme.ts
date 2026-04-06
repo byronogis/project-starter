@@ -1,6 +1,6 @@
 import type {
   PaletteDesignToken,
-} from '@primevue/themes/types'
+} from '@primeuix/themes/types'
 
 export interface PrimoColorItem {
   name: string

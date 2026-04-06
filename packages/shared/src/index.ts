@@ -71,6 +71,7 @@ export function sanitizeString(options: {
     source,
     regex = /[^\w-]/g,
     replaceWith = '_',
+    // eslint-disable-next-line e18e/prefer-static-regex
     afterReplace = (result: string) => (/^\d/.test(result)) ? `${replaceWith}${result}` : result,
   } = options ?? {}
 

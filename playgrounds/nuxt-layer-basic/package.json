@@ -4,16 +4,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "nuxi dev --host",
-    "typecheck": "nuxi typecheck",
-    "clear": "pnpx rimraf -g '**/.nuxt' '**/.output' '**/dist'",
-    "postinstall": "nuxi prepare"
+    "dev": "nuxt dev --host",
+    "typecheck": "nuxt typecheck",
+    "clear": "nuxt cleanup",
+    "prepare": "nuxt prepare"
   },
   "dependencies": {
     "@project-starter/nuxt-layer-basic": "workspace:*"
   },
   "devDependencies": {
-    "nuxt": "catalog:frontend-nuxt",
-    "vue-tsc": "catalog:dev"
+    "nuxt": "catalog:eco-nuxt",
+    "typescript": "catalog:types",
+    "vue-tsc": "catalog:types"
   }
 }

@@ -36,11 +36,6 @@ export default defineNuxtConfig({
 
   modules: [
     ['@primevue/nuxt-module', primevue],
-
     ['@vee-validate/nuxt', veeValidate],
   ],
-
-  future: {
-    compatibilityVersion: 4,
-  },
 })

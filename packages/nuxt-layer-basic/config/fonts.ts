@@ -1,6 +1,6 @@
 import type { NuxtOptions } from '@nuxt/schema'
 
-type FontInfoValue = NonNullable<NuxtOptions['fonts']['families']>[number]
+type FontInfoValue = NonNullable<Exclude<NuxtOptions['fonts'], false>['families']>[number]
 
 export const fontInfo: Record<'sans' | 'serif' | 'mono', FontInfoValue> = {
   sans: { name: 'DM Sans' },
@@ -8,7 +8,7 @@ export const fontInfo: Record<'sans' | 'serif' | 'mono', FontInfoValue> = {
   mono: { name: 'DM Mono' },
 }
 
-export const fonts: NuxtOptions['fonts'] = {
+export const fonts: Exclude<NuxtOptions['fonts'], false> = {
   families: Object.values(fontInfo).map(info => info),
   assets: {},
 }

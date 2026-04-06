@@ -26,7 +26,3 @@ useHead({
     </button>
   </div>
 </template>
-
-<style>
-@import '@unocss/reset/tailwind.css' layer(reset);
-</style>

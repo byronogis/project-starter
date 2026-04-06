@@ -1,5 +1,5 @@
 @layer nuxt-layer-basic {
-  /*@see ~/config/icon */
+  /*@see ~~/config/icon */
   .nuxt-icon {
     display: inline-block;
     vertical-align: middle;

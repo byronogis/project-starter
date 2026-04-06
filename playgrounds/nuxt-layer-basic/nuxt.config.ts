@@ -6,8 +6,4 @@ export default defineNuxtConfig({
   extends: [
     '@project-starter/nuxt-layer-basic',
   ],
-
-  future: {
-    compatibilityVersion: 4,
-  },
 })

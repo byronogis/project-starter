@@ -2,41 +2,38 @@
   "name": "@project-starter/nuxt-layer-primo",
   "type": "module",
   "version": "0.0.1",
-  "exports": {
-    ".": "./nuxt.config.ts"
-  },
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi prepare",
-    "typecheck": "nuxi typecheck",
-    "clear": "pnpx rimraf .nuxt .output dist",
-    "postinstall": "nuxi prepare"
+    "dev": "nuxt dev",
+    "clear": "nuxt cleanup",
+    "prepare": "nuxt prepare"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@iconify-json/prime": "catalog:icons",
     "@nuxt/schema": "catalog:types",
-    "@primevue/nuxt-module": "catalog:frontend-nuxt",
-    "@primevue/themes": "catalog:frontend-vue",
+    "@primeuix/themes": "catalog:eco-vue",
+    "@primevue/nuxt-module": "catalog:eco-nuxt",
     "@project-starter/nuxt-layer-basic": "workspace:*",
     "@types/nprogress": "catalog:types",
-    "@vee-validate/nuxt": "catalog:frontend-nuxt",
-    "@vee-validate/zod": "catalog:frontend-vue",
+    "@vee-validate/nuxt": "catalog:eco-nuxt",
+    "@vee-validate/zod": "catalog:eco-vue",
     "chart.js": "catalog:frontend",
     "filepond": "catalog:frontend",
     "filepond-plugin-file-rename": "catalog:frontend",
     "filepond-plugin-file-validate-type": "catalog:frontend",
     "filepond-plugin-image-preview": "catalog:frontend",
-    "json-editor-vue": "catalog:frontend-vue",
+    "json-editor-vue": "catalog:eco-vue",
     "lossless-json": "catalog:deps",
     "nprogress": "catalog:frontend",
-    "primevue": "catalog:frontend-vue",
+    "primevue": "catalog:eco-vue",
     "unocss": "catalog:frontend",
     "vanilla-jsoneditor": "catalog:frontend",
-    "vee-validate": "catalog:frontend-vue",
-    "vue-filepond": "catalog:frontend-vue"
+    "vee-validate": "catalog:eco-vue",
+    "vue-filepond": "catalog:eco-vue"
   },
   "devDependencies": {
-    "nuxt": "catalog:frontend-nuxt",
-    "vue-tsc": "catalog:dev"
+    "nuxt": "catalog:eco-nuxt",
+    "typescript": "catalog:types",
+    "vue-tsc": "catalog:types"
   }
 }

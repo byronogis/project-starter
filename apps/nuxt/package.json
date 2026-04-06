@@ -15,19 +15,16 @@
     "postinstall": "nuxi prepare"
   },
   "devDependencies": {
-    "@hebilicious/vue-query-nuxt": "catalog:frontend-nuxt",
-    "@pinia/nuxt": "catalog:frontend-nuxt",
-    "@project-starter/eslint-config": "workspace:*",
+    "@hebilicious/vue-query-nuxt": "catalog:eco-nuxt",
+    "@pinia/nuxt": "catalog:eco-nuxt",
     "@project-starter/nuxt-layer-primo": "workspace:*",
-    "@project-starter/unocss-config": "workspace:*",
-    "@tanstack/vue-query": "catalog:frontend-vue",
-    "@tanstack/vue-query-devtools": "catalog:dev",
-    "@unocss/reset": "catalog:frontend",
-    "@vite-pwa/nuxt": "catalog:frontend-nuxt",
-    "nuxt": "catalog:frontend-nuxt",
-    "pinia": "catalog:frontend-vue",
-    "typescript": "catalog:dev",
+    "@tanstack/vue-query": "catalog:eco-vue",
+    "@tanstack/vue-query-devtools": "catalog:devtools",
+    "@vite-pwa/nuxt": "catalog:eco-nuxt",
+    "nuxt": "catalog:eco-nuxt",
+    "pinia": "catalog:eco-vue",
+    "typescript": "catalog:types",
     "unocss": "catalog:frontend",
-    "vue-tsc": "catalog:dev"
+    "vue-tsc": "catalog:types"
   }
 }

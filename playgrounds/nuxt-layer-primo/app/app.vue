@@ -65,7 +65,3 @@ const title = 'Primo Nuxt Layer'
     </NuxtLayout>
   </PrimoApp>
 </template>
-
-<style>
-@import '@unocss/reset/tailwind.css' layer(reset);
-</style>

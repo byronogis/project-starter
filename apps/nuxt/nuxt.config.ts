@@ -63,7 +63,9 @@ export default defineNuxtConfig({
     // host: '0.0.0.0',
   },
 
+  // https://nuxt.com/docs/4.x/guide/going-further/experimental-features
   experimental: {
+    typedPages: true,
     viewTransition: !true,
     /**
      * '@vite-pwa/nuxt' related
@@ -71,7 +73,6 @@ export default defineNuxtConfig({
      * but missing on offline, disabling extraction it until fixed
      */
     payloadExtraction: false,
-    typedPages: true,
   },
 
   extends: [
@@ -79,7 +80,7 @@ export default defineNuxtConfig({
   ],
 
   future: {
-    compatibilityVersion: 4,
+    compatibilityVersion: 5,
   },
 
   icon: {

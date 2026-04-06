@@ -4,30 +4,30 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi prepare",
-    "typecheck": "nuxi typecheck",
-    "clear": "pnpx rimraf .nuxt .output dist",
-    "postinstall": "nuxi prepare"
+    "dev": "nuxt dev",
+    "clear": "nuxt cleanup",
+    "prepare": "nuxt prepare"
   },
-  "dependencies": {
-    "@nuxt/devtools": "catalog:dev",
+  "peerDependencies": {
+    "@nuxt/devtools": "catalog:devtools",
     "@nuxt/eslint": "catalog:lint",
-    "@nuxt/fonts": "catalog:frontend-nuxt",
+    "@nuxt/fonts": "catalog:eco-nuxt",
     "@nuxt/icon": "catalog:icons",
     "@nuxt/schema": "catalog:types",
-    "@nuxtjs/color-mode": "catalog:frontend-nuxt",
-    "@nuxtjs/seo": "catalog:frontend-nuxt",
-    "@unocss/nuxt": "catalog:frontend-nuxt",
-    "@vueuse/core": "catalog:frontend-vue",
-    "@vueuse/motion": "catalog:frontend-vue",
-    "@vueuse/nuxt": "catalog:frontend-nuxt",
-    "nuxt-html-inject-commands": "catalog:frontend-nuxt",
+    "@nuxtjs/color-mode": "catalog:eco-nuxt",
+    "@nuxtjs/seo": "catalog:eco-nuxt",
+    "@unocss/nuxt": "catalog:eco-nuxt",
+    "@vueuse/core": "catalog:eco-vue",
+    "@vueuse/motion": "catalog:eco-vue",
+    "@vueuse/nuxt": "catalog:eco-nuxt",
+    "nuxt-html-inject-commands": "catalog:eco-nuxt",
     "postcss-preset-env": "catalog:build",
     "vue-component-type-helpers": "catalog:types",
     "zod": "catalog:deps"
   },
   "devDependencies": {
-    "nuxt": "catalog:frontend-nuxt",
-    "vue-tsc": "catalog:dev"
+    "nuxt": "catalog:eco-nuxt",
+    "typescript": "catalog:types",
+    "vue-tsc": "catalog:types"
   }
 }

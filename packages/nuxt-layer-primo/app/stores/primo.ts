@@ -1,4 +1,4 @@
-import { $t, updatePreset, updateSurfacePalette } from '@primevue/themes'
+import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes'
 
 const [useProvidePrimoStore, usePrimoStore] = createInjectionState((options?: PrimoOptions) => {
   const {

@@ -5,23 +5,22 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
-    "./*": "./src/*.ts"
+    "./*": "./src/*.ts",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@ctrl/tinycolor": "catalog:deps",
     "axios": "catalog:deps",
     "consola": "catalog:deps",
     "date-fns": "catalog:deps",
     "defu": "catalog:deps",
-    "es-toolkit": "catalog:inline",
+    "es-toolkit": "catalog:deps",
     "pausable-timers": "catalog:deps",
     "type-fest": "catalog:types",
-    "vee-validate": "catalog:frontend-vue",
-    "vue": "catalog:frontend-vue",
     "worker-timers": "catalog:deps",
     "zod": "catalog:deps"
   }

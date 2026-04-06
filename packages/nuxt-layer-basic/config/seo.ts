@@ -5,41 +5,41 @@ import type { NuxtOptions } from '@nuxt/schema'
  * @see https://nuxtseo.com/
  * @see https://github.com/harlan-zw/nuxt-seo/blob/main/src/const.ts
  */
-const nuxtseo: NuxtOptions['nuxtseo'] = {
+const nuxtseo: Exclude<NuxtOptions['nuxtseo'], false> = {
   enabled: true,
 }
 
-const robots: NuxtOptions['robots'] = {
+const robots: Partial<Exclude<NuxtOptions['robots'], false>> = {
   enabled: true,
-} as NuxtOptions['robots']
+}
 
-const sitemap: NuxtOptions['sitemap'] = {
+const sitemap: Partial<Exclude<NuxtOptions['sitemap'], false>> = {
   enabled: true,
-} as NuxtOptions['sitemap']
+}
 
-const ogImage: NuxtOptions['ogImage'] = {
+const ogImage: Partial<Exclude<NuxtOptions['ogImage'], false>> = {
   enabled: false,
   // zeroRuntime: true,
-} as NuxtOptions['ogImage']
+}
 
-const schemaOrg: NuxtOptions['schemaOrg'] = {
+const schemaOrg: Partial<Exclude<NuxtOptions['schemaOrg'], false>> = {
   enabled: false,
-} as NuxtOptions['schemaOrg']
+}
 
-const linkChecker: NuxtOptions['linkChecker'] = {
+const linkChecker: Partial<Exclude<NuxtOptions['linkChecker'], false>> = {
   enabled: true,
-} as NuxtOptions['linkChecker']
+}
 
-const site: NuxtOptions['site'] = {
+const site: Partial<Exclude<NuxtOptions['site'], false>> = {
   enabled: true,
-} as NuxtOptions['site']
+}
 
 /**
  *  seo utils
  */
-const seo: NuxtOptions['seo'] = {
+const seo: Partial<Exclude<NuxtOptions['seo'], false>> = {
   enabled: false,
-} as NuxtOptions['seo']
+}
 
 export const seoCombind = {
   nuxtseo,

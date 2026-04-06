@@ -1,6 +1,6 @@
 import type { NuxtOptions } from '@nuxt/schema'
-import { definePreset } from '@primevue/themes'
-import Aura from '@primevue/themes/aura'
+import { definePreset } from '@primeuix/themes'
+import Aura from '@primeuix/themes/aura'
 import { PrimoConfigDefaultCST } from '../app/constants/setting'
 import { PrimoPrimaryColorListCST } from '../app/constants/theme'
 import { sakakiThemePresetGenerator } from '../app/utils/theme'

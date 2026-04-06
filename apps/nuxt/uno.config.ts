@@ -1,4 +1,4 @@
-import { base } from '@project-starter/unocss-config'
+import base from '@project-starter/shared/config/unocss/presets/base'
 import { mergeConfigs } from 'unocss'
 import config from './.nuxt/uno.config.mjs'
 
@@ -9,5 +9,5 @@ export default mergeConfigs([
       icons: false,
       webFonts: false,
     },
-  ) as any,
+  ),
 ])

@@ -15,7 +15,7 @@ export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
     && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   if (!isAppearanceTransition) {
-    toggle()
+    void toggle()
     return
   }
 
@@ -56,7 +56,7 @@ export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
   const transition = document.startViewTransition(async () => {
     await toggle()
   })
-  transition.ready
+  void transition.ready
     .then(() => {
       const clipPath = [
         `circle(0px at ${x}px ${y}px)`,
@@ -71,6 +71,7 @@ export function dynamic(event: MouseEvent, options: SharedAppearanceOptions) {
         {
           duration: 400,
           easing: 'ease-out',
+          fill: 'forwards',
           pseudoElement: isDark
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',

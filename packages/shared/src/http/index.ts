@@ -7,7 +7,7 @@ import type {
 } from 'axios'
 import axios from 'axios'
 
-export class HTTP<Result = any, Extra = any> {
+export class HTTP<Result = any, Extra = object> {
   static axios = axios
 
   static axiosDefaultTransformRequests = Array.isArray(axios.defaults.transformRequest)
@@ -33,9 +33,9 @@ export class HTTP<Result = any, Extra = any> {
   request<Params = any, Result2 = Result, Extra2 = Extra>(
     config: RequestConfig<Params, Extra2> & { _directResponse: true }
   ): Promise<Result2>
-  request<Params = any, Result2 = Result, Extra2 = Extra, Response2 extends Response<Result2, Params, Extra2> = Response<Result2, Params, Extra2>>(
+  request<Params = any, Result2 = Result, Extra2 = Extra>(
     config: RequestConfig<Params, Extra2>
-  ): Promise<Response2>
+  ): Promise<Response<Result2, Params, Extra2>>
   request<Params = any, Result2 = Result, Extra2 = Extra, Response2 extends Response<Result2, Params, Extra2> = Response<Result2, Params, Extra2>>(
     config: RequestConfig<Params, Extra2>,
   ): Promise<Result2 | Response2> {
@@ -68,7 +68,7 @@ export type ExtraRequestConfig<Extra = object> = {
 /**
  * 可接收传入的请求配置
  */
-export type RequestConfig<Params = any, Extra = any> = AxiosRequestConfig<Params> & ExtraRequestConfig<Extra>
+export type RequestConfig<Params = any, Extra = object> = AxiosRequestConfig<Params> & ExtraRequestConfig<Extra>
 
 /**
  * 经过 axios 处理后的传入的请求配置 \
