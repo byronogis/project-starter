@@ -15,7 +15,7 @@ const exampleFileUploadProcessCST: PrimoFormFieldFileUploadProcess = async (
   { signal },
 ) => {
   return await new Promise((resolve, _reject) => {
-    console.log('exampleFileUploadProcessCST', cxt, signal)
+    console.info('exampleFileUploadProcessCST', cxt, signal)
     const url = URL.createObjectURL(cxt[1])
 
     resolve({

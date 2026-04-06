@@ -30,12 +30,12 @@ const extraActionList = ref<PrimoExtraActionItem[]>([
   {
     label: 'Profile',
     icon: 'i-prime:user',
-    onClick: () => console.log('Profile'),
+    onClick: () => console.info('Profile'),
   },
   {
     label: 'Setting',
     icon: 'i-prime:cog',
-    onClick: () => console.log('Setting'),
+    onClick: () => console.info('Setting'),
   },
   {
     label: 'Logout',

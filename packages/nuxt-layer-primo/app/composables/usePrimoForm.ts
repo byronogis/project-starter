@@ -127,20 +127,20 @@ export type PrimoFormGroup<
   PrimoFormFieldExtra
 >
 
-export type PrimoFormFieldType =
-  | 'text'
-  | 'textarea'
-  | 'number'
-  | 'password'
-  | 'select'
-  | 'select-group'
-  | 'multi-select'
-  | 'multi-select-group'
-  | 'slider'
-  | 'image'
-  | 'images'
-  | 'datetime'
-  | 'json'
+export type PrimoFormFieldType
+  = | 'text'
+    | 'textarea'
+    | 'number'
+    | 'password'
+    | 'select'
+    | 'select-group'
+    | 'multi-select'
+    | 'multi-select-group'
+    | 'slider'
+    | 'image'
+    | 'images'
+    | 'datetime'
+    | 'json'
 
 export interface PrimoFormFieldExtra {
   /**

@@ -39,7 +39,7 @@ const fieldPropsMerged = computed(() => {
     'disabled': field.value.disable,
     'placeholder': field.value.placeholder,
 
-    ...field.value.extra?.props ?? {},
+    ...field.value.extra?.props,
   }
 
   switch (field.value.type) {

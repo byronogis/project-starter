@@ -4,7 +4,7 @@ import { parse, stringify } from 'lossless-json'
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
 
 // @see https://github.com/vuejs/core/issues/11123
-const props = withDefaults(defineProps</* @vue-ignore */ ComponentProps<typeof JsonEditorVue>>(), {
+const props = withDefaults(defineProps<ComponentProps<typeof JsonEditorVue>>(), {
   // ...
 })
 

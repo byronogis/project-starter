@@ -68,14 +68,13 @@ export default definePreset((userOptions?: Options) => {
     name: 'shared-preset-base',
     configResolved(config) {
       // 由于 preset 不支持修改 outputToCssLayers, 因此利用 configResolved 来修改
-      if (!config.outputToCssLayers) {
-        config.outputToCssLayers = {
-          cssLayerName: layer => layer === 'default'
-            ? 'uno-default'
-            : layer.includes('uno')
-              ? layer
-              : `uno.${layer}`,
-        }
+      if (typeof config.outputToCssLayers !== 'boolean') {
+        config.outputToCssLayers ??= {}
+        config.outputToCssLayers.cssLayerName ??= layer => layer === 'default'
+          ? 'uno-default'
+          : layer.includes('uno')
+            ? layer
+            : `uno.${layer}`
       }
     },
     safelist: [

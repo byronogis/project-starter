@@ -12,7 +12,7 @@ http.instance.interceptors.response.use((response: Response) => {
   const _data = response.data as BaseResult
   const _skipCheck = response.config._skipResponseCheck
   if (!_skipCheck && _data.code !== 200) {
-    return Promise.reject(new Error(_data.message ?? `[HTTP] Unknown Error: ${{ response }}`))
+    return Promise.reject(new Error(_data.message ?? `[HTTP] Unknown Error: ${JSON.stringify(response)}`))
   }
 
   return Promise.resolve(response)

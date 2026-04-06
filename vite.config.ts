@@ -6,11 +6,16 @@ export default defineConfig({
       enabled: !true,
       // include: ['src'],
     },
+    projects: [
+      'packages/*',
+      'apps/*',
+      '!apps/uniapp',
+    ],
   },
   lint: {
     options: {
       typeAware: true,
-      // typeCheck: true,
+      typeCheck: true,
     },
     ignorePatterns: [
       'apps/uniapp',
@@ -18,7 +23,7 @@ export default defineConfig({
   },
   fmt: {},
   staged: {
-    '*': 'vp check --fix',
+    '*': 'eslint . --fix',
   },
   run: {
     cache: true,

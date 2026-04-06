@@ -17,41 +17,41 @@ export interface PrimoSurfaceItem extends Omit<PrimoColorItem, 'name'> {
   name: PrimoSurfaceName
 }
 
-export type PrimoThemePresetName =
-  | 'Aura'
-  | 'Lara'
-  | 'Nora'
-  | 'Material'
+export type PrimoThemePresetName
+  = | 'Aura'
+    | 'Lara'
+    | 'Nora'
+    | 'Material'
 
-export type PrimoPrimaryColorName =
-  | 'noir'
-  | 'emerald'
-  | 'green'
-  | 'lime'
-  | 'orange'
-  | 'amber'
-  | 'yellow'
-  | 'teal'
-  | 'cyan'
-  | 'sky'
-  | 'blue'
-  | 'indigo'
-  | 'violet'
-  | 'purple'
-  | 'fuchsia'
-  | 'pink'
-  | 'rose'
+export type PrimoPrimaryColorName
+  = | 'noir'
+    | 'emerald'
+    | 'green'
+    | 'lime'
+    | 'orange'
+    | 'amber'
+    | 'yellow'
+    | 'teal'
+    | 'cyan'
+    | 'sky'
+    | 'blue'
+    | 'indigo'
+    | 'violet'
+    | 'purple'
+    | 'fuchsia'
+    | 'pink'
+    | 'rose'
 
-export type PrimoSurfaceName =
-  | 'slate'
-  | 'gray'
-  | 'zinc'
-  | 'neutral'
-  | 'stone'
-  | 'soho'
-  | 'viva'
-  | 'ocean'
+export type PrimoSurfaceName
+  = | 'slate'
+    | 'gray'
+    | 'zinc'
+    | 'neutral'
+    | 'stone'
+    | 'soho'
+    | 'viva'
+    | 'ocean'
 
-export type PrimoMenuMode =
-  | 'static'
-  | 'overlay'
+export type PrimoMenuMode
+  = | 'static'
+    | 'overlay'

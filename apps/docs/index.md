@@ -5,7 +5,6 @@ layout: home
 hero:
   name: "Project Starter"
   text: "A project starter"
-  # tagline: My great project tagline
   actions:
     - theme: brand
       text: Apps

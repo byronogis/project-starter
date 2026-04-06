@@ -7,6 +7,7 @@ export default antfu(
   {
     ignores: [
       '.github',
+      'apps/uniapp',
     ],
   },
 )

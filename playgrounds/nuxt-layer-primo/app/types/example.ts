@@ -1,10 +1,10 @@
 export type ExampleFormFieldInfo = PrimoFormFields<ExampleItem, ExampleFormFieldsGroup>
 
-export type ExampleFormFieldsGroup =
-  | 'basic' // 基础信息
-  | 'profile' // 个人资料
-  | 'settings' // 系统设置
-  | 'contacts' // 联系方式
+export type ExampleFormFieldsGroup
+  = | 'basic' // 基础信息
+    | 'profile' // 个人资料
+    | 'settings' // 系统设置
+    | 'contacts' // 联系方式
 
 export interface ExampleItem {
   id: string

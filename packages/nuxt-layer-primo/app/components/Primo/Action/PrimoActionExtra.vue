@@ -9,14 +9,20 @@ async function handleTopbarExtraActionClick(e: MouseEvent, action: PrimoExtraAct
   const _closeTiming = action.closePopover ?? 'begining'
   const _closeFn = () => emits('hidePanel')
 
-  _closeTiming === 'begining' && _closeFn()
+  if (_closeTiming === 'begining') {
+    _closeFn()
+  }
 
   try {
     await action.onClick(e)
-    _closeTiming === 'end' && _closeFn()
+    if (_closeTiming === 'end') {
+      _closeFn()
+    }
   }
   catch (error: any) {
-    _closeTiming === 'end-force' && _closeFn()
+    if (_closeTiming === 'end-force') {
+      _closeFn()
+    }
     throw new Error(error?.message ?? error)
   }
 }

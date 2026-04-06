@@ -61,7 +61,9 @@ const [useProvidePrimoStore, usePrimoStore] = createInjectionState((options?: Pr
   })
   watchImmediate(() => config.value.surface, () => {
     const surface = PrimoSurfaceListCST.find(s => s.name === config.value.surface)
-    surface && updateSurfacePalette(surface.palette)
+    if (surface) {
+      updateSurfacePalette(surface.palette)
+    }
   })
 
   /**

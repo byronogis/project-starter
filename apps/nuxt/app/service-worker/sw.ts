@@ -25,5 +25,5 @@ registerRoute(new NavigationRoute(
   { allowlist },
 ))
 
-self.skipWaiting()
+void self.skipWaiting()
 clientsClaim()

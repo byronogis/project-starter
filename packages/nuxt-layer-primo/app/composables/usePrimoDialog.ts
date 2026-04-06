@@ -104,4 +104,4 @@ interface PrimoConfirmDialogComfirmParams {
   signal: AbortSignal
 }
 
-type PrimoConfirmDialogConfirmFn = (p: PrimoConfirmDialogComfirmParams) => Promise<any> | any
+type PrimoConfirmDialogConfirmFn = (p: PrimoConfirmDialogComfirmParams) => Promise<any>
